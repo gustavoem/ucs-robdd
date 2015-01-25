@@ -1,0 +1,17 @@
+
+== List of best subsets found ==
+ X : c(X)
+ <0000000010> : 0
+ <0000000000> : 0
+ <0000000001> : 1
+ <0000000011> : 1
+ <1000000000> : 8
+ <1000000010> : 8
+ <1000000001> : 9
+
+Number of visited subsets: 1024
+Required time to compute the visited subsets: 60851 microseconds 
+(average 59 microseconds per node)
+
+== End of processing ==
+

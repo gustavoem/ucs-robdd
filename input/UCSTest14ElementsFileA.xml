@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ElementSet>
+  <SetName> 98231 </SetName>
+  <MaxNumberOfElementValues> 1 </MaxNumberOfElementValues>
+  <NumberOfElements> 14 </NumberOfElements>
+  <Element>
+    <name>e1</name>
+    <value> 58398  </value>
+  </Element>  <Element>
+    <name>e2</name>
+    <value> 37  </value>
+  </Element>  <Element>
+    <name>e3</name>
+    <value> 87559  </value>
+  </Element>  <Element>
+    <name>e4</name>
+    <value> 15577  </value>
+  </Element>  <Element>
+    <name>e5</name>
+    <value> 59047  </value>
+  </Element>  <Element>
+    <name>e6</name>
+    <value> 88150  </value>
+  </Element>  <Element>
+    <name>e7</name>
+    <value> 49187  </value>
+  </Element>  <Element>
+    <name>e8</name>
+    <value> 66544  </value>
+  </Element>  <Element>
+    <name>e9</name>
+    <value> 94593  </value>
+  </Element>  <Element>
+    <name>e10</name>
+    <value> 88278  </value>
+  </Element>  <Element>
+    <name>e11</name>
+    <value> 71586  </value>
+  </Element>  <Element>
+    <name>e12</name>
+    <value> 10736  </value>
+  </Element>  <Element>
+    <name>e13</name>
+    <value> 87743  </value>
+  </Element>  <Element>
+    <name>e14</name>
+    <value> 9454  </value>
+  </Element></ElementSet>
+

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ElementSet>
+  <SetName>172273</SetName>
+  <MaxNumberOfElementValues> 1 </MaxNumberOfElementValues>
+  <NumberOfElements> 6 </NumberOfElements>
+  <Element>
+    <name>e1</name>
+    <value> 77254  </value>
+  </Element>  
+  <Element>
+    <name>e2</name>
+    <value> 86775  </value>
+  </Element>  
+  <Element>
+    <name>e3</name>
+    <value> 69122  </value>
+  </Element>  
+  <Element>
+    <name>e4</name>
+    <value> 47904  </value>
+  </Element>  
+  <Element>
+    <name>e5</name>
+    <value> 82859  </value>
+  </Element>  
+  <Element>
+    <name>e6</name>
+    <value> 96296  </value>
+  </Element>
+</ElementSet>

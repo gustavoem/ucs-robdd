@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ElementSet>
+  <SetName> x01 </SetName>
+  <MaxNumberOfElementValues> 10 </MaxNumberOfElementValues>
+  <NumberOfElements> 2 </NumberOfElements>
+    <Element><name> x00 </name>
+    <value>1</value>
+    <value>1</value>
+    <value>1</value>
+    <value>1</value>
+    <value>1</value>
+    <value>1</value>
+    <value>1</value>
+    <value>1</value>
+    <value>1</value>
+    <value>1</value>
+  </Element>
+  <Element><name>x01</name>
+    <value>0</value>
+    <value>0</value>
+    <value>0</value>
+    <value>0</value>
+    <value>0</value>
+    <value>0</value>
+    <value>0</value>
+    <value>0</value>
+    <value>2</value>
+    <value>1</value>
+  </Element>
+</ElementSet>
+

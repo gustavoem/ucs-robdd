@@ -1,0 +1,10 @@
+/*
+ * TO-DO-LIST
+ *
+ *  Created on: 06/05/2010
+ *      Author: marceloreis
+ */
+ 
+- Add dynamic tables into ElementSet class, thus eliminating the  <MaxNumberOfValues> and <NumOfElements> fields from the XML input.
+   
+- Add exception handling (memory allocation, file, and other abnormal behaviors).
