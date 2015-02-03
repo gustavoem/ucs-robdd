@@ -9,6 +9,15 @@ Vertex::Vertex (Element * elm)
 }
 
 
+Vertex::Vertex (bool value)
+{
+	var = NULL;
+	lo = NULL;
+	hi = NULL;
+	this->value = value;
+}
+
+
 Vertex::~Vertex () 
 {
 	return;
@@ -28,7 +37,7 @@ Vertex * Vertex::get_lo ()
 
 bool Vertex::set_lo(Vertex * vertex)
 {
-	if (lo != NULL)
+	if (lo == NULL)
 		lo = vertex;
 	else
 		return false;
@@ -41,11 +50,20 @@ Vertex * Vertex::get_hi ()
 	return hi;
 }
 
+
 bool Vertex::set_hi(Vertex * vertex)
 {
-	if (hi != NULL)
+	if (hi == NULL)
 		hi = vertex;
 	else
 		return false;
 	return true;
+}
+
+
+int Vertex::get_value()
+{
+	if (var != NULL)
+		return -1;
+	return value;
 }

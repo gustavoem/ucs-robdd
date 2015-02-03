@@ -29,6 +29,8 @@
 #include "ElementSubsetTest.h"
 #include "CollectionTest.h"
 
+#include "VertexTest.h"
+#include "ROBDDTest.h"
 
 // Objective functions
 //
@@ -71,6 +73,7 @@ void printResult (bool passed)
 }
 
 int main(void) {
+	/*
 
 	cout << endl << "Starting Unit Tests... " << endl << endl;
 
@@ -392,6 +395,32 @@ int main(void) {
 	cout << "SFFSTest::it_should_converge_for_large_abs_sum_sets";
 	cout.flush ();
 	printResult (SFFSTest::it_should_converge_for_large_abs_sum_sets ());
+	cout << endl;
+
+	*/
+
+	// Testing Class "Vertex"
+	cout << "VertexTest::a_new_vertex_should_have_no_child";
+	cout.flush ();
+	printResult (VertexTest::a_new_vertex_should_have_no_child ());
+	cout << "VertexTest::its_possible_to_add_lo";
+	cout.flush ();
+	printResult (VertexTest::its_possible_to_add_lo ());
+	cout << "VertexTest::its_possible_to_add_hi";
+	cout.flush ();
+	printResult (VertexTest::its_possible_to_add_hi ());
+	cout << "VertexTest::a_terminal_vertex_should_have_no_var";
+	cout.flush ();
+	printResult (VertexTest::a_terminal_vertex_should_have_no_var ());
+	cout << "VertexTest::a_nonterminal_vertex_should_have_no_value";
+	cout.flush ();
+	printResult (VertexTest::a_nonterminal_vertex_should_have_no_value ());
+	cout << endl;
+
+	// Testing Class "ROBDD"
+	cout << "ROBDDTest::a_new_robdd_has_only_a_terminal_node";
+	cout.flush ();
+	printResult (ROBDDTest::a_new_robdd_has_only_a_terminal_node ());
 	cout << endl;
 
 	cout << "Total " << number_of_passed_tests + number_of_failed_tests << " test(s), ";

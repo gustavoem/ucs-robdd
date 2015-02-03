@@ -12,12 +12,18 @@ private:
 	Vertex * lo;
 	Vertex * hi;
 	Element * var;
+	bool value;
 
 public:
 
-	// Default constructor.
+	// Constructor for nonterminal vertices
 	//
 	Vertex (Element *);
+
+
+	// Constructor for terminal vertices
+	//
+	Vertex (bool);
 
 
 	// Default destructor.
@@ -38,6 +44,10 @@ public:
 
 
 	bool set_hi(Vertex *);
+
+
+	int get_value(); 
+	
 };
 
 #endif /* VERTEX_H_ */
