@@ -6,7 +6,7 @@ namespace VertexTest {
 	{
 		Element * elm = new Element (1, "elm_name");
 		Vertex * new_vertex = new Vertex (elm);
-		return (new_vertex->get_lo () == NULL) & (new_vertex->get_hi () == NULL);
+		return (new_vertex->get_child (false) == NULL) & (new_vertex->get_child (true) == NULL);
 	}
 
 	bool its_possible_to_add_lo () 

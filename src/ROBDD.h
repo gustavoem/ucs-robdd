@@ -20,7 +20,6 @@ private:
 	//
 	Vertex * root;	
 
-
 	// Prints the sub-tree that has the parameter Vertex as root
 	//
 	void print(Vertex *);
@@ -35,7 +34,26 @@ private:
 	//
 	void identify (Vertex *, unsigned int *);
 
+	// Auxiliar function to ROBDD::reduce ()
+	//
+	void fill_vlist (Vertex **, Vertex *);
+
+
+	//
+	//
+	void unmark_all_vertex ();
+
+
+	//
+	//
+	void unmark_all_vertex (Vertex *);
+
+
 public:
+
+	// ROBDD cardinality
+	//
+	unsigned int cardinality;
 
 	// Builds a ROBDD representing the function "0"
 	//
@@ -61,10 +79,15 @@ public:
 	//
 	void print ();
 
+	
 	// Identify the vertices of a OBDD
 	//
 	void identify ();
 
+	
+	// Reduces the OBDD
+	//
+	void reduce ();
 };
 
 #endif /* ROBDD_H_ */

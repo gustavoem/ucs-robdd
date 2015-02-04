@@ -29,8 +29,10 @@ Element * Vertex::get_var ()
 }
 
 
-Vertex * Vertex::get_lo ()
+Vertex * Vertex::get_child (bool side)
 {
+	if (side == true)
+		return hi;
 	return lo;
 }
 
@@ -45,12 +47,6 @@ bool Vertex::set_child(Vertex * vertex, bool side)
 		return false;
 	return true;
 
-}
-
-
-Vertex * Vertex::get_hi ()
-{
-	return hi;
 }
 
 

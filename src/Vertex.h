@@ -14,8 +14,10 @@ private:
 	Element * var;
 	bool value;
 	unsigned int id;
-
+	
 public:
+
+	bool mark;
 
 	// Constructor for nonterminal vertices
 	//
@@ -31,25 +33,32 @@ public:
 	//
 	virtual ~Vertex ();
 
-
+	// Returns the element of a vertex
+	//
 	Element * get_var ();
 
+	// Returns the child. True for high (right) and False for low (left)
+	//
+	Vertex * get_child (bool);
 
-	Vertex * get_lo ();
 
-
+	// Sets the child. True for high (right) and False for low (left)
+	//
 	bool set_child (Vertex *, bool);
 
 
-	Vertex * get_hi ();
-
-
+	// Returns the value of a vertex
+	//
 	int get_value (); 
 
-
+	
+	// Returns the id of a vertex
+	//
 	unsigned int get_id ();
 
 
+	// Sets the id of a vertex
+	//
 	void set_id (unsigned int);
 
 };
