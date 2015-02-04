@@ -4,6 +4,7 @@
 #include "global.h"
 #include "ElementSet.h"
 #include "Vertex.h"
+#include "ElementSubset.h"
 
 class ROBDD
 {
@@ -19,16 +20,31 @@ private:
 	//
 	Vertex * root;	
 
+
 	// Prints the sub-tree that has the parameter Vertex as root
 	//
 	void print(Vertex *);
 
 
+	// Auxiliar function to ROBDD (ElementSet *, ElementSubset*)
+	//
+	void build (Vertex *, unsigned int, unsigned int, ElementSubset *, Vertex *, Vertex *);
+
+
+	// Identify the vertices of a OBDD with root Vertex *
+	//
+	void identify (Vertex *, unsigned int *);
+
 public:
 
-	// Default constructor.
+	// Builds a ROBDD representing the function "0"
 	//
 	ROBDD (ElementSet *);
+
+
+	// Builds an ROBDD where the only path valued "1", is the path representing the subset
+	//
+	ROBDD (ElementSet *, ElementSubset *);
 
 
 	// Default destructor.
@@ -40,9 +56,14 @@ public:
 	//
 	Vertex * get_root ();
 
+
 	// Prints the entire ROBDD
 	//
 	void print ();
+
+	// Identify the vertices of a OBDD
+	//
+	void identify ();
 
 };
 

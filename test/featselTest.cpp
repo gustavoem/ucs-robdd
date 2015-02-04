@@ -126,22 +126,22 @@ int main(void) {
 	cout << endl;
 
 	// Testing Class "ElementSubset"
-	cout << "ElementSubset::a_new_subset_should_be_an_empty_set";
+	cout << "ElementSubsetTest::a_new_subset_should_be_an_empty_set";
 	cout.flush ();
 	printResult (ElementSubsetTest::a_new_subset_should_be_an_empty_set ());
-	cout << "ElementSubset::an_element_not_in_subset_should_be_added";
+	cout << "ElementSubsetTest::an_element_not_in_subset_should_be_added";
 	cout.flush ();
 	printResult (ElementSubsetTest::an_element_not_in_subset_should_be_added ());
-	cout << "ElementSubset::an_element_in_subset_should_be_removed";
+	cout << "ElementSubsetTest::an_element_in_subset_should_be_removed";
 	cout.flush ();
 	printResult (ElementSubsetTest::an_element_in_subset_should_be_removed ());
-	cout << "ElementSubset::it_should_give_the_set_that_belongs_the_subset";
+	cout << "ElementSubsetTest::it_should_give_the_set_that_belongs_the_subset";
 	cout.flush ();
 	printResult (ElementSubsetTest::it_should_give_the_set_that_belongs_the_subset ());
-	cout << "ElementSubset::a_set_should_contains_its_subset";
+	cout << "ElementSubsetTest::a_set_should_contains_its_subset";
 	cout.flush ();
 	printResult (ElementSubsetTest::a_set_should_contains_its_subset ());
-	cout << "ElementSubset::a_subset_should_be_contained_by_its_set";
+	cout << "ElementSubsetTest::a_subset_should_be_contained_by_its_set";
 	cout.flush ();
 	printResult (ElementSubsetTest::a_subset_should_be_contained_by_its_set ());
 	cout << "ElementSubsetTest::a_subset_should_be_successfully_cloned";
@@ -150,7 +150,7 @@ int main(void) {
 	cout << "ElementSubsetTest::a_random_element_should_be_removed";
 	cout.flush ();
 	printResult (ElementSubsetTest::a_random_element_should_be_removed ());
-	cout << "ElementSubset::it_should_give_the_complement_of_the_set";
+	cout << "ElementSubsetTest::it_should_give_the_complement_of_the_set";
 	cout.flush ();
 	printResult (ElementSubsetTest::it_should_give_the_complement_of_the_set ());
 	cout << endl;
@@ -396,7 +396,6 @@ int main(void) {
 	cout.flush ();
 	printResult (SFFSTest::it_should_converge_for_large_abs_sum_sets ());
 	cout << endl;
-
 	*/
 
 	// Testing Class "Vertex"
@@ -422,6 +421,8 @@ int main(void) {
 	cout.flush ();
 	printResult (ROBDDTest::a_new_robdd_has_only_a_terminal_node ());
 	cout << endl;
+
+	ROBDDTest::print_r ();
 
 	cout << "Total " << number_of_passed_tests + number_of_failed_tests << " test(s), ";
 	cout << number_of_passed_tests << " test(s) passed, " << number_of_failed_tests;

@@ -15,7 +15,7 @@ namespace VertexTest {
 		Element * elm2 = new Element (1, "elm2_name");
 		Vertex * new_vertex = new Vertex (elm1);
 		Vertex * new_lo = new Vertex (elm2);
-		bool answ = new_vertex->set_lo (new_lo);
+		bool answ = new_vertex->set_child (new_lo, false);
 		return answ;
 	}
 
@@ -25,7 +25,7 @@ namespace VertexTest {
 		Element * elm2 = new Element (1, "elm2_name");
 		Vertex * new_vertex = new Vertex (elm1);
 		Vertex * new_hi = new Vertex (elm2);
-		bool answ = new_vertex->set_hi (new_hi);
+		bool answ = new_vertex->set_child (new_hi, true);
 		return answ;
 	}
 	

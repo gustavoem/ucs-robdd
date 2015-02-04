@@ -13,6 +13,7 @@ private:
 	Vertex * hi;
 	Element * var;
 	bool value;
+	unsigned int id;
 
 public:
 
@@ -37,17 +38,20 @@ public:
 	Vertex * get_lo ();
 
 
-	bool set_lo(Vertex *);
+	bool set_child (Vertex *, bool);
 
 
 	Vertex * get_hi ();
 
 
-	bool set_hi(Vertex *);
+	int get_value (); 
 
 
-	int get_value(); 
-	
+	unsigned int get_id ();
+
+
+	void set_id (unsigned int);
+
 };
 
 #endif /* VERTEX_H_ */

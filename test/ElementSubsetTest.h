@@ -37,6 +37,7 @@ namespace ElementSubsetTest {
 	bool a_subset_should_be_successfully_cloned();
 	bool a_random_element_should_be_removed();
 	bool it_should_give_the_complement_of_the_set();
+	bool it_should_contain_an_added_element();
 
 }
 

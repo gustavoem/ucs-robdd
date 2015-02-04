@@ -35,13 +35,16 @@ Vertex * Vertex::get_lo ()
 }
 
 
-bool Vertex::set_lo(Vertex * vertex)
+bool Vertex::set_child(Vertex * vertex, bool side)
 {
-	if (lo == NULL)
+	if (side == true && hi == NULL)
+		hi = vertex;
+	else if (side == false && lo == NULL)
 		lo = vertex;
 	else
 		return false;
 	return true;
+
 }
 
 
@@ -51,19 +54,21 @@ Vertex * Vertex::get_hi ()
 }
 
 
-bool Vertex::set_hi(Vertex * vertex)
-{
-	if (hi == NULL)
-		hi = vertex;
-	else
-		return false;
-	return true;
-}
-
-
 int Vertex::get_value()
 {
 	if (var != NULL)
 		return -1;
 	return value;
+}
+
+
+unsigned int Vertex::get_id ()
+{
+	return id;
+}
+
+
+void Vertex::set_id (unsigned int x)
+{
+	id = x;
 }

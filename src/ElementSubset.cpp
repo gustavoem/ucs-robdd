@@ -222,7 +222,6 @@ bool ElementSubset::has_element (unsigned int index)
 	else return list_of_elements[index];
 }
 
-
 ElementSet * ElementSubset::get_set_that_contains_this_subset ()
 {
 	return set;
