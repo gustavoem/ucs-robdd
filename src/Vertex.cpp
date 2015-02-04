@@ -68,3 +68,8 @@ void Vertex::set_id (unsigned int x)
 {
 	id = x;
 }
+
+bool Vertex::is_terminal ()
+{
+	return var == NULL;
+}

@@ -40,14 +40,6 @@ void ROBDD::build (Vertex * v, unsigned int elm_index, unsigned int set_card, El
 }
 
 
-void ROBDD::fill_vlist (Vertex ** vlist, Vertex * v)
-{
-	if (v == NULL)
-		return;
-	vlist[v->get_id ()] = v;
-}
-
-
 void ROBDD::unmark_all_vertex ()
 {
 	unmark_all_vertex (root);
@@ -100,43 +92,67 @@ void ROBDD::print (Vertex * v)
 }
 
 
-void ROBDD::identify ()
-{
-	unsigned int * last_id = (unsigned int *) malloc (sizeof (unsigned int));
-	*last_id = 1;
-	unmark_all_vertex ();
-	identify (root, last_id);
-	free (last_id);
-}
-
-
-void ROBDD::identify (Vertex * v, unsigned int * last_id)
+void ROBDD::traverse (Vertex * v, unsigned int * last_id, Vertex ** vlist)
 {	
 	if (v == NULL || v->mark)
 		return;
-	
-	cout << "setting " << v << " id as " << * last_id << endl;
+
 	v->set_id (* last_id);
+	vlist[(* last_id) - 1] = v;
 	(* last_id)++;
 	v->mark = true;
 
-	identify (v->get_child (false), last_id);
-	identify (v->get_child (true), last_id);
+	traverse (v->get_child (false), last_id, vlist);
+	traverse (v->get_child (true), last_id, vlist);
 	return;
 }
 
 
 void ROBDD::reduce ()
 {
-	Vertex ** vlist = (Vertex **) malloc (sizeof (*vlist) * elm_set->get_set_cardinality ());
+	Vertex ** vlist = (Vertex **) malloc (sizeof (*vlist) * elm_set->get_set_cardinality () + 1);
 	Vertex ** subgraph;
-	
-	identify();	
-	fill_vlist (vlist, root);
+
+	unsigned int * last_id = (unsigned int *) malloc (sizeof (unsigned int));
+	*last_id = 1;
+	unmark_all_vertex ();	
+	traverse (root, last_id, vlist);
 
 	int next_id = 0;
-	for (int i = elm_set->get_set_cardinality (); i > 0; i--)
+	for (int i = cardinality; i > 0; i--)
 	{
-		cout << "id: " << i << " | address: " << vlist[i] << endl;
+		cout << "id: " << i << " | address: " << vlist[i - 1] << endl;
+		map<unsigned int, Vertex *> Q;
+		for (int i = cardinality; i > 0; i--)
+		{
+			Vertex * u = vlist[i];
+			if (u->is_terminal ()) 
+				Q.insert(make_pair (u->get_value (), u));
+			else if (u->get_child(true)->get_id () == u->get_child(false)->get_id ())
+				u->set_id (u->get_child(true)->get_id ());
+			else
+			{
+				Q.insert(make_pair (u->get_child(true)->get_id (), u));
+				Q.insert(make_pair (u->get_child(false)->get_id (), u));
+			}
+		}
+		int oldkey = -1;
+		for (map<unsigned int, Vertex *>::iterator it = Q.begin(); it != Q.end(); it++)
+		{
+			unsigned int key = it->first;
+			Vertex * u = it->second;
+			if ((int) key == oldkey)
+				u->set_id (next_id);
+			else
+			{
+				next_id++;
+				u->set_id (next_id);
+				subgraph[next_id] = u;
+				u->set_child (subgraph[u->get_child (false)->get_id ()], false);
+				u->set_child (subgraph[u->get_child (true)->get_id ()], true);
+				oldkey = key;
+			}
+		}
 	}
+	root = subgraph[root->get_id ()];
 }

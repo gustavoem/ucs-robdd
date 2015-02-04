@@ -61,6 +61,11 @@ public:
 	//
 	void set_id (unsigned int);
 
+
+	// Says if the vertex is terminal
+	//
+	bool is_terminal();
+
 };
 
 #endif /* VERTEX_H_ */

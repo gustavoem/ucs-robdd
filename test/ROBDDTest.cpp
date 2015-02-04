@@ -16,17 +16,18 @@ namespace ROBDDTest {
 	bool print_r () 
 	{
 		ElementSet * elm_set = new ElementSet ("", 3, 100);
-		ROBDD * robdd = new ROBDD (elm_set);
+		/*ROBDD * robdd = new ROBDD (elm_set);
 		robdd->print ();
-		cout << " fim da robdd 1 " << endl  << endl;
+		cout << " fim da robdd 1 " << endl  << endl;*/
 		ElementSubset * subset = new ElementSubset("", elm_set);
 		subset->add_element(0);
 		subset->add_element(1);
 		subset->add_element(2);
 		ROBDD * robdd2 = new ROBDD (elm_set, subset);
 		robdd2->print ();
-		cout << " fim da robdd 2. |G| = " << robdd2->cardinality << endl << endl;
 		robdd2->reduce ();
+		robdd2->print ();
+		cout << " fim da robdd 2. |G| = " << robdd2->cardinality << endl << endl;
 		return true;
 	}
 

@@ -30,13 +30,9 @@ private:
 	void build (Vertex *, unsigned int, unsigned int, ElementSubset *, Vertex *, Vertex *);
 
 
-	// Identify the vertices of a OBDD with root Vertex *
-	//
-	void identify (Vertex *, unsigned int *);
-
 	// Auxiliar function to ROBDD::reduce ()
 	//
-	void fill_vlist (Vertex **, Vertex *);
+	void traverse (Vertex *, unsigned int *, Vertex **);
 
 
 	//
@@ -78,12 +74,6 @@ public:
 	// Prints the entire ROBDD
 	//
 	void print ();
-
-	
-	// Identify the vertices of a OBDD
-	//
-	void identify ();
-
 	
 	// Reduces the OBDD
 	//
