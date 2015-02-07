@@ -1,20 +1,22 @@
 #include "Vertex.h"
 
 
-Vertex::Vertex (Element * elm) 
+Vertex::Vertex (Element * elm, unsigned int id) 
 {
 	var = elm;
 	lo = NULL;
 	hi = NULL;
+	this->id = id;
 }
 
 
-Vertex::Vertex (bool value)
+Vertex::Vertex (bool value, unsigned int id)
 {
 	var = NULL;
 	lo = NULL;
 	hi = NULL;
 	this->value = value;
+	this->id = id;
 }
 
 
@@ -63,11 +65,6 @@ unsigned int Vertex::get_id ()
 	return id;
 }
 
-
-void Vertex::set_id (unsigned int x)
-{
-	id = x;
-}
 
 bool Vertex::is_terminal ()
 {

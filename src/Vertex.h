@@ -21,12 +21,12 @@ public:
 
 	// Constructor for nonterminal vertices
 	//
-	Vertex (Element *);
+	Vertex (Element *, unsigned int);
 
 
 	// Constructor for terminal vertices
 	//
-	Vertex (bool);
+	Vertex (bool, unsigned int);
 
 
 	// Default destructor.
@@ -55,11 +55,6 @@ public:
 	// Returns the id of a vertex
 	//
 	unsigned int get_id ();
-
-
-	// Sets the id of a vertex
-	//
-	void set_id (unsigned int);
 
 
 	// Says if the vertex is terminal

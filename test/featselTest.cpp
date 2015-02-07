@@ -73,7 +73,6 @@ void printResult (bool passed)
 }
 
 int main(void) {
-	/*
 
 	cout << endl << "Starting Unit Tests... " << endl << endl;
 
@@ -396,7 +395,6 @@ int main(void) {
 	cout.flush ();
 	printResult (SFFSTest::it_should_converge_for_large_abs_sum_sets ());
 	cout << endl;
-	*/
 
 	// Testing Class "Vertex"
 	cout << "VertexTest::a_new_vertex_should_have_no_child";
@@ -421,7 +419,6 @@ int main(void) {
 	cout.flush ();
 	printResult (ROBDDTest::a_new_robdd_has_only_a_terminal_node ());
 	cout << endl;
-
 	ROBDDTest::print_r ();
 
 	cout << "Total " << number_of_passed_tests + number_of_failed_tests << " test(s), ";

@@ -4,7 +4,7 @@
 ROBDD::ROBDD (ElementSet * set)
 {
 	elm_set = set;
-	root = new Vertex (false);
+	root = new Vertex (false, 1);
 	cardinality = 0;
 }
 
@@ -13,30 +13,32 @@ ROBDD::ROBDD (ElementSet * set, ElementSubset * subset)
 {
 	unsigned int set_card = set->get_set_cardinality ();
 	elm_set = set;
-	Vertex * zero = new Vertex (false);
-	Vertex * one = new Vertex (true);
-	root = new Vertex (elm_set->get_element (0));	
+	Vertex * zero = new Vertex (false, set_card + 1);
+	Vertex * one = new Vertex (true, set_card + 1);
+	root = new Vertex (elm_set->get_element (0), 1);	
 	cardinality = 3;
-	build (root, 0, set_card, subset, zero, one);
+	build (root, 1, set_card, subset, zero, one);
 }
 
 
-void ROBDD::build (Vertex * v, unsigned int elm_index, unsigned int set_card, ElementSubset * subset, Vertex * zero, Vertex * one)
+void ROBDD::build (Vertex * v, unsigned int elm_index, unsigned int set_card, \
+ElementSubset * subset, Vertex * zero, Vertex * one)
 {
 	bool zeroside;
-	zeroside = !subset->has_element (elm_index);
+	zeroside = !subset->has_element (elm_index - 1);
 	v->set_child (zero, zeroside);
 	
-	if (elm_index == set_card - 1) 
+	if (elm_index == set_card) 
 	{
 		v->set_child (one, !zeroside);
 		return;
 	}
 
-	Vertex * next_vertice = new Vertex (elm_set->get_element (elm_index + 1));
+	unsigned int child_id = elm_index + 1;
+	Vertex * next_vertice = new Vertex (elm_set->get_element (child_id - 1), child_id);
 	v->set_child (next_vertice, !zeroside);
 	cardinality++;
-	build (next_vertice, elm_index + 1, set_card, subset, zero, one);	
+	build (next_vertice, child_id, set_card, subset, zero, one);	
 }
 
 
@@ -70,7 +72,8 @@ Vertex * ROBDD::get_root()
 
 
 void ROBDD::print ()
-{
+{	
+	cout << "  ";
 	print (root);
 }
 
@@ -97,7 +100,7 @@ void ROBDD::traverse (Vertex * v, unsigned int * last_id, Vertex ** vlist)
 	if (v == NULL || v->mark)
 		return;
 
-	v->set_id (* last_id);
+	//v->set_id (* last_id);
 	vlist[(* last_id) - 1] = v;
 	(* last_id)++;
 	v->mark = true;
@@ -110,7 +113,7 @@ void ROBDD::traverse (Vertex * v, unsigned int * last_id, Vertex ** vlist)
 
 void ROBDD::reduce ()
 {
-	Vertex ** vlist = (Vertex **) malloc (sizeof (*vlist) * elm_set->get_set_cardinality () + 1);
+	/*Vertex ** vlist = (Vertex **) malloc (sizeof (*vlist) * elm_set->get_set_cardinality () + 1);
 	Vertex ** subgraph = (Vertex **) malloc (sizeof (*vlist) * elm_set->get_set_cardinality () + 1);
 
 	for (int i = 0; i < (int) elm_set->get_set_cardinality () + 1; i++)
@@ -167,5 +170,5 @@ void ROBDD::reduce ()
 			}
 		}
 	}
-	root = subgraph[root->get_id ()];
+	root = subgraph[root->get_id ()];*/
 }
