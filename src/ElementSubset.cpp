@@ -211,7 +211,7 @@ bool ElementSubset::is_equal(ElementSubset * Y)
 	return true;
 }
 
-
+/*bug*/
 bool ElementSubset::has_element (unsigned int index)
 {
 	if (index > set->get_set_cardinality ())

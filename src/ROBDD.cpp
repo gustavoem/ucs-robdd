@@ -111,28 +111,37 @@ void ROBDD::traverse (Vertex * v, unsigned int * last_id, Vertex ** vlist)
 void ROBDD::reduce ()
 {
 	Vertex ** vlist = (Vertex **) malloc (sizeof (*vlist) * elm_set->get_set_cardinality () + 1);
-	Vertex ** subgraph;
+	Vertex ** subgraph = (Vertex **) malloc (sizeof (*vlist) * elm_set->get_set_cardinality () + 1);
+
+	for (int i = 0; i < (int) elm_set->get_set_cardinality () + 1; i++)
+		subgraph[i] = NULL;
 
 	unsigned int * last_id = (unsigned int *) malloc (sizeof (unsigned int));
 	*last_id = 1;
 	unmark_all_vertex ();	
 	traverse (root, last_id, vlist);
+	free (last_id);
 
 	int next_id = 0;
 	for (int i = cardinality; i > 0; i--)
 	{
 		cout << "id: " << i << " | address: " << vlist[i - 1] << endl;
 		map<unsigned int, Vertex *> Q;
-		for (int i = cardinality; i > 0; i--)
+		for (int j = cardinality - 1; j >= 0; j--)
 		{
-			Vertex * u = vlist[i];
+			Vertex * u = vlist[j];
 			if (u->is_terminal ()) 
+			{
+				cout << "Inserting: " << "(" << u->get_value () << ", " << u << ")" << endl;
 				Q.insert(make_pair (u->get_value (), u));
+			}
 			else if (u->get_child(true)->get_id () == u->get_child(false)->get_id ())
 				u->set_id (u->get_child(true)->get_id ());
 			else
 			{
+				cout << "Inserting: " << "(" << u->get_child(true)->get_id () << ", " << u << ")" << endl;
 				Q.insert(make_pair (u->get_child(true)->get_id (), u));
+				cout << "Inserting: " << "(" << u->get_child(false)->get_id () << ", " << u << ")" << endl;
 				Q.insert(make_pair (u->get_child(false)->get_id (), u));
 			}
 		}
@@ -141,6 +150,7 @@ void ROBDD::reduce ()
 		{
 			unsigned int key = it->first;
 			Vertex * u = it->second;
+			cout << "U address: " << u << endl;
 			if ((int) key == oldkey)
 				u->set_id (next_id);
 			else
@@ -148,8 +158,11 @@ void ROBDD::reduce ()
 				next_id++;
 				u->set_id (next_id);
 				subgraph[next_id] = u;
-				u->set_child (subgraph[u->get_child (false)->get_id ()], false);
-				u->set_child (subgraph[u->get_child (true)->get_id ()], true);
+				if (!u->is_terminal ())
+				{
+					u->set_child (subgraph[u->get_child (false)->get_id ()], false);
+					u->set_child (subgraph[u->get_child (true)->get_id ()], true);
+				}
 				oldkey = key;
 			}
 		}
