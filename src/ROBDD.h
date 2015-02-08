@@ -32,7 +32,7 @@ private:
 
 	// Auxiliar function to ROBDD::reduce ()
 	//
-	void traverse (Vertex *, unsigned int *, Vertex **);
+	void fill_vlist (Vertex *, list<Vertex *> **);
 
 
 	//

@@ -25,8 +25,8 @@ namespace ROBDDTest {
 		subset->add_element(2);
 		ROBDD * robdd2 = new ROBDD (elm_set, subset);
 		robdd2->print ();
-		/*robdd2->reduce ();
-		robdd2->print ();*/
+		robdd2->reduce ();
+		robdd2->print ();
 		cout << " fim da robdd 2. |G| = " << robdd2->cardinality << endl << endl;
 		return true;
 	}

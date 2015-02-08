@@ -75,7 +75,7 @@ void printResult (bool passed)
 int main(void) {
 
 	cout << endl << "Starting Unit Tests... " << endl << endl;
-
+/*
 	// Testing Class "Element"
 	cout << "ElementTest::an_element_should_have_a_name";
 	cout.flush ();
@@ -413,7 +413,7 @@ int main(void) {
 	cout.flush ();
 	printResult (VertexTest::a_nonterminal_vertex_should_have_no_value ());
 	cout << endl;
-
+*/
 	// Testing Class "ROBDD"
 	cout << "ROBDDTest::a_new_robdd_has_only_a_terminal_node";
 	cout.flush ();

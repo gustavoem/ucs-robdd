@@ -95,40 +95,43 @@ void ROBDD::print (Vertex * v)
 }
 
 
-void ROBDD::traverse (Vertex * v, unsigned int * last_id, Vertex ** vlist)
+void ROBDD::fill_vlist (Vertex * v, list<Vertex *> ** vlists)
 {	
 	if (v == NULL || v->mark)
 		return;
-
-	//v->set_id (* last_id);
-	vlist[(* last_id) - 1] = v;
-	(* last_id)++;
+	unsigned int i = v->get_id ();
+	cout.flush ();
+	(*vlists[i - 1]).push_back (v);
 	v->mark = true;
 
-	traverse (v->get_child (false), last_id, vlist);
-	traverse (v->get_child (true), last_id, vlist);
+	fill_vlist (v->get_child (false), vlists);
+	fill_vlist (v->get_child (true), vlists);
 	return;
 }
 
 
 void ROBDD::reduce ()
 {
-	/*Vertex ** vlist = (Vertex **) malloc (sizeof (*vlist) * elm_set->get_set_cardinality () + 1);
-	Vertex ** subgraph = (Vertex **) malloc (sizeof (*vlist) * elm_set->get_set_cardinality () + 1);
-
-	for (int i = 0; i < (int) elm_set->get_set_cardinality () + 1; i++)
-		subgraph[i] = NULL;
-
-	unsigned int * last_id = (unsigned int *) malloc (sizeof (unsigned int));
-	*last_id = 1;
-	unmark_all_vertex ();	
-	traverse (root, last_id, vlist);
-	free (last_id);
-
+	unsigned int set_card = elm_set->get_set_cardinality ();
+	list<Vertex *> ** vlists = (list<Vertex *> **) calloc (set_card, sizeof (list<Vertex *> **));
+	for (unsigned int i = 0; i < set_card; i++)
+		vlists[i] = new list<Vertex *> ();
+	cout << (*vlists[0]).size () << endl;
+	Vertex ** subgraph = (Vertex **) calloc (cardinality + 1, sizeof (Vertex **));
+	unmark_all_vertex ();
+	fill_vlist (root, vlists);
+	/*for (unsigned int i = 0; i < set_card; i++)
+	{
+		list<Vertex *> lista = vlist[i];
+		for(list<Vertex *>::iterator it = lista.begin (); it != lista.end (); it++)
+		{
+			cout << *it << endl;
+		}
+	}*/
+	/*
 	int next_id = 0;
 	for (int i = cardinality; i > 0; i--)
 	{
-		cout << "id: " << i << " | address: " << vlist[i - 1] << endl;
 		map<unsigned int, Vertex *> Q;
 		for (int j = cardinality - 1; j >= 0; j--)
 		{
