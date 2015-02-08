@@ -57,6 +57,11 @@ public:
 	unsigned int get_id ();
 
 
+	// Sets the id of a vertex
+	//
+	void set_id (unsigned int);
+
+
 	// Says if the vertex is terminal
 	//
 	bool is_terminal();

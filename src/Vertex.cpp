@@ -66,6 +66,12 @@ unsigned int Vertex::get_id ()
 }
 
 
+void Vertex::set_id (unsigned int id)
+{
+	this->id = id;
+}
+
+
 bool Vertex::is_terminal ()
 {
 	return var == NULL;
