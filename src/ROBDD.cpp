@@ -95,13 +95,13 @@ void ROBDD::print (Vertex * v)
 }
 
 
-void ROBDD::fill_vlist (Vertex * v, list<Vertex *> * vlists)
+void ROBDD::fill_vlist (Vertex * v, list<Vertex *> ** vlists)
 {	
 	if (v == NULL || v->mark)
 		return;
 	unsigned int i = v->get_id ();
 	cout.flush ();
-	vlists[i - 1].push_back (v);
+	vlists[i - 1]->push_back (v);
 	v->mark = true;
 
 	fill_vlist (v->get_child (false), vlists);
@@ -113,11 +113,11 @@ void ROBDD::fill_vlist (Vertex * v, list<Vertex *> * vlists)
 void ROBDD::reduce ()
 {
 	unsigned int set_card = elm_set->get_set_cardinality ();
-	list<Vertex *> * vlists = (list<Vertex *> *) calloc (set_card, sizeof (list<Vertex *> *));
-	for (unsigned int i = 0; i < set_card; i++)
-		vlists[i] = list<Vertex *> ();
-	cout << vlists[0].size () << endl;
 	Vertex ** subgraph = (Vertex **) calloc (cardinality + 1, sizeof (Vertex *));
+	list<Vertex *> ** vlists = (list<Vertex *> **) calloc (set_card + 1, sizeof (list<Vertex *> *));
+	for (unsigned int i = 0; i < set_card + 1; i++) {
+		vlists[i] = new list<Vertex *>();
+	}
 	unmark_all_vertex ();
 	fill_vlist (root, vlists);
 	/*for (unsigned int i = 0; i < set_card; i++)
