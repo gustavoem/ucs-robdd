@@ -112,7 +112,7 @@ void ROBDD::fill_vlist (Vertex * v, list<Vertex *> ** vlists)
 
 void ROBDD::reduce ()
 {
-	Vertex ** subgraph = (Vertex **) calloc (cardinality + 1, sizeof (Vertex *));
+	Vertex ** subgraph = (Vertex **) calloc (cardinality, sizeof (Vertex *));
 	unsigned int set_card = elm_set->get_set_cardinality ();
 	list<Vertex *> ** vlists = (list<Vertex *> **) calloc (set_card + 1, sizeof (list<Vertex *> *));
 	for (unsigned int i = 0; i < set_card + 1; i++) {
@@ -132,31 +132,27 @@ void ROBDD::reduce ()
 			cout << *it << endl;
 		}
 	}*/
+
 	int next_id = 0;
-	
-	for (int i = set_card; i > 0; i--)
+	for (int i = set_card + 1; i > 0; i--)
 	{
 		map<pair<int, int>, Vertex *> Q;
-		list<Vertex *> * l = vlists[i];
+		list<Vertex *> * l = vlists[i - 1];
 		for (list<Vertex*>::iterator it = l->begin (); it != l->end (); it++)
 		{
 			Vertex * u = *it;
-			if (u->is_terminal ()) 
+			Vertex * u_lo = u->get_child (false);
+			Vertex * u_hi = u->get_child (true);
+			if (u->get_id () == set_card + 1) 
 			{
-				cout << "Inserting: " << "(" << u->get_value () << ", " << u << ")" << endl;
 				pair<int,  int> key (u->get_value (), -1);
 				Q.insert(make_pair (key, u));
 			}
-			else if (u->get_child(true)->get_id () == u->get_child(false)->get_id ())
-				u->set_id (u->get_child(true)->get_id ());
+			else if (u_hi->get_id () == u_lo->get_id ())
+				u->set_id (u_lo->get_id ());
 			else
 			{
-				cout << "Inserting: " << "(" << u->get_child(true)->get_id () << "&"\
-					<< u->get_child(false)->get_id () << ", " << u << ")" << endl;
-				Vertex * u_lo = u->get_child (false);
-				Vertex * u_hi = u->get_child (true);
-				pair<int, int> key (u_lo->get_id (),\
-					u_hi->get_id ());
+				pair<int, int> key (u_lo->get_id (), u_hi->get_id ());
 				Q.insert(make_pair(key, u));
 			}
 		}
@@ -165,7 +161,6 @@ void ROBDD::reduce ()
 		{
 			pair<int, int> key = it->first;
 			Vertex * u = it->second;
-			cout << "U address: " << u << endl;
 			if (key.first == oldkey.first && key.second == oldkey.second)
 				u->set_id (next_id);
 			else
@@ -173,11 +168,10 @@ void ROBDD::reduce ()
 				next_id++;
 				u->set_id (next_id);
 				subgraph[next_id] = u;
-				if (!u->is_terminal ())
-				{
+				if (u->get_child (false) != NULL)
 					u->set_child (subgraph[u->get_child (false)->get_id ()], false);
+				if (u->get_child (true) != NULL)
 					u->set_child (subgraph[u->get_child (true)->get_id ()], true);
-				}
 				oldkey = key;
 			}
 		}
