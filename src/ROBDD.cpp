@@ -4,7 +4,7 @@
 ROBDD::ROBDD (ElementSet * set)
 {
 	elm_set = set;
-	root = new Vertex (false, 1);
+	root = new Vertex (false, elm_set->get_set_cardinality () + 1);
 	cardinality = 0;
 }
 
@@ -118,11 +118,12 @@ void ROBDD::reduce ()
 	for (unsigned int i = 0; i < set_card + 1; i++) {
 		vlists[i] = new list<Vertex *>();
 	}
+	
 	unmark_all_vertex ();
 	fill_vlist (root, vlists);
 
-	/*
-	Debugging purposes only
+	
+	// Debugging purposes only
 	for (unsigned int i = 0; i <= set_card; i++)
 	{
 		list<Vertex *> * lista = vlists[i];
@@ -131,7 +132,7 @@ void ROBDD::reduce ()
 		{
 			cout << *it << endl;
 		}
-	}*/
+	}
 
 	int next_id = 0;
 	for (int i = set_card + 1; i > 0; i--)

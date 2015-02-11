@@ -18,6 +18,9 @@ namespace ROBDDTest {
 		ElementSet * elm_set = new ElementSet ("", 3, 100);
 		ROBDD * robdd = new ROBDD (elm_set);
 		robdd->print ();
+		robdd->reduce ();
+		robdd->print ();
+		
 		cout << " fim da robdd 1 " << endl  << endl;
 		ElementSubset * subset = new ElementSubset("", elm_set);
 		subset->add_element(0);
