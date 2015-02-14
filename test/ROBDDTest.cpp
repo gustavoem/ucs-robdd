@@ -18,6 +18,7 @@ namespace ROBDDTest {
 		ElementSet * elm_set = new ElementSet ("", 3, 100);
 		ROBDD * robdd = new ROBDD (elm_set);
 		robdd->print ();
+		cout.flush();
 		robdd->reduce ();
 		robdd->print ();
 		
@@ -32,9 +33,12 @@ namespace ROBDDTest {
 		robdd2->print ();
 		cout << " fim da robdd 2. |G| = " << robdd2->cardinality << endl << endl;
 
-		ROBDD * robdd3 = new ROBDD (elm_set, 1);
+		ElementSet * elm_set2 = new ElementSet ("", 2, 100);
+		ROBDD * robdd3 = new ROBDD (elm_set2, 1);
+		cout << "robdd 3" << endl;
 		robdd3->print ();
 		robdd3->reduce ();
+		cout << "depois de reduzir" << endl;
 		robdd3->print ();
 		cout << " fim da robdd 3. |G| = " << robdd3->cardinality << endl << endl;
 		return true;

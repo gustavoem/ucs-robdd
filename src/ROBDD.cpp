@@ -16,14 +16,14 @@ ROBDD::ROBDD (ElementSet * set, int a)
 	elm = elm_set->get_element (1);
 	Vertex * v_lo = new Vertex (elm, 2);
 	Vertex * v_hi = new Vertex (elm, 2);
+	Vertex * zero = new Vertex (false, 3);
+	Vertex * one = new Vertex (true, 3);
+	v_lo->set_child (one, true);
+	v_lo->set_child (zero, false);
+	v_hi->set_child (one, true);
+	v_hi->set_child (zero, false);
 	root->set_child (v_hi, true);
 	root->set_child (v_lo, false);
-	Vertex * zero = new Vertex (false, 4);
-	Vertex * one = new Vertex (true, 4);
-	v_lo->set_child (one, true);
-	v_lo->set_child (zero, false);
-	v_lo->set_child (one, true);
-	v_lo->set_child (zero, false);
 	cardinality = 5;
 }
 
@@ -120,7 +120,7 @@ void ROBDD::fill_vlist (Vertex * v, list<Vertex *> ** vlists)
 		return;
 	unsigned int i = v->get_id ();
 	cout.flush ();
-	vlists[i - 1]->push_back (v);	
+	vlists[i]->push_back (v);	
 	v->mark = true;
 
 	fill_vlist (v->get_child (false), vlists);
@@ -134,7 +134,7 @@ void ROBDD::reduce ()
 	Vertex ** subgraph = (Vertex **) calloc (cardinality, sizeof (Vertex *));
 	unsigned int set_card = elm_set->get_set_cardinality ();
 	list<Vertex *> ** vlists = (list<Vertex *> **) calloc (set_card + 1, sizeof (list<Vertex *> *));
-	for (unsigned int i = 0; i < set_card + 1; i++) {
+	for (unsigned int i = 1; i <= set_card + 1; i++) {
 		vlists[i] = new list<Vertex *>();
 	}
 	
@@ -142,10 +142,10 @@ void ROBDD::reduce ()
 	fill_vlist (root, vlists);
 
 	// Debugging purposes only
-	/*for (unsigned int i = 0; i <= set_card; i++)
+	/*for (unsigned int i = 1; i <= set_card + 1; i++)
 	{
 		list<Vertex *> * lista = vlists[i];
-		cout << "lista de id: " << i + 1 << endl;
+		cout << "lista de id: " << i << endl;
 		for(list<Vertex *>::iterator it = lista->begin (); it != lista->end (); it++)
 		{
 			cout << *it << endl;
@@ -156,7 +156,7 @@ void ROBDD::reduce ()
 	for (int i = set_card + 1; i > 0; i--)
 	{
 		map<pair<int, int>, Vertex *> Q;
-		list<Vertex *> * l = vlists[i - 1];
+		list<Vertex *> * l = vlists[i];
 		for (list<Vertex*>::iterator it = l->begin (); it != l->end (); it++)
 		{
 			Vertex * u = *it;
@@ -179,6 +179,7 @@ void ROBDD::reduce ()
 		for (map<pair<int, int>, Vertex *>::iterator it = Q.begin(); it != Q.end(); it++)
 		{
 			pair<int, int> key = it->first;
+			cout << "(" << key.first << ", " << key.second << ")" << endl;
 			Vertex * u = it->second;
 			if (key.first == oldkey.first && key.second == oldkey.second)
 				u->set_id (next_id);
@@ -196,5 +197,11 @@ void ROBDD::reduce ()
 		}
 	}
 	root = subgraph[root->get_id ()];
+	/*cout << "subarverores:" << endl;
+	for (int i = 1; i < cardinality; i++)
+	{
+		cout << "i = " << i << endl;
+		print(subgraph[i]);
+	}*/
 }
 
