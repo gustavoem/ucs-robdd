@@ -8,6 +8,25 @@ ROBDD::ROBDD (ElementSet * set)
 	cardinality = 0;
 }
 
+ROBDD::ROBDD (ElementSet * set, int a)
+{
+	elm_set = set;
+	Element * elm = elm_set->get_element (0);
+	root = new Vertex (elm, 1);
+	elm = elm_set->get_element (1);
+	Vertex * v_lo = new Vertex (elm, 2);
+	Vertex * v_hi = new Vertex (elm, 2);
+	root->set_child (v_hi, true);
+	root->set_child (v_lo, false);
+	Vertex * zero = new Vertex (false, 4);
+	Vertex * one = new Vertex (true, 4);
+	v_lo->set_child (one, true);
+	v_lo->set_child (zero, false);
+	v_lo->set_child (one, true);
+	v_lo->set_child (zero, false);
+	cardinality = 5;
+}
+
 
 ROBDD::ROBDD (ElementSet * set, ElementSubset * subset)
 {
@@ -101,7 +120,7 @@ void ROBDD::fill_vlist (Vertex * v, list<Vertex *> ** vlists)
 		return;
 	unsigned int i = v->get_id ();
 	cout.flush ();
-	vlists[i - 1]->push_back (v);
+	vlists[i - 1]->push_back (v);	
 	v->mark = true;
 
 	fill_vlist (v->get_child (false), vlists);
@@ -122,9 +141,8 @@ void ROBDD::reduce ()
 	unmark_all_vertex ();
 	fill_vlist (root, vlists);
 
-	
 	// Debugging purposes only
-	for (unsigned int i = 0; i <= set_card; i++)
+	/*for (unsigned int i = 0; i <= set_card; i++)
 	{
 		list<Vertex *> * lista = vlists[i];
 		cout << "lista de id: " << i + 1 << endl;
@@ -132,7 +150,7 @@ void ROBDD::reduce ()
 		{
 			cout << *it << endl;
 		}
-	}
+	}*/
 
 	int next_id = 0;
 	for (int i = set_card + 1; i > 0; i--)
@@ -179,3 +197,4 @@ void ROBDD::reduce ()
 	}
 	root = subgraph[root->get_id ()];
 }
+

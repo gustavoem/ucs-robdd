@@ -31,6 +31,12 @@ namespace ROBDDTest {
 		robdd2->reduce ();
 		robdd2->print ();
 		cout << " fim da robdd 2. |G| = " << robdd2->cardinality << endl << endl;
+
+		ROBDD * robdd3 = new ROBDD (elm_set, 1);
+		robdd3->print ();
+		robdd3->reduce ();
+		robdd3->print ();
+		cout << " fim da robdd 3. |G| = " << robdd3->cardinality << endl << endl;
 		return true;
 	}
 
