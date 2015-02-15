@@ -5,7 +5,7 @@ ROBDD::ROBDD (ElementSet * set)
 {
 	elm_set = set;
 	root = new Vertex (false, elm_set->get_set_cardinality () + 1);
-	cardinality = 0;
+	cardinality = 1;
 }
 
 ROBDD::ROBDD ()
@@ -109,6 +109,7 @@ Vertex ** ROBDD::get_all_vertex ()
 	int * last_index = (int *) malloc (sizeof (int *));
 	*last_index = 0;
 	fill_vertice (v, last_index, root);
+	free (last_index);
 	return v;
 }
 

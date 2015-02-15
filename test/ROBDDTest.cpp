@@ -21,13 +21,13 @@ namespace ROBDDTest {
 		ROBDD * robdd = new ROBDD (elm_set);
 		robdd->print ();
 		cout.flush();
-		robdd->reduce ();
+		//robdd->reduce ();
 		cout << "depois de reduzir" << endl;
 		robdd->print ();
 		cout << " fim da robdd 1 " << endl  << endl;
-		delete robdd;
+		delete robdd;*/
 		
-		ElementSubset * subset = new ElementSubset("", elm_set);
+		/*ElementSubset * subset = new ElementSubset("", elm_set);
 		subset->add_element(0);
 		subset->add_element(1);
 		subset->add_element(2);
