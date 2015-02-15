@@ -9,6 +9,8 @@ namespace ROBDDTest {
 		Vertex * root = robdd->get_root ();
 		bool answ = true;
 		answ = root->get_var () == NULL && root->get_child (true) == NULL && root->get_child (false) == NULL;
+		delete elm_set;
+		delete robdd;
 		return answ;
 	}
 
@@ -22,8 +24,9 @@ namespace ROBDDTest {
 		robdd->reduce ();
 		cout << "depois de reduzir" << endl;
 		robdd->print ();
-		
 		cout << " fim da robdd 1 " << endl  << endl;
+		delete robdd;
+		
 		ElementSubset * subset = new ElementSubset("", elm_set);
 		subset->add_element(0);
 		subset->add_element(1);
@@ -34,6 +37,8 @@ namespace ROBDDTest {
 		cout << "depois de reduzir" << endl;
 		robdd2->print ();
 		cout << " fim da robdd 2. |G| = " << robdd2->cardinality << endl << endl;
+		delete subset;
+		delete robdd2;
 
 		ROBDD * robdd3 = new ROBDD ();
 		cout << "robdd 3" << endl;
@@ -42,6 +47,9 @@ namespace ROBDDTest {
 		cout << "depois de reduzir" << endl;
 		robdd3->print ();
 		cout << " fim da robdd 3. |G| = " << robdd3->cardinality << endl << endl;
+		delete robdd3;
+
+		delete elm_set;
 		return true;
 	}
 
