@@ -8,12 +8,13 @@ ROBDD::ROBDD (ElementSet * set)
 	cardinality = 0;
 }
 
-ROBDD::ROBDD (ElementSet * set, int a)
+ROBDD::ROBDD ()
 {
-	elm_set = set;
+	elm_set = new ElementSet ("", 2, 100);
 	Element * elm = elm_set->get_element (0);
 	root = new Vertex (elm, 1);
-	elm = elm_set->get_element (1);
+	// teste obdd1
+	/*elm = elm_set->get_element (1);
 	Vertex * v_lo = new Vertex (elm, 2);
 	Vertex * v_hi = new Vertex (elm, 2);
 	Vertex * zero = new Vertex (false, 3);
@@ -24,8 +25,22 @@ ROBDD::ROBDD (ElementSet * set, int a)
 	v_hi->set_child (zero, false);
 	root->set_child (v_hi, true);
 	root->set_child (v_lo, false);
+	cardinality = 5;*/
+
+	// teste obdd2
+	elm = elm_set->get_element (1);
+	Vertex * v_lo = new Vertex (elm, 2);
+	Vertex * v_hi = new Vertex (elm, 2);
+	Vertex * zero = new Vertex (false, 3);
+	Vertex * one = new Vertex (true, 3);
+	v_lo->set_child (one, true);
+	v_lo->set_child (one, false);
+	v_hi->set_child (one, true);
+	v_hi->set_child (zero, false);
+	root->set_child (v_hi, true);
+	root->set_child (v_lo, false);
 	cardinality = 5;
-}
+}	
 
 
 ROBDD::ROBDD (ElementSet * set, ElementSubset * subset)
@@ -155,11 +170,14 @@ void ROBDD::reduce ()
 	int next_id = 0;
 	for (int i = set_card + 1; i > 0; i--)
 	{
+		cout << "it: " << i << endl;
+		print(root);
 		map<Vertex *, pair<int, int> > Q;
 		list<Vertex *> * l = vlists[i];
 		for (list<Vertex*>::iterator it = l->begin (); it != l->end (); it++)
 		{
 			Vertex * u = *it;
+			cout << "vertex: " << u << endl;
 			Vertex * u_lo = u->get_child (false);
 			Vertex * u_hi = u->get_child (true);
 			if (u->get_id () == set_card + 1) 
@@ -167,8 +185,10 @@ void ROBDD::reduce ()
 				pair<int,  int> id_i (-1, u->get_value ());
 				Q.insert(make_pair (u, id_i));
 			}
-			else if (u_hi->get_id () == u_lo->get_id ())
+			else if (u_hi->get_id () == u_lo->get_id ()) 
+			{
 				u->set_id (u_lo->get_id ());
+			}
 			else
 			{
 				pair<int, int> id_i (u_lo->get_id (), u_hi->get_id ());
@@ -189,19 +209,31 @@ void ROBDD::reduce ()
 				u->set_id (next_id);
 				subgraph[next_id] = u;
 				if (u->get_child (false) != NULL)
+				{
+					cout << "setting " << u << "_lo as " <<  subgraph[u->get_child (false)->get_id ()] << endl;
 					u->set_child (subgraph[u->get_child (false)->get_id ()], false);
+					cout << "u_lo: " << u->get_child (false) << endl;
+				}
 				if (u->get_child (true) != NULL)
+				{
+					cout << "setting " << u << "_hi as " <<  subgraph[u->get_child (true)->get_id ()] << endl;
 					u->set_child (subgraph[u->get_child (true)->get_id ()], true);
+				}
 				oldkey = id_i;
 			}
 		}
+		for (unsigned int i = 1; i <= root->get_id (); i++)
+		{
+			cout << "vertex of id = " << i << endl;
+			cout << subgraph[i] << endl;
+		}
 	}
 	root = subgraph[root->get_id ()];
-	cout << "subarvores: " << endl;
+	/*cout << "subarvores: " << endl;
 	for (unsigned int i = 1; i <= root->get_id (); i++)
 	{
 		cout << "i = " << i << endl;
 		print(subgraph[i]);
-	}
+	}*/
 }
 

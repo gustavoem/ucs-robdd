@@ -39,16 +39,12 @@ Vertex * Vertex::get_child (bool side)
 }
 
 
-bool Vertex::set_child(Vertex * vertex, bool side)
+void Vertex::set_child(Vertex * vertex, bool side)
 {
-	if (side == true && hi == NULL)
+	if (side == true)
 		hi = vertex;
-	else if (side == false && lo == NULL)
+	else 
 		lo = vertex;
-	else
-		return false;
-	return true;
-
 }
 
 

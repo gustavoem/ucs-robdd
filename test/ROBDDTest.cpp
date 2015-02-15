@@ -35,8 +35,7 @@ namespace ROBDDTest {
 		robdd2->print ();
 		cout << " fim da robdd 2. |G| = " << robdd2->cardinality << endl << endl;
 
-		ElementSet * elm_set2 = new ElementSet ("", 2, 100);
-		ROBDD * robdd3 = new ROBDD (elm_set2, 1);
+		ROBDD * robdd3 = new ROBDD ();
 		cout << "robdd 3" << endl;
 		robdd3->print ();
 		robdd3->reduce ();

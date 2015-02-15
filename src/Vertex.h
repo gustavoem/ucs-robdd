@@ -44,7 +44,7 @@ public:
 
 	// Sets the child. True for high (right) and False for low (left)
 	//
-	bool set_child (Vertex *, bool);
+	void set_child (Vertex *, bool);
 
 
 	// Returns the value of a vertex
