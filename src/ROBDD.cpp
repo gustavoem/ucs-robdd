@@ -155,7 +155,7 @@ void ROBDD::reduce ()
 	int next_id = 0;
 	for (int i = set_card + 1; i > 0; i--)
 	{
-		map<pair<int, int>, Vertex *> Q;
+		map<Vertex *, pair<int, int> > Q;
 		list<Vertex *> * l = vlists[i];
 		for (list<Vertex*>::iterator it = l->begin (); it != l->end (); it++)
 		{
@@ -164,24 +164,24 @@ void ROBDD::reduce ()
 			Vertex * u_hi = u->get_child (true);
 			if (u->get_id () == set_card + 1) 
 			{
-				pair<int,  int> key (u->get_value (), -1);
-				Q.insert(make_pair (key, u));
+				pair<int,  int> id_i (-1, u->get_value ());
+				Q.insert(make_pair (u, id_i));
 			}
 			else if (u_hi->get_id () == u_lo->get_id ())
 				u->set_id (u_lo->get_id ());
 			else
 			{
-				pair<int, int> key (u_lo->get_id (), u_hi->get_id ());
-				Q.insert(make_pair(key, u));
+				pair<int, int> id_i (u_lo->get_id (), u_hi->get_id ());
+				Q.insert(make_pair(u, id_i));
 			}
 		}
 		pair<int, int> oldkey (-1, -1);
-		for (map<pair<int, int>, Vertex *>::iterator it = Q.begin(); it != Q.end(); it++)
+		for (map<Vertex *, pair<int, int> >::iterator it = Q.begin(); it != Q.end(); it++)
 		{
-			pair<int, int> key = it->first;
-			cout << "(" << key.first << ", " << key.second << ")" << endl;
-			Vertex * u = it->second;
-			if (key.first == oldkey.first && key.second == oldkey.second)
+			pair<int, int> id_i = it->second;
+			cout << "(" << id_i.first << ", " << id_i.second << ")" << endl;
+			Vertex * u = it->first;
+			if (id_i.first == oldkey.first && id_i.second == oldkey.second)
 				u->set_id (next_id);
 			else
 			{
@@ -192,16 +192,16 @@ void ROBDD::reduce ()
 					u->set_child (subgraph[u->get_child (false)->get_id ()], false);
 				if (u->get_child (true) != NULL)
 					u->set_child (subgraph[u->get_child (true)->get_id ()], true);
-				oldkey = key;
+				oldkey = id_i;
 			}
 		}
 	}
 	root = subgraph[root->get_id ()];
-	/*cout << "subarverores:" << endl;
-	for (int i = 1; i < cardinality; i++)
+	cout << "subarvores: " << endl;
+	for (unsigned int i = 1; i <= root->get_id (); i++)
 	{
 		cout << "i = " << i << endl;
 		print(subgraph[i]);
-	}*/
+	}
 }
 
