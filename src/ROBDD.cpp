@@ -95,7 +95,18 @@ void ROBDD::unmark_all_vertex (Vertex * v)
 
 ROBDD::~ROBDD ()
 {
-	return;
+	delete_vertices (root);
+}
+
+
+void ROBDD::delete_vertices (Vertex * v)
+{
+	if (v == NULL)
+		return;
+	delete_vertices (v->get_child(true));
+	delete_vertices (v->get_child(false));
+	delete v;
+
 }
 
 

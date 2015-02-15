@@ -35,15 +35,18 @@ private:
 	void fill_vlist (Vertex *, list<Vertex *> **);
 
 
-	//
+	// Unmarks all the vertices from the robdd
 	//
 	void unmark_all_vertex ();
 
 
-	//
+	// Unmarks all the vertices from the subtree with root Vertex *
 	//
 	void unmark_all_vertex (Vertex *);
 
+	// Deletes all vertex from the subtree with root Vertex *
+	//
+	void delete_vertices (Vertex *);
 
 public:
 

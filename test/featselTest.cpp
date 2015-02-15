@@ -409,11 +409,11 @@ int main(void) {
 	cout << endl;
 
 	// Testing Class "ROBDD"
-	/*cout << "ROBDDTest::a_new_robdd_has_only_a_terminal_node";
+	cout << "ROBDDTest::a_new_robdd_has_only_a_terminal_node";
 	cout.flush ();
 	printResult (ROBDDTest::a_new_robdd_has_only_a_terminal_node ());
 	cout << endl;
-	ROBDDTest::print_r ();*/
+	ROBDDTest::print_r ();
 
 	cout << "Total " << number_of_passed_tests + number_of_failed_tests << " test(s), ";
 	cout << number_of_passed_tests << " test(s) passed, " << number_of_failed_tests;

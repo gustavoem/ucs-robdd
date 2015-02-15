@@ -17,7 +17,7 @@ namespace ROBDDTest {
 	/*not a test*/
 	bool print_r () 
 	{
-		ElementSet * elm_set = new ElementSet ("", 3, 100);
+		/*ElementSet * elm_set = new ElementSet ("", 3, 100);
 		ROBDD * robdd = new ROBDD (elm_set);
 		robdd->print ();
 		cout.flush();
@@ -49,7 +49,7 @@ namespace ROBDDTest {
 		cout << " fim da robdd 3. |G| = " << robdd3->cardinality << endl << endl;
 		delete robdd3;
 
-		delete elm_set;
+		delete elm_set;*/
 		return true;
 	}
 
