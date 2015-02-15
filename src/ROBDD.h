@@ -44,9 +44,14 @@ private:
 	//
 	void unmark_all_vertex (Vertex *);
 
-	// Deletes all vertex from the subtree with root Vertex *
+	// Returns a list with all vertex of the ROBDD
 	//
-	void delete_vertices (Vertex *);
+	Vertex ** get_all_vertex ();
+
+	// Auxiliar function to get_all_vertex that traverse the robdd assgning
+	// pointers of the vertex to the vector vertice
+	//
+	void fill_vertice (Vertex **, int *, Vertex *);
 
 public:
 

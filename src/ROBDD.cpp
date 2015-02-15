@@ -95,18 +95,33 @@ void ROBDD::unmark_all_vertex (Vertex * v)
 
 ROBDD::~ROBDD ()
 {
-	delete_vertices (root);
+	unmark_all_vertex ();
+	Vertex ** vertice = get_all_vertex ();
+	for (unsigned int i = 0; i < cardinality; i++)
+		delete vertice[i];
+	free (vertice);
 }
 
 
-void ROBDD::delete_vertices (Vertex * v)
+Vertex ** ROBDD::get_all_vertex ()
 {
-	if (v == NULL)
-		return;
-	delete_vertices (v->get_child(true));
-	delete_vertices (v->get_child(false));
-	delete v;
+	Vertex ** v = (Vertex **) malloc (sizeof (Vertex *) * cardinality);
+	int * last_index = (int *) malloc (sizeof (int *));
+	*last_index = 0;
+	fill_vertice (v, last_index, root);
+	return v;
+}
 
+void ROBDD::fill_vertice (Vertex ** vertice, int * last_index, Vertex * v)
+{
+	if (v == NULL || v->mark)
+		return;
+	vertice[*last_index] = v;
+	v->mark = true;
+	(*last_index)++;
+
+	fill_vertice(vertice, last_index, v->get_child (true));
+	fill_vertice(vertice, last_index, v->get_child (false));
 }
 
 
@@ -240,11 +255,14 @@ void ROBDD::reduce ()
 		}
 	}
 	root = subgraph[root->get_id ()];
+
 	/*cout << "subarvores: " << endl;
 	for (unsigned int i = 1; i <= root->get_id (); i++)
 	{
 		cout << "i = " << i << endl;
 		print(subgraph[i]);
 	}*/
+	for (unsigned int i = 1; i <= set_card + 1; i++)
+		delete vlists[i];
 }
 

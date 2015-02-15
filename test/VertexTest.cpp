@@ -6,9 +6,10 @@ namespace VertexTest {
 	{
 		Element * elm = new Element (1, "elm_name");
 		Vertex * new_vertex = new Vertex (elm, 1);
+		bool answ = (new_vertex->get_child (false) == NULL) & (new_vertex->get_child (true) == NULL);
 		delete elm;
 		delete new_vertex;
-		return (new_vertex->get_child (false) == NULL) & (new_vertex->get_child (true) == NULL);
+		return answ;
 	}
 
 	bool a_terminal_vertex_should_have_no_var () 
