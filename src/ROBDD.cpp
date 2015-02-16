@@ -173,12 +173,11 @@ void ROBDD::fill_vlist (Vertex * v, list<Vertex *> ** vlists)
 
 void ROBDD::reduce ()
 {
-	Vertex ** subgraph = (Vertex **) calloc (cardinality, sizeof (Vertex *));
+	Vertex ** subgraph = (Vertex **) calloc (cardinality + 1, sizeof (Vertex *));
 	unsigned int set_card = elm_set->get_set_cardinality ();
-	list<Vertex *> ** vlists = (list<Vertex *> **) calloc (set_card + 1, sizeof (list<Vertex *> *));
-	for (unsigned int i = 1; i <= set_card + 1; i++) {
+	list<Vertex *> ** vlists = (list<Vertex *> **) calloc (set_card + 2, sizeof (list<Vertex *> *));
+	for (unsigned int i = 1; i <= set_card + 1; i++) 
 		vlists[i] = new list<Vertex *>();
-	}
 	
 	unmark_all_vertex ();
 	fill_vlist (root, vlists);
@@ -197,14 +196,12 @@ void ROBDD::reduce ()
 	int next_id = 0;
 	for (int i = set_card + 1; i > 0; i--)
 	{
-		cout << "it: " << i << endl;
-		print(root);
+		// cout << "it: " << i << endl;
 		map<Vertex *, pair<int, int> > Q;
 		list<Vertex *> * l = vlists[i];
 		for (list<Vertex*>::iterator it = l->begin (); it != l->end (); it++)
 		{
 			Vertex * u = *it;
-			cout << "vertex: " << u << endl;
 			Vertex * u_lo = u->get_child (false);
 			Vertex * u_hi = u->get_child (true);
 			if (u->get_id () == set_card + 1) 
@@ -239,7 +236,6 @@ void ROBDD::reduce ()
 				{
 					cout << "setting " << u << "_lo as " <<  subgraph[u->get_child (false)->get_id ()] << endl;
 					u->set_child (subgraph[u->get_child (false)->get_id ()], false);
-					cout << "u_lo: " << u->get_child (false) << endl;
 				}
 				if (u->get_child (true) != NULL)
 				{
@@ -265,5 +261,7 @@ void ROBDD::reduce ()
 	}*/
 	for (unsigned int i = 1; i <= set_card + 1; i++)
 		delete vlists[i];
+	free (vlists);
+	free (subgraph);
 }
 
