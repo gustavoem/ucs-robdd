@@ -27,20 +27,20 @@ namespace ROBDDTest {
 		cout << " fim da robdd 1 " << endl  << endl;
 		delete robdd;
 		
-		/*ElementSubset * subset = new ElementSubset("", elm_set);
+		ElementSubset * subset = new ElementSubset("", elm_set);
 		subset->add_element(0);
 		subset->add_element(1);
 		subset->add_element(2);
 		ROBDD * robdd2 = new ROBDD (elm_set, subset);
 		robdd2->print ();
-		// robdd2->reduce ();
+		robdd2->reduce ();
 		cout << "depois de reduzir" << endl;
 		robdd2->print ();
 		cout << " fim da robdd 2. |G| = " << robdd2->cardinality << endl << endl;
 		delete subset;
 		delete robdd2;
 
-		ROBDD * robdd3 = new ROBDD ();
+		/*ROBDD * robdd3 = new ROBDD ();
 		cout << "robdd 3" << endl;
 		robdd3->print ();
 		// robdd3->reduce ();
