@@ -27,8 +27,8 @@ ROBDD::ROBDD (ElementSet * set, int a)
 	root->set_child (v_lo, false);
 	cardinality = 5;
 
-	// teste obdd2
-	/*elm = elm_set->get_element (1);
+	// test obdd2
+/*	elm = elm_set->get_element (1);
 	Vertex * v_lo = new Vertex (elm, 2);
 	Vertex * v_hi = new Vertex (elm, 2);
 	Vertex * zero = new Vertex (false, 3);
@@ -40,6 +40,19 @@ ROBDD::ROBDD (ElementSet * set, int a)
 	root->set_child (v_hi, true);
 	root->set_child (v_lo, false);
 	cardinality = 5;*/
+
+	// teste obdd3
+	/*elm = elm_set->get_element (1);
+	Vertex * v_lo = new Vertex (elm, 2);
+	Vertex * v_hi = new Vertex (elm, 2);
+	Vertex * one = new Vertex (true, 3);
+	v_lo->set_child (one, true);
+	v_lo->set_child (one, false);
+	v_hi->set_child (one, true);
+	v_hi->set_child (one, false);
+	root->set_child (v_hi, true);
+	root->set_child (v_lo, false);
+	cardinality = 4;*/
 }	
 
 
@@ -98,7 +111,10 @@ ROBDD::~ROBDD ()
 	unmark_all_vertex ();
 	Vertex ** vertice = get_all_vertex ();
 	for (unsigned int i = 0; i < cardinality; i++)
+	{
+		cout.flush ();
 		delete vertice[i];
+	}
 	free (vertice);
 }
 
@@ -182,23 +198,12 @@ void ROBDD::reduce ()
 	unmark_all_vertex ();
 	fill_vlist (root, vlists);
 
-	// Debugging purposes only
-	/*for (unsigned int i = 1; i <= set_card + 1; i++)
-	{
-		list<Vertex *> * lista = vlists[i];
-		cout << "lista de id: " << i << endl;
-		for(list<Vertex *>::iterator it = lista->begin (); it != lista->end (); it++)
-		{
-			cout << *it << endl;
-		}
-	}*/
-
 	int next_id = 0;
 	for (int i = set_card + 1; i > 0; i--)
 	{
-		// cout << "it: " << i << endl;
 		map<Vertex *, pair<int, int> > Q;
 		list<Vertex *> * l = vlists[i];
+		pair<Vertex *, Vertex *> trash (NULL, NULL);
 		for (list<Vertex*>::iterator it = l->begin (); it != l->end (); it++)
 		{
 			Vertex * u = *it;
@@ -211,7 +216,21 @@ void ROBDD::reduce ()
 			}
 			else if (u_hi->get_id () == u_lo->get_id ()) 
 			{
+
 				u->set_id (u_lo->get_id ());
+				if (u_hi != u_lo)
+				{
+					if (subgraph[u_hi->get_id ()] != u_hi) 
+					{
+						trash.first = u_hi;
+						cardinality--;
+					}
+					if (subgraph[u_hi->get_id ()] != u_lo)
+					{
+						trash.second = u_lo;
+						cardinality--;
+					}
+				}
 			}
 			else
 			{
@@ -223,10 +242,11 @@ void ROBDD::reduce ()
 		for (map<Vertex *, pair<int, int> >::iterator it = Q.begin(); it != Q.end(); it++)
 		{
 			pair<int, int> id_i = it->second;
-			cout << "(" << id_i.first << ", " << id_i.second << ")" << endl;
 			Vertex * u = it->first;
 			if (id_i.first == oldkey.first && id_i.second == oldkey.second)
+			{
 				u->set_id (next_id);
+			}
 			else
 			{
 				next_id++;
@@ -234,31 +254,39 @@ void ROBDD::reduce ()
 				subgraph[next_id] = u;
 				if (u->get_child (false) != NULL)
 				{
-					cout << "setting " << u << "_lo as " <<  subgraph[u->get_child (false)->get_id ()] << endl;
-					u->set_child (subgraph[u->get_child (false)->get_id ()], false);
+					Vertex * actual_lo_child = subgraph[u->get_child (false)->get_id ()];
+					if (actual_lo_child != u->get_child (false)) 
+					{
+						cardinality--;
+						delete u->get_child (false);
+					}
+					u->set_child (actual_lo_child, false);
 				}
 				if (u->get_child (true) != NULL)
 				{
-					cout << "setting " << u << "_hi as " <<  subgraph[u->get_child (true)->get_id ()] << endl;
-					u->set_child (subgraph[u->get_child (true)->get_id ()], true);
+					Vertex * actual_hi_child = subgraph[u->get_child (true)->get_id ()];
+					if (actual_hi_child != u->get_child (true))
+					{
+						cardinality--;
+						delete u->get_child (true);
+					}
+					u->set_child (actual_hi_child, true);
 				}
 				oldkey = id_i;
 			}
 		}
-		for (unsigned int i = 1; i <= root->get_id (); i++)
-		{
-			cout << "vertex of id = " << i << endl;
-			cout << subgraph[i] << endl;
-		}
+		delete trash.first;
+		delete trash.second;
 	}
-	root = subgraph[root->get_id ()];
-
-	/*cout << "subarvores: " << endl;
-	for (unsigned int i = 1; i <= root->get_id (); i++)
+	
+	Vertex * new_root = subgraph[root->get_id ()];
+	if (root != new_root)
 	{
-		cout << "i = " << i << endl;
-		print(subgraph[i]);
-	}*/
+		cardinality--;
+		delete	root;
+	}
+	root = new_root;
+
 	for (unsigned int i = 1; i <= set_card + 1; i++)
 		delete vlists[i];
 	free (vlists);
