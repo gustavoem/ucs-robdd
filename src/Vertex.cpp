@@ -9,22 +9,24 @@ Vertex::Vertex ()
 }
 
 
-Vertex::Vertex (Element * elm, unsigned int id) 
+Vertex::Vertex (Element * elm, unsigned int index) 
 {
 	var = elm;
 	lo = NULL;
 	hi = NULL;
-	this->id = id;
+	this->index = index;
+	this->id = index;
 }
 
 
-Vertex::Vertex (bool value, unsigned int id)
+Vertex::Vertex (bool value, unsigned int index)
 {
 	var = NULL;
 	lo = NULL;
 	hi = NULL;
 	this->value = value;
-	this->id = id;
+	this->index = index;
+	this->id = index;
 }
 
 

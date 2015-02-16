@@ -209,7 +209,7 @@ void ROBDD::reduce ()
 			Vertex * u = *it;
 			Vertex * u_lo = u->get_child (false);
 			Vertex * u_hi = u->get_child (true);
-			if (u->get_id () == set_card + 1) 
+			if (u->get_index () == set_card + 1) 
 			{
 				pair<int,  int> id_i (-1, u->get_value ());
 				Q.insert(make_pair (u, id_i));
