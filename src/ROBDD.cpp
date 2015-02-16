@@ -293,3 +293,36 @@ void ROBDD::reduce ()
 	free (subgraph);
 }
 
+
+void ROBDD::union_to (Vertex * root2)
+{
+	map<pair<Vertex *, Vertex*>, Vertex *> T;
+	//Vertex * root2 = robdd2->get_root();
+	Vertex * new_root = union_step (root, root2, &T);
+}
+
+Vertex * ROBDD::union_step (Vertex * v1, Vertex * v2, map<pair<Vertex *, Vertex*>, Vertex *> * T)
+{
+	Vertex * u = (*T)[pair<Vertex *, Vertex *> (v1, v2)];
+	
+	if (u != NULL)
+		return u;
+
+	u = new Vertex ();
+	u->mark = false;
+	pair<Vertex *, Vertex *> key (v1, v2);
+	(*T).insert(make_pair(key, u));
+	if ((v1->is_terminal () || v2->is_terminal ()) && \
+		 (v1->get_value () || v2->get_value ()))
+	{
+		u->set_id (elm_set->get_set_cardinality () + 1);
+		u->set_child (NULL, true);
+		u->set_child (NULL, false);
+	}
+	else
+	{
+		Element * v1_elm = v1->get_var ();
+		Element * v2_elm = v2->get_var ();
+
+	}
+}

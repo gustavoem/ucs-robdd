@@ -1,6 +1,14 @@
 #include "Vertex.h"
 
 
+Vertex::Vertex ()
+{
+	var = NULL;
+	lo = NULL;
+	hi = NULL;
+}
+
+
 Vertex::Vertex (Element * elm, unsigned int id) 
 {
 	var = elm;
@@ -28,6 +36,12 @@ Vertex::~Vertex ()
 Element * Vertex::get_var ()
 {
 	return var;
+}
+
+
+void Vertex::set_var (Element * var)
+{
+	this->var = var;
 }
 
 
@@ -65,6 +79,18 @@ unsigned int Vertex::get_id ()
 void Vertex::set_id (unsigned int id)
 {
 	this->id = id;
+}
+
+
+unsigned int Vertex::get_index ()
+{
+	return index;
+}
+
+
+void Vertex::set_index (unsigned int index)
+{
+	this->index = index;
 }
 
 

@@ -89,6 +89,14 @@ public:
 	// Reduces the OBDD
 	//
 	void reduce ();
+
+	// Makes the union of this ROBDD and the one passed by argument
+	//
+	void union_to (Vertex *);
+
+	// Makes the union of the subtrees passed by argument
+	//
+	Vertex * union_step (Vertex * v1, Vertex * v2, map<pair<Vertex *, Vertex *>, Vertex *> *);
 };
 
 #endif /* ROBDD_H_ */

@@ -14,10 +14,15 @@ private:
 	Element * var;
 	bool value;
 	unsigned int id;
+	unsigned int index;
 	
 public:
 
 	bool mark;
+
+	// Default Vertex constructor
+	//
+	Vertex ();
 
 	// Constructor for nonterminal vertices
 	//
@@ -36,6 +41,10 @@ public:
 	// Returns the element of a vertex
 	//
 	Element * get_var ();
+
+	// Sets the element of a vertex
+	//
+	void set_var (Element *);
 
 	// Returns the child. True for high (right) and False for low (left)
 	//
@@ -60,6 +69,15 @@ public:
 	// Sets the id of a vertex
 	//
 	void set_id (unsigned int);
+
+	// Returns the index of a vertex
+	//
+	unsigned int get_index ();
+
+
+	// Sets the index of a vertex
+	//
+	void set_index (unsigned int);	
 
 
 	// Says if the vertex is terminal
