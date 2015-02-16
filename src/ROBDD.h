@@ -65,7 +65,7 @@ public:
 
 	// this is for testing reduce ()
 	//
-	ROBDD ();
+	ROBDD (ElementSet *, int);
 
 	// Builds an ROBDD where the only path valued "1", is the path representing the subset
 	//
