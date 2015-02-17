@@ -67,7 +67,7 @@ void Vertex::set_child (Vertex * vertex, bool side)
 int Vertex::get_value ()
 {
 	if (var != NULL)
-		return 0;
+		return -1;
 	return value;
 }
 
