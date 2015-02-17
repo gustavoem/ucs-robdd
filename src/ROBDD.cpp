@@ -304,6 +304,7 @@ void ROBDD::union_to (Vertex * root2)
 	Vertex * new_root = union_step (root, root2, pairs, &new_cardinality);
 	cout << new_cardinality << endl;
 	root = new_root;
+	reduce ();
 }
 
 Vertex * ROBDD::union_step (Vertex * v1, Vertex * v2, map<pair<Vertex *, Vertex*>, Vertex *> * pairs, unsigned int * new_cardinality)
