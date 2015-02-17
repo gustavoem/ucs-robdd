@@ -108,22 +108,25 @@ void ROBDD::unmark_all_vertex (Vertex * v)
 
 ROBDD::~ROBDD ()
 {
-	unmark_all_vertex ();
-	Vertex ** vertice = get_all_vertex ();
-	for (unsigned int i = 0; i < cardinality; i++)
-	{
-		cout.flush ();
+	delete_subtree (root, cardinality);
+}
+
+
+void ROBDD::delete_subtree (Vertex * v, unsigned int n)
+{
+	Vertex ** vertice = get_all_vertex (root, n);
+	for (unsigned int i = 0; i < n; i++)
 		delete vertice[i];
-	}
 	free (vertice);
 }
 
 
-Vertex ** ROBDD::get_all_vertex ()
+Vertex ** ROBDD::get_all_vertex (Vertex * root, unsigned int n)
 {
-	Vertex ** v = (Vertex **) malloc (sizeof (Vertex *) * cardinality);
+	Vertex ** v = (Vertex **) malloc (sizeof (Vertex *) * n);
 	int * last_index = (int *) malloc (sizeof (int *));
 	*last_index = 0;
+	unmark_all_vertex (root);
 	fill_vertice (v, last_index, root);
 	free (last_index);
 	return v;
@@ -297,11 +300,13 @@ void ROBDD::reduce ()
 void ROBDD::union_to (Vertex * root2)
 {
 	map<pair<Vertex *, Vertex*>, Vertex *> * pairs = new map<pair<Vertex *, Vertex*>, Vertex *>();
-	root = union_step (root, root2, pairs);
-	cout << root->get_child (true);
+	unsigned int new_cardinality = 0;
+	Vertex * new_root = union_step (root, root2, pairs, &new_cardinality);
+	cout << new_cardinality << endl;
+	root = new_root;
 }
 
-Vertex * ROBDD::union_step (Vertex * v1, Vertex * v2, map<pair<Vertex *, Vertex*>, Vertex *> * pairs)
+Vertex * ROBDD::union_step (Vertex * v1, Vertex * v2, map<pair<Vertex *, Vertex*>, Vertex *> * pairs, unsigned int * new_cardinality)
 {
 	map<pair<Vertex *, Vertex *>, Vertex *>::iterator it = pairs->find (make_pair (v1, v2));
 	if (it != pairs->end ())
@@ -311,6 +316,7 @@ Vertex * ROBDD::union_step (Vertex * v1, Vertex * v2, map<pair<Vertex *, Vertex*
 	}
 
 	Vertex * u = new Vertex ();
+	(*new_cardinality)++;
 	u->mark = false;
 	pair<Vertex *, Vertex *> key (v1, v2);
 	pairs->insert(make_pair (key, u));
@@ -357,8 +363,8 @@ Vertex * ROBDD::union_step (Vertex * v1, Vertex * v2, map<pair<Vertex *, Vertex*
 			vlow2 = v2;
 			vhigh2 = v2;
 		}
-		Vertex * lo_chi = union_step (vlow1, vlow2, pairs);
-		Vertex * hi_chi = union_step (vhigh1, vhigh2, pairs);
+		Vertex * lo_chi = union_step (vlow1, vlow2, pairs, new_cardinality);
+		Vertex * hi_chi = union_step (vhigh1, vhigh2, pairs, new_cardinality);
 		u->set_child (lo_chi, false);
 		u->set_child (hi_chi, true);
 	}

@@ -44,9 +44,16 @@ private:
 	//
 	void unmark_all_vertex (Vertex *);
 
-	// Returns a list with all vertex of the ROBDD
+
+	// Deletes the subtree with root Vertex *
 	//
-	Vertex ** get_all_vertex ();
+	void delete_subtree (Vertex *, unsigned int);
+
+
+	// Returns a list with all vertex of the ROBDD with root Vertex *
+	//
+	Vertex ** get_all_vertex (Vertex *, unsigned int);
+
 
 	// Auxiliar function to get_all_vertex that traverse the robdd assgning
 	// pointers of the vertex to the vector vertice
@@ -96,7 +103,7 @@ public:
 
 	// Makes the union of the subtrees passed by argument
 	//
-	Vertex * union_step (Vertex * v1, Vertex * v2, map<pair<Vertex *, Vertex *>, Vertex *> *);
+	Vertex * union_step (Vertex * v1, Vertex * v2, map<pair<Vertex *, Vertex *>, Vertex *> *, unsigned int *);
 };
 
 #endif /* ROBDD_H_ */
