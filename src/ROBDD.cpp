@@ -298,6 +298,7 @@ void ROBDD::union_to (Vertex * root2)
 {
 	map<pair<Vertex *, Vertex*>, Vertex *> * pairs = new map<pair<Vertex *, Vertex*>, Vertex *>();
 	root = union_step (root, root2, pairs);
+	cout << root->get_child (true);
 }
 
 Vertex * ROBDD::union_step (Vertex * v1, Vertex * v2, map<pair<Vertex *, Vertex*>, Vertex *> * pairs)
@@ -336,7 +337,9 @@ Vertex * ROBDD::union_step (Vertex * v1, Vertex * v2, map<pair<Vertex *, Vertex*
 		Vertex * vhigh1 = NULL;
 		Vertex * vlow2 = NULL;
 		Vertex * vhigh2 = NULL;
-		u->set_index (min(v1->get_index (), v2->get_index ()));
+		int index = min(v1->get_index (), v2->get_index ());
+		u->set_index (index);
+		u->set_var (elm_set->get_element (index - 1));
 		if (u->get_index () == v1->get_index ())
 		{
 			vlow1 = v1->get_child (false);
@@ -365,13 +368,12 @@ Vertex * ROBDD::union_step (Vertex * v1, Vertex * v2, map<pair<Vertex *, Vertex*
 		u->set_child (hi_chi, true);
 	}
 
-	/*cout << "elms of pairs: " << endl;
+	cout << "elms of pairs: " << endl;
 	for (map<pair<Vertex*, Vertex *>, Vertex *>::iterator it = pairs->begin (); it != pairs->end (); it++) {
 		cout << "(<" << it->first.first << ", " << it->first.second << ">, " << it->second << ")" << endl;
-	}*/
+	}
 
 	cout << "retornando u: " << u << " " << u->get_value () << " " << u->get_index () <<  endl;
 	cout << "filhos de u: " << u->get_child (false) << " & " << u->get_child (true) << endl;
-	// print (u);*/
 	return u;
 }
