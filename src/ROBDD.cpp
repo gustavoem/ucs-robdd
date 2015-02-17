@@ -307,16 +307,13 @@ Vertex * ROBDD::union_step (Vertex * v1, Vertex * v2, map<pair<Vertex *, Vertex*
 	if (it != pairs->end ())
 	{
 		Vertex * u = it->second;
-		cout << "ja fiz esse par (" << v1 << ", " << v2 << ")" << "; retornando u: " << u << " " << u->get_value () << " " << u->get_index () <<  endl;
 		return u;
 	}
 
 	Vertex * u = new Vertex ();
 	u->mark = false;
 	pair<Vertex *, Vertex *> key (v1, v2);
-	cout << "inserindo " << "(<" << v1 << ", " << v2 << ">, " << u << ")" << endl; 
 	pairs->insert(make_pair (key, u));
-	cout << (*pairs)[key] << endl;
 
 	// Quero levar 0 e -1 em 0, e 1 em 1 => f(x) = (x * x + x)/2
 	int value1 = (v1 != NULL) && (v1->get_value () * v1->get_value () + v1->get_value ());
@@ -361,19 +358,9 @@ Vertex * ROBDD::union_step (Vertex * v1, Vertex * v2, map<pair<Vertex *, Vertex*
 			vhigh2 = v2;
 		}
 		Vertex * lo_chi = union_step (vlow1, vlow2, pairs);
-		cout << "voltei para: v1: " << v1 << " v2: " << v2 << " u: " << u << endl;
 		Vertex * hi_chi = union_step (vhigh1, vhigh2, pairs);
-		cout << "setting " << u << " childs: " << lo_chi << " & " << hi_chi << endl;
 		u->set_child (lo_chi, false);
 		u->set_child (hi_chi, true);
 	}
-
-	cout << "elms of pairs: " << endl;
-	for (map<pair<Vertex*, Vertex *>, Vertex *>::iterator it = pairs->begin (); it != pairs->end (); it++) {
-		cout << "(<" << it->first.first << ", " << it->first.second << ">, " << it->second << ")" << endl;
-	}
-
-	cout << "retornando u: " << u << " " << u->get_value () << " " << u->get_index () <<  endl;
-	cout << "filhos de u: " << u->get_child (false) << " & " << u->get_child (true) << endl;
 	return u;
 }
