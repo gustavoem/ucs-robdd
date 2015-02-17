@@ -41,7 +41,7 @@ namespace ROBDDTest {
 		delete subset;
 		delete robdd2;*/
 
-		ElementSet * elm_set2 = new ElementSet ("", 2, 100);
+		/*ElementSet * elm_set2 = new ElementSet ("", 2, 100);
 		ROBDD * robdd3 = new ROBDD (elm_set2, 1);
 		cout << "robdd 3" << endl;
 		robdd3->print ();
@@ -50,7 +50,22 @@ namespace ROBDDTest {
 		robdd3->print ();
 		cout << " fim da robdd 3. |G| = " << robdd3->cardinality << endl << endl;
 		delete robdd3;
-		delete elm_set2;
+		delete elm_set2;*/
+
+		/*agora para testar a union*/
+		ElementSubset * subset1 = new ElementSubset("", elm_set);
+		subset1->add_element(0);
+		subset1->add_element(2);
+		ROBDD * robdd4 = new ROBDD (elm_set, subset1);
+		robdd4->print ();
+		ElementSubset * subset2 = new ElementSubset("", elm_set);
+		subset2->add_element (3);
+		ROBDD * robdd5 = new ROBDD (elm_set, subset1);
+		robdd5->print ();
+		robdd5->union_to (robdd4->get_root ());
+		robdd5->print ();
+
+
 
 		delete elm_set;
 		return true;

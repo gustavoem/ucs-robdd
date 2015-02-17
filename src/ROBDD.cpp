@@ -298,7 +298,7 @@ void ROBDD::union_to (Vertex * root2)
 {
 	map<pair<Vertex *, Vertex*>, Vertex *> T;
 	//Vertex * root2 = robdd2->get_root();
-	Vertex * new_root = union_step (root, root2, &T);
+	root = union_step (root, root2, &T);
 }
 
 Vertex * ROBDD::union_step (Vertex * v1, Vertex * v2, map<pair<Vertex *, Vertex*>, Vertex *> * T)
@@ -321,8 +321,33 @@ Vertex * ROBDD::union_step (Vertex * v1, Vertex * v2, map<pair<Vertex *, Vertex*
 	}
 	else
 	{
-		Element * v1_elm = v1->get_var ();
-		Element * v2_elm = v2->get_var ();
-
+		Vertex * vlow1 = NULL;
+		Vertex * vhigh1 = NULL;
+		Vertex * vlow2 = NULL;
+		Vertex * vhigh2 = NULL;
+		u->set_index (min(v1->get_index (), v2->get_index ()));
+		if (u->get_index () == v1->get_index ())
+		{
+			vlow1 = v1->get_child (false);
+			vhigh1 = v1->get_child (true);
+		}
+		else
+		{
+			vlow1 = v1;
+			vhigh1 = v1;
+		}
+		if (u->get_index () == v2->get_index ())
+		{
+			vlow2 = v2->get_child (false);
+			vhigh2 = v2->get_child (true);
+		}	
+		else
+		{
+			vlow2 = v2;
+			vhigh2 = v2;
+		}
+		u->set_child (union_step (vlow1, vlow2, T), false);
+		u->set_child (union_step (vhigh1, vhigh2, T), true);
 	}
+	return u;
 }
