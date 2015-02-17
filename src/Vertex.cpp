@@ -55,7 +55,7 @@ Vertex * Vertex::get_child (bool side)
 }
 
 
-void Vertex::set_child(Vertex * vertex, bool side)
+void Vertex::set_child (Vertex * vertex, bool side)
 {
 	if (side == true)
 		hi = vertex;
@@ -64,11 +64,17 @@ void Vertex::set_child(Vertex * vertex, bool side)
 }
 
 
-int Vertex::get_value()
+int Vertex::get_value ()
 {
 	if (var != NULL)
-		return -1;
+		return 0;
 	return value;
+}
+
+
+void Vertex::set_value (int value)
+{
+	this->value = value;
 }
 
 

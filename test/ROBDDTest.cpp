@@ -57,12 +57,15 @@ namespace ROBDDTest {
 		subset1->add_element(0);
 		subset1->add_element(2);
 		ROBDD * robdd4 = new ROBDD (elm_set, subset1);
+		cout << "robdd4" << endl;
 		robdd4->print ();
 		ElementSubset * subset2 = new ElementSubset("", elm_set);
-		subset2->add_element (3);
-		ROBDD * robdd5 = new ROBDD (elm_set, subset1);
+		subset2->add_element (1);
+		ROBDD * robdd5 = new ROBDD (elm_set, subset2);
+		cout << "robdd5" << endl;
 		robdd5->print ();
 		robdd5->union_to (robdd4->get_root ());
+		cout << "juntas:" << endl;
 		robdd5->print ();
 
 

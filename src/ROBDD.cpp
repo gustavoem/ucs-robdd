@@ -160,14 +160,14 @@ void ROBDD::print (Vertex * v)
 	Element * var = v->get_var ();
 	if (var != NULL)
 	{
-		cout << var->get_element_name () << " & id: " << v->get_id () <<  " addres: " << v << endl;
+		cout << var->get_element_name () << " & id: " << v->get_id () <<  " addres: " << v << " index: " << v->get_index () << endl;
 		cout << "L ";
 		print (v->get_child (false));
 		cout << "R ";
 		print (v->get_child (true));
 		return;
 	}
-	cout << v->get_value () << "      & id: " << v->get_id () <<  " addres: " << v << endl;
+	cout << v->get_value () << "      & id: " << v->get_id () <<  " addres: " << v << " index: " << v->get_index () << endl;
 	return;
 }
 
@@ -297,24 +297,37 @@ void ROBDD::reduce ()
 void ROBDD::union_to (Vertex * root2)
 {
 	map<pair<Vertex *, Vertex*>, Vertex *> T;
-	//Vertex * root2 = robdd2->get_root();
 	root = union_step (root, root2, &T);
 }
 
 Vertex * ROBDD::union_step (Vertex * v1, Vertex * v2, map<pair<Vertex *, Vertex*>, Vertex *> * T)
 {
 	Vertex * u = (*T)[pair<Vertex *, Vertex *> (v1, v2)];
-	
+	cout << "v1: " << v1 << " v2: " << v2 << " u: " << u << endl;
 	if (u != NULL)
+	{
+		cout << "ja fiz esse: retornando u: " << u << " " << u->get_value () << " " << u->get_index () <<  endl;
 		return u;
+	}
 
 	u = new Vertex ();
 	u->mark = false;
 	pair<Vertex *, Vertex *> key (v1, v2);
-	(*T).insert(make_pair(key, u));
-	if ((v1->is_terminal () || v2->is_terminal ()) && \
-		 (v1->get_value () || v2->get_value ()))
+	T->insert(make_pair (key, u));
+	cout << "inseri " << "(<" << v1 << ", " << v2 << ">, " << u << ")" << endl; 
+	cout << "elms of T: " << endl;
+	for (map<pair<Vertex*, Vertex *>, Vertex *>::iterator it = T->begin (); it != T->end (); it++) {
+		cout << "(<" << it->first.first << ", " << it->first.second << ">, " << it->second << ")" << endl;
+	}
+
+	int value1 = (v1 != NULL) && v1->get_value ();
+	int value2 = (v2 != NULL) && v2->get_value ();
+	if ((value1) || (value2) || \
+	   ((value1 + value2 == 0) && (v1 != NULL && v1->is_terminal ()) \
+	                           && (v2 != NULL && v2->is_terminal ())))
 	{
+		u->set_value (value1 + value2);
+		u->set_index (elm_set->get_set_cardinality () + 1);
 		u->set_id (elm_set->get_set_cardinality () + 1);
 		u->set_child (NULL, true);
 		u->set_child (NULL, false);
@@ -346,8 +359,21 @@ Vertex * ROBDD::union_step (Vertex * v1, Vertex * v2, map<pair<Vertex *, Vertex*
 			vlow2 = v2;
 			vhigh2 = v2;
 		}
-		u->set_child (union_step (vlow1, vlow2, T), false);
-		u->set_child (union_step (vhigh1, vhigh2, T), true);
+		Vertex * lo_chi = union_step (vlow1, vlow2, T);
+		cout << "voltei para: v1: " << v1 << " v2: " << v2 << " u: " << u << endl;
+		Vertex * hi_chi = union_step (vhigh1, vhigh2, T);
+		cout << "setting " << u << " childs: " << lo_chi << " & " << hi_chi << endl;
+		u->set_child (lo_chi, false);
+		u->set_child (hi_chi, true);
 	}
+
+	/*cout << "elms of T: " << endl;
+	for (map<pair<Vertex*, Vertex *>, Vertex *>::iterator it = T->begin (); it != T->end (); it++) {
+		cout << "(<" << it->first.first << ", " << it->first.second << ">, " << it->second << ")" << endl;
+	}*/
+
+	cout << "retornando u: " << u << " " << u->get_value () << " " << u->get_index () <<  endl;
+	cout << "filhos de u: " << u->get_child (false) << " & " << u->get_child (true) << endl;
+	// print (u);
 	return u;
 }

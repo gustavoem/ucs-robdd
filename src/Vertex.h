@@ -60,6 +60,10 @@ public:
 	//
 	int get_value (); 
 
+
+	// Sets the value of a vertex
+	//
+	void set_value (int);
 	
 	// Returns the id of a vertex
 	//
