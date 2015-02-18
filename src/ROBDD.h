@@ -64,7 +64,7 @@ private:
 	// a ROBDD that has ones for subsets covered by the subset passed by 
 	// argument.
 	//
-	Vertex * covered_elm_tree (unsigned int, unsigned int *, ElementSubset *, Vertex *, Vertex *);
+	Vertex * build_interval (unsigned int, unsigned int *, ElementSubset *, Vertex *, Vertex *, bool);
 
 
 public:
@@ -119,9 +119,9 @@ public:
 	Vertex * union_step (Vertex * v1, Vertex * v2, map<pair<Vertex *, Vertex *>, Vertex *> *, unsigned int *);
 
 
-	// Adds to the ROBDD all the subsets covered by ElementSubset *
+	// Adds to the ROBDD all the subsets covered (if bool true) or that covers (if bool false) by ElementSubset *
 	//
-	void add_lower_interval (ElementSubset *);
+	void add_interval (ElementSubset *, bool);
 
 
 	// Returns true if the ElementSubset * path of the robdds leads to a 1

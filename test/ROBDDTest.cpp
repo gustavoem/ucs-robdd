@@ -36,7 +36,7 @@ namespace ROBDDTest {
 		subset->add_element (1);
 		subset->add_element (2);
 		ROBDD * robdd = new ROBDD (elm_set);
-		robdd->add_lower_interval (subset);
+		robdd->add_interval (subset, false);
 		Vertex * root = robdd->get_root ();
 		bool answ = (root->get_child (true) == NULL) && (root->get_child (false) == NULL) \
 					&& root->get_value () == 1;
@@ -88,7 +88,7 @@ namespace ROBDDTest {
 		subset.add_element (0);
 		subset.add_element (1);
 		ROBDD robdd (&elm_set);
-		robdd.add_lower_interval (&subset);
+		robdd.add_interval (&subset, false);
 		ElementSubset sub0 ("", &elm_set);
 		ElementSubset sub1 ("", &elm_set);
 		sub1.add_element (0);
@@ -109,10 +109,11 @@ namespace ROBDDTest {
 		subset.add_element (0);
 		subset.add_element (1);
 		ROBDD robdd (&elm_set);
-		robdd.add_lower_interval (&subset);
+		robdd.add_interval (&subset, false);
 		ElementSubset * elm = robdd.get_random_zero_evaluated_element ();
 		return elm == NULL;
 	}
+
 
 	bool its_possible_to_get_a_random_subset_evaluated_zero ()
 	{
@@ -120,9 +121,9 @@ namespace ROBDDTest {
 		ROBDD robdd (&elm_set);
 		ElementSubset subset ("", &elm_set);
 		subset.add_element (0);
-		robdd.add_lower_interval (&subset);
+		subset.add_element (1);
+		robdd.add_interval (&subset, true);
 		ElementSubset expected_subset ("", &elm_set);
-		expected_subset.add_element (1);
 		ElementSubset * answ_subset = robdd.get_random_zero_evaluated_element ();
 		bool answ = answ_subset->is_equal(&expected_subset);
 		delete answ_subset;

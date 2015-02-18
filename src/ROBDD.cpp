@@ -383,8 +383,8 @@ Vertex * ROBDD::union_step (Vertex * v1, Vertex * v2, map<pair<Vertex *, Vertex*
 	return u;
 }
 
-
-void ROBDD::add_lower_interval (ElementSubset * subset)
+// orientation = true for upper
+void ROBDD::add_interval (ElementSubset * subset, bool orientation)
 {
 	int set_card = elm_set->get_set_cardinality ();
 	Vertex * zero = new Vertex (false, set_card + 1);
@@ -392,7 +392,7 @@ void ROBDD::add_lower_interval (ElementSubset * subset)
 	Vertex * one = new Vertex (true, set_card + 1);
 	one->mark = false;
 	unsigned int card2 = 0;
-	Vertex * root2 = covered_elm_tree (0, &card2, subset, zero, one);
+	Vertex * root2 = build_interval (0, &card2, subset, zero, one, orientation);
 	union_to (root2);
 	if (!one->mark)
 		delete one;
@@ -402,7 +402,7 @@ void ROBDD::add_lower_interval (ElementSubset * subset)
 }
 
 
-Vertex * ROBDD::covered_elm_tree (unsigned int index, unsigned int * card, ElementSubset * subset, Vertex * zero, Vertex * one)
+Vertex * ROBDD::build_interval (unsigned int index, unsigned int * card, ElementSubset * subset, Vertex * zero, Vertex * one, bool orientation)
 {
 	if (index == elm_set->get_set_cardinality ())
 	{
@@ -411,18 +411,19 @@ Vertex * ROBDD::covered_elm_tree (unsigned int index, unsigned int * card, Eleme
 		return one;
 	}
 	
-	if (subset->has_element (index))
-		return covered_elm_tree (index + 1, card, subset, zero, one);
+	if ((orientation == false && subset->has_element (index)) ||
+		(orientation == true && !subset->has_element (index)))
+		return build_interval (index + 1, card, subset, zero, one, orientation);
 	
 	Vertex * v = new Vertex (elm_set->get_element (index), index + 1);
 	(*card)++;
-	v->set_child (zero, true);
+	v->set_child (zero, !orientation);
 	if (!zero->mark)
 	{
 		zero->mark = true;
 		(*card)++;
 	}
-	v->set_child (covered_elm_tree (index + 1, card, subset, zero, one), false);
+	v->set_child (build_interval (index + 1, card, subset, zero, one, orientation), orientation);
 	return v;
 }
 
@@ -451,17 +452,17 @@ ElementSubset * ROBDD::get_random_zero_evaluated_element ()
 	ElementSubset * subset = new ElementSubset ("", elm_set);
 	while (!v->is_terminal ())
 	{
-		subset->add_element (v->get_index () - 1);
+		Vertex * next_v;
 		if (v->get_child (true)->is_terminal () && !v->get_child (true)->get_value ())
-			v = v->get_child (true);
+			next_v = v->get_child (true);
 		else if (v->get_child (false)->is_terminal () && !v->get_child (false)->get_value ())
-			v = v->get_child (false);
+			next_v = v->get_child (false);
 		else
-		{
-			int r = rand() % 2;
-			v = v->get_child (r);
-		}
+			next_v = v->get_child ((int) rand() % 2);
+
+		if (next_v == v->get_child (true))
+			subset->add_element (v->get_index () - 1);
+		v = next_v;
 	}
-	// Risco: se a robdd estiver vazia vou devolver um subset sem nenhum elemento, tudo bem?
 	return subset;
 }

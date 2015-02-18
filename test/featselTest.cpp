@@ -75,7 +75,7 @@ void printResult (bool passed)
 int main(void) {
 
 	cout << endl << "Starting Unit Tests... " << endl << endl;
-/*
+
 	// Testing Class "Element"
 	cout << "ElementTest::an_element_should_have_a_name";
 	cout.flush ();
@@ -395,7 +395,7 @@ int main(void) {
 	cout.flush ();
 	printResult (SFFSTest::it_should_converge_for_large_abs_sum_sets ());
 	cout << endl;
-*/
+
 	// Testing Class "Vertex"
 	cout << "VertexTest::a_new_vertex_should_have_no_child";
 	cout.flush ();
