@@ -449,9 +449,8 @@ ElementSubset * ROBDD::get_random_zero_evaluated_element ()
 	if (v->is_terminal () && v->get_value ())
 		return NULL;
 	ElementSubset * subset = new ElementSubset ("", elm_set);
-	while (!v->is_terminal () && !v->get_value ())
+	while (!v->is_terminal ())
 	{
-		cout << "adicionando elemento: " << v->get_index () - 1 << endl;
 		subset->add_element (v->get_index () - 1);
 		if (v->get_child (true)->is_terminal () && !v->get_child (true)->get_value ())
 			v = v->get_child (true);

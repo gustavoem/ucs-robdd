@@ -430,6 +430,9 @@ int main(void) {
 	cout << "ROBDDTest::the_function_one_have_no_subset_evaluated_zero";
 	cout.flush ();
 	printResult (ROBDDTest::the_function_one_have_no_subset_evaluated_zero ());
+	cout << "ROBDDTest::its_possible_to_get_a_random_subset_evaluated_zero";
+	cout.flush ();
+	printResult (ROBDDTest::its_possible_to_get_a_random_subset_evaluated_zero ());
 	cout << endl;
 	
 

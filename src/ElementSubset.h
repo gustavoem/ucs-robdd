@@ -121,7 +121,6 @@ public:
 	//
 	bool has_element (unsigned int);
 
-	bool has_element (Element elm);
 
 	// Sets this subset as the intersection of it and the parameter subset.
 	//

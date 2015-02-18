@@ -116,7 +116,17 @@ namespace ROBDDTest {
 
 	bool its_possible_to_get_a_random_subset_evaluated_zero ()
 	{
-
+		ElementSet elm_set ("", 2, 2);	
+		ROBDD robdd (&elm_set);
+		ElementSubset subset ("", &elm_set);
+		subset.add_element (0);
+		robdd.add_lower_interval (&subset);
+		ElementSubset expected_subset ("", &elm_set);
+		expected_subset.add_element (1);
+		ElementSubset * answ_subset = robdd.get_random_zero_evaluated_element ();
+		bool answ = answ_subset->is_equal(&expected_subset);
+		delete answ_subset;
+		return answ;
 	}
 
 	/*not a test*/

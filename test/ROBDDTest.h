@@ -13,6 +13,7 @@ namespace ROBDDTest {
 	bool an_added_subset_must_be_contained ();
 	bool the_function_one_covers_all_subsets ();
 	bool the_function_one_have_no_subset_evaluated_zero ();
+	bool its_possible_to_get_a_random_subset_evaluated_zero();
 
 }
 
