@@ -11,6 +11,7 @@ namespace ROBDDTest {
 	bool the_union_of_all_subsets_must_be_the_function_1 ();
 	bool a_new_robdd_contais_no_subset ();
 	bool an_added_subset_must_be_contained ();
+	bool the_function_one_covers_all_subsets ();
 
 }
 

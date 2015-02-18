@@ -424,6 +424,9 @@ int main(void) {
 	cout << "ROBDDTest::an_added_subset_must_be_contained";
 	cout.flush ();
 	printResult (ROBDDTest::an_added_subset_must_be_contained ());
+	cout << "ROBDDTest::the_function_one_covers_all_subsets";
+	cout.flush ();
+	printResult (ROBDDTest::the_function_one_covers_all_subsets ());
 	cout << endl;
 	
 

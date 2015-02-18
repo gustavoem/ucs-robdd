@@ -81,6 +81,26 @@ namespace ROBDDTest {
 		return answ;
 	}
 
+	bool the_function_one_covers_all_subsets ()
+	{
+		ElementSet elm_set ("", 2, 2);	
+		ElementSubset subset ("", &elm_set);
+		subset.add_element (0);
+		subset.add_element (1);
+		ROBDD robdd (&elm_set);
+		robdd.add_lower_interval (&subset);
+		ElementSubset sub0 ("", &elm_set);
+		ElementSubset sub1 ("", &elm_set);
+		sub1.add_element (0);
+		ElementSubset sub2 ("", &elm_set);
+		sub2.add_element (1);
+		ElementSubset sub3 ("", &elm_set);
+		sub3.add_element (0);
+		sub3.add_element (1);
+		bool answ = robdd.contains (&sub0) && robdd.contains (&sub1) && \
+					robdd.contains (&sub2) && robdd.contains (&sub3);
+		return answ;
+	}
 
 	/*not a test*/
 	bool print_r () 
