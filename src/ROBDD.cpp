@@ -163,6 +163,7 @@ void ROBDD::print (Vertex * v)
 	Element * var = v->get_var ();
 	if (var != NULL)
 	{
+
 		cout << var->get_element_name () << " & id: " << v->get_id () <<  " addres: " << v << " index: " << v->get_index () << endl;
 		cout << "L ";
 		print (v->get_child (false));
@@ -303,8 +304,9 @@ void ROBDD::union_to (Vertex * root2)
 	unsigned int new_cardinality = 0;
 	Vertex * new_root = union_step (root, root2, pairs, &new_cardinality);
 	cout << new_cardinality << endl;
+	delete_subtree (root, cardinality);
 	root = new_root;
-	reduce ();
+	// reduce ();
 }
 
 Vertex * ROBDD::union_step (Vertex * v1, Vertex * v2, map<pair<Vertex *, Vertex*>, Vertex *> * pairs, unsigned int * new_cardinality)
@@ -315,7 +317,6 @@ Vertex * ROBDD::union_step (Vertex * v1, Vertex * v2, map<pair<Vertex *, Vertex*
 		Vertex * u = it->second;
 		return u;
 	}
-
 	Vertex * u = new Vertex ();
 	(*new_cardinality)++;
 	u->mark = false;
@@ -343,6 +344,7 @@ Vertex * ROBDD::union_step (Vertex * v1, Vertex * v2, map<pair<Vertex *, Vertex*
 		Vertex * vhigh2 = NULL;
 		int index = min(v1->get_index (), v2->get_index ());
 		u->set_index (index);
+		u->set_id (index);
 		u->set_var (elm_set->get_element (index - 1));
 		if (u->get_index () == v1->get_index ())
 		{
