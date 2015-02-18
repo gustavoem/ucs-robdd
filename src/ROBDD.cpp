@@ -201,7 +201,7 @@ void ROBDD::fill_vlist (Vertex * v, list<Vertex *> ** vlists)
 
 
 void ROBDD::reduce ()
-{
+{ 
 	Vertex ** subgraph = (Vertex **) calloc (cardinality + 1, sizeof (Vertex *));
 	unsigned int set_card = elm_set->get_set_cardinality ();
 	list<Vertex *> ** vlists = (list<Vertex *> **) calloc (set_card + 2, sizeof (list<Vertex *> *));
@@ -309,14 +309,15 @@ void ROBDD::reduce ()
 
 void ROBDD::union_to (Vertex * root2)
 {
-	/*map<pair<Vertex *, Vertex*>, Vertex *> * pairs = new map<pair<Vertex *, Vertex*>, Vertex *>();
+	map<pair<Vertex *, Vertex*>, Vertex *> pairs;
 	unsigned int new_cardinality = 0;
-	Vertex * new_root = union_step (root, root2, pairs, &new_cardinality);
-	cout << new_cardinality << endl;*/
+	Vertex * new_root = union_step (root, root2, &pairs, &new_cardinality);
+	cout << new_cardinality << endl;
 	delete_subtree (&root, &cardinality);
+	cardinality = new_cardinality;
+	root = new_root;
 	print (root);
-	//root = new_root;
-	// reduce ();
+	reduce ();
 }
 
 Vertex * ROBDD::union_step (Vertex * v1, Vertex * v2, map<pair<Vertex *, Vertex*>, Vertex *> * pairs, unsigned int * new_cardinality)
