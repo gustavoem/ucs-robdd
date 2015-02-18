@@ -312,7 +312,6 @@ void ROBDD::union_to (Vertex * root2)
 	map<pair<Vertex *, Vertex*>, Vertex *> pairs;
 	unsigned int new_cardinality = 0;
 	Vertex * new_root = union_step (root, root2, &pairs, &new_cardinality);
-	cout << new_cardinality << endl;
 	delete_subtree (&root, &cardinality);
 	cardinality = new_cardinality;
 	root = new_root;

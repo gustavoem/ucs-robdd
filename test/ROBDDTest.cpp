@@ -19,7 +19,7 @@ namespace ROBDDTest {
 	{
 		ElementSet * elm_set = new ElementSet ("", 3, 100);
 		
-		/*ROBDD * robdd = new ROBDD (elm_set);
+		ROBDD * robdd = new ROBDD (elm_set);
 		robdd->print ();
 		cout.flush();
 		robdd->reduce ();
@@ -28,7 +28,7 @@ namespace ROBDDTest {
 		cout << " fim da robdd 1 " << endl  << endl;
 		delete robdd;
 		
-		ElementSubset * subset = new ElementSubset("", elm_set);
+		/*ElementSubset * subset = new ElementSubset("", elm_set);
 		subset->add_element(0);
 		subset->add_element(1);
 		subset->add_element(2);
@@ -39,7 +39,7 @@ namespace ROBDDTest {
 		robdd2->print ();
 		cout << " fim da robdd 2. |G| = " << robdd2->cardinality << endl << endl;
 		delete subset;
-		delete robdd2;*/
+		delete robdd2;
 
 		/*ElementSet * elm_set2 = new ElementSet ("", 2, 100);
 		ROBDD * robdd3 = new ROBDD (elm_set2, 1);
@@ -53,23 +53,23 @@ namespace ROBDDTest {
 		delete elm_set2;*/
 
 		/*agora para testar a union*/
-		ElementSubset * subset1 = new ElementSubset("", elm_set);
+		/*ElementSubset * subset1 = new ElementSubset("", elm_set);
 		subset1->add_element(0);
 		subset1->add_element(2);
 		ROBDD * robdd4 = new ROBDD (elm_set, subset1);
 		cout << "robdd4" << endl;
-		robdd4->print ();
+		robdd4->print ();*/
 		ElementSubset * subset2 = new ElementSubset("", elm_set);
 		subset2->add_element (1);
 		ROBDD * robdd5 = new ROBDD (elm_set, subset2);
 		cout << "robdd5" << endl;
 		robdd5->print ();
-		robdd5->union_to (robdd4->get_root ());
+		robdd5->union_to (robdd->get_root ());
 		cout << "juntas:" << endl;
 		robdd5->print ();
-		delete robdd4;
+		//delete robdd4;
 		delete robdd5;
-		delete subset1;
+		//delete subset1;
 		delete subset2;
 
 
