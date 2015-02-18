@@ -102,6 +102,11 @@ namespace ROBDDTest {
 		return answ;
 	}
 
+	bool the_function_one_have_no_element_evaluated_zero ()
+	{
+		
+	}
+
 	/*not a test*/
 	bool print_r () 
 	{

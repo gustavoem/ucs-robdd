@@ -426,6 +426,7 @@ Vertex * ROBDD::covered_elm_tree (unsigned int index, unsigned int * card, Eleme
 	return v;
 }
 
+
 bool ROBDD::contains (ElementSubset * subset)
 {
 	Vertex * v = root;
@@ -439,4 +440,29 @@ bool ROBDD::contains (ElementSubset * subset)
 		index = v->get_index ();
 	}
 	return v->get_value ();
+}
+
+
+ElementSubset * ROBDD::get_random_zero_evaluated_element ()
+{
+	Vertex * v = root;
+	if (v->is_terminal () && v->get_value ())
+		return NULL;
+	ElementSubset * subset = new ElementSubset ("", elm_set);
+	while (!v->is_terminal () && !v->get_value ())
+	{
+		cout << "adicionando elemento: " << v->get_index () - 1 << endl;
+		subset->add_element (v->get_index () - 1);
+		if (v->get_child (true)->is_terminal () && !v->get_child (true)->get_value ())
+			v = v->get_child (true);
+		else if (v->get_child (false)->is_terminal () && !v->get_child (false)->get_value ())
+			v = v->get_child (false);
+		else
+		{
+			int r = rand() % 2;
+			v = v->get_child (r);
+		}
+	}
+	// Risco: se a robdd estiver vazia vou devolver um subset sem nenhum elemento, tudo bem?
+	return subset;
 }

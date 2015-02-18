@@ -73,13 +73,16 @@ public:
 	//
 	unsigned int cardinality;
 
+
 	// Builds a ROBDD representing the function "0"
 	//
 	ROBDD (ElementSet *);
 
+
 	// this is for testing reduce ()
 	//
 	ROBDD (ElementSet *, int);
+
 
 	// Builds an ROBDD where the only path valued "1", is the path representing the subset
 	//
@@ -100,25 +103,35 @@ public:
 	//
 	void print ();
 	
+
 	// Reduces the OBDD
 	//
 	void reduce ();
+
 
 	// Makes the union of this ROBDD and the one passed by argument
 	//
 	void union_to (Vertex *);
 
+
 	// Makes the union of the subtrees passed by argument
 	//
 	Vertex * union_step (Vertex * v1, Vertex * v2, map<pair<Vertex *, Vertex *>, Vertex *> *, unsigned int *);
+
 
 	// Adds to the ROBDD all the subsets covered by ElementSubset *
 	//
 	void add_lower_interval (ElementSubset *);
 
+
 	// Returns true if the ElementSubset * path of the robdds leads to a 1
 	//
 	bool contains (ElementSubset *);
+
+
+	// Returns a random subset that is evaluated by zero.
+	//
+	ElementSubset * get_random_zero_evaluated_element ();
 };
 
 #endif /* ROBDD_H_ */
