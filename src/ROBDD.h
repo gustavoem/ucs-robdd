@@ -60,6 +60,13 @@ private:
 	//
 	void fill_vertice (Vertex **, int *, Vertex *);
 
+	// Auxiliar function to add_lower_interval (). This method builds a tree of
+	// a ROBDD that has ones for subsets covered by the subset passed by 
+	// argument.
+	//
+	Vertex * covered_elm_tree (unsigned int, unsigned int *, ElementSubset *, Vertex *, Vertex *);
+
+
 public:
 
 	// ROBDD cardinality
@@ -104,6 +111,10 @@ public:
 	// Makes the union of the subtrees passed by argument
 	//
 	Vertex * union_step (Vertex * v1, Vertex * v2, map<pair<Vertex *, Vertex *>, Vertex *> *, unsigned int *);
+
+	//
+	//
+	void add_lower_interval (ElementSubset *);
 };
 
 #endif /* ROBDD_H_ */

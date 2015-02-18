@@ -382,3 +382,41 @@ Vertex * ROBDD::union_step (Vertex * v1, Vertex * v2, map<pair<Vertex *, Vertex*
 	}
 	return u;
 }
+
+
+void ROBDD::add_lower_interval (ElementSubset * subset)
+{
+	int set_card = elm_set->get_set_cardinality ();
+	Vertex * zero = new Vertex (false, set_card + 1);
+	zero->mark = false;
+	Vertex * one = new Vertex (true, set_card + 1);
+	one->mark = false;
+	unsigned int card2 = 0;
+	Vertex * root2 = covered_elm_tree (0, &card2, subset, zero, one);
+	union_to (root2);
+	delete_subtree (&root2, &card2);
+}
+
+
+Vertex * ROBDD::covered_elm_tree (unsigned int index, unsigned int * card, ElementSubset * subset, Vertex * zero, Vertex * one)
+{
+	if (index == elm_set->get_set_cardinality ())
+	{
+		(*card)++;
+		return one;
+	}
+	
+	if (subset->has_element (index))
+		return covered_elm_tree (index + 1, card, subset, zero, one);
+	
+	Vertex * v = new Vertex (elm_set->get_element (index), index + 1);
+	(*card)++;
+	v->set_child (zero, true);
+	if (!zero->mark)
+	{
+		zero->mark = true;
+		(*card)++;
+	}
+	v->set_child (covered_elm_tree (index + 1, card, subset, zero, one), false);
+	return v;
+}

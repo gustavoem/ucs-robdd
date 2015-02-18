@@ -412,9 +412,12 @@ int main(void) {
 	cout << "ROBDDTest::a_new_robdd_has_only_a_terminal_node";
 	cout.flush ();
 	printResult (ROBDDTest::a_new_robdd_has_only_a_terminal_node ());
-	cout << "ROBDDTest::the_join_of_a_new_robdd_with_itself_should_be_itself";
+	cout << "ROBDDTest::the_union_of_a_new_robdd_with_itself_should_be_itself";
 	cout.flush ();
-	printResult (ROBDDTest::the_join_of_a_new_robdd_with_itself_should_be_itself ());
+	printResult (ROBDDTest::the_union_of_a_new_robdd_with_itself_should_be_itself ());
+	cout << "ROBDDTest::the_union_of_all_subsets_must_be_the_function_1";
+	cout.flush ();
+	printResult (ROBDDTest::the_union_of_all_subsets_must_be_the_function_1 ());
 	cout << endl;
 	
 

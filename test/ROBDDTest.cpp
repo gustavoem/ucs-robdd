@@ -14,7 +14,7 @@ namespace ROBDDTest {
 		return answ;
 	}
 
-	bool the_join_of_a_new_robdd_with_itself_should_be_itself ()
+	bool the_union_of_a_new_robdd_with_itself_should_be_itself ()
 	{
 		ElementSet * elm_set = new ElementSet ("", 3, 100);
 		ROBDD * robdd = new ROBDD (elm_set);
@@ -23,8 +23,29 @@ namespace ROBDDTest {
 		root = robdd->get_root ();
 		bool answ = (root->get_child (true) == NULL) && (root->get_child (false) == NULL) \
 					&& root->get_value () == 0;
+		delete elm_set;
+		delete robdd;
 		return answ;
 	}
+
+	bool the_union_of_all_subsets_must_be_the_function_1 ()
+	{
+		ElementSet * elm_set = new ElementSet ("", 3, 3);
+		ElementSubset * subset = new ElementSubset ("", elm_set);
+		subset->add_element (0);
+		subset->add_element (1);
+		subset->add_element (2);
+		ROBDD * robdd = new ROBDD (elm_set);
+		robdd->add_lower_interval (subset);
+		Vertex * root = robdd->get_root ();
+		bool answ = (root->get_child (true) == NULL) && (root->get_child (false) == NULL) \
+					&& root->get_value () == 1;
+		delete robdd;
+		delete elm_set;
+		delete subset;
+		return answ;
+	}
+
 
 	/*not a test*/
 	bool print_r () 
