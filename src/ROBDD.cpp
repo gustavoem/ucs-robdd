@@ -394,6 +394,10 @@ void ROBDD::add_lower_interval (ElementSubset * subset)
 	unsigned int card2 = 0;
 	Vertex * root2 = covered_elm_tree (0, &card2, subset, zero, one);
 	union_to (root2);
+	if (!one->mark)
+		delete one;
+	if (!zero->mark)
+		delete zero;
 	delete_subtree (&root2, &card2);
 }
 
@@ -403,6 +407,7 @@ Vertex * ROBDD::covered_elm_tree (unsigned int index, unsigned int * card, Eleme
 	if (index == elm_set->get_set_cardinality ())
 	{
 		(*card)++;
+		one->mark = true;
 		return one;
 	}
 	
@@ -419,4 +424,19 @@ Vertex * ROBDD::covered_elm_tree (unsigned int index, unsigned int * card, Eleme
 	}
 	v->set_child (covered_elm_tree (index + 1, card, subset, zero, one), false);
 	return v;
+}
+
+bool ROBDD::contains (ElementSubset * subset)
+{
+	Vertex * v = root;
+	unsigned int index = root->get_index ();
+	while (!v->is_terminal ()) 
+	{
+		if (subset->has_element (index - 1))
+			v = v->get_child (true);
+		else
+			v = v->get_child (false);
+		index = v->get_index ();
+	}
+	return v->get_value ();
 }

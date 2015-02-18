@@ -112,9 +112,13 @@ public:
 	//
 	Vertex * union_step (Vertex * v1, Vertex * v2, map<pair<Vertex *, Vertex *>, Vertex *> *, unsigned int *);
 
-	//
+	// Adds to the ROBDD all the subsets covered by ElementSubset *
 	//
 	void add_lower_interval (ElementSubset *);
+
+	// Returns true if the ElementSubset * path of the robdds leads to a 1
+	//
+	bool contains (ElementSubset *);
 };
 
 #endif /* ROBDD_H_ */

@@ -418,6 +418,12 @@ int main(void) {
 	cout << "ROBDDTest::the_union_of_all_subsets_must_be_the_function_1";
 	cout.flush ();
 	printResult (ROBDDTest::the_union_of_all_subsets_must_be_the_function_1 ());
+	cout << "ROBDDTest::a_new_robdd_contais_no_subset";
+	cout.flush ();
+	printResult (ROBDDTest::a_new_robdd_contais_no_subset ());
+	cout << "ROBDDTest::an_added_subset_must_be_contained";
+	cout.flush ();
+	printResult (ROBDDTest::an_added_subset_must_be_contained ());
 	cout << endl;
 	
 

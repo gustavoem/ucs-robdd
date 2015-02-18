@@ -46,6 +46,41 @@ namespace ROBDDTest {
 		return answ;
 	}
 
+	bool a_new_robdd_contais_no_subset ()
+	{
+		ElementSet * elm_set = new ElementSet ("", 3, 100);
+		ROBDD * robdd = new ROBDD (elm_set);
+		ElementSubset * subset1 = new ElementSubset ("", elm_set);
+		subset1->add_element (0);
+		ElementSubset * subset2 = new ElementSubset ("", elm_set);
+		subset2->add_element (1);
+		ElementSubset * subset3 = new ElementSubset ("", elm_set);
+		subset3->add_element (2);
+		bool answ = !robdd->contains (subset1) && !robdd->contains (subset2) && \
+					!robdd->contains (subset3);
+		delete elm_set;
+		delete robdd;
+		delete subset1;
+		delete subset2;
+		delete subset3;
+		return answ;
+	}
+
+	bool an_added_subset_must_be_contained ()
+	{
+		ElementSet * elm_set = new ElementSet ("", 3, 3);
+		ElementSubset * subset = new ElementSubset ("", elm_set);
+		subset->add_element (0);
+		subset->add_element (1);
+		subset->add_element (2);
+		ROBDD * robdd = new ROBDD (elm_set, subset);
+		bool answ = robdd->contains (subset);
+		delete elm_set;
+		delete subset;
+		delete robdd;
+		return answ;
+	}
+
 
 	/*not a test*/
 	bool print_r () 
