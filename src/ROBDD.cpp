@@ -115,10 +115,8 @@ ROBDD::~ROBDD ()
 void ROBDD::delete_subtree (Vertex ** v, unsigned int * n)
 {
 	Vertex ** vertice = get_all_vertex (*v, *n);
-	cout << "root: " << *v << " n = " << *n  << endl;
 	for (unsigned int i = 0; i < *n; i++)
 	{
-		cout << vertice[i] << endl;
 		vertice[i]->set_child (NULL, true);
 		vertice[i]->set_child (NULL, false);
 		delete vertice[i];
@@ -316,7 +314,6 @@ void ROBDD::union_to (Vertex * root2)
 	Vertex * new_root = union_step (root, root2, pairs, &new_cardinality);
 	cout << new_cardinality << endl;*/
 	delete_subtree (&root, &cardinality);
-	cout << "lalalalalala" << (root == NULL) << cardinality << endl;
 	print (root);
 	//root = new_root;
 	// reduce ();

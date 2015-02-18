@@ -66,7 +66,7 @@ namespace ROBDDTest {
 		robdd5->print ();
 		robdd5->union_to (robdd4->get_root ());
 		cout << "juntas:" << endl;
-		// robdd5->print ();
+		robdd5->print ();
 		delete robdd4;
 		delete robdd5;
 		delete subset1;
