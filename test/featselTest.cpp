@@ -427,6 +427,9 @@ int main(void) {
 	cout << "ROBDDTest::the_function_one_covers_all_subsets";
 	cout.flush ();
 	printResult (ROBDDTest::the_function_one_covers_all_subsets ());
+	cout << "ROBDDTest::the_function_one_have_no_subset_evaluated_zero";
+	cout.flush ();
+	printResult (ROBDDTest::the_function_one_have_no_subset_evaluated_zero ());
 	cout << endl;
 	
 

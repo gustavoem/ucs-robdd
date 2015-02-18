@@ -102,9 +102,21 @@ namespace ROBDDTest {
 		return answ;
 	}
 
-	bool the_function_one_have_no_element_evaluated_zero ()
+	bool the_function_one_have_no_subset_evaluated_zero ()
 	{
-		
+		ElementSet elm_set ("", 2, 2);	
+		ElementSubset subset ("", &elm_set);
+		subset.add_element (0);
+		subset.add_element (1);
+		ROBDD robdd (&elm_set);
+		robdd.add_lower_interval (&subset);
+		ElementSubset * elm = robdd.get_random_zero_evaluated_element ();
+		return elm == NULL;
+	}
+
+	bool its_possible_to_get_a_random_subset_evaluated_zero ()
+	{
+
 	}
 
 	/*not a test*/
