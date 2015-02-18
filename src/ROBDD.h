@@ -47,7 +47,7 @@ private:
 
 	// Deletes the subtree with root Vertex *
 	//
-	void delete_subtree (Vertex *, unsigned int);
+	void delete_subtree (Vertex **, unsigned int *);
 
 
 	// Returns a list with all vertex of the ROBDD with root Vertex *

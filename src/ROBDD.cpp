@@ -108,15 +108,24 @@ void ROBDD::unmark_all_vertex (Vertex * v)
 
 ROBDD::~ROBDD ()
 {
-	delete_subtree (root, cardinality);
+	delete_subtree (&root, &cardinality);
 }
 
 
-void ROBDD::delete_subtree (Vertex * v, unsigned int n)
+void ROBDD::delete_subtree (Vertex ** v, unsigned int * n)
 {
-	Vertex ** vertice = get_all_vertex (root, n);
-	for (unsigned int i = 0; i < n; i++)
+	Vertex ** vertice = get_all_vertex (*v, *n);
+	cout << "root: " << *v << " n = " << *n  << endl;
+	for (unsigned int i = 0; i < *n; i++)
+	{
+		cout << vertice[i] << endl;
+		vertice[i]->set_child (NULL, true);
+		vertice[i]->set_child (NULL, false);
 		delete vertice[i];
+		vertice [i] = NULL;
+	}
+	*n = 0;
+	*v = NULL;
 	free (vertice);
 }
 
@@ -160,10 +169,12 @@ void ROBDD::print ()
 
 void ROBDD::print (Vertex * v) 
 {
+	if (v == NULL)
+		return;
+
 	Element * var = v->get_var ();
 	if (var != NULL)
 	{
-
 		cout << var->get_element_name () << " & id: " << v->get_id () <<  " addres: " << v << " index: " << v->get_index () << endl;
 		cout << "L ";
 		print (v->get_child (false));
@@ -300,12 +311,14 @@ void ROBDD::reduce ()
 
 void ROBDD::union_to (Vertex * root2)
 {
-	map<pair<Vertex *, Vertex*>, Vertex *> * pairs = new map<pair<Vertex *, Vertex*>, Vertex *>();
+	/*map<pair<Vertex *, Vertex*>, Vertex *> * pairs = new map<pair<Vertex *, Vertex*>, Vertex *>();
 	unsigned int new_cardinality = 0;
 	Vertex * new_root = union_step (root, root2, pairs, &new_cardinality);
-	cout << new_cardinality << endl;
-	delete_subtree (root, cardinality);
-	root = new_root;
+	cout << new_cardinality << endl;*/
+	delete_subtree (&root, &cardinality);
+	cout << "lalalalalala" << (root == NULL) << cardinality << endl;
+	print (root);
+	//root = new_root;
 	// reduce ();
 }
 
