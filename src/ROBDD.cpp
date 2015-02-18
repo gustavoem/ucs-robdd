@@ -315,7 +315,6 @@ void ROBDD::union_to (Vertex * root2)
 	delete_subtree (&root, &cardinality);
 	cardinality = new_cardinality;
 	root = new_root;
-	print (root);
 	reduce ();
 }
 

@@ -412,8 +412,13 @@ int main(void) {
 	cout << "ROBDDTest::a_new_robdd_has_only_a_terminal_node";
 	cout.flush ();
 	printResult (ROBDDTest::a_new_robdd_has_only_a_terminal_node ());
+	cout << "ROBDDTest::the_join_of_a_new_robdd_with_itself_should_be_itself";
+	cout.flush ();
+	printResult (ROBDDTest::the_join_of_a_new_robdd_with_itself_should_be_itself ());
 	cout << endl;
-	ROBDDTest::print_r ();
+	
+
+	//ROBDDTest::print_r ();
 
 	cout << "Total " << number_of_passed_tests + number_of_failed_tests << " test(s), ";
 	cout << number_of_passed_tests << " test(s) passed, " << number_of_failed_tests;

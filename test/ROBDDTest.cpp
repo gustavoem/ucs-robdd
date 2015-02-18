@@ -14,6 +14,18 @@ namespace ROBDDTest {
 		return answ;
 	}
 
+	bool the_join_of_a_new_robdd_with_itself_should_be_itself ()
+	{
+		ElementSet * elm_set = new ElementSet ("", 3, 100);
+		ROBDD * robdd = new ROBDD (elm_set);
+		Vertex * root = robdd->get_root ();
+		robdd->union_to (root);
+		root = robdd->get_root ();
+		bool answ = (root->get_child (true) == NULL) && (root->get_child (false) == NULL) \
+					&& root->get_value () == 0;
+		return answ;
+	}
+
 	/*not a test*/
 	bool print_r () 
 	{
