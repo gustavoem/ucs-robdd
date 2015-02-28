@@ -421,9 +421,9 @@ int main(void) {
 	cout << "ROBDDTest::a_new_robdd_contais_no_subset";
 	cout.flush ();
 	printResult (ROBDDTest::a_new_robdd_contais_no_subset ());
-	cout << "ROBDDTest::an_added_subset_must_be_contained";
+	cout << "ROBDDTest::an_added_subset_must_be_covered";
 	cout.flush ();
-	printResult (ROBDDTest::an_added_subset_must_be_contained ());
+	printResult (ROBDDTest::an_added_subset_must_be_covered ());
 	cout << "ROBDDTest::the_function_one_covers_all_subsets";
 	cout.flush ();
 	printResult (ROBDDTest::the_function_one_covers_all_subsets ());

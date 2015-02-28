@@ -66,7 +66,7 @@ namespace ROBDDTest {
 		return answ;
 	}
 
-	bool an_added_subset_must_be_contained ()
+	bool an_added_subset_must_be_covered ()
 	{
 		ElementSet * elm_set = new ElementSet ("", 3, 3);
 		ElementSubset * subset = new ElementSubset ("", elm_set);

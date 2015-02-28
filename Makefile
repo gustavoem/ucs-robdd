@@ -20,7 +20,7 @@
 
 IDIR = ../
 
-CXXFLAGS =	-O0 -g -Wall -fmessage-length=0
+CXXFLAGS =	-O2 -g -Wall -fmessage-length=0
 
 OBJS =		src/Element.o src/ElementSet.o src/ElementSubset.o \
 			src/Collection.o src/Solver.o src/CostFunction.o \
@@ -29,7 +29,7 @@ OBJS =		src/Element.o src/ElementSet.o src/ElementSubset.o \
 			src/algorithms/BranchAndBound.o src/algorithms/PosetForestSearch.o \
 			src/functions/AbsSum.o src/functions/Explicit.o src/functions/MeanAbsSum.o \
 			src/functions/HammingDistance.o src/functions/MeanConditionalEntropy.o \
-			src/Vertex.o src/ROBDD.o \
+			src/Vertex.o src/ROBDD.o src/algorithms/UCS-ROBDD.o \
 			
 TOBJS =		test/ElementTest.o test/ElementSetTest.o test/ElementSubsetTest.o \
 			test/CollectionTest.o test/SolverTest.o \
@@ -38,7 +38,7 @@ TOBJS =		test/ElementTest.o test/ElementSetTest.o test/ElementSubsetTest.o \
 			test/CostFunctionTest.o test/CostFunctionMock.o test/SFSTest.o \
 			test/SFFSTest.o test/SFFSMock.o test/PosetForestSearchMock.o \
 			test/BranchAndBoundTest.o test/PosetForestSearchTest.o \
-			test/VertexTest.o test/ROBDDTest.o \
+			test/VertexTest.o test/ROBDDTest.o test/UCS-ROBDDTest.o \
 
 LIBS = -lm
 
