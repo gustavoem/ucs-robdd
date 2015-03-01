@@ -207,7 +207,50 @@ namespace UCSROBDDToolBox
 
 	Node * select_an_unvisited_adjacent (map<string, Node *> * Graph, ROBDD * R, Node * Y, unsigned int * i)
 	{
-		return NULL;
+		unsigned int direction;
+		Node * N;
+		ElementSet * set = Y->vertex->get_set_that_contains_this_subset ();
+		ElementSubset X ("", set);
+
+		while (! Y->unverified->is_empty ())
+		{
+			// here we can put any criterion to the selection of adjacent elements
+			// (for instance, preference for subsets of lower cardinality)
+			*i = Y->unverified->remove_random_element ();
+
+			// selection of an element that is either upper or lower adjacent to A->vertex
+			X.copy (Y->vertex);
+			if (Y->vertex->has_element (*i))
+			{
+				direction = 1;           // top-down and X is lower adjacent to Y
+				X.remove_element (*i);
+			}
+			else
+			{
+				direction = 0;          // bottom-up and X is upper adjacent to Y
+				X.add_element (*i);
+			}
+
+		    if ((Graph->find (X.print_subset ()) == Graph->end () ) &&
+		    	(! R->contains (&X)))
+			{
+				// if X belongs to the search space AND it is not contained
+				// in a node of the graph, then X is an unvisited adjacent to
+				// Y, therefore a node N such that N[vertex] = X is returned.
+				N = create_node (&X);
+				return N;
+			}
+
+			if ((direction == 1) && (R->contains (&X)) ) // X is lower adjacent to Y[vertex]
+				Y->lower_flag->remove_element (*i);
+
+			if ((direction == 0) && (R->contains (&X)) ) // X is upper adjacent to Y[vertex]
+				Y->upper_flag->remove_element (*i);
+
+		} // while Y has adjacent elements to Y->vertex to explore
+
+		               // if there are no more adjacent elements to Y->vertex to explore,
+		return NULL;   // then Y has no more unvisited adjacent and NULL is returned.
 	}
 
 	void prune_lower_elements (map<string, Node *> * Graph, list<Node *> * Stack, Node * A)
