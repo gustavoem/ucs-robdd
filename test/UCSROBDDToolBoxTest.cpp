@@ -9,7 +9,7 @@ namespace UCSROBDDToolBoxTest {
 		subset.add_element (0);
 		subset.add_element (1);
 		ROBDD R (&elm_set);
-		R.add_interval (&subset, false);
+		UCSROBDDToolBox::update_lower_restriction (&R, &subset);
 		ElementSubset * min_subset = UCSROBDDToolBox::get_minimal_subset (&R, &elm_set);
 		bool ans = min_subset == NULL;
 		return ans;
@@ -19,14 +19,25 @@ namespace UCSROBDDToolBoxTest {
 	{
 		ElementSet elm_set ("", 2, 2);
 		ElementSubset subset ("", &elm_set);
-		subset.add_element (0);
-		subset.add_element (1);
 		ROBDD R (&elm_set);
-		R.add_interval (&subset, false);
+		UCSROBDDToolBox::update_upper_restriction (&R, &subset);
 		ElementSubset * max_subset = UCSROBDDToolBox::get_maximal_subset (&R, &elm_set);
 		bool ans = max_subset == NULL;
+		delete max_subset;
 		return ans;
 	}
+
+	bool when_empty_set_is_not_restricted_its_the_minimal_subset ()
+	{
+		ElementSet elm_set ("", 2, 2);
+		ROBDD R (&elm_set);
+		ElementSubset * min_subset = UCSROBDDToolBox::get_minimal_subset (&R, &elm_set);
+		bool ans = min_subset->get_subset_cardinality () == 0;
+		delete min_subset;
+		return ans;
+	}
+
+
 
 } // end of namespace
 

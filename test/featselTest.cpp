@@ -443,6 +443,9 @@ int main(void) {
 	cout << "UCSROBDDToolBoxTest::theres_no_maximal_element_when_all_subsets_are_restricted";
 	cout.flush ();
 	printResult (UCSROBDDToolBoxTest::theres_no_maximal_element_when_all_subsets_are_restricted ());
+	cout << "UCSROBDDToolBoxTest::when_empty_set_is_not_restricted_its_the_minimal_subset";
+	cout.flush ();
+	printResult (UCSROBDDToolBoxTest::when_empty_set_is_not_restricted_its_the_minimal_subset ());
 	cout << endl;
 
 	cout << "Total " << number_of_passed_tests + number_of_failed_tests << " test(s), ";
