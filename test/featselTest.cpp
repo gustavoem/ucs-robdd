@@ -440,9 +440,10 @@ int main(void) {
 	cout << "UCSROBDDToolBoxTest::theres_no_minial_element_when_all_subsets_are_restricted";
 	cout.flush ();
 	printResult (UCSROBDDToolBoxTest::theres_no_minial_element_when_all_subsets_are_restricted ());
-	
-
-	//ROBDDTest::print_r ();
+	cout << "UCSROBDDToolBoxTest::theres_no_maximal_element_when_all_subsets_are_restricted";
+	cout.flush ();
+	printResult (UCSROBDDToolBoxTest::theres_no_maximal_element_when_all_subsets_are_restricted ());
+	cout << endl;
 
 	cout << "Total " << number_of_passed_tests + number_of_failed_tests << " test(s), ";
 	cout << number_of_passed_tests << " test(s) passed, " << number_of_failed_tests;
