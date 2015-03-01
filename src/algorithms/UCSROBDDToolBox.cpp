@@ -1,31 +1,29 @@
-//
-// UCurveToolBox.cpp -- implementation of the namespace "UCurveToolBox".
-//
-//    This file is part of the featsel program
-//    Copyright (C) 2010  Marcelo S. Reis
-//
-//    This program is free software: you can redistribute it and/or modify
-//    it under the terms of the GNU General Public License as published by
-//    the Free Software Foundation, either version 3 of the License, or
-//    (at your option) any later version.
-//
-//    This program is distributed in the hope that it will be useful,
-//    but WITHOUT ANY WARRANTY; without even the implied warranty of
-//    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-//    GNU General Public License for more details.
-//
-//    You should have received a copy of the GNU General Public License
-//    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-//
-
 #include "UCSROBDDToolBox.h"
 
 
-namespace UCurveToolBox
+namespace UCSROBDDToolBox
 {
 	ElementSubset * get_minimal_subset (ROBDD * R, ElementSet * a_set)
 	{
-		return NULL;
+		ElementSubset * A, B ("", a_set);
+		unsigned int i;
+
+		B.set_complete_subset ();
+		if (R->contains (&B))
+			return NULL;
+		else
+		{
+			A = new ElementSubset ("", a_set);
+			A->set_complete_subset ();
+			while (! B.is_empty ())
+			{
+				i = B.remove_random_element ();
+				A->remove_element (i);
+				if (R->contains (A))
+					A->add_element (i);
+			}
+			return A;
+		}
 	}
 
 
@@ -48,14 +46,13 @@ namespace UCurveToolBox
 
 
 	void DFS (Node * M, Collection * L, Collection * R, CostFunction * c,
-	          unsigned int * max_graph_size)
+			  unsigned int * max_graph_size)
 	{
-		return NULL;
+		return;
 	}
 
 
-	Node * select_an_unvisited_adjacent
-	 (map<string, Node *> * Graph, Collection * R, Node * Y, unsigned int * i)
+	Node * select_an_unvisited_adjacent (map<string, Node *> * Graph, Collection * R, Node * Y, unsigned int * i)
 	{
 		return NULL; 
 	}
@@ -96,7 +93,7 @@ namespace UCurveToolBox
 	}
 
 
-	UCurveToolBox::Node * create_node (ElementSubset * X)
+	UCSROBDDToolBox::Node * create_node (ElementSubset * X)
 	{
 		Node * N = new Node;
 		ElementSet * set = X->get_set_that_contains_this_subset ();

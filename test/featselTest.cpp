@@ -31,6 +31,7 @@
 
 #include "VertexTest.h"
 #include "ROBDDTest.h"
+#include "UCSROBDDToolBoxTest.h"
 
 // Objective functions
 //
@@ -434,6 +435,11 @@ int main(void) {
 	cout.flush ();
 	printResult (ROBDDTest::its_possible_to_get_a_random_subset_evaluated_zero ());
 	cout << endl;
+
+	// Testing Class "UCSROBDDToolBox"
+	cout << "UCSROBDDToolBoxTest::theres_no_minial_element_when_all_subsets_are_restricted";
+	cout.flush ();
+	printResult (UCSROBDDToolBoxTest::theres_no_minial_element_when_all_subsets_are_restricted ());
 	
 
 	//ROBDDTest::print_r ();

@@ -3,6 +3,7 @@
 
 #include "../ROBDD.h"
 #include "../CostFunction.h"
+#include "../Collection.h"
 
 
 namespace UCSROBDDToolBox
@@ -25,7 +26,7 @@ namespace UCSROBDDToolBox
 	// - X does not contain a subset from this collection;
 	// - there is no subset Y | Y contains X and Y does not contain a subset from this collection.
 	//
-	ElementSubset * get_maximal_subset (ROBDD *, ROBDD *, ElementSet *);
+	ElementSubset * get_maximal_subset (ROBDD *, ElementSet *);
 
 
 	// Returns a minimal subset, say X, with the following properties:
@@ -33,7 +34,7 @@ namespace UCSROBDDToolBox
 	// - there is no subset Y | Y is contained by X and Y is not contained by a subset
 	//   from this collection.
 	//
-	ElementSubset * get_minimal_subset (ROBDD *, ROBDD *, ElementSet *);
+	ElementSubset * get_minimal_subset (ROBDD *, ElementSet *);
 
 
 	// Receives a subset A, a collection of restrictions and add A into the latter.
@@ -51,8 +52,7 @@ namespace UCSROBDDToolBox
 
 	// DFS subroutine
 	//
-	void DFS
-	     (Node *, ROBDD *, ROBDD *, ROBDD *, CostFunction *, unsigned int *);
+	void DFS (Node *, Collection *, ROBDD *, CostFunction *, unsigned int *);
 
 
 	// Prunes the elements of the minima exhausting graph that were lower removed from
@@ -86,7 +86,7 @@ namespace UCSROBDDToolBox
 	// - NULL, if there are no such X (in this case, the value of the integer doesn't care).
 	//
 	Node * select_an_unvisited_adjacents
-	       (map<string, Node *> *, ROBDD *, ROBDD *, Node *, unsigned int *);
+			(map<string, Node *> *, ROBDD *, Node *, unsigned int *);
 
 
 	// Returns true if a given vertex belongs to a node list, and false otherwise.
