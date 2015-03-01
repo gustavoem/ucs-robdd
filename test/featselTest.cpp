@@ -449,6 +449,9 @@ int main(void) {
 	cout << "UCSROBDDToolBoxTest::it_should_return_null_when_theres_no_unvisited_adjacent";
 	cout.flush ();
 	printResult (UCSROBDDToolBoxTest::it_should_return_null_when_theres_no_unvisited_adjacent ());
+	cout << "UCSROBDDToolBoxTest::it_should_return_an_unvisited_adjacent";
+	cout.flush ();
+	printResult (UCSROBDDToolBoxTest::it_should_return_an_unvisited_adjacent ());
 	cout << endl;
 
 	cout << "Total " << number_of_passed_tests + number_of_failed_tests << " test(s), ";
