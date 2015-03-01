@@ -446,6 +446,9 @@ int main(void) {
 	cout << "UCSROBDDToolBoxTest::when_empty_set_is_not_restricted_its_the_minimal_subset";
 	cout.flush ();
 	printResult (UCSROBDDToolBoxTest::when_empty_set_is_not_restricted_its_the_minimal_subset ());
+	cout << "UCSROBDDToolBoxTest::it_should_return_null_when_theres_no_unvisited_adjacent";
+	cout.flush ();
+	printResult (UCSROBDDToolBoxTest::it_should_return_null_when_theres_no_unvisited_adjacent ());
 	cout << endl;
 
 	cout << "Total " << number_of_passed_tests + number_of_failed_tests << " test(s), ";

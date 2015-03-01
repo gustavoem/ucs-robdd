@@ -37,6 +37,26 @@ namespace UCSROBDDToolBoxTest {
 		return ans;
 	}
 
+	bool it_should_return_null_when_theres_no_unvisited_adjacent ()
+	{
+		ElementSet elm_set ("", 3, 100);
+		map<string, UCSROBDDToolBox::Node *>  Graph;
+		ROBDD R (&elm_set);
+		ElementSubset X ("", &elm_set);
+		UCSROBDDToolBox::Node * A, * Y;
+		unsigned int i;
+
+		X.set_complete_subset ();
+		A = UCSROBDDToolBox::create_node (&X);
+		Graph.insert (pair<string, UCSROBDDToolBox::Node *> (A->vertex->print_subset (), A));
+		UCSROBDDToolBox::update_lower_restriction (&R, &X);
+		Y = UCSROBDDToolBox::select_an_unvisited_adjacent (&Graph, &R, A, &i);
+		bool ans = Y == NULL;
+		if (Y != NULL)
+			UCSROBDDToolBox::delete_node (Y);
+		UCSROBDDToolBox::delete_node (A);
+		return ans;
+	}
 
 
 } // end of namespace
