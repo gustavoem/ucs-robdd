@@ -117,8 +117,6 @@ void ROBDD::delete_subtree (Vertex ** v, unsigned int * n)
 	Vertex ** vertice = get_all_vertex (*v, *n);
 	for (unsigned int i = 0; i < *n; i++)
 	{
-		vertice[i]->set_child (NULL, true);
-		vertice[i]->set_child (NULL, false);
 		delete vertice[i];
 		vertice [i] = NULL;
 	}
@@ -130,7 +128,7 @@ void ROBDD::delete_subtree (Vertex ** v, unsigned int * n)
 
 Vertex ** ROBDD::get_all_vertex (Vertex * root, unsigned int n)
 {
-	Vertex ** v = (Vertex **) malloc (sizeof (Vertex *) * n);
+	Vertex ** v = (Vertex **) malloc (sizeof (Vertex *) * n + 1);
 	int * last_index = (int *) malloc (sizeof (int *));
 	*last_index = 0;
 	unmark_all_vertex (root);
@@ -210,6 +208,9 @@ void ROBDD::reduce ()
 	
 	unmark_all_vertex ();
 	fill_vlist (root, vlists);
+
+	cout << endl<< "vou reduzir: " << endl;
+	this.print ();
 
 	int next_id = 0;
 	for (int i = set_card + 1; i > 0; i--)
@@ -309,9 +310,20 @@ void ROBDD::reduce ()
 
 void ROBDD::union_to (Vertex * root2)
 {
+	/*cout << endl << "vou unir " << endl;
+	print ();
+	cout << endl << "com " << endl;
+	print (root2);
+	cout.flush();*/
 	map<pair<Vertex *, Vertex*>, Vertex *> pairs;
 	unsigned int new_cardinality = 0;
 	Vertex * new_root = union_step (root, root2, &pairs, &new_cardinality);
+	/*cout << "e deu: " << endl;
+	print (root2);
+	cout.flush();
+	cout << endl << "Vou deletar esse cara: " << &root <<endl;
+	print (root);
+	cout.flush();*/
 	delete_subtree (&root, &cardinality);
 	cardinality = new_cardinality;
 	root = new_root;
@@ -398,6 +410,9 @@ void ROBDD::add_interval (ElementSubset * subset, bool orientation)
 		delete one;
 	if (!zero->mark)
 		delete zero;
+	/*cout << endl << "Vou deletar esse cara: " << &root2 <<endl;
+	print (root2);
+	cout.flush();*/
 	delete_subtree (&root2, &card2);
 }
 

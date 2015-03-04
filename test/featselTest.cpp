@@ -31,7 +31,9 @@
 
 #include "VertexTest.h"
 #include "ROBDDTest.h"
+
 #include "UCSROBDDToolBoxTest.h"
+#include "UCSROBDDTest.h"
 
 // Objective functions
 //
@@ -436,6 +438,7 @@ int main(void) {
 	printResult (ROBDDTest::its_possible_to_get_a_random_subset_evaluated_zero ());
 	cout << endl;
 
+
 	// Testing Class "UCSROBDDToolBox"
 	cout << "UCSROBDDToolBoxTest::theres_no_minial_element_when_all_subsets_are_restricted";
 	cout.flush ();
@@ -453,6 +456,15 @@ int main(void) {
 	cout.flush ();
 	printResult (UCSROBDDToolBoxTest::it_should_return_an_unvisited_adjacent ());
 	cout << endl;
+
+
+	// Testing Class "UCSROBDD"
+	cout << "UCSROBDDTest::a_lattice_with_constant_cost_should_be_totally_exausted";
+	cout.flush ();
+	printResult (UCSROBDDTest::a_lattice_with_constant_cost_should_be_totally_exausted ());
+	cout << endl;
+
+
 
 	cout << "Total " << number_of_passed_tests + number_of_failed_tests << " test(s), ";
 	cout << number_of_passed_tests << " test(s) passed, " << number_of_failed_tests;

@@ -54,12 +54,18 @@ namespace UCSROBDDToolBox
 
 	void update_lower_restriction (ROBDD * R, ElementSubset * A)
 	{
+		/*cout << "vou adicionar o intervalo " << A->print_subset () << " por baixo a:" << endl;
+		R->print ();
+		cout.flush();*/
 		R->add_interval (A, false);
 	}
 
 
 	void update_upper_restriction (ROBDD * R, ElementSubset * A)
 	{
+		/*cout << "vou adicionar o intervalo " << A->print_subset () << " por cima a:" << endl;
+		R->print ();
+		cout.flush();*/
 		R->add_interval (A, true);
 	}
 

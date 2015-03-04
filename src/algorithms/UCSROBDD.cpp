@@ -4,7 +4,6 @@ UCSROBDD::UCSROBDD ()
 {
 	/*lower_restriction = new ROBDD (set);
 	upper_restriction = new ROBDD (set);*/
-	restrictions = new ROBDD (set);
 	list_of_visited_subsets = new Collection ();
 	cost_function = NULL;
 }
@@ -23,6 +22,7 @@ UCSROBDD::~UCSROBDD ()
 
 void UCSROBDD::get_minima_list (unsigned int max_size_of_minima_list)
 {
+	restrictions = new ROBDD (set);
 	timeval begin_exhausting, end_exhausting, begin_program, end_program;
 	gettimeofday (& begin_program, NULL);
 
@@ -41,7 +41,8 @@ void UCSROBDD::get_minima_list (unsigned int max_size_of_minima_list)
 		number_of_calls_of_minimal_and_maximal_element++;
 		max_graph_of_this_iteration = 0;
 
-		direction = rand () % 2;
+		//direction = rand () % 2;
+		direction = 1;
 		if (direction == 0)
 		{
 			X = UCSROBDDToolBox::get_minimal_subset (restrictions, set);

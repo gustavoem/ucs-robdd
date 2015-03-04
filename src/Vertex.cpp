@@ -32,7 +32,9 @@ Vertex::Vertex (bool value, unsigned int index)
 
 Vertex::~Vertex () 
 {
-	return;
+	this->hi = NULL;
+	this->lo = NULL;
+	this->var = NULL;
 }
 
 Element * Vertex::get_var ()
