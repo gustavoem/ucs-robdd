@@ -263,7 +263,7 @@ namespace UCSROBDDToolBox
 	{
 		map<string, Node *>::iterator it;
 
-		for (it = Graph->begin (); it != Graph->end (); it++)
+/*E*/	for (it = Graph->begin (); it != Graph->end (); it++)
 			if ((A->vertex->contains (it->second->vertex)) &&
 				(! A->vertex->is_equal (it->second->vertex)))
 			{
@@ -272,7 +272,7 @@ namespace UCSROBDDToolBox
 				// delete the removed node
 				delete_node (it->second);
 				// remove the node from the graph
-				Graph->erase (it);
+/*E*/			Graph->erase (it);
 			}
 	}
 
@@ -281,7 +281,7 @@ namespace UCSROBDDToolBox
 	{
 		map<string, Node *>::iterator it;
 
-		for (it = Graph->begin (); it != Graph->end (); it++)
+/*E*/	for (it = Graph->begin (); it != Graph->end (); it++)
 			if ((A->vertex->is_contained_by (it->second->vertex)) &&
 				(! A->vertex->is_equal (it->second->vertex)))
 			{
@@ -290,7 +290,7 @@ namespace UCSROBDDToolBox
 				// delete the removed node
 				delete_node (it->second);
 				// remove the node from the graph
-				Graph->erase (it);
+/*E*/ 			Graph->erase (it);
 			}
 	}
 

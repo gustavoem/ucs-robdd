@@ -115,6 +115,7 @@ ROBDD::~ROBDD ()
 void ROBDD::delete_subtree (Vertex ** v, unsigned int * n)
 {
 	Vertex ** vertice = get_all_vertex (*v, *n);
+	/*Perigo: vamos ver se o n bate com tamanho da arvore.*/
 	for (unsigned int i = 0; i < *n; i++)
 	{
 		delete vertice[i];
@@ -210,7 +211,7 @@ void ROBDD::reduce ()
 	fill_vlist (root, vlists);
 
 	cout << endl<< "vou reduzir: " << endl;
-	this.print ();
+	this->print ();
 
 	int next_id = 0;
 	for (int i = set_card + 1; i > 0; i--)
@@ -230,7 +231,6 @@ void ROBDD::reduce ()
 			}
 			else if (u_hi->get_id () == u_lo->get_id ()) 
 			{
-
 				u->set_id (u_lo->get_id ());
 				if (u_hi != u_lo)
 				{
