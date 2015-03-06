@@ -36,7 +36,7 @@
 #include "algorithms/SFFS.h"
 #include "algorithms/BranchAndBound.h"
 #include "algorithms/PosetForestSearch.h"
-
+#include "algorithms/UCSROBDD.h"
 
 // Function to parse and verify the correctness of the parameters.
 // It returns '0' if all the parameters were correct, '1' if there was an error,
@@ -94,6 +94,8 @@ int main(int argc, char * argv[])
 		//
 		if (algorithm.compare ("ucs") == 0)
 			solver = new UCurveSearch ();
+		else if (algorithm.compare ("ucsr") == 0)
+			solver = new UCSROBDD ();
 		else if (algorithm.compare ("es") == 0)
 			solver = new ExhaustiveSearch ();
 		else if (algorithm.compare ("sfs") == 0)
@@ -342,12 +344,13 @@ under certain conditions; see 'LICENSE.TXT' for details.");
 		else if ( (strcmp(argv[i],"-a") == 0) && ((i+1) < argc) )
 		{
 			i++;
-			if ( (strcmp(argv[i], "ucs") == 0) ||
-			     (strcmp(argv[i], "es") == 0) ||
-			     (strcmp(argv[i], "sfs") == 0) ||
-			     (strcmp(argv[i], "sffs") == 0) ||
-			     (strcmp(argv[i], "pfs") == 0) ||
-			     (strcmp(argv[i], "ubb") == 0) )
+			if ( (strcmp (argv[i], "ucs") == 0)  ||
+			     (strcmp (argv[i], "es") == 0)   ||
+			     (strcmp (argv[i], "sfs") == 0)  ||
+			     (strcmp (argv[i], "sffs") == 0) ||
+			     (strcmp (argv[i], "pfs") == 0)  ||
+			     (strcmp (argv[i], "ubb") == 0)  ||
+			     (strcmp (argv[i], "ucsr") == 0) )
 			{
 				a->clear();
 				a->append(argv[i]);
