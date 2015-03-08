@@ -439,7 +439,7 @@ int main(void) {
 	cout << endl;
 
 
-	// Testing Class "UCSROBDDToolBox"
+	/*// Testing Class "UCSROBDDToolBox"
 	cout << "UCSROBDDToolBoxTest::theres_no_minial_element_when_all_subsets_are_restricted";
 	cout.flush ();
 	printResult (UCSROBDDToolBoxTest::theres_no_minial_element_when_all_subsets_are_restricted ());
@@ -455,14 +455,14 @@ int main(void) {
 	cout << "UCSROBDDToolBoxTest::it_should_return_an_unvisited_adjacent";
 	cout.flush ();
 	printResult (UCSROBDDToolBoxTest::it_should_return_an_unvisited_adjacent ());
-	cout << endl;
+	cout << endl;*/
 
 
 	// Testing Class "UCSROBDD"
-	cout << "UCSROBDDTest::a_lattice_with_constant_cost_should_be_totally_exausted";
+/*	cout << "UCSROBDDTest::a_lattice_with_constant_cost_should_be_totally_exausted";
 	cout.flush ();
 	printResult (UCSROBDDTest::a_lattice_with_constant_cost_should_be_totally_exausted ());
-	cout << endl;
+	cout << endl;*/
 
 
 

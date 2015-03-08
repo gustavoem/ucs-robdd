@@ -116,10 +116,12 @@ public:
 
 	// Makes the union of the subtrees passed by argument
 	//
-	Vertex * union_step (Vertex * v1, Vertex * v2, map<pair<Vertex *, Vertex *>, Vertex *> *, unsigned int *);
+	Vertex * union_step (Vertex * v1, Vertex * v2, map<pair<Vertex *, Vertex *>,\
+						 Vertex *> *, unsigned int *, Vertex *, Vertex *);
 
 
-	// Adds to the ROBDD all the subsets covered (if bool true) or that covers (if bool false) by ElementSubset *
+	// Adds to the ROBDD all the subsets covered (if bool true) or that covers (if bool
+	// false) by ElementSubset *
 	//
 	void add_interval (ElementSubset *, bool);
 

@@ -210,9 +210,6 @@ void ROBDD::reduce ()
 	unmark_all_vertex ();
 	fill_vlist (root, vlists);
 
-	cout << endl<< "vou reduzir: " << endl;
-	this->print ();
-
 	int next_id = 0;
 	for (int i = set_card + 1; i > 0; i--)
 	{
@@ -304,45 +301,48 @@ void ROBDD::reduce ()
 	for (unsigned int i = 1; i <= set_card + 1; i++)
 		delete vlists[i];
 	free (vlists);
-	free (subgraph);
+	free (subgraph);	
 }
 
 
 void ROBDD::union_to (Vertex * root2)
 {
-	/*cout << endl << "vou unir " << endl;
-	print ();
-	cout << endl << "com " << endl;
-	print (root2);
-	cout.flush();*/
+	unsigned int set_card = elm_set->get_set_cardinality ();
 	map<pair<Vertex *, Vertex*>, Vertex *> pairs;
 	unsigned int new_cardinality = 0;
-	Vertex * new_root = union_step (root, root2, &pairs, &new_cardinality);
-	/*cout << "e deu: " << endl;
-	print (root2);
-	cout.flush();
-	cout << endl << "Vou deletar esse cara: " << &root <<endl;
-	print (root);
-	cout.flush();*/
+	Vertex * one = new Vertex (true, set_card + 1);
+	one->mark = false;
+	Vertex * zero = new Vertex (false, set_card + 1);
+	zero->mark = false;
+	Vertex * new_root = union_step (root, root2, &pairs, &new_cardinality, \
+									one, zero);
+
+	if (one->mark)
+		new_cardinality++;
+	else
+		delete one;
+	if (zero->mark)
+		new_cardinality++;
+	else
+		delete zero;
+
 	delete_subtree (&root, &cardinality);
 	cardinality = new_cardinality;
 	root = new_root;
-	reduce ();
 }
 
-Vertex * ROBDD::union_step (Vertex * v1, Vertex * v2, map<pair<Vertex *, Vertex*>, Vertex *> * pairs, unsigned int * new_cardinality)
+Vertex * ROBDD::union_step (Vertex * v1, Vertex * v2, map<pair<Vertex *, Vertex*>,\
+							Vertex *> * pairs, unsigned int * new_cardinality, \
+							Vertex * one, Vertex * zero)
 {
-	map<pair<Vertex *, Vertex *>, Vertex *>::iterator it = pairs->find (make_pair (v1, v2));
+	pair<Vertex *, Vertex *> key (v1, v2);
+	map<pair<Vertex *, Vertex *>, Vertex *>::iterator it = pairs->find (key);
+	Vertex * u;
 	if (it != pairs->end ())
 	{
-		Vertex * u = it->second;
+		u = it->second;
 		return u;
 	}
-	Vertex * u = new Vertex ();
-	(*new_cardinality)++;
-	u->mark = false;
-	pair<Vertex *, Vertex *> key (v1, v2);
-	pairs->insert(make_pair (key, u));
 
 	// Quero levar 0 e -1 em 0, e 1 em 1 => f(x) = (x * x + x)/2
 	int value1 = (v1 != NULL) && (v1->get_value () * v1->get_value () + v1->get_value ());
@@ -351,14 +351,25 @@ Vertex * ROBDD::union_step (Vertex * v1, Vertex * v2, map<pair<Vertex *, Vertex*
 	   ((value1 + value2 == 0) && (v1 != NULL && v1->is_terminal ()) \
 	                           && (v2 != NULL && v2->is_terminal ())))
 	{
-		u->set_value (value1 + value2);
-		u->set_index (elm_set->get_set_cardinality () + 1);
-		u->set_id (elm_set->get_set_cardinality () + 1);
-		u->set_child (NULL, true);
-		u->set_child (NULL, false);
+		if (value1 + value2 == 0)
+		{
+			u = zero;
+			u->mark = true;
+		}
+		else
+		{
+			u = one;
+			u->mark = true;
+		}
+		pairs->insert(make_pair (key, u));
 	}
 	else
 	{
+		u = new Vertex ();
+		(*new_cardinality)++;
+		u->mark = false;
+		pairs->insert(make_pair (key, u));
+		
 		Vertex * vlow1 = NULL;
 		Vertex * vhigh1 = NULL;
 		Vertex * vlow2 = NULL;
@@ -387,8 +398,8 @@ Vertex * ROBDD::union_step (Vertex * v1, Vertex * v2, map<pair<Vertex *, Vertex*
 			vlow2 = v2;
 			vhigh2 = v2;
 		}
-		Vertex * lo_chi = union_step (vlow1, vlow2, pairs, new_cardinality);
-		Vertex * hi_chi = union_step (vhigh1, vhigh2, pairs, new_cardinality);
+		Vertex * lo_chi = union_step (vlow1, vlow2, pairs, new_cardinality, one, zero);
+		Vertex * hi_chi = union_step (vhigh1, vhigh2, pairs, new_cardinality, one, zero);
 		u->set_child (lo_chi, false);
 		u->set_child (hi_chi, true);
 	}
@@ -410,9 +421,6 @@ void ROBDD::add_interval (ElementSubset * subset, bool orientation)
 		delete one;
 	if (!zero->mark)
 		delete zero;
-	/*cout << endl << "Vou deletar esse cara: " << &root2 <<endl;
-	print (root2);
-	cout.flush();*/
 	delete_subtree (&root2, &card2);
 }
 
