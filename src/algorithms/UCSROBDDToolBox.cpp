@@ -263,7 +263,7 @@ namespace UCSROBDDToolBox
 	{
 		map<string, Node *>::iterator it;
 
-/*E*/	for (it = Graph->begin (); it != Graph->end (); it++)
+		for (it = Graph->begin (); it != Graph->end ();)
 			if ((A->vertex->contains (it->second->vertex)) &&
 				(! A->vertex->is_equal (it->second->vertex)))
 			{
@@ -272,16 +272,18 @@ namespace UCSROBDDToolBox
 				// delete the removed node
 				delete_node (it->second);
 				// remove the node from the graph
-/*E*/			Graph->erase (it);
+				Graph->erase (it++);
 			}
+			else
+				it++;
 	}
 
 
 	void prune_upper_elements (map<string, Node *> * Graph, list<Node *> * Stack, Node * A)
 	{
-		map<string, Node *>::iterator it;
+	 	map<string, Node *>::iterator it;
 
-/*E*/	for (it = Graph->begin (); it != Graph->end (); it++)
+		for (it = Graph->begin (); it != Graph->end ();)
 			if ((A->vertex->is_contained_by (it->second->vertex)) &&
 				(! A->vertex->is_equal (it->second->vertex)))
 			{
@@ -290,8 +292,10 @@ namespace UCSROBDDToolBox
 				// delete the removed node
 				delete_node (it->second);
 				// remove the node from the graph
-/*E*/ 			Graph->erase (it);
+				Graph->erase (it++);
 			}
+			else
+				it++;
 	}
 
 
