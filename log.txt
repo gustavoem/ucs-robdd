@@ -1,397 +1,375 @@
-==5087== Memcheck, a memory error detector
-==5087== Copyright (C) 2002-2013, and GNU GPL'd, by Julian Seward et al.
-==5087== Using Valgrind-3.10.0 and LibVEX; rerun with -h for copyright info
-==5087== Command: ./featselTest
-==5087== Parent PID: 4047
-==5087== 
-==5087== Invalid read of size 8
-==5087==    at 0x4EAA680: std::_Rb_tree_increment(std::_Rb_tree_node_base*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.20)
-==5087==    by 0x447E92: std::_Rb_tree_iterator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >::operator++(int) (stl_tree.h:211)
-==5087==    by 0x447676: UCSROBDDToolBox::prune_upper_elements(std::map<std::string, UCSROBDDToolBox::MyNode*, std::less<std::string>, std::allocator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> > >*, std::list<UCSROBDDToolBox::MyNode*, std::allocator<UCSROBDDToolBox::MyNode*> >*, UCSROBDDToolBox::MyNode*) (UCSROBDDToolBox.cpp:284)
-==5087==    by 0x446DF3: UCSROBDDToolBox::DFS(UCSROBDDToolBox::MyNode*, Collection*, ROBDD*, CostFunction*, unsigned int*) (UCSROBDDToolBox.cpp:184)
-==5087==    by 0x445FAE: UCSROBDD::get_minima_list(unsigned int) (UCSROBDD.cpp:105)
-==5087==    by 0x42D22A: UCSROBDDTest::a_lattice_with_constant_cost_should_be_totally_exausted() (UCSROBDDTest.cpp:19)
-==5087==    by 0x403152: main (in /home/bcc/gustavoem/2015BCC/ucs-robdd/featselTest)
-==5087==  Address 0x5a12e58 is 24 bytes inside a block of size 48 free'd
-==5087==    at 0x4C2A360: operator delete(void*) (vg_replace_malloc.c:507)
-==5087==    by 0x42EED7: __gnu_cxx::new_allocator<std::_Rb_tree_node<std::pair<std::string const, UCSROBDDToolBox::MyNode*> > >::deallocate(std::_Rb_tree_node<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >*, unsigned long) (new_allocator.h:110)
-==5087==    by 0x42EDA0: __gnu_cxx::__alloc_traits<std::allocator<std::_Rb_tree_node<std::pair<std::string const, UCSROBDDToolBox::MyNode*> > > >::deallocate(std::allocator<std::_Rb_tree_node<std::pair<std::string const, UCSROBDDToolBox::MyNode*> > >&, std::_Rb_tree_node<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >*, unsigned long) (alloc_traits.h:185)
-==5087==    by 0x42EB8C: std::_Rb_tree<std::string, std::pair<std::string const, UCSROBDDToolBox::MyNode*>, std::_Select1st<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >, std::less<std::string>, std::allocator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> > >::_M_put_node(std::_Rb_tree_node<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >*) (stl_tree.h:389)
-==5087==    by 0x42E73C: std::_Rb_tree<std::string, std::pair<std::string const, UCSROBDDToolBox::MyNode*>, std::_Select1st<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >, std::less<std::string>, std::allocator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> > >::_M_destroy_node(std::_Rb_tree_node<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >*) (stl_tree.h:410)
-==5087==    by 0x44883B: std::_Rb_tree<std::string, std::pair<std::string const, UCSROBDDToolBox::MyNode*>, std::_Select1st<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >, std::less<std::string>, std::allocator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> > >::_M_erase_aux(std::_Rb_tree_const_iterator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >) (stl_tree.h:1867)
-==5087==    by 0x44832D: std::_Rb_tree<std::string, std::pair<std::string const, UCSROBDDToolBox::MyNode*>, std::_Select1st<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >, std::less<std::string>, std::allocator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> > >::erase(std::_Rb_tree_iterator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >) (stl_tree.h:874)
-==5087==    by 0x447EE4: std::map<std::string, UCSROBDDToolBox::MyNode*, std::less<std::string>, std::allocator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> > >::erase(std::_Rb_tree_iterator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >) (stl_map.h:746)
-==5087==    by 0x447665: UCSROBDDToolBox::prune_upper_elements(std::map<std::string, UCSROBDDToolBox::MyNode*, std::less<std::string>, std::allocator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> > >*, std::list<UCSROBDDToolBox::MyNode*, std::allocator<UCSROBDDToolBox::MyNode*> >*, UCSROBDDToolBox::MyNode*) (UCSROBDDToolBox.cpp:293)
-==5087==    by 0x446DF3: UCSROBDDToolBox::DFS(UCSROBDDToolBox::MyNode*, Collection*, ROBDD*, CostFunction*, unsigned int*) (UCSROBDDToolBox.cpp:184)
-==5087==    by 0x445FAE: UCSROBDD::get_minima_list(unsigned int) (UCSROBDD.cpp:105)
-==5087==    by 0x42D22A: UCSROBDDTest::a_lattice_with_constant_cost_should_be_totally_exausted() (UCSROBDDTest.cpp:19)
-==5087== 
-==5087== Invalid read of size 8
-==5087==    at 0x4EAA6A0: std::_Rb_tree_increment(std::_Rb_tree_node_base*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.20)
-==5087==    by 0x447E92: std::_Rb_tree_iterator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >::operator++(int) (stl_tree.h:211)
-==5087==    by 0x447676: UCSROBDDToolBox::prune_upper_elements(std::map<std::string, UCSROBDDToolBox::MyNode*, std::less<std::string>, std::allocator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> > >*, std::list<UCSROBDDToolBox::MyNode*, std::allocator<UCSROBDDToolBox::MyNode*> >*, UCSROBDDToolBox::MyNode*) (UCSROBDDToolBox.cpp:284)
-==5087==    by 0x446DF3: UCSROBDDToolBox::DFS(UCSROBDDToolBox::MyNode*, Collection*, ROBDD*, CostFunction*, unsigned int*) (UCSROBDDToolBox.cpp:184)
-==5087==    by 0x445FAE: UCSROBDD::get_minima_list(unsigned int) (UCSROBDD.cpp:105)
-==5087==    by 0x42D22A: UCSROBDDTest::a_lattice_with_constant_cost_should_be_totally_exausted() (UCSROBDDTest.cpp:19)
-==5087==    by 0x403152: main (in /home/bcc/gustavoem/2015BCC/ucs-robdd/featselTest)
-==5087==  Address 0x5a12e48 is 8 bytes inside a block of size 48 free'd
-==5087==    at 0x4C2A360: operator delete(void*) (vg_replace_malloc.c:507)
-==5087==    by 0x42EED7: __gnu_cxx::new_allocator<std::_Rb_tree_node<std::pair<std::string const, UCSROBDDToolBox::MyNode*> > >::deallocate(std::_Rb_tree_node<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >*, unsigned long) (new_allocator.h:110)
-==5087==    by 0x42EDA0: __gnu_cxx::__alloc_traits<std::allocator<std::_Rb_tree_node<std::pair<std::string const, UCSROBDDToolBox::MyNode*> > > >::deallocate(std::allocator<std::_Rb_tree_node<std::pair<std::string const, UCSROBDDToolBox::MyNode*> > >&, std::_Rb_tree_node<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >*, unsigned long) (alloc_traits.h:185)
-==5087==    by 0x42EB8C: std::_Rb_tree<std::string, std::pair<std::string const, UCSROBDDToolBox::MyNode*>, std::_Select1st<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >, std::less<std::string>, std::allocator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> > >::_M_put_node(std::_Rb_tree_node<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >*) (stl_tree.h:389)
-==5087==    by 0x42E73C: std::_Rb_tree<std::string, std::pair<std::string const, UCSROBDDToolBox::MyNode*>, std::_Select1st<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >, std::less<std::string>, std::allocator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> > >::_M_destroy_node(std::_Rb_tree_node<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >*) (stl_tree.h:410)
-==5087==    by 0x44883B: std::_Rb_tree<std::string, std::pair<std::string const, UCSROBDDToolBox::MyNode*>, std::_Select1st<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >, std::less<std::string>, std::allocator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> > >::_M_erase_aux(std::_Rb_tree_const_iterator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >) (stl_tree.h:1867)
-==5087==    by 0x44832D: std::_Rb_tree<std::string, std::pair<std::string const, UCSROBDDToolBox::MyNode*>, std::_Select1st<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >, std::less<std::string>, std::allocator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> > >::erase(std::_Rb_tree_iterator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >) (stl_tree.h:874)
-==5087==    by 0x447EE4: std::map<std::string, UCSROBDDToolBox::MyNode*, std::less<std::string>, std::allocator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> > >::erase(std::_Rb_tree_iterator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >) (stl_map.h:746)
-==5087==    by 0x447665: UCSROBDDToolBox::prune_upper_elements(std::map<std::string, UCSROBDDToolBox::MyNode*, std::less<std::string>, std::allocator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> > >*, std::list<UCSROBDDToolBox::MyNode*, std::allocator<UCSROBDDToolBox::MyNode*> >*, UCSROBDDToolBox::MyNode*) (UCSROBDDToolBox.cpp:293)
-==5087==    by 0x446DF3: UCSROBDDToolBox::DFS(UCSROBDDToolBox::MyNode*, Collection*, ROBDD*, CostFunction*, unsigned int*) (UCSROBDDToolBox.cpp:184)
-==5087==    by 0x445FAE: UCSROBDD::get_minima_list(unsigned int) (UCSROBDD.cpp:105)
-==5087==    by 0x42D22A: UCSROBDDTest::a_lattice_with_constant_cost_should_be_totally_exausted() (UCSROBDDTest.cpp:19)
-==5087== 
-==5087== Conditional jump or move depends on uninitialised value(s)
-==5087==    at 0x441F69: ROBDD::delete_subtree(Vertex**, unsigned int*) (ROBDD.cpp:120)
-==5087==    by 0x442D5F: ROBDD::union_to(Vertex*) (ROBDD.cpp:327)
-==5087==    by 0x4433D6: ROBDD::add_interval(ElementSubset*, bool) (ROBDD.cpp:408)
-==5087==    by 0x44676B: UCSROBDDToolBox::update_upper_restriction(ROBDD*, ElementSubset*) (UCSROBDDToolBox.cpp:69)
-==5087==    by 0x446DD3: UCSROBDDToolBox::DFS(UCSROBDDToolBox::MyNode*, Collection*, ROBDD*, CostFunction*, unsigned int*) (UCSROBDDToolBox.cpp:183)
-==5087==    by 0x445FAE: UCSROBDD::get_minima_list(unsigned int) (UCSROBDD.cpp:105)
-==5087==    by 0x42D22A: UCSROBDDTest::a_lattice_with_constant_cost_should_be_totally_exausted() (UCSROBDDTest.cpp:19)
-==5087==    by 0x403152: main (in /home/bcc/gustavoem/2015BCC/ucs-robdd/featselTest)
-==5087== 
-==5087== Conditional jump or move depends on uninitialised value(s)
-==5087==    at 0x441F69: ROBDD::delete_subtree(Vertex**, unsigned int*) (ROBDD.cpp:120)
-==5087==    by 0x442D5F: ROBDD::union_to(Vertex*) (ROBDD.cpp:327)
-==5087==    by 0x4433D6: ROBDD::add_interval(ElementSubset*, bool) (ROBDD.cpp:408)
-==5087==    by 0x446741: UCSROBDDToolBox::update_lower_restriction(ROBDD*, ElementSubset*) (UCSROBDDToolBox.cpp:60)
-==5087==    by 0x446D4D: UCSROBDDToolBox::DFS(UCSROBDDToolBox::MyNode*, Collection*, ROBDD*, CostFunction*, unsigned int*) (UCSROBDDToolBox.cpp:175)
-==5087==    by 0x445FAE: UCSROBDD::get_minima_list(unsigned int) (UCSROBDD.cpp:105)
-==5087==    by 0x42D22A: UCSROBDDTest::a_lattice_with_constant_cost_should_be_totally_exausted() (UCSROBDDTest.cpp:19)
-==5087==    by 0x403152: main (in /home/bcc/gustavoem/2015BCC/ucs-robdd/featselTest)
-==5087== 
-==5087== Invalid read of size 8
-==5087==    at 0x4EAA680: std::_Rb_tree_increment(std::_Rb_tree_node_base*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.20)
-==5087==    by 0x447E92: std::_Rb_tree_iterator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >::operator++(int) (stl_tree.h:211)
-==5087==    by 0x447554: UCSROBDDToolBox::prune_lower_elements(std::map<std::string, UCSROBDDToolBox::MyNode*, std::less<std::string>, std::allocator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> > >*, std::list<UCSROBDDToolBox::MyNode*, std::allocator<UCSROBDDToolBox::MyNode*> >*, UCSROBDDToolBox::MyNode*) (UCSROBDDToolBox.cpp:266)
-==5087==    by 0x446D6D: UCSROBDDToolBox::DFS(UCSROBDDToolBox::MyNode*, Collection*, ROBDD*, CostFunction*, unsigned int*) (UCSROBDDToolBox.cpp:176)
-==5087==    by 0x445FAE: UCSROBDD::get_minima_list(unsigned int) (UCSROBDD.cpp:105)
-==5087==    by 0x42D22A: UCSROBDDTest::a_lattice_with_constant_cost_should_be_totally_exausted() (UCSROBDDTest.cpp:19)
-==5087==    by 0x403152: main (in /home/bcc/gustavoem/2015BCC/ucs-robdd/featselTest)
-==5087==  Address 0x5a1d8c8 is 24 bytes inside a block of size 48 free'd
-==5087==    at 0x4C2A360: operator delete(void*) (vg_replace_malloc.c:507)
-==5087==    by 0x42EED7: __gnu_cxx::new_allocator<std::_Rb_tree_node<std::pair<std::string const, UCSROBDDToolBox::MyNode*> > >::deallocate(std::_Rb_tree_node<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >*, unsigned long) (new_allocator.h:110)
-==5087==    by 0x42EDA0: __gnu_cxx::__alloc_traits<std::allocator<std::_Rb_tree_node<std::pair<std::string const, UCSROBDDToolBox::MyNode*> > > >::deallocate(std::allocator<std::_Rb_tree_node<std::pair<std::string const, UCSROBDDToolBox::MyNode*> > >&, std::_Rb_tree_node<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >*, unsigned long) (alloc_traits.h:185)
-==5087==    by 0x42EB8C: std::_Rb_tree<std::string, std::pair<std::string const, UCSROBDDToolBox::MyNode*>, std::_Select1st<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >, std::less<std::string>, std::allocator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> > >::_M_put_node(std::_Rb_tree_node<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >*) (stl_tree.h:389)
-==5087==    by 0x42E73C: std::_Rb_tree<std::string, std::pair<std::string const, UCSROBDDToolBox::MyNode*>, std::_Select1st<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >, std::less<std::string>, std::allocator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> > >::_M_destroy_node(std::_Rb_tree_node<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >*) (stl_tree.h:410)
-==5087==    by 0x44883B: std::_Rb_tree<std::string, std::pair<std::string const, UCSROBDDToolBox::MyNode*>, std::_Select1st<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >, std::less<std::string>, std::allocator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> > >::_M_erase_aux(std::_Rb_tree_const_iterator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >) (stl_tree.h:1867)
-==5087==    by 0x44832D: std::_Rb_tree<std::string, std::pair<std::string const, UCSROBDDToolBox::MyNode*>, std::_Select1st<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >, std::less<std::string>, std::allocator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> > >::erase(std::_Rb_tree_iterator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >) (stl_tree.h:874)
-==5087==    by 0x447EE4: std::map<std::string, UCSROBDDToolBox::MyNode*, std::less<std::string>, std::allocator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> > >::erase(std::_Rb_tree_iterator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >) (stl_map.h:746)
-==5087==    by 0x447543: UCSROBDDToolBox::prune_lower_elements(std::map<std::string, UCSROBDDToolBox::MyNode*, std::less<std::string>, std::allocator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> > >*, std::list<UCSROBDDToolBox::MyNode*, std::allocator<UCSROBDDToolBox::MyNode*> >*, UCSROBDDToolBox::MyNode*) (UCSROBDDToolBox.cpp:275)
-==5087==    by 0x446D6D: UCSROBDDToolBox::DFS(UCSROBDDToolBox::MyNode*, Collection*, ROBDD*, CostFunction*, unsigned int*) (UCSROBDDToolBox.cpp:176)
-==5087==    by 0x445FAE: UCSROBDD::get_minima_list(unsigned int) (UCSROBDD.cpp:105)
-==5087==    by 0x42D22A: UCSROBDDTest::a_lattice_with_constant_cost_should_be_totally_exausted() (UCSROBDDTest.cpp:19)
-==5087== 
-==5087== Invalid read of size 8
-==5087==    at 0x4EAA6A0: std::_Rb_tree_increment(std::_Rb_tree_node_base*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.20)
-==5087==    by 0x447E92: std::_Rb_tree_iterator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >::operator++(int) (stl_tree.h:211)
-==5087==    by 0x447554: UCSROBDDToolBox::prune_lower_elements(std::map<std::string, UCSROBDDToolBox::MyNode*, std::less<std::string>, std::allocator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> > >*, std::list<UCSROBDDToolBox::MyNode*, std::allocator<UCSROBDDToolBox::MyNode*> >*, UCSROBDDToolBox::MyNode*) (UCSROBDDToolBox.cpp:266)
-==5087==    by 0x446D6D: UCSROBDDToolBox::DFS(UCSROBDDToolBox::MyNode*, Collection*, ROBDD*, CostFunction*, unsigned int*) (UCSROBDDToolBox.cpp:176)
-==5087==    by 0x445FAE: UCSROBDD::get_minima_list(unsigned int) (UCSROBDD.cpp:105)
-==5087==    by 0x42D22A: UCSROBDDTest::a_lattice_with_constant_cost_should_be_totally_exausted() (UCSROBDDTest.cpp:19)
-==5087==    by 0x403152: main (in /home/bcc/gustavoem/2015BCC/ucs-robdd/featselTest)
-==5087==  Address 0x5a1d8b8 is 8 bytes inside a block of size 48 free'd
-==5087==    at 0x4C2A360: operator delete(void*) (vg_replace_malloc.c:507)
-==5087==    by 0x42EED7: __gnu_cxx::new_allocator<std::_Rb_tree_node<std::pair<std::string const, UCSROBDDToolBox::MyNode*> > >::deallocate(std::_Rb_tree_node<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >*, unsigned long) (new_allocator.h:110)
-==5087==    by 0x42EDA0: __gnu_cxx::__alloc_traits<std::allocator<std::_Rb_tree_node<std::pair<std::string const, UCSROBDDToolBox::MyNode*> > > >::deallocate(std::allocator<std::_Rb_tree_node<std::pair<std::string const, UCSROBDDToolBox::MyNode*> > >&, std::_Rb_tree_node<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >*, unsigned long) (alloc_traits.h:185)
-==5087==    by 0x42EB8C: std::_Rb_tree<std::string, std::pair<std::string const, UCSROBDDToolBox::MyNode*>, std::_Select1st<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >, std::less<std::string>, std::allocator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> > >::_M_put_node(std::_Rb_tree_node<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >*) (stl_tree.h:389)
-==5087==    by 0x42E73C: std::_Rb_tree<std::string, std::pair<std::string const, UCSROBDDToolBox::MyNode*>, std::_Select1st<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >, std::less<std::string>, std::allocator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> > >::_M_destroy_node(std::_Rb_tree_node<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >*) (stl_tree.h:410)
-==5087==    by 0x44883B: std::_Rb_tree<std::string, std::pair<std::string const, UCSROBDDToolBox::MyNode*>, std::_Select1st<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >, std::less<std::string>, std::allocator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> > >::_M_erase_aux(std::_Rb_tree_const_iterator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >) (stl_tree.h:1867)
-==5087==    by 0x44832D: std::_Rb_tree<std::string, std::pair<std::string const, UCSROBDDToolBox::MyNode*>, std::_Select1st<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >, std::less<std::string>, std::allocator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> > >::erase(std::_Rb_tree_iterator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >) (stl_tree.h:874)
-==5087==    by 0x447EE4: std::map<std::string, UCSROBDDToolBox::MyNode*, std::less<std::string>, std::allocator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> > >::erase(std::_Rb_tree_iterator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >) (stl_map.h:746)
-==5087==    by 0x447543: UCSROBDDToolBox::prune_lower_elements(std::map<std::string, UCSROBDDToolBox::MyNode*, std::less<std::string>, std::allocator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> > >*, std::list<UCSROBDDToolBox::MyNode*, std::allocator<UCSROBDDToolBox::MyNode*> >*, UCSROBDDToolBox::MyNode*) (UCSROBDDToolBox.cpp:275)
-==5087==    by 0x446D6D: UCSROBDDToolBox::DFS(UCSROBDDToolBox::MyNode*, Collection*, ROBDD*, CostFunction*, unsigned int*) (UCSROBDDToolBox.cpp:176)
-==5087==    by 0x445FAE: UCSROBDD::get_minima_list(unsigned int) (UCSROBDD.cpp:105)
-==5087==    by 0x42D22A: UCSROBDDTest::a_lattice_with_constant_cost_should_be_totally_exausted() (UCSROBDDTest.cpp:19)
-==5087== 
-==5087== Invalid read of size 4
-==5087==    at 0x441808: Vertex::get_id() (Vertex.cpp:85)
-==5087==    by 0x4426D2: ROBDD::reduce() (ROBDD.cpp:231)
-==5087==    by 0x442D81: ROBDD::union_to(Vertex*) (ROBDD.cpp:330)
-==5087==    by 0x4433D6: ROBDD::add_interval(ElementSubset*, bool) (ROBDD.cpp:408)
-==5087==    by 0x446741: UCSROBDDToolBox::update_lower_restriction(ROBDD*, ElementSubset*) (UCSROBDDToolBox.cpp:60)
-==5087==    by 0x446D4D: UCSROBDDToolBox::DFS(UCSROBDDToolBox::MyNode*, Collection*, ROBDD*, CostFunction*, unsigned int*) (UCSROBDDToolBox.cpp:175)
-==5087==    by 0x445FAE: UCSROBDD::get_minima_list(unsigned int) (UCSROBDD.cpp:105)
-==5087==    by 0x42D22A: UCSROBDDTest::a_lattice_with_constant_cost_should_be_totally_exausted() (UCSROBDDTest.cpp:19)
-==5087==    by 0x403152: main (in /home/bcc/gustavoem/2015BCC/ucs-robdd/featselTest)
-==5087==  Address 0x5a281d4 is 36 bytes inside a block of size 48 free'd
-==5087==    at 0x4C2A360: operator delete(void*) (vg_replace_malloc.c:507)
-==5087==    by 0x44172B: Vertex::~Vertex() (Vertex.cpp:38)
-==5087==    by 0x442B7D: ROBDD::reduce() (ROBDD.cpp:292)
-==5087==    by 0x442D81: ROBDD::union_to(Vertex*) (ROBDD.cpp:330)
-==5087==    by 0x4433D6: ROBDD::add_interval(ElementSubset*, bool) (ROBDD.cpp:408)
-==5087==    by 0x446741: UCSROBDDToolBox::update_lower_restriction(ROBDD*, ElementSubset*) (UCSROBDDToolBox.cpp:60)
-==5087==    by 0x446D4D: UCSROBDDToolBox::DFS(UCSROBDDToolBox::MyNode*, Collection*, ROBDD*, CostFunction*, unsigned int*) (UCSROBDDToolBox.cpp:175)
-==5087==    by 0x445FAE: UCSROBDD::get_minima_list(unsigned int) (UCSROBDD.cpp:105)
-==5087==    by 0x42D22A: UCSROBDDTest::a_lattice_with_constant_cost_should_be_totally_exausted() (UCSROBDDTest.cpp:19)
-==5087==    by 0x403152: main (in /home/bcc/gustavoem/2015BCC/ucs-robdd/featselTest)
-==5087== 
-==5087== Invalid read of size 4
-==5087==    at 0x441808: Vertex::get_id() (Vertex.cpp:85)
-==5087==    by 0x442723: ROBDD::reduce() (ROBDD.cpp:237)
-==5087==    by 0x442D81: ROBDD::union_to(Vertex*) (ROBDD.cpp:330)
-==5087==    by 0x4433D6: ROBDD::add_interval(ElementSubset*, bool) (ROBDD.cpp:408)
-==5087==    by 0x446741: UCSROBDDToolBox::update_lower_restriction(ROBDD*, ElementSubset*) (UCSROBDDToolBox.cpp:60)
-==5087==    by 0x446D4D: UCSROBDDToolBox::DFS(UCSROBDDToolBox::MyNode*, Collection*, ROBDD*, CostFunction*, unsigned int*) (UCSROBDDToolBox.cpp:175)
-==5087==    by 0x445FAE: UCSROBDD::get_minima_list(unsigned int) (UCSROBDD.cpp:105)
-==5087==    by 0x42D22A: UCSROBDDTest::a_lattice_with_constant_cost_should_be_totally_exausted() (UCSROBDDTest.cpp:19)
-==5087==    by 0x403152: main (in /home/bcc/gustavoem/2015BCC/ucs-robdd/featselTest)
-==5087==  Address 0x5a281d4 is 36 bytes inside a block of size 48 free'd
-==5087==    at 0x4C2A360: operator delete(void*) (vg_replace_malloc.c:507)
-==5087==    by 0x44172B: Vertex::~Vertex() (Vertex.cpp:38)
-==5087==    by 0x442B7D: ROBDD::reduce() (ROBDD.cpp:292)
-==5087==    by 0x442D81: ROBDD::union_to(Vertex*) (ROBDD.cpp:330)
-==5087==    by 0x4433D6: ROBDD::add_interval(ElementSubset*, bool) (ROBDD.cpp:408)
-==5087==    by 0x446741: UCSROBDDToolBox::update_lower_restriction(ROBDD*, ElementSubset*) (UCSROBDDToolBox.cpp:60)
-==5087==    by 0x446D4D: UCSROBDDToolBox::DFS(UCSROBDDToolBox::MyNode*, Collection*, ROBDD*, CostFunction*, unsigned int*) (UCSROBDDToolBox.cpp:175)
-==5087==    by 0x445FAE: UCSROBDD::get_minima_list(unsigned int) (UCSROBDD.cpp:105)
-==5087==    by 0x42D22A: UCSROBDDTest::a_lattice_with_constant_cost_should_be_totally_exausted() (UCSROBDDTest.cpp:19)
-==5087==    by 0x403152: main (in /home/bcc/gustavoem/2015BCC/ucs-robdd/featselTest)
-==5087== 
-==5087== Invalid read of size 4
-==5087==    at 0x441808: Vertex::get_id() (Vertex.cpp:85)
-==5087==    by 0x442770: ROBDD::reduce() (ROBDD.cpp:242)
-==5087==    by 0x442D81: ROBDD::union_to(Vertex*) (ROBDD.cpp:330)
-==5087==    by 0x4433D6: ROBDD::add_interval(ElementSubset*, bool) (ROBDD.cpp:408)
-==5087==    by 0x446741: UCSROBDDToolBox::update_lower_restriction(ROBDD*, ElementSubset*) (UCSROBDDToolBox.cpp:60)
-==5087==    by 0x446D4D: UCSROBDDToolBox::DFS(UCSROBDDToolBox::MyNode*, Collection*, ROBDD*, CostFunction*, unsigned int*) (UCSROBDDToolBox.cpp:175)
-==5087==    by 0x445FAE: UCSROBDD::get_minima_list(unsigned int) (UCSROBDD.cpp:105)
-==5087==    by 0x42D22A: UCSROBDDTest::a_lattice_with_constant_cost_should_be_totally_exausted() (UCSROBDDTest.cpp:19)
-==5087==    by 0x403152: main (in /home/bcc/gustavoem/2015BCC/ucs-robdd/featselTest)
-==5087==  Address 0x5a281d4 is 36 bytes inside a block of size 48 free'd
-==5087==    at 0x4C2A360: operator delete(void*) (vg_replace_malloc.c:507)
-==5087==    by 0x44172B: Vertex::~Vertex() (Vertex.cpp:38)
-==5087==    by 0x442B7D: ROBDD::reduce() (ROBDD.cpp:292)
-==5087==    by 0x442D81: ROBDD::union_to(Vertex*) (ROBDD.cpp:330)
-==5087==    by 0x4433D6: ROBDD::add_interval(ElementSubset*, bool) (ROBDD.cpp:408)
-==5087==    by 0x446741: UCSROBDDToolBox::update_lower_restriction(ROBDD*, ElementSubset*) (UCSROBDDToolBox.cpp:60)
-==5087==    by 0x446D4D: UCSROBDDToolBox::DFS(UCSROBDDToolBox::MyNode*, Collection*, ROBDD*, CostFunction*, unsigned int*) (UCSROBDDToolBox.cpp:175)
-==5087==    by 0x445FAE: UCSROBDD::get_minima_list(unsigned int) (UCSROBDD.cpp:105)
-==5087==    by 0x42D22A: UCSROBDDTest::a_lattice_with_constant_cost_should_be_totally_exausted() (UCSROBDDTest.cpp:19)
-==5087==    by 0x403152: main (in /home/bcc/gustavoem/2015BCC/ucs-robdd/featselTest)
-==5087== 
-==5087== Invalid read of size 8
-==5087==    at 0x442B68: ROBDD::reduce() (ROBDD.cpp:292)
-==5087==    by 0x442D81: ROBDD::union_to(Vertex*) (ROBDD.cpp:330)
-==5087==    by 0x4433D6: ROBDD::add_interval(ElementSubset*, bool) (ROBDD.cpp:408)
-==5087==    by 0x446741: UCSROBDDToolBox::update_lower_restriction(ROBDD*, ElementSubset*) (UCSROBDDToolBox.cpp:60)
-==5087==    by 0x446D4D: UCSROBDDToolBox::DFS(UCSROBDDToolBox::MyNode*, Collection*, ROBDD*, CostFunction*, unsigned int*) (UCSROBDDToolBox.cpp:175)
-==5087==    by 0x445FAE: UCSROBDD::get_minima_list(unsigned int) (UCSROBDD.cpp:105)
-==5087==    by 0x42D22A: UCSROBDDTest::a_lattice_with_constant_cost_should_be_totally_exausted() (UCSROBDDTest.cpp:19)
-==5087==    by 0x403152: main (in /home/bcc/gustavoem/2015BCC/ucs-robdd/featselTest)
-==5087==  Address 0x5a281b0 is 0 bytes inside a block of size 48 free'd
-==5087==    at 0x4C2A360: operator delete(void*) (vg_replace_malloc.c:507)
-==5087==    by 0x44172B: Vertex::~Vertex() (Vertex.cpp:38)
-==5087==    by 0x442B7D: ROBDD::reduce() (ROBDD.cpp:292)
-==5087==    by 0x442D81: ROBDD::union_to(Vertex*) (ROBDD.cpp:330)
-==5087==    by 0x4433D6: ROBDD::add_interval(ElementSubset*, bool) (ROBDD.cpp:408)
-==5087==    by 0x446741: UCSROBDDToolBox::update_lower_restriction(ROBDD*, ElementSubset*) (UCSROBDDToolBox.cpp:60)
-==5087==    by 0x446D4D: UCSROBDDToolBox::DFS(UCSROBDDToolBox::MyNode*, Collection*, ROBDD*, CostFunction*, unsigned int*) (UCSROBDDToolBox.cpp:175)
-==5087==    by 0x445FAE: UCSROBDD::get_minima_list(unsigned int) (UCSROBDD.cpp:105)
-==5087==    by 0x42D22A: UCSROBDDTest::a_lattice_with_constant_cost_should_be_totally_exausted() (UCSROBDDTest.cpp:19)
-==5087==    by 0x403152: main (in /home/bcc/gustavoem/2015BCC/ucs-robdd/featselTest)
-==5087== 
-==5087== Invalid write of size 8
-==5087==    at 0x4416C6: Vertex::~Vertex() (Vertex.cpp:33)
-==5087==    by 0x44171F: Vertex::~Vertex() (Vertex.cpp:38)
-==5087==    by 0x442B7D: ROBDD::reduce() (ROBDD.cpp:292)
-==5087==    by 0x442D81: ROBDD::union_to(Vertex*) (ROBDD.cpp:330)
-==5087==    by 0x4433D6: ROBDD::add_interval(ElementSubset*, bool) (ROBDD.cpp:408)
-==5087==    by 0x446741: UCSROBDDToolBox::update_lower_restriction(ROBDD*, ElementSubset*) (UCSROBDDToolBox.cpp:60)
-==5087==    by 0x446D4D: UCSROBDDToolBox::DFS(UCSROBDDToolBox::MyNode*, Collection*, ROBDD*, CostFunction*, unsigned int*) (UCSROBDDToolBox.cpp:175)
-==5087==    by 0x445FAE: UCSROBDD::get_minima_list(unsigned int) (UCSROBDD.cpp:105)
-==5087==    by 0x42D22A: UCSROBDDTest::a_lattice_with_constant_cost_should_be_totally_exausted() (UCSROBDDTest.cpp:19)
-==5087==    by 0x403152: main (in /home/bcc/gustavoem/2015BCC/ucs-robdd/featselTest)
-==5087==  Address 0x5a281b0 is 0 bytes inside a block of size 48 free'd
-==5087==    at 0x4C2A360: operator delete(void*) (vg_replace_malloc.c:507)
-==5087==    by 0x44172B: Vertex::~Vertex() (Vertex.cpp:38)
-==5087==    by 0x442B7D: ROBDD::reduce() (ROBDD.cpp:292)
-==5087==    by 0x442D81: ROBDD::union_to(Vertex*) (ROBDD.cpp:330)
-==5087==    by 0x4433D6: ROBDD::add_interval(ElementSubset*, bool) (ROBDD.cpp:408)
-==5087==    by 0x446741: UCSROBDDToolBox::update_lower_restriction(ROBDD*, ElementSubset*) (UCSROBDDToolBox.cpp:60)
-==5087==    by 0x446D4D: UCSROBDDToolBox::DFS(UCSROBDDToolBox::MyNode*, Collection*, ROBDD*, CostFunction*, unsigned int*) (UCSROBDDToolBox.cpp:175)
-==5087==    by 0x445FAE: UCSROBDD::get_minima_list(unsigned int) (UCSROBDD.cpp:105)
-==5087==    by 0x42D22A: UCSROBDDTest::a_lattice_with_constant_cost_should_be_totally_exausted() (UCSROBDDTest.cpp:19)
-==5087==    by 0x403152: main (in /home/bcc/gustavoem/2015BCC/ucs-robdd/featselTest)
-==5087== 
-==5087== Invalid write of size 8
-==5087==    at 0x4416D1: Vertex::~Vertex() (Vertex.cpp:35)
-==5087==    by 0x44171F: Vertex::~Vertex() (Vertex.cpp:38)
-==5087==    by 0x442B7D: ROBDD::reduce() (ROBDD.cpp:292)
-==5087==    by 0x442D81: ROBDD::union_to(Vertex*) (ROBDD.cpp:330)
-==5087==    by 0x4433D6: ROBDD::add_interval(ElementSubset*, bool) (ROBDD.cpp:408)
-==5087==    by 0x446741: UCSROBDDToolBox::update_lower_restriction(ROBDD*, ElementSubset*) (UCSROBDDToolBox.cpp:60)
-==5087==    by 0x446D4D: UCSROBDDToolBox::DFS(UCSROBDDToolBox::MyNode*, Collection*, ROBDD*, CostFunction*, unsigned int*) (UCSROBDDToolBox.cpp:175)
-==5087==    by 0x445FAE: UCSROBDD::get_minima_list(unsigned int) (UCSROBDD.cpp:105)
-==5087==    by 0x42D22A: UCSROBDDTest::a_lattice_with_constant_cost_should_be_totally_exausted() (UCSROBDDTest.cpp:19)
-==5087==    by 0x403152: main (in /home/bcc/gustavoem/2015BCC/ucs-robdd/featselTest)
-==5087==  Address 0x5a281c0 is 16 bytes inside a block of size 48 free'd
-==5087==    at 0x4C2A360: operator delete(void*) (vg_replace_malloc.c:507)
-==5087==    by 0x44172B: Vertex::~Vertex() (Vertex.cpp:38)
-==5087==    by 0x442B7D: ROBDD::reduce() (ROBDD.cpp:292)
-==5087==    by 0x442D81: ROBDD::union_to(Vertex*) (ROBDD.cpp:330)
-==5087==    by 0x4433D6: ROBDD::add_interval(ElementSubset*, bool) (ROBDD.cpp:408)
-==5087==    by 0x446741: UCSROBDDToolBox::update_lower_restriction(ROBDD*, ElementSubset*) (UCSROBDDToolBox.cpp:60)
-==5087==    by 0x446D4D: UCSROBDDToolBox::DFS(UCSROBDDToolBox::MyNode*, Collection*, ROBDD*, CostFunction*, unsigned int*) (UCSROBDDToolBox.cpp:175)
-==5087==    by 0x445FAE: UCSROBDD::get_minima_list(unsigned int) (UCSROBDD.cpp:105)
-==5087==    by 0x42D22A: UCSROBDDTest::a_lattice_with_constant_cost_should_be_totally_exausted() (UCSROBDDTest.cpp:19)
-==5087==    by 0x403152: main (in /home/bcc/gustavoem/2015BCC/ucs-robdd/featselTest)
-==5087== 
-==5087== Invalid write of size 8
-==5087==    at 0x4416DD: Vertex::~Vertex() (Vertex.cpp:36)
-==5087==    by 0x44171F: Vertex::~Vertex() (Vertex.cpp:38)
-==5087==    by 0x442B7D: ROBDD::reduce() (ROBDD.cpp:292)
-==5087==    by 0x442D81: ROBDD::union_to(Vertex*) (ROBDD.cpp:330)
-==5087==    by 0x4433D6: ROBDD::add_interval(ElementSubset*, bool) (ROBDD.cpp:408)
-==5087==    by 0x446741: UCSROBDDToolBox::update_lower_restriction(ROBDD*, ElementSubset*) (UCSROBDDToolBox.cpp:60)
-==5087==    by 0x446D4D: UCSROBDDToolBox::DFS(UCSROBDDToolBox::MyNode*, Collection*, ROBDD*, CostFunction*, unsigned int*) (UCSROBDDToolBox.cpp:175)
-==5087==    by 0x445FAE: UCSROBDD::get_minima_list(unsigned int) (UCSROBDD.cpp:105)
-==5087==    by 0x42D22A: UCSROBDDTest::a_lattice_with_constant_cost_should_be_totally_exausted() (UCSROBDDTest.cpp:19)
-==5087==    by 0x403152: main (in /home/bcc/gustavoem/2015BCC/ucs-robdd/featselTest)
-==5087==  Address 0x5a281b8 is 8 bytes inside a block of size 48 free'd
-==5087==    at 0x4C2A360: operator delete(void*) (vg_replace_malloc.c:507)
-==5087==    by 0x44172B: Vertex::~Vertex() (Vertex.cpp:38)
-==5087==    by 0x442B7D: ROBDD::reduce() (ROBDD.cpp:292)
-==5087==    by 0x442D81: ROBDD::union_to(Vertex*) (ROBDD.cpp:330)
-==5087==    by 0x4433D6: ROBDD::add_interval(ElementSubset*, bool) (ROBDD.cpp:408)
-==5087==    by 0x446741: UCSROBDDToolBox::update_lower_restriction(ROBDD*, ElementSubset*) (UCSROBDDToolBox.cpp:60)
-==5087==    by 0x446D4D: UCSROBDDToolBox::DFS(UCSROBDDToolBox::MyNode*, Collection*, ROBDD*, CostFunction*, unsigned int*) (UCSROBDDToolBox.cpp:175)
-==5087==    by 0x445FAE: UCSROBDD::get_minima_list(unsigned int) (UCSROBDD.cpp:105)
-==5087==    by 0x42D22A: UCSROBDDTest::a_lattice_with_constant_cost_should_be_totally_exausted() (UCSROBDDTest.cpp:19)
-==5087==    by 0x403152: main (in /home/bcc/gustavoem/2015BCC/ucs-robdd/featselTest)
-==5087== 
-==5087== Invalid write of size 8
-==5087==    at 0x4416E9: Vertex::~Vertex() (Vertex.cpp:37)
-==5087==    by 0x44171F: Vertex::~Vertex() (Vertex.cpp:38)
-==5087==    by 0x442B7D: ROBDD::reduce() (ROBDD.cpp:292)
-==5087==    by 0x442D81: ROBDD::union_to(Vertex*) (ROBDD.cpp:330)
-==5087==    by 0x4433D6: ROBDD::add_interval(ElementSubset*, bool) (ROBDD.cpp:408)
-==5087==    by 0x446741: UCSROBDDToolBox::update_lower_restriction(ROBDD*, ElementSubset*) (UCSROBDDToolBox.cpp:60)
-==5087==    by 0x446D4D: UCSROBDDToolBox::DFS(UCSROBDDToolBox::MyNode*, Collection*, ROBDD*, CostFunction*, unsigned int*) (UCSROBDDToolBox.cpp:175)
-==5087==    by 0x445FAE: UCSROBDD::get_minima_list(unsigned int) (UCSROBDD.cpp:105)
-==5087==    by 0x42D22A: UCSROBDDTest::a_lattice_with_constant_cost_should_be_totally_exausted() (UCSROBDDTest.cpp:19)
-==5087==    by 0x403152: main (in /home/bcc/gustavoem/2015BCC/ucs-robdd/featselTest)
-==5087==  Address 0x5a281c8 is 24 bytes inside a block of size 48 free'd
-==5087==    at 0x4C2A360: operator delete(void*) (vg_replace_malloc.c:507)
-==5087==    by 0x44172B: Vertex::~Vertex() (Vertex.cpp:38)
-==5087==    by 0x442B7D: ROBDD::reduce() (ROBDD.cpp:292)
-==5087==    by 0x442D81: ROBDD::union_to(Vertex*) (ROBDD.cpp:330)
-==5087==    by 0x4433D6: ROBDD::add_interval(ElementSubset*, bool) (ROBDD.cpp:408)
-==5087==    by 0x446741: UCSROBDDToolBox::update_lower_restriction(ROBDD*, ElementSubset*) (UCSROBDDToolBox.cpp:60)
-==5087==    by 0x446D4D: UCSROBDDToolBox::DFS(UCSROBDDToolBox::MyNode*, Collection*, ROBDD*, CostFunction*, unsigned int*) (UCSROBDDToolBox.cpp:175)
-==5087==    by 0x445FAE: UCSROBDD::get_minima_list(unsigned int) (UCSROBDD.cpp:105)
-==5087==    by 0x42D22A: UCSROBDDTest::a_lattice_with_constant_cost_should_be_totally_exausted() (UCSROBDDTest.cpp:19)
-==5087==    by 0x403152: main (in /home/bcc/gustavoem/2015BCC/ucs-robdd/featselTest)
-==5087== 
-==5087== Invalid free() / delete / delete[] / realloc()
-==5087==    at 0x4C2A360: operator delete(void*) (vg_replace_malloc.c:507)
-==5087==    by 0x44172B: Vertex::~Vertex() (Vertex.cpp:38)
-==5087==    by 0x442B7D: ROBDD::reduce() (ROBDD.cpp:292)
-==5087==    by 0x442D81: ROBDD::union_to(Vertex*) (ROBDD.cpp:330)
-==5087==    by 0x4433D6: ROBDD::add_interval(ElementSubset*, bool) (ROBDD.cpp:408)
-==5087==    by 0x446741: UCSROBDDToolBox::update_lower_restriction(ROBDD*, ElementSubset*) (UCSROBDDToolBox.cpp:60)
-==5087==    by 0x446D4D: UCSROBDDToolBox::DFS(UCSROBDDToolBox::MyNode*, Collection*, ROBDD*, CostFunction*, unsigned int*) (UCSROBDDToolBox.cpp:175)
-==5087==    by 0x445FAE: UCSROBDD::get_minima_list(unsigned int) (UCSROBDD.cpp:105)
-==5087==    by 0x42D22A: UCSROBDDTest::a_lattice_with_constant_cost_should_be_totally_exausted() (UCSROBDDTest.cpp:19)
-==5087==    by 0x403152: main (in /home/bcc/gustavoem/2015BCC/ucs-robdd/featselTest)
-==5087==  Address 0x5a281b0 is 0 bytes inside a block of size 48 free'd
-==5087==    at 0x4C2A360: operator delete(void*) (vg_replace_malloc.c:507)
-==5087==    by 0x44172B: Vertex::~Vertex() (Vertex.cpp:38)
-==5087==    by 0x442B7D: ROBDD::reduce() (ROBDD.cpp:292)
-==5087==    by 0x442D81: ROBDD::union_to(Vertex*) (ROBDD.cpp:330)
-==5087==    by 0x4433D6: ROBDD::add_interval(ElementSubset*, bool) (ROBDD.cpp:408)
-==5087==    by 0x446741: UCSROBDDToolBox::update_lower_restriction(ROBDD*, ElementSubset*) (UCSROBDDToolBox.cpp:60)
-==5087==    by 0x446D4D: UCSROBDDToolBox::DFS(UCSROBDDToolBox::MyNode*, Collection*, ROBDD*, CostFunction*, unsigned int*) (UCSROBDDToolBox.cpp:175)
-==5087==    by 0x445FAE: UCSROBDD::get_minima_list(unsigned int) (UCSROBDD.cpp:105)
-==5087==    by 0x42D22A: UCSROBDDTest::a_lattice_with_constant_cost_should_be_totally_exausted() (UCSROBDDTest.cpp:19)
-==5087==    by 0x403152: main (in /home/bcc/gustavoem/2015BCC/ucs-robdd/featselTest)
-==5087== 
-==5087== Invalid write of size 8
-==5087==    at 0x4420BB: ROBDD::fill_vertice(Vertex**, int*, Vertex*) (ROBDD.cpp:144)
-==5087==    by 0x44205C: ROBDD::get_all_vertex(Vertex*, unsigned int) (ROBDD.cpp:135)
-==5087==    by 0x441F43: ROBDD::delete_subtree(Vertex**, unsigned int*) (ROBDD.cpp:117)
-==5087==    by 0x442D5F: ROBDD::union_to(Vertex*) (ROBDD.cpp:327)
-==5087==    by 0x4433D6: ROBDD::add_interval(ElementSubset*, bool) (ROBDD.cpp:408)
-==5087==    by 0x44676B: UCSROBDDToolBox::update_upper_restriction(ROBDD*, ElementSubset*) (UCSROBDDToolBox.cpp:69)
-==5087==    by 0x446F64: UCSROBDDToolBox::DFS(UCSROBDDToolBox::MyNode*, Collection*, ROBDD*, CostFunction*, unsigned int*) (UCSROBDDToolBox.cpp:205)
-==5087==    by 0x445FAE: UCSROBDD::get_minima_list(unsigned int) (UCSROBDD.cpp:105)
-==5087==    by 0x42D22A: UCSROBDDTest::a_lattice_with_constant_cost_should_be_totally_exausted() (UCSROBDDTest.cpp:19)
-==5087==    by 0x403152: main (in /home/bcc/gustavoem/2015BCC/ucs-robdd/featselTest)
-==5087==  Address 0x5a28e40 is 0 bytes inside a block of size 1 alloc'd
-==5087==    at 0x4C28C20: malloc (vg_replace_malloc.c:296)
-==5087==    by 0x442015: ROBDD::get_all_vertex(Vertex*, unsigned int) (ROBDD.cpp:131)
-==5087==    by 0x441F43: ROBDD::delete_subtree(Vertex**, unsigned int*) (ROBDD.cpp:117)
-==5087==    by 0x442D5F: ROBDD::union_to(Vertex*) (ROBDD.cpp:327)
-==5087==    by 0x4433D6: ROBDD::add_interval(ElementSubset*, bool) (ROBDD.cpp:408)
-==5087==    by 0x44676B: UCSROBDDToolBox::update_upper_restriction(ROBDD*, ElementSubset*) (UCSROBDDToolBox.cpp:69)
-==5087==    by 0x446F64: UCSROBDDToolBox::DFS(UCSROBDDToolBox::MyNode*, Collection*, ROBDD*, CostFunction*, unsigned int*) (UCSROBDDToolBox.cpp:205)
-==5087==    by 0x445FAE: UCSROBDD::get_minima_list(unsigned int) (UCSROBDD.cpp:105)
-==5087==    by 0x42D22A: UCSROBDDTest::a_lattice_with_constant_cost_should_be_totally_exausted() (UCSROBDDTest.cpp:19)
-==5087==    by 0x403152: main (in /home/bcc/gustavoem/2015BCC/ucs-robdd/featselTest)
-==5087== 
-==5087== Invalid read of size 8
-==5087==    at 0x4EAA680: std::_Rb_tree_increment(std::_Rb_tree_node_base*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.20)
-==5087==    by 0x447E92: std::_Rb_tree_iterator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >::operator++(int) (stl_tree.h:211)
-==5087==    by 0x446FAC: UCSROBDDToolBox::DFS(UCSROBDDToolBox::MyNode*, Collection*, ROBDD*, CostFunction*, unsigned int*) (UCSROBDDToolBox.cpp:200)
-==5087==    by 0x445FAE: UCSROBDD::get_minima_list(unsigned int) (UCSROBDD.cpp:105)
-==5087==    by 0x42D22A: UCSROBDDTest::a_lattice_with_constant_cost_should_be_totally_exausted() (UCSROBDDTest.cpp:19)
-==5087==    by 0x403152: main (in /home/bcc/gustavoem/2015BCC/ucs-robdd/featselTest)
-==5087==  Address 0x5a161f8 is 24 bytes inside a block of size 48 free'd
-==5087==    at 0x4C2A360: operator delete(void*) (vg_replace_malloc.c:507)
-==5087==    by 0x42EED7: __gnu_cxx::new_allocator<std::_Rb_tree_node<std::pair<std::string const, UCSROBDDToolBox::MyNode*> > >::deallocate(std::_Rb_tree_node<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >*, unsigned long) (new_allocator.h:110)
-==5087==    by 0x42EDA0: __gnu_cxx::__alloc_traits<std::allocator<std::_Rb_tree_node<std::pair<std::string const, UCSROBDDToolBox::MyNode*> > > >::deallocate(std::allocator<std::_Rb_tree_node<std::pair<std::string const, UCSROBDDToolBox::MyNode*> > >&, std::_Rb_tree_node<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >*, unsigned long) (alloc_traits.h:185)
-==5087==    by 0x42EB8C: std::_Rb_tree<std::string, std::pair<std::string const, UCSROBDDToolBox::MyNode*>, std::_Select1st<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >, std::less<std::string>, std::allocator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> > >::_M_put_node(std::_Rb_tree_node<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >*) (stl_tree.h:389)
-==5087==    by 0x42E73C: std::_Rb_tree<std::string, std::pair<std::string const, UCSROBDDToolBox::MyNode*>, std::_Select1st<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >, std::less<std::string>, std::allocator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> > >::_M_destroy_node(std::_Rb_tree_node<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >*) (stl_tree.h:410)
-==5087==    by 0x44883B: std::_Rb_tree<std::string, std::pair<std::string const, UCSROBDDToolBox::MyNode*>, std::_Select1st<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >, std::less<std::string>, std::allocator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> > >::_M_erase_aux(std::_Rb_tree_const_iterator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >) (stl_tree.h:1867)
-==5087==    by 0x44832D: std::_Rb_tree<std::string, std::pair<std::string const, UCSROBDDToolBox::MyNode*>, std::_Select1st<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >, std::less<std::string>, std::allocator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> > >::erase(std::_Rb_tree_iterator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >) (stl_tree.h:874)
-==5087==    by 0x447EE4: std::map<std::string, UCSROBDDToolBox::MyNode*, std::less<std::string>, std::allocator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> > >::erase(std::_Rb_tree_iterator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >) (stl_map.h:746)
-==5087==    by 0x446F98: UCSROBDDToolBox::DFS(UCSROBDDToolBox::MyNode*, Collection*, ROBDD*, CostFunction*, unsigned int*) (UCSROBDDToolBox.cpp:209)
-==5087==    by 0x445FAE: UCSROBDD::get_minima_list(unsigned int) (UCSROBDD.cpp:105)
-==5087==    by 0x42D22A: UCSROBDDTest::a_lattice_with_constant_cost_should_be_totally_exausted() (UCSROBDDTest.cpp:19)
-==5087==    by 0x403152: main (in /home/bcc/gustavoem/2015BCC/ucs-robdd/featselTest)
-==5087== 
-==5087== Invalid read of size 8
-==5087==    at 0x4EAA6A0: std::_Rb_tree_increment(std::_Rb_tree_node_base*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.20)
-==5087==    by 0x447E92: std::_Rb_tree_iterator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >::operator++(int) (stl_tree.h:211)
-==5087==    by 0x446FAC: UCSROBDDToolBox::DFS(UCSROBDDToolBox::MyNode*, Collection*, ROBDD*, CostFunction*, unsigned int*) (UCSROBDDToolBox.cpp:200)
-==5087==    by 0x445FAE: UCSROBDD::get_minima_list(unsigned int) (UCSROBDD.cpp:105)
-==5087==    by 0x42D22A: UCSROBDDTest::a_lattice_with_constant_cost_should_be_totally_exausted() (UCSROBDDTest.cpp:19)
-==5087==    by 0x403152: main (in /home/bcc/gustavoem/2015BCC/ucs-robdd/featselTest)
-==5087==  Address 0x5a1a9c8 is 8 bytes inside a block of size 48 free'd
-==5087==    at 0x4C2A360: operator delete(void*) (vg_replace_malloc.c:507)
-==5087==    by 0x42EED7: __gnu_cxx::new_allocator<std::_Rb_tree_node<std::pair<std::string const, UCSROBDDToolBox::MyNode*> > >::deallocate(std::_Rb_tree_node<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >*, unsigned long) (new_allocator.h:110)
-==5087==    by 0x42EDA0: __gnu_cxx::__alloc_traits<std::allocator<std::_Rb_tree_node<std::pair<std::string const, UCSROBDDToolBox::MyNode*> > > >::deallocate(std::allocator<std::_Rb_tree_node<std::pair<std::string const, UCSROBDDToolBox::MyNode*> > >&, std::_Rb_tree_node<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >*, unsigned long) (alloc_traits.h:185)
-==5087==    by 0x42EB8C: std::_Rb_tree<std::string, std::pair<std::string const, UCSROBDDToolBox::MyNode*>, std::_Select1st<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >, std::less<std::string>, std::allocator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> > >::_M_put_node(std::_Rb_tree_node<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >*) (stl_tree.h:389)
-==5087==    by 0x42E73C: std::_Rb_tree<std::string, std::pair<std::string const, UCSROBDDToolBox::MyNode*>, std::_Select1st<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >, std::less<std::string>, std::allocator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> > >::_M_destroy_node(std::_Rb_tree_node<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >*) (stl_tree.h:410)
-==5087==    by 0x44883B: std::_Rb_tree<std::string, std::pair<std::string const, UCSROBDDToolBox::MyNode*>, std::_Select1st<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >, std::less<std::string>, std::allocator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> > >::_M_erase_aux(std::_Rb_tree_const_iterator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >) (stl_tree.h:1867)
-==5087==    by 0x44832D: std::_Rb_tree<std::string, std::pair<std::string const, UCSROBDDToolBox::MyNode*>, std::_Select1st<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >, std::less<std::string>, std::allocator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> > >::erase(std::_Rb_tree_iterator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >) (stl_tree.h:874)
-==5087==    by 0x447EE4: std::map<std::string, UCSROBDDToolBox::MyNode*, std::less<std::string>, std::allocator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> > >::erase(std::_Rb_tree_iterator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >) (stl_map.h:746)
-==5087==    by 0x446F98: UCSROBDDToolBox::DFS(UCSROBDDToolBox::MyNode*, Collection*, ROBDD*, CostFunction*, unsigned int*) (UCSROBDDToolBox.cpp:209)
-==5087==    by 0x445FAE: UCSROBDD::get_minima_list(unsigned int) (UCSROBDD.cpp:105)
-==5087==    by 0x42D22A: UCSROBDDTest::a_lattice_with_constant_cost_should_be_totally_exausted() (UCSROBDDTest.cpp:19)
-==5087==    by 0x403152: main (in /home/bcc/gustavoem/2015BCC/ucs-robdd/featselTest)
-==5087== 
-==5087== 
-==5087== HEAP SUMMARY:
-==5087==     in use at exit: 192 bytes in 4 blocks
-==5087==   total heap usage: 1,882 allocs, 1,879 frees, 63,100 bytes allocated
-==5087== 
-==5087== LEAK SUMMARY:
-==5087==    definitely lost: 192 bytes in 4 blocks
-==5087==    indirectly lost: 0 bytes in 0 blocks
-==5087==      possibly lost: 0 bytes in 0 blocks
-==5087==    still reachable: 0 bytes in 0 blocks
-==5087==         suppressed: 0 bytes in 0 blocks
-==5087== Rerun with --leak-check=full to see details of leaked memory
-==5087== 
-==5087== For counts of detected and suppressed errors, rerun with: -v
-==5087== Use --track-origins=yes to see where uninitialised values come from
-==5087== ERROR SUMMARY: 28 errors from 18 contexts (suppressed: 0 from 0)
+==12644== Memcheck, a memory error detector
+==12644== Copyright (C) 2002-2013, and GNU GPL'd, by Julian Seward et al.
+==12644== Using Valgrind-3.10.0.SVN and LibVEX; rerun with -h for copyright info
+==12644== Command: ./featselTest
+==12644== Parent PID: 32068
+==12644== 
+--12644-- 
+--12644-- Valgrind options:
+--12644--    -v
+--12644--    --log-file=log.txt
+--12644-- Contents of /proc/version:
+--12644--   Linux version 3.13.0-45-generic (buildd@phianna) (gcc version 4.8.2 (Ubuntu 4.8.2-19ubuntu1) ) #74-Ubuntu SMP Tue Jan 13 19:36:28 UTC 2015
+--12644-- Arch and hwcaps: AMD64, amd64-cx16-rdtscp-sse3-avx
+--12644-- Page sizes: currently 4096, max supported 4096
+--12644-- Valgrind library directory: /usr/lib/valgrind
+--12644-- Reading syms from /home/gustavoem/cs/ucs-robdd/featselTest
+--12644-- Reading syms from /lib/x86_64-linux-gnu/ld-2.19.so
+--12644--   Considering /lib/x86_64-linux-gnu/ld-2.19.so ..
+--12644--   .. CRC mismatch (computed 4cbae35e wanted 8d683c31)
+--12644--   Considering /usr/lib/debug/lib/x86_64-linux-gnu/ld-2.19.so ..
+--12644--   .. CRC is valid
+--12644-- Reading syms from /usr/lib/valgrind/memcheck-amd64-linux
+--12644--   Considering /usr/lib/valgrind/memcheck-amd64-linux ..
+--12644--   .. CRC mismatch (computed 37cdde19 wanted adc367dd)
+--12644--    object doesn't have a symbol table
+--12644--    object doesn't have a dynamic symbol table
+--12644-- Scheduler: using generic scheduler lock implementation.
+--12644-- Reading suppressions file: /usr/lib/valgrind/default.supp
+==12644== embedded gdbserver: reading from /tmp/vgdb-pipe-from-vgdb-to-12644-by-gustavoem-on-???
+==12644== embedded gdbserver: writing to   /tmp/vgdb-pipe-to-vgdb-from-12644-by-gustavoem-on-???
+==12644== embedded gdbserver: shared mem   /tmp/vgdb-pipe-shared-mem-vgdb-12644-by-gustavoem-on-???
+==12644== 
+==12644== TO CONTROL THIS PROCESS USING vgdb (which you probably
+==12644== don't want to do, unless you know exactly what you're doing,
+==12644== or are doing some strange experiment):
+==12644==   /usr/lib/valgrind/../../bin/vgdb --pid=12644 ...command...
+==12644== 
+==12644== TO DEBUG THIS PROCESS USING GDB: start GDB like this
+==12644==   /path/to/gdb ./featselTest
+==12644== and then give GDB the following command
+==12644==   target remote | /usr/lib/valgrind/../../bin/vgdb --pid=12644
+==12644== --pid is optional if only one valgrind process is running
+==12644== 
+--12644-- REDIR: 0x4019ca0 (strlen) redirected to 0x38068331 (???)
+--12644-- Reading syms from /usr/lib/valgrind/vgpreload_core-amd64-linux.so
+--12644--   Considering /usr/lib/valgrind/vgpreload_core-amd64-linux.so ..
+--12644--   .. CRC mismatch (computed 329d6860 wanted c0186920)
+--12644--    object doesn't have a symbol table
+--12644-- Reading syms from /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so
+--12644--   Considering /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so ..
+--12644--   .. CRC mismatch (computed 1fb85af8 wanted 2e9e3c16)
+--12644--    object doesn't have a symbol table
+==12644== WARNING: new redirection conflicts with existing -- ignoring it
+--12644--     old: 0x04019ca0 (strlen              ) R-> (0000.0) 0x38068331 ???
+--12644--     new: 0x04019ca0 (strlen              ) R-> (2007.0) 0x04c2e1a0 strlen
+--12644-- REDIR: 0x4019a50 (index) redirected to 0x4c2dd50 (index)
+--12644-- REDIR: 0x4019c70 (strcmp) redirected to 0x4c2f2f0 (strcmp)
+--12644-- REDIR: 0x401a9c0 (mempcpy) redirected to 0x4c31da0 (mempcpy)
+--12644-- Reading syms from /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.19
+--12644--   Considering /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.19 ..
+--12644--   .. CRC mismatch (computed a220b90a wanted 886349ba)
+--12644--    object doesn't have a symbol table
+--12644-- Reading syms from /lib/x86_64-linux-gnu/libm-2.19.so
+--12644--   Considering /lib/x86_64-linux-gnu/libm-2.19.so ..
+--12644--   .. CRC mismatch (computed a46ef660 wanted 767bfa33)
+--12644--   Considering /usr/lib/debug/lib/x86_64-linux-gnu/libm-2.19.so ..
+--12644--   .. CRC is valid
+--12644-- Reading syms from /lib/x86_64-linux-gnu/libgcc_s.so.1
+--12644--   Considering /lib/x86_64-linux-gnu/libgcc_s.so.1 ..
+--12644--   .. CRC mismatch (computed ea519b66 wanted 0c00ddb3)
+--12644--    object doesn't have a symbol table
+--12644-- Reading syms from /lib/x86_64-linux-gnu/libc-2.19.so
+--12644--   Considering /lib/x86_64-linux-gnu/libc-2.19.so ..
+--12644--   .. CRC mismatch (computed 8238e74c wanted 8df065ae)
+--12644--   Considering /usr/lib/debug/lib/x86_64-linux-gnu/libc-2.19.so ..
+--12644--   .. CRC is valid
+--12644-- REDIR: 0x56e48f0 (strcasecmp) redirected to 0x4a25720 (_vgnU_ifunc_wrapper)
+--12644-- REDIR: 0x56e6be0 (strncasecmp) redirected to 0x4a25720 (_vgnU_ifunc_wrapper)
+--12644-- REDIR: 0x56e40c0 (memcpy@GLIBC_2.2.5) redirected to 0x4a25720 (_vgnU_ifunc_wrapper)
+--12644-- REDIR: 0x56e2350 (rindex) redirected to 0x4c2da30 (rindex)
+--12644-- REDIR: 0x56e0650 (strlen) redirected to 0x4c2e0e0 (strlen)
+--12644-- REDIR: 0x56e3b30 (__GI_memcmp) redirected to 0x4c30b80 (__GI_memcmp)
+--12644-- REDIR: 0x56dec00 (strcmp) redirected to 0x4a25720 (_vgnU_ifunc_wrapper)
+--12644-- REDIR: 0x5797d90 (__strcmp_ssse3) redirected to 0x4c2f1b0 (strcmp)
+--12644-- REDIR: 0x56dadb0 (calloc) redirected to 0x4c2cbf0 (calloc)
+--12644-- REDIR: 0x56e92c0 (memcpy@@GLIBC_2.14) redirected to 0x4a25720 (_vgnU_ifunc_wrapper)
+--12644-- REDIR: 0x56efb60 (__memcpy_sse2_unaligned) redirected to 0x4c2f6b0 (memcpy@@GLIBC_2.14)
+--12644-- REDIR: 0x56e3af0 (bcmp) redirected to 0x4a25720 (_vgnU_ifunc_wrapper)
+--12644-- REDIR: 0x57b7bf0 (__memcmp_sse4_1) redirected to 0x4c30c00 (__memcmp_sse4_1)
+--12644-- REDIR: 0x4e95f10 (operator new(unsigned long)) redirected to 0x4c2b070 (operator new(unsigned long))
+--12644-- REDIR: 0x4e96050 (operator new[](unsigned long, std::nothrow_t const&)) redirected to 0x4c2ba60 (operator new[](unsigned long, std::nothrow_t const&))
+--12644-- REDIR: 0x4e94290 (operator delete[](void*)) redirected to 0x4c2c7d0 (operator delete[](void*))
+--12644-- REDIR: 0x4e94260 (operator delete(void*)) redirected to 0x4c2c250 (operator delete(void*))
+--12644-- REDIR: 0x4e96020 (operator new[](unsigned long)) redirected to 0x4c2b790 (operator new[](unsigned long))
+--12644-- REDIR: 0xffffffffff600400 (???) redirected to 0x3806831d (???)
+--12644-- REDIR: 0x56da2e0 (malloc) redirected to 0x4c2ab10 (malloc)
+--12644-- REDIR: 0x56da980 (free) redirected to 0x4c2bd80 (free)
+--12644-- REDIR: 0xffffffffff600000 (???) redirected to 0x38068313 (???)
+==12644== Invalid read of size 8
+==12644==    at 0x4EABCA0: std::_Rb_tree_increment(std::_Rb_tree_node_base*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.19)
+==12644==    by 0x44926C: std::_Rb_tree_iterator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >::operator++(int) (stl_tree.h:197)
+==12644==    by 0x448A50: UCSROBDDToolBox::prune_upper_elements(std::map<std::string, UCSROBDDToolBox::MyNode*, std::less<std::string>, std::allocator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> > >*, std::list<UCSROBDDToolBox::MyNode*, std::allocator<UCSROBDDToolBox::MyNode*> >*, UCSROBDDToolBox::MyNode*) (UCSROBDDToolBox.cpp:284)
+==12644==    by 0x4481B3: UCSROBDDToolBox::DFS(UCSROBDDToolBox::MyNode*, Collection*, ROBDD*, CostFunction*, unsigned int*) (UCSROBDDToolBox.cpp:184)
+==12644==    by 0x44739A: UCSROBDD::get_minima_list(unsigned int) (UCSROBDD.cpp:105)
+==12644==    by 0x42E8AB: UCSROBDDTest::a_lattice_with_constant_cost_should_be_totally_exausted() (UCSROBDDTest.cpp:19)
+==12644==    by 0x403209: main (in /home/gustavoem/cs/ucs-robdd/featselTest)
+==12644==  Address 0x5a2f198 is 24 bytes inside a block of size 48 free'd
+==12644==    at 0x4C2C2BC: operator delete(void*) (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==12644==    by 0x430609: __gnu_cxx::new_allocator<std::_Rb_tree_node<std::pair<std::string const, UCSROBDDToolBox::MyNode*> > >::deallocate(std::_Rb_tree_node<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >*, unsigned long) (new_allocator.h:110)
+==12644==    by 0x430411: std::_Rb_tree<std::string, std::pair<std::string const, UCSROBDDToolBox::MyNode*>, std::_Select1st<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >, std::less<std::string>, std::allocator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> > >::_M_put_node(std::_Rb_tree_node<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >*) (stl_tree.h:374)
+==12644==    by 0x43000A: std::_Rb_tree<std::string, std::pair<std::string const, UCSROBDDToolBox::MyNode*>, std::_Select1st<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >, std::less<std::string>, std::allocator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> > >::_M_destroy_node(std::_Rb_tree_node<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >*) (stl_tree.h:396)
+==12644==    by 0x449BE9: std::_Rb_tree<std::string, std::pair<std::string const, UCSROBDDToolBox::MyNode*>, std::_Select1st<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >, std::less<std::string>, std::allocator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> > >::_M_erase_aux(std::_Rb_tree_const_iterator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >) (stl_tree.h:1746)
+==12644==    by 0x449703: std::_Rb_tree<std::string, std::pair<std::string const, UCSROBDDToolBox::MyNode*>, std::_Select1st<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >, std::less<std::string>, std::allocator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> > >::erase(std::_Rb_tree_iterator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >) (stl_tree.h:826)
+==12644==    by 0x4492BE: std::map<std::string, UCSROBDDToolBox::MyNode*, std::less<std::string>, std::allocator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> > >::erase(std::_Rb_tree_iterator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >) (stl_map.h:711)
+==12644==    by 0x448A3F: UCSROBDDToolBox::prune_upper_elements(std::map<std::string, UCSROBDDToolBox::MyNode*, std::less<std::string>, std::allocator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> > >*, std::list<UCSROBDDToolBox::MyNode*, std::allocator<UCSROBDDToolBox::MyNode*> >*, UCSROBDDToolBox::MyNode*) (UCSROBDDToolBox.cpp:293)
+==12644==    by 0x4481B3: UCSROBDDToolBox::DFS(UCSROBDDToolBox::MyNode*, Collection*, ROBDD*, CostFunction*, unsigned int*) (UCSROBDDToolBox.cpp:184)
+==12644==    by 0x44739A: UCSROBDD::get_minima_list(unsigned int) (UCSROBDD.cpp:105)
+==12644==    by 0x42E8AB: UCSROBDDTest::a_lattice_with_constant_cost_should_be_totally_exausted() (UCSROBDDTest.cpp:19)
+==12644==    by 0x403209: main (in /home/gustavoem/cs/ucs-robdd/featselTest)
+==12644== 
+==12644== Invalid read of size 8
+==12644==    at 0x4EABCBE: std::_Rb_tree_increment(std::_Rb_tree_node_base*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.19)
+==12644==    by 0x44926C: std::_Rb_tree_iterator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >::operator++(int) (stl_tree.h:197)
+==12644==    by 0x448A50: UCSROBDDToolBox::prune_upper_elements(std::map<std::string, UCSROBDDToolBox::MyNode*, std::less<std::string>, std::allocator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> > >*, std::list<UCSROBDDToolBox::MyNode*, std::allocator<UCSROBDDToolBox::MyNode*> >*, UCSROBDDToolBox::MyNode*) (UCSROBDDToolBox.cpp:284)
+==12644==    by 0x4481B3: UCSROBDDToolBox::DFS(UCSROBDDToolBox::MyNode*, Collection*, ROBDD*, CostFunction*, unsigned int*) (UCSROBDDToolBox.cpp:184)
+==12644==    by 0x44739A: UCSROBDD::get_minima_list(unsigned int) (UCSROBDD.cpp:105)
+==12644==    by 0x42E8AB: UCSROBDDTest::a_lattice_with_constant_cost_should_be_totally_exausted() (UCSROBDDTest.cpp:19)
+==12644==    by 0x403209: main (in /home/gustavoem/cs/ucs-robdd/featselTest)
+==12644==  Address 0x5a2f188 is 8 bytes inside a block of size 48 free'd
+==12644==    at 0x4C2C2BC: operator delete(void*) (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==12644==    by 0x430609: __gnu_cxx::new_allocator<std::_Rb_tree_node<std::pair<std::string const, UCSROBDDToolBox::MyNode*> > >::deallocate(std::_Rb_tree_node<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >*, unsigned long) (new_allocator.h:110)
+==12644==    by 0x430411: std::_Rb_tree<std::string, std::pair<std::string const, UCSROBDDToolBox::MyNode*>, std::_Select1st<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >, std::less<std::string>, std::allocator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> > >::_M_put_node(std::_Rb_tree_node<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >*) (stl_tree.h:374)
+==12644==    by 0x43000A: std::_Rb_tree<std::string, std::pair<std::string const, UCSROBDDToolBox::MyNode*>, std::_Select1st<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >, std::less<std::string>, std::allocator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> > >::_M_destroy_node(std::_Rb_tree_node<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >*) (stl_tree.h:396)
+==12644==    by 0x449BE9: std::_Rb_tree<std::string, std::pair<std::string const, UCSROBDDToolBox::MyNode*>, std::_Select1st<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >, std::less<std::string>, std::allocator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> > >::_M_erase_aux(std::_Rb_tree_const_iterator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >) (stl_tree.h:1746)
+==12644==    by 0x449703: std::_Rb_tree<std::string, std::pair<std::string const, UCSROBDDToolBox::MyNode*>, std::_Select1st<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >, std::less<std::string>, std::allocator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> > >::erase(std::_Rb_tree_iterator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >) (stl_tree.h:826)
+==12644==    by 0x4492BE: std::map<std::string, UCSROBDDToolBox::MyNode*, std::less<std::string>, std::allocator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> > >::erase(std::_Rb_tree_iterator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >) (stl_map.h:711)
+==12644==    by 0x448A3F: UCSROBDDToolBox::prune_upper_elements(std::map<std::string, UCSROBDDToolBox::MyNode*, std::less<std::string>, std::allocator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> > >*, std::list<UCSROBDDToolBox::MyNode*, std::allocator<UCSROBDDToolBox::MyNode*> >*, UCSROBDDToolBox::MyNode*) (UCSROBDDToolBox.cpp:293)
+==12644==    by 0x4481B3: UCSROBDDToolBox::DFS(UCSROBDDToolBox::MyNode*, Collection*, ROBDD*, CostFunction*, unsigned int*) (UCSROBDDToolBox.cpp:184)
+==12644==    by 0x44739A: UCSROBDD::get_minima_list(unsigned int) (UCSROBDD.cpp:105)
+==12644==    by 0x42E8AB: UCSROBDDTest::a_lattice_with_constant_cost_should_be_totally_exausted() (UCSROBDDTest.cpp:19)
+==12644==    by 0x403209: main (in /home/gustavoem/cs/ucs-robdd/featselTest)
+==12644== 
+==12644== Invalid read of size 8
+==12644==    at 0x4EABCA0: std::_Rb_tree_increment(std::_Rb_tree_node_base*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.19)
+==12644==    by 0x44926C: std::_Rb_tree_iterator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >::operator++(int) (stl_tree.h:197)
+==12644==    by 0x44892E: UCSROBDDToolBox::prune_lower_elements(std::map<std::string, UCSROBDDToolBox::MyNode*, std::less<std::string>, std::allocator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> > >*, std::list<UCSROBDDToolBox::MyNode*, std::allocator<UCSROBDDToolBox::MyNode*> >*, UCSROBDDToolBox::MyNode*) (UCSROBDDToolBox.cpp:266)
+==12644==    by 0x448130: UCSROBDDToolBox::DFS(UCSROBDDToolBox::MyNode*, Collection*, ROBDD*, CostFunction*, unsigned int*) (UCSROBDDToolBox.cpp:176)
+==12644==    by 0x44739A: UCSROBDD::get_minima_list(unsigned int) (UCSROBDD.cpp:105)
+==12644==    by 0x42E8AB: UCSROBDDTest::a_lattice_with_constant_cost_should_be_totally_exausted() (UCSROBDDTest.cpp:19)
+==12644==    by 0x403209: main (in /home/gustavoem/cs/ucs-robdd/featselTest)
+==12644==  Address 0x5a38398 is 24 bytes inside a block of size 48 free'd
+==12644==    at 0x4C2C2BC: operator delete(void*) (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==12644==    by 0x430609: __gnu_cxx::new_allocator<std::_Rb_tree_node<std::pair<std::string const, UCSROBDDToolBox::MyNode*> > >::deallocate(std::_Rb_tree_node<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >*, unsigned long) (new_allocator.h:110)
+==12644==    by 0x430411: std::_Rb_tree<std::string, std::pair<std::string const, UCSROBDDToolBox::MyNode*>, std::_Select1st<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >, std::less<std::string>, std::allocator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> > >::_M_put_node(std::_Rb_tree_node<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >*) (stl_tree.h:374)
+==12644==    by 0x43000A: std::_Rb_tree<std::string, std::pair<std::string const, UCSROBDDToolBox::MyNode*>, std::_Select1st<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >, std::less<std::string>, std::allocator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> > >::_M_destroy_node(std::_Rb_tree_node<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >*) (stl_tree.h:396)
+==12644==    by 0x449BE9: std::_Rb_tree<std::string, std::pair<std::string const, UCSROBDDToolBox::MyNode*>, std::_Select1st<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >, std::less<std::string>, std::allocator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> > >::_M_erase_aux(std::_Rb_tree_const_iterator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >) (stl_tree.h:1746)
+==12644==    by 0x449703: std::_Rb_tree<std::string, std::pair<std::string const, UCSROBDDToolBox::MyNode*>, std::_Select1st<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >, std::less<std::string>, std::allocator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> > >::erase(std::_Rb_tree_iterator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >) (stl_tree.h:826)
+==12644==    by 0x4492BE: std::map<std::string, UCSROBDDToolBox::MyNode*, std::less<std::string>, std::allocator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> > >::erase(std::_Rb_tree_iterator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >) (stl_map.h:711)
+==12644==    by 0x44891D: UCSROBDDToolBox::prune_lower_elements(std::map<std::string, UCSROBDDToolBox::MyNode*, std::less<std::string>, std::allocator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> > >*, std::list<UCSROBDDToolBox::MyNode*, std::allocator<UCSROBDDToolBox::MyNode*> >*, UCSROBDDToolBox::MyNode*) (UCSROBDDToolBox.cpp:275)
+==12644==    by 0x448130: UCSROBDDToolBox::DFS(UCSROBDDToolBox::MyNode*, Collection*, ROBDD*, CostFunction*, unsigned int*) (UCSROBDDToolBox.cpp:176)
+==12644==    by 0x44739A: UCSROBDD::get_minima_list(unsigned int) (UCSROBDD.cpp:105)
+==12644==    by 0x42E8AB: UCSROBDDTest::a_lattice_with_constant_cost_should_be_totally_exausted() (UCSROBDDTest.cpp:19)
+==12644==    by 0x403209: main (in /home/gustavoem/cs/ucs-robdd/featselTest)
+==12644== 
+==12644== Invalid read of size 8
+==12644==    at 0x4EABCBE: std::_Rb_tree_increment(std::_Rb_tree_node_base*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.19)
+==12644==    by 0x44926C: std::_Rb_tree_iterator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >::operator++(int) (stl_tree.h:197)
+==12644==    by 0x44892E: UCSROBDDToolBox::prune_lower_elements(std::map<std::string, UCSROBDDToolBox::MyNode*, std::less<std::string>, std::allocator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> > >*, std::list<UCSROBDDToolBox::MyNode*, std::allocator<UCSROBDDToolBox::MyNode*> >*, UCSROBDDToolBox::MyNode*) (UCSROBDDToolBox.cpp:266)
+==12644==    by 0x448130: UCSROBDDToolBox::DFS(UCSROBDDToolBox::MyNode*, Collection*, ROBDD*, CostFunction*, unsigned int*) (UCSROBDDToolBox.cpp:176)
+==12644==    by 0x44739A: UCSROBDD::get_minima_list(unsigned int) (UCSROBDD.cpp:105)
+==12644==    by 0x42E8AB: UCSROBDDTest::a_lattice_with_constant_cost_should_be_totally_exausted() (UCSROBDDTest.cpp:19)
+==12644==    by 0x403209: main (in /home/gustavoem/cs/ucs-robdd/featselTest)
+==12644==  Address 0x5a38388 is 8 bytes inside a block of size 48 free'd
+==12644==    at 0x4C2C2BC: operator delete(void*) (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==12644==    by 0x430609: __gnu_cxx::new_allocator<std::_Rb_tree_node<std::pair<std::string const, UCSROBDDToolBox::MyNode*> > >::deallocate(std::_Rb_tree_node<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >*, unsigned long) (new_allocator.h:110)
+==12644==    by 0x430411: std::_Rb_tree<std::string, std::pair<std::string const, UCSROBDDToolBox::MyNode*>, std::_Select1st<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >, std::less<std::string>, std::allocator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> > >::_M_put_node(std::_Rb_tree_node<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >*) (stl_tree.h:374)
+==12644==    by 0x43000A: std::_Rb_tree<std::string, std::pair<std::string const, UCSROBDDToolBox::MyNode*>, std::_Select1st<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >, std::less<std::string>, std::allocator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> > >::_M_destroy_node(std::_Rb_tree_node<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >*) (stl_tree.h:396)
+==12644==    by 0x449BE9: std::_Rb_tree<std::string, std::pair<std::string const, UCSROBDDToolBox::MyNode*>, std::_Select1st<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >, std::less<std::string>, std::allocator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> > >::_M_erase_aux(std::_Rb_tree_const_iterator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >) (stl_tree.h:1746)
+==12644==    by 0x449703: std::_Rb_tree<std::string, std::pair<std::string const, UCSROBDDToolBox::MyNode*>, std::_Select1st<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >, std::less<std::string>, std::allocator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> > >::erase(std::_Rb_tree_iterator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >) (stl_tree.h:826)
+==12644==    by 0x4492BE: std::map<std::string, UCSROBDDToolBox::MyNode*, std::less<std::string>, std::allocator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> > >::erase(std::_Rb_tree_iterator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >) (stl_map.h:711)
+==12644==    by 0x44891D: UCSROBDDToolBox::prune_lower_elements(std::map<std::string, UCSROBDDToolBox::MyNode*, std::less<std::string>, std::allocator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> > >*, std::list<UCSROBDDToolBox::MyNode*, std::allocator<UCSROBDDToolBox::MyNode*> >*, UCSROBDDToolBox::MyNode*) (UCSROBDDToolBox.cpp:275)
+==12644==    by 0x448130: UCSROBDDToolBox::DFS(UCSROBDDToolBox::MyNode*, Collection*, ROBDD*, CostFunction*, unsigned int*) (UCSROBDDToolBox.cpp:176)
+==12644==    by 0x44739A: UCSROBDD::get_minima_list(unsigned int) (UCSROBDD.cpp:105)
+==12644==    by 0x42E8AB: UCSROBDDTest::a_lattice_with_constant_cost_should_be_totally_exausted() (UCSROBDDTest.cpp:19)
+==12644==    by 0x403209: main (in /home/gustavoem/cs/ucs-robdd/featselTest)
+==12644== 
+==12644== Invalid read of size 8
+==12644==    at 0x4EABCA0: std::_Rb_tree_increment(std::_Rb_tree_node_base*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.19)
+==12644==    by 0x44926C: std::_Rb_tree_iterator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >::operator++(int) (stl_tree.h:197)
+==12644==    by 0x44836C: UCSROBDDToolBox::DFS(UCSROBDDToolBox::MyNode*, Collection*, ROBDD*, CostFunction*, unsigned int*) (UCSROBDDToolBox.cpp:200)
+==12644==    by 0x44739A: UCSROBDD::get_minima_list(unsigned int) (UCSROBDD.cpp:105)
+==12644==    by 0x42E8AB: UCSROBDDTest::a_lattice_with_constant_cost_should_be_totally_exausted() (UCSROBDDTest.cpp:19)
+==12644==    by 0x403209: main (in /home/gustavoem/cs/ucs-robdd/featselTest)
+==12644==  Address 0x5a362d8 is 24 bytes inside a block of size 48 free'd
+==12644==    at 0x4C2C2BC: operator delete(void*) (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==12644==    by 0x430609: __gnu_cxx::new_allocator<std::_Rb_tree_node<std::pair<std::string const, UCSROBDDToolBox::MyNode*> > >::deallocate(std::_Rb_tree_node<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >*, unsigned long) (new_allocator.h:110)
+==12644==    by 0x430411: std::_Rb_tree<std::string, std::pair<std::string const, UCSROBDDToolBox::MyNode*>, std::_Select1st<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >, std::less<std::string>, std::allocator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> > >::_M_put_node(std::_Rb_tree_node<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >*) (stl_tree.h:374)
+==12644==    by 0x43000A: std::_Rb_tree<std::string, std::pair<std::string const, UCSROBDDToolBox::MyNode*>, std::_Select1st<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >, std::less<std::string>, std::allocator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> > >::_M_destroy_node(std::_Rb_tree_node<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >*) (stl_tree.h:396)
+==12644==    by 0x449BE9: std::_Rb_tree<std::string, std::pair<std::string const, UCSROBDDToolBox::MyNode*>, std::_Select1st<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >, std::less<std::string>, std::allocator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> > >::_M_erase_aux(std::_Rb_tree_const_iterator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >) (stl_tree.h:1746)
+==12644==    by 0x449703: std::_Rb_tree<std::string, std::pair<std::string const, UCSROBDDToolBox::MyNode*>, std::_Select1st<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >, std::less<std::string>, std::allocator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> > >::erase(std::_Rb_tree_iterator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >) (stl_tree.h:826)
+==12644==    by 0x4492BE: std::map<std::string, UCSROBDDToolBox::MyNode*, std::less<std::string>, std::allocator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> > >::erase(std::_Rb_tree_iterator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >) (stl_map.h:711)
+==12644==    by 0x448358: UCSROBDDToolBox::DFS(UCSROBDDToolBox::MyNode*, Collection*, ROBDD*, CostFunction*, unsigned int*) (UCSROBDDToolBox.cpp:209)
+==12644==    by 0x44739A: UCSROBDD::get_minima_list(unsigned int) (UCSROBDD.cpp:105)
+==12644==    by 0x42E8AB: UCSROBDDTest::a_lattice_with_constant_cost_should_be_totally_exausted() (UCSROBDDTest.cpp:19)
+==12644==    by 0x403209: main (in /home/gustavoem/cs/ucs-robdd/featselTest)
+==12644== 
+==12644== Invalid read of size 8
+==12644==    at 0x4EABCBE: std::_Rb_tree_increment(std::_Rb_tree_node_base*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.19)
+==12644==    by 0x44926C: std::_Rb_tree_iterator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >::operator++(int) (stl_tree.h:197)
+==12644==    by 0x44836C: UCSROBDDToolBox::DFS(UCSROBDDToolBox::MyNode*, Collection*, ROBDD*, CostFunction*, unsigned int*) (UCSROBDDToolBox.cpp:200)
+==12644==    by 0x44739A: UCSROBDD::get_minima_list(unsigned int) (UCSROBDD.cpp:105)
+==12644==    by 0x42E8AB: UCSROBDDTest::a_lattice_with_constant_cost_should_be_totally_exausted() (UCSROBDDTest.cpp:19)
+==12644==    by 0x403209: main (in /home/gustavoem/cs/ucs-robdd/featselTest)
+==12644==  Address 0x5a362c8 is 8 bytes inside a block of size 48 free'd
+==12644==    at 0x4C2C2BC: operator delete(void*) (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==12644==    by 0x430609: __gnu_cxx::new_allocator<std::_Rb_tree_node<std::pair<std::string const, UCSROBDDToolBox::MyNode*> > >::deallocate(std::_Rb_tree_node<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >*, unsigned long) (new_allocator.h:110)
+==12644==    by 0x430411: std::_Rb_tree<std::string, std::pair<std::string const, UCSROBDDToolBox::MyNode*>, std::_Select1st<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >, std::less<std::string>, std::allocator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> > >::_M_put_node(std::_Rb_tree_node<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >*) (stl_tree.h:374)
+==12644==    by 0x43000A: std::_Rb_tree<std::string, std::pair<std::string const, UCSROBDDToolBox::MyNode*>, std::_Select1st<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >, std::less<std::string>, std::allocator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> > >::_M_destroy_node(std::_Rb_tree_node<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >*) (stl_tree.h:396)
+==12644==    by 0x449BE9: std::_Rb_tree<std::string, std::pair<std::string const, UCSROBDDToolBox::MyNode*>, std::_Select1st<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >, std::less<std::string>, std::allocator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> > >::_M_erase_aux(std::_Rb_tree_const_iterator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >) (stl_tree.h:1746)
+==12644==    by 0x449703: std::_Rb_tree<std::string, std::pair<std::string const, UCSROBDDToolBox::MyNode*>, std::_Select1st<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >, std::less<std::string>, std::allocator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> > >::erase(std::_Rb_tree_iterator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >) (stl_tree.h:826)
+==12644==    by 0x4492BE: std::map<std::string, UCSROBDDToolBox::MyNode*, std::less<std::string>, std::allocator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> > >::erase(std::_Rb_tree_iterator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >) (stl_map.h:711)
+==12644==    by 0x448358: UCSROBDDToolBox::DFS(UCSROBDDToolBox::MyNode*, Collection*, ROBDD*, CostFunction*, unsigned int*) (UCSROBDDToolBox.cpp:209)
+==12644==    by 0x44739A: UCSROBDD::get_minima_list(unsigned int) (UCSROBDD.cpp:105)
+==12644==    by 0x42E8AB: UCSROBDDTest::a_lattice_with_constant_cost_should_be_totally_exausted() (UCSROBDDTest.cpp:19)
+==12644==    by 0x403209: main (in /home/gustavoem/cs/ucs-robdd/featselTest)
+==12644== 
+==12644== 
+==12644== HEAP SUMMARY:
+==12644==     in use at exit: 0 bytes in 0 blocks
+==12644==   total heap usage: 290,884 allocs, 290,884 frees, 8,450,308 bytes allocated
+==12644== 
+==12644== All heap blocks were freed -- no leaks are possible
+==12644== 
+==12644== ERROR SUMMARY: 1615 errors from 6 contexts (suppressed: 0 from 0)
+==12644== 
+==12644== 6 errors in context 1 of 6:
+==12644== Invalid read of size 8
+==12644==    at 0x4EABCBE: std::_Rb_tree_increment(std::_Rb_tree_node_base*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.19)
+==12644==    by 0x44926C: std::_Rb_tree_iterator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >::operator++(int) (stl_tree.h:197)
+==12644==    by 0x44892E: UCSROBDDToolBox::prune_lower_elements(std::map<std::string, UCSROBDDToolBox::MyNode*, std::less<std::string>, std::allocator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> > >*, std::list<UCSROBDDToolBox::MyNode*, std::allocator<UCSROBDDToolBox::MyNode*> >*, UCSROBDDToolBox::MyNode*) (UCSROBDDToolBox.cpp:266)
+==12644==    by 0x448130: UCSROBDDToolBox::DFS(UCSROBDDToolBox::MyNode*, Collection*, ROBDD*, CostFunction*, unsigned int*) (UCSROBDDToolBox.cpp:176)
+==12644==    by 0x44739A: UCSROBDD::get_minima_list(unsigned int) (UCSROBDD.cpp:105)
+==12644==    by 0x42E8AB: UCSROBDDTest::a_lattice_with_constant_cost_should_be_totally_exausted() (UCSROBDDTest.cpp:19)
+==12644==    by 0x403209: main (in /home/gustavoem/cs/ucs-robdd/featselTest)
+==12644==  Address 0x5a38388 is 8 bytes inside a block of size 48 free'd
+==12644==    at 0x4C2C2BC: operator delete(void*) (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==12644==    by 0x430609: __gnu_cxx::new_allocator<std::_Rb_tree_node<std::pair<std::string const, UCSROBDDToolBox::MyNode*> > >::deallocate(std::_Rb_tree_node<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >*, unsigned long) (new_allocator.h:110)
+==12644==    by 0x430411: std::_Rb_tree<std::string, std::pair<std::string const, UCSROBDDToolBox::MyNode*>, std::_Select1st<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >, std::less<std::string>, std::allocator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> > >::_M_put_node(std::_Rb_tree_node<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >*) (stl_tree.h:374)
+==12644==    by 0x43000A: std::_Rb_tree<std::string, std::pair<std::string const, UCSROBDDToolBox::MyNode*>, std::_Select1st<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >, std::less<std::string>, std::allocator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> > >::_M_destroy_node(std::_Rb_tree_node<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >*) (stl_tree.h:396)
+==12644==    by 0x449BE9: std::_Rb_tree<std::string, std::pair<std::string const, UCSROBDDToolBox::MyNode*>, std::_Select1st<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >, std::less<std::string>, std::allocator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> > >::_M_erase_aux(std::_Rb_tree_const_iterator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >) (stl_tree.h:1746)
+==12644==    by 0x449703: std::_Rb_tree<std::string, std::pair<std::string const, UCSROBDDToolBox::MyNode*>, std::_Select1st<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >, std::less<std::string>, std::allocator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> > >::erase(std::_Rb_tree_iterator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >) (stl_tree.h:826)
+==12644==    by 0x4492BE: std::map<std::string, UCSROBDDToolBox::MyNode*, std::less<std::string>, std::allocator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> > >::erase(std::_Rb_tree_iterator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >) (stl_map.h:711)
+==12644==    by 0x44891D: UCSROBDDToolBox::prune_lower_elements(std::map<std::string, UCSROBDDToolBox::MyNode*, std::less<std::string>, std::allocator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> > >*, std::list<UCSROBDDToolBox::MyNode*, std::allocator<UCSROBDDToolBox::MyNode*> >*, UCSROBDDToolBox::MyNode*) (UCSROBDDToolBox.cpp:275)
+==12644==    by 0x448130: UCSROBDDToolBox::DFS(UCSROBDDToolBox::MyNode*, Collection*, ROBDD*, CostFunction*, unsigned int*) (UCSROBDDToolBox.cpp:176)
+==12644==    by 0x44739A: UCSROBDD::get_minima_list(unsigned int) (UCSROBDD.cpp:105)
+==12644==    by 0x42E8AB: UCSROBDDTest::a_lattice_with_constant_cost_should_be_totally_exausted() (UCSROBDDTest.cpp:19)
+==12644==    by 0x403209: main (in /home/gustavoem/cs/ucs-robdd/featselTest)
+==12644== 
+==12644== 
+==12644== 6 errors in context 2 of 6:
+==12644== Invalid read of size 8
+==12644==    at 0x4EABCBE: std::_Rb_tree_increment(std::_Rb_tree_node_base*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.19)
+==12644==    by 0x44926C: std::_Rb_tree_iterator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >::operator++(int) (stl_tree.h:197)
+==12644==    by 0x448A50: UCSROBDDToolBox::prune_upper_elements(std::map<std::string, UCSROBDDToolBox::MyNode*, std::less<std::string>, std::allocator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> > >*, std::list<UCSROBDDToolBox::MyNode*, std::allocator<UCSROBDDToolBox::MyNode*> >*, UCSROBDDToolBox::MyNode*) (UCSROBDDToolBox.cpp:284)
+==12644==    by 0x4481B3: UCSROBDDToolBox::DFS(UCSROBDDToolBox::MyNode*, Collection*, ROBDD*, CostFunction*, unsigned int*) (UCSROBDDToolBox.cpp:184)
+==12644==    by 0x44739A: UCSROBDD::get_minima_list(unsigned int) (UCSROBDD.cpp:105)
+==12644==    by 0x42E8AB: UCSROBDDTest::a_lattice_with_constant_cost_should_be_totally_exausted() (UCSROBDDTest.cpp:19)
+==12644==    by 0x403209: main (in /home/gustavoem/cs/ucs-robdd/featselTest)
+==12644==  Address 0x5a2f188 is 8 bytes inside a block of size 48 free'd
+==12644==    at 0x4C2C2BC: operator delete(void*) (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==12644==    by 0x430609: __gnu_cxx::new_allocator<std::_Rb_tree_node<std::pair<std::string const, UCSROBDDToolBox::MyNode*> > >::deallocate(std::_Rb_tree_node<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >*, unsigned long) (new_allocator.h:110)
+==12644==    by 0x430411: std::_Rb_tree<std::string, std::pair<std::string const, UCSROBDDToolBox::MyNode*>, std::_Select1st<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >, std::less<std::string>, std::allocator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> > >::_M_put_node(std::_Rb_tree_node<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >*) (stl_tree.h:374)
+==12644==    by 0x43000A: std::_Rb_tree<std::string, std::pair<std::string const, UCSROBDDToolBox::MyNode*>, std::_Select1st<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >, std::less<std::string>, std::allocator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> > >::_M_destroy_node(std::_Rb_tree_node<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >*) (stl_tree.h:396)
+==12644==    by 0x449BE9: std::_Rb_tree<std::string, std::pair<std::string const, UCSROBDDToolBox::MyNode*>, std::_Select1st<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >, std::less<std::string>, std::allocator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> > >::_M_erase_aux(std::_Rb_tree_const_iterator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >) (stl_tree.h:1746)
+==12644==    by 0x449703: std::_Rb_tree<std::string, std::pair<std::string const, UCSROBDDToolBox::MyNode*>, std::_Select1st<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >, std::less<std::string>, std::allocator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> > >::erase(std::_Rb_tree_iterator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >) (stl_tree.h:826)
+==12644==    by 0x4492BE: std::map<std::string, UCSROBDDToolBox::MyNode*, std::less<std::string>, std::allocator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> > >::erase(std::_Rb_tree_iterator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >) (stl_map.h:711)
+==12644==    by 0x448A3F: UCSROBDDToolBox::prune_upper_elements(std::map<std::string, UCSROBDDToolBox::MyNode*, std::less<std::string>, std::allocator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> > >*, std::list<UCSROBDDToolBox::MyNode*, std::allocator<UCSROBDDToolBox::MyNode*> >*, UCSROBDDToolBox::MyNode*) (UCSROBDDToolBox.cpp:293)
+==12644==    by 0x4481B3: UCSROBDDToolBox::DFS(UCSROBDDToolBox::MyNode*, Collection*, ROBDD*, CostFunction*, unsigned int*) (UCSROBDDToolBox.cpp:184)
+==12644==    by 0x44739A: UCSROBDD::get_minima_list(unsigned int) (UCSROBDD.cpp:105)
+==12644==    by 0x42E8AB: UCSROBDDTest::a_lattice_with_constant_cost_should_be_totally_exausted() (UCSROBDDTest.cpp:19)
+==12644==    by 0x403209: main (in /home/gustavoem/cs/ucs-robdd/featselTest)
+==12644== 
+==12644== 
+==12644== 10 errors in context 3 of 6:
+==12644== Invalid read of size 8
+==12644==    at 0x4EABCA0: std::_Rb_tree_increment(std::_Rb_tree_node_base*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.19)
+==12644==    by 0x44926C: std::_Rb_tree_iterator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >::operator++(int) (stl_tree.h:197)
+==12644==    by 0x44892E: UCSROBDDToolBox::prune_lower_elements(std::map<std::string, UCSROBDDToolBox::MyNode*, std::less<std::string>, std::allocator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> > >*, std::list<UCSROBDDToolBox::MyNode*, std::allocator<UCSROBDDToolBox::MyNode*> >*, UCSROBDDToolBox::MyNode*) (UCSROBDDToolBox.cpp:266)
+==12644==    by 0x448130: UCSROBDDToolBox::DFS(UCSROBDDToolBox::MyNode*, Collection*, ROBDD*, CostFunction*, unsigned int*) (UCSROBDDToolBox.cpp:176)
+==12644==    by 0x44739A: UCSROBDD::get_minima_list(unsigned int) (UCSROBDD.cpp:105)
+==12644==    by 0x42E8AB: UCSROBDDTest::a_lattice_with_constant_cost_should_be_totally_exausted() (UCSROBDDTest.cpp:19)
+==12644==    by 0x403209: main (in /home/gustavoem/cs/ucs-robdd/featselTest)
+==12644==  Address 0x5a38398 is 24 bytes inside a block of size 48 free'd
+==12644==    at 0x4C2C2BC: operator delete(void*) (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==12644==    by 0x430609: __gnu_cxx::new_allocator<std::_Rb_tree_node<std::pair<std::string const, UCSROBDDToolBox::MyNode*> > >::deallocate(std::_Rb_tree_node<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >*, unsigned long) (new_allocator.h:110)
+==12644==    by 0x430411: std::_Rb_tree<std::string, std::pair<std::string const, UCSROBDDToolBox::MyNode*>, std::_Select1st<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >, std::less<std::string>, std::allocator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> > >::_M_put_node(std::_Rb_tree_node<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >*) (stl_tree.h:374)
+==12644==    by 0x43000A: std::_Rb_tree<std::string, std::pair<std::string const, UCSROBDDToolBox::MyNode*>, std::_Select1st<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >, std::less<std::string>, std::allocator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> > >::_M_destroy_node(std::_Rb_tree_node<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >*) (stl_tree.h:396)
+==12644==    by 0x449BE9: std::_Rb_tree<std::string, std::pair<std::string const, UCSROBDDToolBox::MyNode*>, std::_Select1st<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >, std::less<std::string>, std::allocator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> > >::_M_erase_aux(std::_Rb_tree_const_iterator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >) (stl_tree.h:1746)
+==12644==    by 0x449703: std::_Rb_tree<std::string, std::pair<std::string const, UCSROBDDToolBox::MyNode*>, std::_Select1st<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >, std::less<std::string>, std::allocator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> > >::erase(std::_Rb_tree_iterator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >) (stl_tree.h:826)
+==12644==    by 0x4492BE: std::map<std::string, UCSROBDDToolBox::MyNode*, std::less<std::string>, std::allocator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> > >::erase(std::_Rb_tree_iterator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >) (stl_map.h:711)
+==12644==    by 0x44891D: UCSROBDDToolBox::prune_lower_elements(std::map<std::string, UCSROBDDToolBox::MyNode*, std::less<std::string>, std::allocator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> > >*, std::list<UCSROBDDToolBox::MyNode*, std::allocator<UCSROBDDToolBox::MyNode*> >*, UCSROBDDToolBox::MyNode*) (UCSROBDDToolBox.cpp:275)
+==12644==    by 0x448130: UCSROBDDToolBox::DFS(UCSROBDDToolBox::MyNode*, Collection*, ROBDD*, CostFunction*, unsigned int*) (UCSROBDDToolBox.cpp:176)
+==12644==    by 0x44739A: UCSROBDD::get_minima_list(unsigned int) (UCSROBDD.cpp:105)
+==12644==    by 0x42E8AB: UCSROBDDTest::a_lattice_with_constant_cost_should_be_totally_exausted() (UCSROBDDTest.cpp:19)
+==12644==    by 0x403209: main (in /home/gustavoem/cs/ucs-robdd/featselTest)
+==12644== 
+==12644== 
+==12644== 14 errors in context 4 of 6:
+==12644== Invalid read of size 8
+==12644==    at 0x4EABCA0: std::_Rb_tree_increment(std::_Rb_tree_node_base*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.19)
+==12644==    by 0x44926C: std::_Rb_tree_iterator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >::operator++(int) (stl_tree.h:197)
+==12644==    by 0x448A50: UCSROBDDToolBox::prune_upper_elements(std::map<std::string, UCSROBDDToolBox::MyNode*, std::less<std::string>, std::allocator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> > >*, std::list<UCSROBDDToolBox::MyNode*, std::allocator<UCSROBDDToolBox::MyNode*> >*, UCSROBDDToolBox::MyNode*) (UCSROBDDToolBox.cpp:284)
+==12644==    by 0x4481B3: UCSROBDDToolBox::DFS(UCSROBDDToolBox::MyNode*, Collection*, ROBDD*, CostFunction*, unsigned int*) (UCSROBDDToolBox.cpp:184)
+==12644==    by 0x44739A: UCSROBDD::get_minima_list(unsigned int) (UCSROBDD.cpp:105)
+==12644==    by 0x42E8AB: UCSROBDDTest::a_lattice_with_constant_cost_should_be_totally_exausted() (UCSROBDDTest.cpp:19)
+==12644==    by 0x403209: main (in /home/gustavoem/cs/ucs-robdd/featselTest)
+==12644==  Address 0x5a2f198 is 24 bytes inside a block of size 48 free'd
+==12644==    at 0x4C2C2BC: operator delete(void*) (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==12644==    by 0x430609: __gnu_cxx::new_allocator<std::_Rb_tree_node<std::pair<std::string const, UCSROBDDToolBox::MyNode*> > >::deallocate(std::_Rb_tree_node<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >*, unsigned long) (new_allocator.h:110)
+==12644==    by 0x430411: std::_Rb_tree<std::string, std::pair<std::string const, UCSROBDDToolBox::MyNode*>, std::_Select1st<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >, std::less<std::string>, std::allocator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> > >::_M_put_node(std::_Rb_tree_node<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >*) (stl_tree.h:374)
+==12644==    by 0x43000A: std::_Rb_tree<std::string, std::pair<std::string const, UCSROBDDToolBox::MyNode*>, std::_Select1st<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >, std::less<std::string>, std::allocator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> > >::_M_destroy_node(std::_Rb_tree_node<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >*) (stl_tree.h:396)
+==12644==    by 0x449BE9: std::_Rb_tree<std::string, std::pair<std::string const, UCSROBDDToolBox::MyNode*>, std::_Select1st<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >, std::less<std::string>, std::allocator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> > >::_M_erase_aux(std::_Rb_tree_const_iterator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >) (stl_tree.h:1746)
+==12644==    by 0x449703: std::_Rb_tree<std::string, std::pair<std::string const, UCSROBDDToolBox::MyNode*>, std::_Select1st<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >, std::less<std::string>, std::allocator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> > >::erase(std::_Rb_tree_iterator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >) (stl_tree.h:826)
+==12644==    by 0x4492BE: std::map<std::string, UCSROBDDToolBox::MyNode*, std::less<std::string>, std::allocator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> > >::erase(std::_Rb_tree_iterator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >) (stl_map.h:711)
+==12644==    by 0x448A3F: UCSROBDDToolBox::prune_upper_elements(std::map<std::string, UCSROBDDToolBox::MyNode*, std::less<std::string>, std::allocator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> > >*, std::list<UCSROBDDToolBox::MyNode*, std::allocator<UCSROBDDToolBox::MyNode*> >*, UCSROBDDToolBox::MyNode*) (UCSROBDDToolBox.cpp:293)
+==12644==    by 0x4481B3: UCSROBDDToolBox::DFS(UCSROBDDToolBox::MyNode*, Collection*, ROBDD*, CostFunction*, unsigned int*) (UCSROBDDToolBox.cpp:184)
+==12644==    by 0x44739A: UCSROBDD::get_minima_list(unsigned int) (UCSROBDD.cpp:105)
+==12644==    by 0x42E8AB: UCSROBDDTest::a_lattice_with_constant_cost_should_be_totally_exausted() (UCSROBDDTest.cpp:19)
+==12644==    by 0x403209: main (in /home/gustavoem/cs/ucs-robdd/featselTest)
+==12644== 
+==12644== 
+==12644== 570 errors in context 5 of 6:
+==12644== Invalid read of size 8
+==12644==    at 0x4EABCBE: std::_Rb_tree_increment(std::_Rb_tree_node_base*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.19)
+==12644==    by 0x44926C: std::_Rb_tree_iterator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >::operator++(int) (stl_tree.h:197)
+==12644==    by 0x44836C: UCSROBDDToolBox::DFS(UCSROBDDToolBox::MyNode*, Collection*, ROBDD*, CostFunction*, unsigned int*) (UCSROBDDToolBox.cpp:200)
+==12644==    by 0x44739A: UCSROBDD::get_minima_list(unsigned int) (UCSROBDD.cpp:105)
+==12644==    by 0x42E8AB: UCSROBDDTest::a_lattice_with_constant_cost_should_be_totally_exausted() (UCSROBDDTest.cpp:19)
+==12644==    by 0x403209: main (in /home/gustavoem/cs/ucs-robdd/featselTest)
+==12644==  Address 0x5a362c8 is 8 bytes inside a block of size 48 free'd
+==12644==    at 0x4C2C2BC: operator delete(void*) (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==12644==    by 0x430609: __gnu_cxx::new_allocator<std::_Rb_tree_node<std::pair<std::string const, UCSROBDDToolBox::MyNode*> > >::deallocate(std::_Rb_tree_node<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >*, unsigned long) (new_allocator.h:110)
+==12644==    by 0x430411: std::_Rb_tree<std::string, std::pair<std::string const, UCSROBDDToolBox::MyNode*>, std::_Select1st<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >, std::less<std::string>, std::allocator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> > >::_M_put_node(std::_Rb_tree_node<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >*) (stl_tree.h:374)
+==12644==    by 0x43000A: std::_Rb_tree<std::string, std::pair<std::string const, UCSROBDDToolBox::MyNode*>, std::_Select1st<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >, std::less<std::string>, std::allocator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> > >::_M_destroy_node(std::_Rb_tree_node<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >*) (stl_tree.h:396)
+==12644==    by 0x449BE9: std::_Rb_tree<std::string, std::pair<std::string const, UCSROBDDToolBox::MyNode*>, std::_Select1st<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >, std::less<std::string>, std::allocator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> > >::_M_erase_aux(std::_Rb_tree_const_iterator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >) (stl_tree.h:1746)
+==12644==    by 0x449703: std::_Rb_tree<std::string, std::pair<std::string const, UCSROBDDToolBox::MyNode*>, std::_Select1st<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >, std::less<std::string>, std::allocator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> > >::erase(std::_Rb_tree_iterator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >) (stl_tree.h:826)
+==12644==    by 0x4492BE: std::map<std::string, UCSROBDDToolBox::MyNode*, std::less<std::string>, std::allocator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> > >::erase(std::_Rb_tree_iterator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >) (stl_map.h:711)
+==12644==    by 0x448358: UCSROBDDToolBox::DFS(UCSROBDDToolBox::MyNode*, Collection*, ROBDD*, CostFunction*, unsigned int*) (UCSROBDDToolBox.cpp:209)
+==12644==    by 0x44739A: UCSROBDD::get_minima_list(unsigned int) (UCSROBDD.cpp:105)
+==12644==    by 0x42E8AB: UCSROBDDTest::a_lattice_with_constant_cost_should_be_totally_exausted() (UCSROBDDTest.cpp:19)
+==12644==    by 0x403209: main (in /home/gustavoem/cs/ucs-robdd/featselTest)
+==12644== 
+==12644== 
+==12644== 1009 errors in context 6 of 6:
+==12644== Invalid read of size 8
+==12644==    at 0x4EABCA0: std::_Rb_tree_increment(std::_Rb_tree_node_base*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.19)
+==12644==    by 0x44926C: std::_Rb_tree_iterator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >::operator++(int) (stl_tree.h:197)
+==12644==    by 0x44836C: UCSROBDDToolBox::DFS(UCSROBDDToolBox::MyNode*, Collection*, ROBDD*, CostFunction*, unsigned int*) (UCSROBDDToolBox.cpp:200)
+==12644==    by 0x44739A: UCSROBDD::get_minima_list(unsigned int) (UCSROBDD.cpp:105)
+==12644==    by 0x42E8AB: UCSROBDDTest::a_lattice_with_constant_cost_should_be_totally_exausted() (UCSROBDDTest.cpp:19)
+==12644==    by 0x403209: main (in /home/gustavoem/cs/ucs-robdd/featselTest)
+==12644==  Address 0x5a362d8 is 24 bytes inside a block of size 48 free'd
+==12644==    at 0x4C2C2BC: operator delete(void*) (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==12644==    by 0x430609: __gnu_cxx::new_allocator<std::_Rb_tree_node<std::pair<std::string const, UCSROBDDToolBox::MyNode*> > >::deallocate(std::_Rb_tree_node<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >*, unsigned long) (new_allocator.h:110)
+==12644==    by 0x430411: std::_Rb_tree<std::string, std::pair<std::string const, UCSROBDDToolBox::MyNode*>, std::_Select1st<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >, std::less<std::string>, std::allocator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> > >::_M_put_node(std::_Rb_tree_node<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >*) (stl_tree.h:374)
+==12644==    by 0x43000A: std::_Rb_tree<std::string, std::pair<std::string const, UCSROBDDToolBox::MyNode*>, std::_Select1st<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >, std::less<std::string>, std::allocator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> > >::_M_destroy_node(std::_Rb_tree_node<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >*) (stl_tree.h:396)
+==12644==    by 0x449BE9: std::_Rb_tree<std::string, std::pair<std::string const, UCSROBDDToolBox::MyNode*>, std::_Select1st<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >, std::less<std::string>, std::allocator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> > >::_M_erase_aux(std::_Rb_tree_const_iterator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >) (stl_tree.h:1746)
+==12644==    by 0x449703: std::_Rb_tree<std::string, std::pair<std::string const, UCSROBDDToolBox::MyNode*>, std::_Select1st<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >, std::less<std::string>, std::allocator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> > >::erase(std::_Rb_tree_iterator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >) (stl_tree.h:826)
+==12644==    by 0x4492BE: std::map<std::string, UCSROBDDToolBox::MyNode*, std::less<std::string>, std::allocator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> > >::erase(std::_Rb_tree_iterator<std::pair<std::string const, UCSROBDDToolBox::MyNode*> >) (stl_map.h:711)
+==12644==    by 0x448358: UCSROBDDToolBox::DFS(UCSROBDDToolBox::MyNode*, Collection*, ROBDD*, CostFunction*, unsigned int*) (UCSROBDDToolBox.cpp:209)
+==12644==    by 0x44739A: UCSROBDD::get_minima_list(unsigned int) (UCSROBDD.cpp:105)
+==12644==    by 0x42E8AB: UCSROBDDTest::a_lattice_with_constant_cost_should_be_totally_exausted() (UCSROBDDTest.cpp:19)
+==12644==    by 0x403209: main (in /home/gustavoem/cs/ucs-robdd/featselTest)
+==12644== 
+==12644== ERROR SUMMARY: 1615 errors from 6 contexts (suppressed: 0 from 0)
