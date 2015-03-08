@@ -197,7 +197,7 @@ namespace UCSROBDDToolBox
 
 		// "Remove graph" subroutine
 		//
-		for (it = Graph.begin (); it != Graph.end (); it++)
+		for (it = Graph.begin (); it != Graph.end (); )
 		{
 			if (it->second->upper_flag->is_empty ())
 				UCSROBDDToolBox::update_lower_restriction (R, it->second->vertex);
@@ -206,7 +206,7 @@ namespace UCSROBDDToolBox
 			// delete the removed node
 			delete_node (it->second);
 			// remove the node from the graph
-			Graph.erase (it);
+			Graph.erase (it++);
 		}
 	}
 
