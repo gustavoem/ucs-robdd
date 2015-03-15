@@ -458,11 +458,30 @@ int main(void) {
 	cout << endl;
 
 
-	// Testing Class "UCSROBDD"
+// Testing Class "UCSROBDD"
 	cout << "UCSROBDDTest::a_lattice_with_constant_cost_should_be_totally_exausted";
 	cout.flush ();
 	printResult (UCSROBDDTest::a_lattice_with_constant_cost_should_be_totally_exausted ());
+	cout << "UCSROBDDTest::it_should_find_a_global_minimum";
+	cout.flush ();
+	printResult (UCSROBDDTest::it_should_find_a_global_minimum ());
+	cout << "UCSROBDDTest::it_should_converge_for_large_hamming_sets";
+	cout.flush ();
+	printResult (UCSROBDDTest::it_should_converge_for_large_hamming_sets ());
+	cout << "UCSROBDDTest::it_should_converge_for_large_abs_sum_sets";
+	cout.flush ();
+	printResult (UCSROBDDTest::it_should_converge_for_large_abs_sum_sets());
+	cout << "UCSROBDDTest::it_should_store_all_the_visited_subsets";
+	cout.flush ();
+	printResult (UCSROBDDTest::it_should_store_all_the_visited_subsets ());
+	cout << "UCSROBDDTest::it_should_give_the_number_of_the_visited_subsets";
+	cout.flush ();
+	printResult (UCSROBDDTest::it_should_give_the_number_of_the_visited_subsets ());
+	cout << "UCSROBDDTest::it_should_always_give_the_correct_answer";
+	cout.flush ();
+	printResult (UCSROBDDTest::it_should_always_give_the_correct_answer ());
 	cout << endl;
+
 
 
 
