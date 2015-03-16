@@ -31,9 +31,9 @@ namespace UCSROBDDTest
 		MeanAbsSum c1 (&a_set1);
 		MeanAbsSum c2 (&a_set2);
 		MeanAbsSum c3 (&a_set3);
-		UCSROBDD ucs1;
-		UCSROBDD ucs2;
-		UCSROBDD ucs3;
+		UCSROBDD2 ucs1;
+		UCSROBDD2 ucs2;
+		UCSROBDD2 ucs3;
 		string list;
 		ucs1.set_parameters (&c1, &a_set1, false);
 		ucs1.get_minima_list (8);
@@ -70,10 +70,10 @@ namespace UCSROBDDTest
 		MeanAbsSum c2 (&set2);
 		HammingDistance c3 (&set3);
 		Explicit c4 (&set4);
-		UCSROBDD ucs1;
-		UCSROBDD ucs2;
-		UCSROBDD ucs3;
-		UCSROBDD ucs4;
+		UCSROBDD2 ucs1;
+		UCSROBDD2 ucs2;
+		UCSROBDD2 ucs3;
+		UCSROBDD2 ucs4;
 		ucs1.set_parameters (&c1, &set1, false);
 		ucs1.get_minima_list (1);
 		if (ucs1.print_list_of_minima ().find ("<010>") == string::npos)
@@ -103,7 +103,7 @@ namespace UCSROBDDTest
 		unsigned int i, n = 12; // 2^16 is around 64K subsets
 		string minimum = " <";
 		ElementSet set1 ("set", n, 2);   // rand() % 2 results in a "hamming" instance.
-		UCSROBDD ucs1;
+		UCSROBDD2 ucs1;
 		HammingDistance c1 (&set1);
 		ucs1.set_parameters (&c1, &set1, false);
 		ucs1.get_minima_list (1);
@@ -127,7 +127,7 @@ namespace UCSROBDDTest
 	{
 		unsigned int n = 16;
 		ElementSet set1 ("set", n, 10000); // mean_abs_sum instance.
-		UCSROBDD ucs1;
+		UCSROBDD2 ucs1;
 		MeanAbsSum c1 (&set1);
 		ucs1.set_parameters (&c1, &set1, false);
 		ucs1.get_minima_list (1);
@@ -138,7 +138,7 @@ namespace UCSROBDDTest
 	bool it_should_store_all_the_visited_subsets ()
 	{
 		ElementSet set1 ("S1", 3, 1);    // |S1| = 3
-		UCSROBDD ucs1;
+		UCSROBDD2 ucs1;
 		MeanAbsSum c1 (&set1);
 		string list;
 		ucs1.set_parameters (&c1, &set1, true);
@@ -162,7 +162,7 @@ namespace UCSROBDDTest
 	bool it_should_give_the_number_of_the_visited_subsets ()
 	{
 		ElementSet set1 ("S1", 3, 1);    // |S1| = 3
-		UCSROBDD ucs;
+		UCSROBDD2 ucs;
 		MeanAbsSum c1 (&set1);
 		ucs.set_parameters (&c1, &set1, true);
 		ucs.get_minima_list (1);
@@ -199,14 +199,14 @@ namespace UCSROBDDTest
 	//	AbsSum c9 (& set9);
 	//	AbsSum cA (& setA);
 
-		UCSROBDD * ucs;
+		UCSROBDD2 * ucs;
 
 		int i,
 		    k = 10;  // change the value of k for more (less) tests
 		string result;
 	    for (i = 1; i <= k; i++)
 		{
-			ucs = new UCSROBDD ();
+			ucs = new UCSROBDD2 ();
 			ucs->set_parameters (&c1, &set1, false);
 			ucs->get_minima_list (1);
 			result.clear ();
@@ -217,7 +217,7 @@ namespace UCSROBDDTest
 		}
 		for (i = 1; i <= k; i++)
 		{
-			ucs = new UCSROBDD ();
+			ucs = new UCSROBDD2 ();
 			ucs->set_parameters (&c2, &set2, false);
 			ucs->get_minima_list (1);
 			result.clear ();
@@ -228,7 +228,7 @@ namespace UCSROBDDTest
 		}
 		for (i = 1; i <= k; i++)
 		{
-			ucs = new UCSROBDD ();
+			ucs = new UCSROBDD2 ();
 			ucs->set_parameters (&c3, &set3, false);
 			ucs->get_minima_list (1);
 			result.clear ();
@@ -239,7 +239,7 @@ namespace UCSROBDDTest
 		}
 		for (i = 1; i <= k; i++)
 		{
-			ucs = new UCSROBDD ();
+			ucs = new UCSROBDD2 ();
 			ucs->set_parameters (&c4, &set4, false);
 			ucs->get_minima_list (1);
 			result.clear ();
@@ -250,7 +250,7 @@ namespace UCSROBDDTest
 		}
 		for (i = 1; i <= k; i++)
 		{
-			ucs = new UCSROBDD ();
+			ucs = new UCSROBDD2 ();
 			ucs->set_parameters (&c5, &set5, false);
 			ucs->get_minima_list (1);
 			result.clear ();
@@ -261,7 +261,7 @@ namespace UCSROBDDTest
 		}
 		for (i = 1; i <= k; i++)
 		{
-			ucs = new UCSROBDD ();
+			ucs = new UCSROBDD2 ();
 			ucs->set_parameters (&c6, &set6, false);
 			ucs->get_minima_list (1);
 			result.clear ();
@@ -275,7 +275,7 @@ namespace UCSROBDDTest
 		 *  probably error in the XML parser)
 	 	for (i = 1; i <= k; i++)
 		{
-			ucs = new UCSROBDD ();
+			ucs = new UCSROBDD2 ();
 			ucs->set_parameters (&c7, &set7, false);
 			ucs->get_minima_list (1);
 			result.clear ();
@@ -286,7 +286,7 @@ namespace UCSROBDDTest
 		}
 		for (i = 1; i <= k; i++)
 		{
-			ucs = new UCSROBDD ();
+			ucs = new UCSROBDD2 ();
 			ucs->set_parameters (&c8, &set8, false);
 			ucs->get_minima_list (1);
 			result.clear ();
@@ -297,7 +297,7 @@ namespace UCSROBDDTest
 		}
 		for (i = 1; i <= k; i++)
 		{
-			ucs = new UCSROBDD ();
+			ucs = new UCSROBDD2 ();
 			ucs->set_parameters (& c9, & set9, false);
 			ucs->get_minima_list (1);
 			result.clear ();
@@ -312,7 +312,7 @@ namespace UCSROBDDTest
 		}
 		for (i = 1; i <= k; i++)
 		{
-			ucs = new UCSROBDD ();
+			ucs = new UCSROBDD2 ();
 			ucs->set_parameters (& cA, & setA, false);
 			ucs->get_minima_list (1);
 			result.clear ();

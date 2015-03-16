@@ -30,6 +30,7 @@ OBJS =		src/Element.o src/ElementSet.o src/ElementSubset.o \
 			src/functions/AbsSum.o src/functions/Explicit.o src/functions/MeanAbsSum.o \
 			src/functions/HammingDistance.o src/functions/MeanConditionalEntropy.o \
 			src/Vertex.o src/ROBDD.o src/algorithms/UCSROBDD.o src/algorithms/UCSROBDDToolBox.o \
+			src/algorithms/UCSROBDD2.o src/algorithms/UCSROBDDToolBox2.o \
 			
 TOBJS =		test/ElementTest.o test/ElementSetTest.o test/ElementSubsetTest.o \
 			test/CollectionTest.o test/SolverTest.o \
