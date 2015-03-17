@@ -26,7 +26,7 @@ void UCSROBDD2::get_minima_list (unsigned int max_size_of_minima_list)
 	timeval begin_exhausting, end_exhausting, begin_program, end_program;
 	gettimeofday (& begin_program, NULL);
 
-	unsigned int direction, max_graph_of_this_iteration;
+	unsigned int max_graph_of_this_iteration;
 	Collection * L = new Collection ();
 	bool search_space_is_empty = false;
 	ElementSubset * X, Y ("", set);
@@ -40,14 +40,19 @@ void UCSROBDD2::get_minima_list (unsigned int max_size_of_minima_list)
 		//
 		number_of_calls_of_minimal_and_maximal_element++;
 		max_graph_of_this_iteration = 0;
-
-			X = restrictions->get_random_zero_evaluated_element ();
+		cout << "restricoes: " << endl;
+		restrictions->print ();
+		X = restrictions->get_random_zero_evaluated_element ();
+		cout << X->print_subset ();
 			if (X != NULL)
 			{
-				/*if (restrictions->contains (X))
+				if (restrictions->contains (X))
+				{
+					cout << "smth went wrong, x cant be covered!" << endl;
 					UCSROBDDToolBox2::update_lower_restriction (restrictions, X);
+				}
 				else
-				{*/
+				{
 					gettimeofday (& begin_exhausting, NULL);
 
 					M = UCSROBDDToolBox2::create_node (X);
@@ -65,7 +70,7 @@ void UCSROBDD2::get_minima_list (unsigned int max_size_of_minima_list)
 					gettimeofday (& end_exhausting, NULL);
 					elapsed_time_of_all_calls_of_the_minima_exhausting +=
 							diff_us (end_exhausting, begin_exhausting);
-				//}
+				}
 				delete X;
 			}
 			else
