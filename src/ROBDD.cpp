@@ -10,7 +10,7 @@ ROBDD::ROBDD (ElementSet * set)
 
 ROBDD::ROBDD (ElementSet * set, int a)
 {
-	elm_set = set;
+/*	elm_set = set;
 	Element * elm = elm_set->get_element (0);
 	root = new Vertex (elm, 1);
 	// teste obdd1
@@ -28,7 +28,7 @@ ROBDD::ROBDD (ElementSet * set, int a)
 	cardinality = 5;
 
 	// test obdd2
-/*	elm = elm_set->get_element (1);
+	elm = elm_set->get_element (1);
 	Vertex * v_lo = new Vertex (elm, 2);
 	Vertex * v_hi = new Vertex (elm, 2);
 	Vertex * zero = new Vertex (false, 3);
@@ -115,7 +115,6 @@ ROBDD::~ROBDD ()
 void ROBDD::delete_subtree (Vertex ** v, unsigned int * n)
 {
 	Vertex ** vertice = get_all_vertex (*v, *n);
-	/*Perigo: vamos ver se o n bate com tamanho da arvore.*/
 	for (unsigned int i = 0; i < *n; i++)
 	{
 		delete vertice[i];
@@ -269,6 +268,7 @@ void ROBDD::reduce ()
 					if (actual_lo_child != u->get_child (false)) 
 					{
 						cardinality--;
+						cout << "actual node: " << actual_lo_child << " deleted: " << u->get_child (false) << endl;
 						delete u->get_child (false);
 					}
 					u->set_child (actual_lo_child, false);
@@ -279,6 +279,7 @@ void ROBDD::reduce ()
 					if (actual_hi_child != u->get_child (true))
 					{
 						cardinality--;
+						cout << "actual node: " << actual_hi_child << " deleted: " << u->get_child (true) << endl;
 						delete u->get_child (true);
 					}
 					u->set_child (actual_hi_child, true);
@@ -326,9 +327,10 @@ void ROBDD::union_to (Vertex * root2)
 	else
 		delete zero;
 
-	delete_subtree (&root, &cardinality);
+	//delete_subtree (&root, &cardinality);
 	cardinality = new_cardinality;
 	root = new_root;
+	//reduce ();
 }
 
 Vertex * ROBDD::union_step (Vertex * v1, Vertex * v2, map<pair<Vertex *, Vertex*>,\

@@ -42,8 +42,12 @@ void UCSROBDD2::get_minima_list (unsigned int max_size_of_minima_list)
 		max_graph_of_this_iteration = 0;
 		cout << "restricoes: " << endl;
 		restrictions->print ();
+		restrictions->reduce ();
+		cout << "reduced: " << endl;
+		restrictions->print ();
 		X = restrictions->get_random_zero_evaluated_element ();
-		cout << X->print_subset ();
+		if (X != NULL)
+			cout << X->print_subset ();
 			if (X != NULL)
 			{
 				if (restrictions->contains (X))
