@@ -115,8 +115,10 @@ ROBDD::~ROBDD ()
 void ROBDD::delete_subtree (Vertex ** v, unsigned int * n)
 {
 	Vertex ** vertice = get_all_vertex (*v, *n);
+	//cout << "sizeof tree " <<*n << endl;
 	for (unsigned int i = 0; i < *n; i++)
 	{
+		//cout << "deleting: " << vertice[i] << endl;
 		delete vertice[i];
 		vertice [i] = NULL;
 	}
@@ -133,6 +135,7 @@ Vertex ** ROBDD::get_all_vertex (Vertex * root, unsigned int n)
 	*last_index = 0;
 	unmark_all_vertex (root);
 	fill_vertice (v, last_index, root);
+
 	free (last_index);
 	return v;
 }
@@ -141,6 +144,7 @@ void ROBDD::fill_vertice (Vertex ** vertice, int * last_index, Vertex * v)
 {
 	if (v == NULL || v->mark)
 		return;
+	//cout << "inserting: " << v << endl;
 	vertice[*last_index] = v;
 	v->mark = true;
 	(*last_index)++;
@@ -282,18 +286,16 @@ void ROBDD::reduce ()
 	for (trash_it = trash_can.begin (); trash_it != trash_can.end (); )
 	{
 		Vertex * x = *trash_it;
-		cardinality--;
 		trash_it++;
 		delete x;
 	}
 	
 	Vertex * new_root = subgraph[root->get_id ()];
 	if (root != new_root)
-	{
-		cardinality--;
 		delete	root;
-	}
+	
 	root = new_root;
+	cardinality = root->get_id ();
 
 	for (unsigned int i = 1; i <= set_card + 1; i++)
 		delete vlists[i];
