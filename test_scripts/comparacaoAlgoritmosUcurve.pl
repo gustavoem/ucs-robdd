@@ -35,7 +35,7 @@ my $n;
 # list of solvers; SFFS is required for the heuristic mode 
 #
 
-my @solvers = ("UCS", "UBB", "ES", "UCSR");
+my @solvers = ("UCSR2", "UCS", "UBB", "ES", "UCSR");
 
 my $number_of_solvers = @solvers;
 

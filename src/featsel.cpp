@@ -36,6 +36,7 @@
 #include "algorithms/SFFS.h"
 #include "algorithms/BranchAndBound.h"
 #include "algorithms/PosetForestSearch.h"
+#include "algorithms/UCSROBDD.h"
 #include "algorithms/UCSROBDD2.h"
 
 // Function to parse and verify the correctness of the parameters.
@@ -95,7 +96,9 @@ int main(int argc, char * argv[])
 		if (algorithm.compare ("ucs") == 0)
 			solver = new UCurveSearch ();
 		else if (algorithm.compare ("ucsr") == 0)
-			solver = new UCSROBDD2 ();
+			solver = new UCSROBDD ();
+                else if (algorithm.compare ("ucsr2") == 0)
+                        solver = new UCSROBDD2 ();
 		else if (algorithm.compare ("es") == 0)
 			solver = new ExhaustiveSearch ();
 		else if (algorithm.compare ("sfs") == 0)
@@ -350,7 +353,8 @@ under certain conditions; see 'LICENSE.TXT' for details.");
 			     (strcmp (argv[i], "sffs") == 0) ||
 			     (strcmp (argv[i], "pfs") == 0)  ||
 			     (strcmp (argv[i], "ubb") == 0)  ||
-			     (strcmp (argv[i], "ucsr") == 0) )
+			     (strcmp (argv[i], "ucsr") == 0) ||
+                             (strcmp (argv[i], "ucsr2") == 0)  )
 			{
 				a->clear();
 				a->append(argv[i]);
