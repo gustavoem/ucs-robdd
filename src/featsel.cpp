@@ -36,7 +36,7 @@
 #include "algorithms/SFFS.h"
 #include "algorithms/BranchAndBound.h"
 #include "algorithms/PosetForestSearch.h"
-#include "algorithms/UCSROBDD.h"
+#include "algorithms/UCSROBDD2.h"
 
 // Function to parse and verify the correctness of the parameters.
 // It returns '0' if all the parameters were correct, '1' if there was an error,
@@ -95,7 +95,7 @@ int main(int argc, char * argv[])
 		if (algorithm.compare ("ucs") == 0)
 			solver = new UCurveSearch ();
 		else if (algorithm.compare ("ucsr") == 0)
-			solver = new UCSROBDD ();
+			solver = new UCSROBDD2 ();
 		else if (algorithm.compare ("es") == 0)
 			solver = new ExhaustiveSearch ();
 		else if (algorithm.compare ("sfs") == 0)

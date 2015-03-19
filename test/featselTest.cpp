@@ -459,7 +459,7 @@ int main(void) {
 
 
 	// Testing Class "UCSROBDD2"
-/*	cout << "UCSROBDDTest::a_lattice_with_constant_cost_should_be_totally_exausted";
+	cout << "UCSROBDDTest::a_lattice_with_constant_cost_should_be_totally_exausted";
 	cout.flush ();
 	printResult (UCSROBDDTest::a_lattice_with_constant_cost_should_be_totally_exausted ());
 	cout << "UCSROBDDTest::it_should_find_a_global_minimum";
@@ -480,7 +480,7 @@ int main(void) {
 	cout << "UCSROBDDTest::it_should_always_give_the_correct_answer";
 	cout.flush ();
 	printResult (UCSROBDDTest::it_should_always_give_the_correct_answer ());
-	cout << endl;*/
+	cout << endl;
 
 
 	cout << "Total " << number_of_passed_tests + number_of_failed_tests << " test(s), ";

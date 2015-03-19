@@ -36,19 +36,19 @@ void UCSROBDD2::get_minima_list (unsigned int max_size_of_minima_list)
 		//
 		number_of_calls_of_minimal_and_maximal_element++;
 		max_graph_of_this_iteration = 0;
-		cout << "restricoes: " << endl;
+		/*cout << "restricoes: " << endl;
 		restrictions->print ();
 		//restrictions->reduce ();
 		cout << "reduced: " << endl;
-		restrictions->print ();
+		restrictions->print ();*/
 		X = restrictions->get_random_zero_evaluated_element ();
-		if (X != NULL)
-			cout << X->print_subset ();
+		/*if (X != NULL)
+			cout << X->print_subset ();*/
 		if (X != NULL)
 		{
 			if (restrictions->contains (X))
 			{
-				cout << "smth went wrong, x cant be covered!" << endl;
+				//cout << "smth went wrong, x cant be covered!" << endl;
 				UCSROBDDToolBox2::update_lower_restriction (restrictions, X);
 			}
 			else
