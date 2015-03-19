@@ -1,5 +1,5 @@
 #include "ROBDD.h"
-
+#include <set>
 
 ROBDD::ROBDD (ElementSet * set)
 {
@@ -206,6 +206,9 @@ void ROBDD::reduce ()
 	for (unsigned int i = 1; i <= set_card + 1; i++) 
 		vlists[i] = new list<Vertex *>();
 	
+	set<Vertex *> trash_can;
+	set<Vertex *>::iterator trash_it = trash_can.begin ();
+	
 	unmark_all_vertex ();
 	fill_vlist (root, vlists);
 
@@ -214,7 +217,6 @@ void ROBDD::reduce ()
 	{
 		map<Vertex *, pair<int, int> > Q;
 		list<Vertex *> * l = vlists[i];
-		pair<Vertex *, Vertex *> trash (NULL, NULL);
 		for (list<Vertex*>::iterator it = l->begin (); it != l->end (); it++)
 		{
 			Vertex * u = *it;
@@ -231,15 +233,9 @@ void ROBDD::reduce ()
 				if (u_hi != u_lo)
 				{
 					if (subgraph[u_hi->get_id ()] != u_hi) 
-					{
-						trash.first = u_hi;
-						cardinality--;
-					}
+						trash_can.insert (trash_it, u_hi);
 					if (subgraph[u_hi->get_id ()] != u_lo)
-					{
-						trash.second = u_lo;
-						cardinality--;
-					}
+						trash_can.insert (trash_it, u_lo);
 				}
 			}
 			else
@@ -264,44 +260,40 @@ void ROBDD::reduce ()
 				next_id++;
 				u->set_id (next_id);
 				subgraph[next_id] = u;
-				pair<Vertex *, Vertex *> trash2 (NULL, NULL);
 				if (u_lo != NULL)
 				{
 					Vertex * actual_lo_child = subgraph[u_lo->get_id ()];
 					if (actual_lo_child != u_lo) 
 					{
 						cout << "actual node: " << actual_lo_child << " deleted: " << u_lo << endl;
-						cout.flush();
-						trash2.first = u_lo;
+						cout.flush ();
+						trash_can.insert (trash_it, u_lo);
 					}
 					u->set_child (actual_lo_child, false);
 				}
 				if (u_hi != NULL)
 				{
 					Vertex * actual_hi_child = subgraph[u_hi->get_id ()];
-					if ((actual_hi_child != u_hi) && (trash2.first != u_hi))
+					if (actual_hi_child != u_hi)
 					{
 						cout << "actual node: " << actual_hi_child << " deleted: " << u_hi << endl;
 						cout.flush();
-						trash2.second = u_hi;					
+						trash_can.insert (trash_it, u_hi);
 					}
 					u->set_child (actual_hi_child, true);
 				}
 				oldkey = id_i;
-				if (trash2.first != NULL)
-				{
-					cardinality--;
-					delete trash2.first;
-				}
-				if (trash2.second != NULL)
-				{
-					cardinality--;
-					delete trash2.second;
-				}
 			}
 		}
-//		delete trash.first;
-		//delete trash.second;
+	}
+	
+	for (trash_it = trash_can.begin (); trash_it != trash_can.end (); )
+	{
+		Vertex * x = *trash_it;
+		cardinality--;
+		trash_it++;
+		cout << "x: " << x << endl;
+		delete x;
 	}
 	
 	Vertex * new_root = subgraph[root->get_id ()];
