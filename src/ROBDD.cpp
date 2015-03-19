@@ -259,36 +259,49 @@ void ROBDD::reduce ()
 			}
 			else
 			{
+				Vertex * u_lo = u->get_child (false);
+				Vertex * u_hi = u->get_child (true);
 				next_id++;
 				u->set_id (next_id);
 				subgraph[next_id] = u;
-				if (u->get_child (false) != NULL)
+				pair<Vertex *, Vertex *> trash2 (NULL, NULL);
+				if (u_lo != NULL)
 				{
-					Vertex * actual_lo_child = subgraph[u->get_child (false)->get_id ()];
-					if (actual_lo_child != u->get_child (false)) 
+					Vertex * actual_lo_child = subgraph[u_lo->get_id ()];
+					if (actual_lo_child != u_lo) 
 					{
-						cardinality--;
-						cout << "actual node: " << actual_lo_child << " deleted: " << u->get_child (false) << endl;
-						delete u->get_child (false);
+						cout << "actual node: " << actual_lo_child << " deleted: " << u_lo << endl;
+						cout.flush();
+						trash2.first = u_lo;
 					}
 					u->set_child (actual_lo_child, false);
 				}
-				if (u->get_child (true) != NULL)
+				if (u_hi != NULL)
 				{
-					Vertex * actual_hi_child = subgraph[u->get_child (true)->get_id ()];
-					if (actual_hi_child != u->get_child (true))
+					Vertex * actual_hi_child = subgraph[u_hi->get_id ()];
+					if ((actual_hi_child != u_hi) && (trash2.first != u_hi))
 					{
-						cardinality--;
-						cout << "actual node: " << actual_hi_child << " deleted: " << u->get_child (true) << endl;
-						delete u->get_child (true);
+						cout << "actual node: " << actual_hi_child << " deleted: " << u_hi << endl;
+						cout.flush();
+						trash2.second = u_hi;					
 					}
 					u->set_child (actual_hi_child, true);
 				}
 				oldkey = id_i;
+				if (trash2.first != NULL)
+				{
+					cardinality--;
+					delete trash2.first;
+				}
+				if (trash2.second != NULL)
+				{
+					cardinality--;
+					delete trash2.second;
+				}
 			}
 		}
-		delete trash.first;
-		delete trash.second;
+//		delete trash.first;
+		//delete trash.second;
 	}
 	
 	Vertex * new_root = subgraph[root->get_id ()];
@@ -330,7 +343,7 @@ void ROBDD::union_to (Vertex * root2)
 	//delete_subtree (&root, &cardinality);
 	cardinality = new_cardinality;
 	root = new_root;
-	//reduce ();
+	reduce ();
 }
 
 Vertex * ROBDD::union_step (Vertex * v1, Vertex * v2, map<pair<Vertex *, Vertex*>,\
