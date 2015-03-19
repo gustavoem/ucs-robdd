@@ -264,22 +264,14 @@ void ROBDD::reduce ()
 				{
 					Vertex * actual_lo_child = subgraph[u_lo->get_id ()];
 					if (actual_lo_child != u_lo) 
-					{
-						cout << "actual node: " << actual_lo_child << " deleted: " << u_lo << endl;
-						cout.flush ();
 						trash_can.insert (trash_it, u_lo);
-					}
 					u->set_child (actual_lo_child, false);
 				}
 				if (u_hi != NULL)
 				{
 					Vertex * actual_hi_child = subgraph[u_hi->get_id ()];
 					if (actual_hi_child != u_hi)
-					{
-						cout << "actual node: " << actual_hi_child << " deleted: " << u_hi << endl;
-						cout.flush();
 						trash_can.insert (trash_it, u_hi);
-					}
 					u->set_child (actual_hi_child, true);
 				}
 				oldkey = id_i;
@@ -292,7 +284,6 @@ void ROBDD::reduce ()
 		Vertex * x = *trash_it;
 		cardinality--;
 		trash_it++;
-		cout << "x: " << x << endl;
 		delete x;
 	}
 	
@@ -332,7 +323,7 @@ void ROBDD::union_to (Vertex * root2)
 	else
 		delete zero;
 
-	//delete_subtree (&root, &cardinality);
+	delete_subtree (&root, &cardinality);
 	cardinality = new_cardinality;
 	root = new_root;
 	reduce ();
