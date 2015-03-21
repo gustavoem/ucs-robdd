@@ -115,10 +115,8 @@ ROBDD::~ROBDD ()
 void ROBDD::delete_subtree (Vertex ** v, unsigned int * n)
 {
 	Vertex ** vertice = get_all_vertex (*v, *n);
-	//cout << "sizeof tree " <<*n << endl;
 	for (unsigned int i = 0; i < *n; i++)
 	{
-		//cout << "deleting: " << vertice[i] << endl;
 		delete vertice[i];
 		vertice [i] = NULL;
 	}
@@ -144,7 +142,7 @@ void ROBDD::fill_vertice (Vertex ** vertice, int * last_index, Vertex * v)
 {
 	if (v == NULL || v->mark)
 		return;
-	//cout << "inserting: " << v << endl;
+
 	vertice[*last_index] = v;
 	v->mark = true;
 	(*last_index)++;
@@ -320,6 +318,7 @@ void ROBDD::union_to (Vertex * root2)
 		new_cardinality++;
 	else
 		delete one;
+	
 	if (zero->mark)
 		new_cardinality++;
 	else
@@ -472,14 +471,15 @@ ElementSubset * ROBDD::get_random_zero_evaluated_element ()
 	Vertex * v = root;
 	if (v->is_terminal () && v->get_value ())
 		return NULL;
+
 	ElementSubset * subset = new ElementSubset ("", elm_set);
 	while (!v->is_terminal ())
 	{
 		Vertex * next_v;
-		if (v->get_child (true)->is_terminal () && !v->get_child (true)->get_value ())
-			next_v = v->get_child (true);
-		else if (v->get_child (false)->is_terminal () && !v->get_child (false)->get_value ())
+		if (v->get_child (true)->is_terminal () && v->get_child (true)->get_value ())
 			next_v = v->get_child (false);
+		else if (v->get_child (false)->is_terminal () && v->get_child (false)->get_value ())
+			next_v = v->get_child (true);
 		else
 			next_v = v->get_child ((int) rand() % 2);
 

@@ -36,45 +36,23 @@ void UCSROBDD2::get_minima_list (unsigned int max_size_of_minima_list)
 		//
 		number_of_calls_of_minimal_and_maximal_element++;
 		max_graph_of_this_iteration = 0;
-		/*cout << "restricoes: " << endl;
-		restrictions->print ();
-		//restrictions->reduce ();
-		cout << "reduced: " << endl;
-		restrictions->print ();*/
 		X = restrictions->get_random_zero_evaluated_element ();
-		/*if (X != NULL)
-			cout << X->print_subset ();*/
 		if (X != NULL)
 		{
-			if (restrictions->contains (X))
-			{
-				//cout << "smth went wrong, x cant be covered!" << endl;
-				UCSROBDDToolBox2::update_lower_restriction (restrictions, X);
-			}
-			else
-			{
-				gettimeofday (& begin_exhausting, NULL);
-				M = UCSROBDDToolBox2::create_node (X);
-				M->vertex->cost = cost_function->cost (M->vertex);
-	
-				// X is minimal, thus there is no lower adjacent
-				//UCSROBDDToolBox2::update_lower_restriction (restrictions, X);
-				//M->lower_flag->set_empty_subset ();
-
-				max_graph_of_this_iteration = 1;
-				UCSROBDDToolBox2::DFS
-					(M, L, restrictions, cost_function,
-					 & max_graph_of_this_iteration);
-					gettimeofday (& end_exhausting, NULL);
-				elapsed_time_of_all_calls_of_the_minima_exhausting +=
-						diff_us (end_exhausting, begin_exhausting);
-			}
-				delete X;
+			gettimeofday (& begin_exhausting, NULL);
+			M = UCSROBDDToolBox2::create_node (X);
+			M->vertex->cost = cost_function->cost (M->vertex);
+			max_graph_of_this_iteration = 1;
+			UCSROBDDToolBox2::DFS
+				(M, L, restrictions, cost_function,
+				 & max_graph_of_this_iteration);
+			gettimeofday (& end_exhausting, NULL);
+			elapsed_time_of_all_calls_of_the_minima_exhausting +=
+			diff_us (end_exhausting, begin_exhausting);		
+			delete X;
 		}
 		else
-		{
 			search_space_is_empty = true;
-		}
 
 		if (max_graph_of_this_iteration >= 1) // this operation just counts the calls of DFS that explores
 		{                                    // more than one node

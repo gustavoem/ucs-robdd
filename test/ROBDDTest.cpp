@@ -119,10 +119,12 @@ namespace ROBDDTest {
 	{
 		ElementSet elm_set ("", 2, 2);	
 		ROBDD robdd (&elm_set);
-		ElementSubset subset ("", &elm_set);
-		subset.add_element (0);
-		subset.add_element (1);
-		robdd.add_interval (&subset, true);
+		ElementSubset subset1 ("", &elm_set);
+		ElementSubset subset2 ("", &elm_set);
+		subset1.add_element (0);
+		subset2.add_element (1);
+		robdd.add_interval (&subset1, true);
+		robdd.add_interval (&subset2, true);
 		ElementSubset expected_subset ("", &elm_set);
 		ElementSubset * answ_subset = robdd.get_random_zero_evaluated_element ();
 		bool answ = answ_subset->is_equal(&expected_subset);
