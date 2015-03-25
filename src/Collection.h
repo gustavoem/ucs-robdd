@@ -46,6 +46,15 @@ private:
 	unsigned int nof_consults;
 
 
+	// Time spent updating the ROBDD
+	//
+	unsigned int time_updating;
+
+	// Time spent consulting the ROBDD
+	//
+	unsigned int time_consulting;
+
+
 public:
 
 	// container map; it is implemented as a self-balancing binary search tree
@@ -142,6 +151,16 @@ public:
 	// Returns nof_updates
 	//
 	unsigned int get_nof_updates ();
+
+
+	// Returns time elapsed updating the collection
+	//
+	int get_time_updating ();
+
+	
+	// Returns time elapsed consulting the collection
+	//
+	int get_time_consulting ();	
 
 };
 

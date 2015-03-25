@@ -55,6 +55,19 @@ protected:
 	//
     int elapsed_time_of_the_algorithm;
 
+	
+	// Stores the time (in microseconds) spent by the
+	// updates of restrictions
+	//
+    int elapsed_time_updating_restrictions;
+
+
+    // Stores the time (in microseconds) spent by the
+	// consults of restrictions
+	//
+    int elapsed_time_consulting_restrictions;
+
+
 	// Stores the maximum size that a forest A achieves during all
 	// iterations of the PFS algorithm and similar ones.
 	//
@@ -161,6 +174,16 @@ public:
 	// Returns the elapsed time of the solver execution.
 	//
 	int get_elapsed_time_of_the_algorithm ();
+
+
+	// Returns the elapsed time updating restrictions
+	//
+	int get_elapsed_time_updating_restrictions ();
+
+
+	// Returns the elapsed time consulting restrictions
+	//
+	int get_elapsed_time_consulting_restrictions ();
 
 
 	// Returns the number of calls of the minimal and maximal element subroutines.

@@ -32,9 +32,6 @@ void UCSROBDD2::get_minima_list (unsigned int max_size_of_minima_list)
 
 	do
 	{
-		// at each iteration it is called either minimal_element or maximal_element
-		//
-		number_of_calls_of_minimal_and_maximal_element++;
 		max_graph_of_this_iteration = 0;
 		X = restrictions->get_random_zero_evaluated_element ();
 		if (X != NULL)
@@ -82,6 +79,8 @@ void UCSROBDD2::get_minima_list (unsigned int max_size_of_minima_list)
 	number_of_visited_subsets =  cost_function->get_number_of_calls_of_cost_function ();
 	number_of_restrictions_consults = restrictions->get_nof_consults ();
 	number_of_restrictions_updates = restrictions->get_nof_updates ();
+	elapsed_time_consulting_restrictions = restrictions->get_time_consulting ();
+	elapsed_time_updating_restrictions = restrictions->get_time_updating ();
 
 	gettimeofday (& end_program, NULL);
 	elapsed_time_of_the_algorithm = diff_us (end_program, begin_program);

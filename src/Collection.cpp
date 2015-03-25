@@ -25,6 +25,8 @@ Collection::Collection ()
 {
 	nof_consults = 0;
 	nof_updates = 0;
+	time_consulting = 0;
+	time_updating = 0;
 }
 
 
@@ -40,6 +42,9 @@ Collection::~Collection ()
 bool Collection::lower_covers (ElementSubset * X)
 {
 	nof_consults++;
+	timeval start, end;
+	gettimeofday (& start, NULL);
+	
 	map<string, ElementSubset *>::iterator it;
 	if (X == NULL)
 	{
@@ -51,6 +56,10 @@ bool Collection::lower_covers (ElementSubset * X)
 		if (it->second->contains (X))
 			return true;
 	}
+
+	gettimeofday (& end, NULL);
+	time_consulting += (((end.tv_sec - start.tv_sec) * 1000000) + (end.tv_usec - start.tv_usec));
+
 	return false;
 }
 
@@ -58,6 +67,9 @@ bool Collection::lower_covers (ElementSubset * X)
 bool Collection::upper_covers (ElementSubset * X)
 {
 	nof_consults++;
+	timeval start, end;
+	gettimeofday (& start, NULL);
+
 	map<string, ElementSubset *>::iterator it;
 	if (X == NULL)
 	{
@@ -69,6 +81,10 @@ bool Collection::upper_covers (ElementSubset * X)
 		if (it->second->is_contained_by (X))
 			return true;
 	}
+
+	gettimeofday (& end, NULL);
+	time_consulting += (((end.tv_sec - start.tv_sec) * 1000000) + (end.tv_usec - start.tv_usec));
+
 	return false;
 }
 
@@ -124,12 +140,19 @@ void Collection::copy (Collection * C)
 
 ElementSubset * Collection::add_subset (ElementSubset * X)
 {
+	nof_updates++;
+	timeval start, end;
+	gettimeofday (& start, NULL);
+
 	pair<map<string, ElementSubset *>::iterator,bool> ret;
 	ElementSubset * Y;
 	Y = new ElementSubset ("", X->get_set_that_contains_this_subset());
 	Y->copy (X);
 	ret = my_map.insert (pair<string, ElementSubset *> (Y->print_subset (), Y));
-	nof_updates++;
+
+	gettimeofday (& end, NULL);
+	time_updating += (((end.tv_sec - start.tv_sec) * 1000000) + (end.tv_usec - start.tv_usec));
+
 	if (ret.second)
 		return ret.first->second;
 	else
@@ -142,12 +165,19 @@ ElementSubset * Collection::add_subset (ElementSubset * X)
 
 ElementSubset * Collection::remove_last_subset ()
 {
+	timeval start, end;
+	gettimeofday (& start, NULL);
+
 	map<string, ElementSubset *>::iterator it;
 	ElementSubset * X;
 	it = my_map.begin ();
 	X = it->second;
 	my_map.erase (it);
+
 	nof_updates++;
+	gettimeofday (& end, NULL);
+	time_updating += (((end.tv_sec - start.tv_sec) * 1000000) + (end.tv_usec - start.tv_usec));
+	
 	return X;
 }
 
@@ -155,17 +185,37 @@ ElementSubset * Collection::remove_last_subset ()
 bool Collection::has_subset (ElementSubset * X)
 {
 	nof_consults++;
-	if (my_map.find (X->print_subset ()) == my_map.end ())
+
+	timeval start, end;
+	gettimeofday (& start, NULL);
+
+	if (my_map.find (X->print_subset ()) == my_map.end ()) 
+	{
+		gettimeofday (& end, NULL);
+		time_consulting += (((end.tv_sec - start.tv_sec) * 1000000) + (end.tv_usec - start.tv_usec));
 		return false;
+	}
 	else
+	{
+		gettimeofday (& end, NULL);
+		time_consulting += (((end.tv_sec - start.tv_sec) * 1000000) + (end.tv_usec - start.tv_usec));
 		return true;
+	}
 }
 
 
 ElementSubset * Collection::get_subset (ElementSubset * X)
 {
+	nof_consults++;
+	timeval start, end;
+	gettimeofday (& start, NULL);
+	
 	map<string, ElementSubset *>::iterator it;
 	it = my_map.find (X->print_subset ());
+
+	gettimeofday (& end, NULL);
+	time_consulting += (((end.tv_sec - start.tv_sec) * 1000000) + (end.tv_usec - start.tv_usec));
+
 	if (it == my_map.end ())
 		return NULL;
 	else
@@ -185,6 +235,9 @@ unsigned int Collection::size ()
 
 unsigned int Collection::remove_covered_subsets (ElementSubset * X, bool lower_cover)
 {
+	timeval start, end;
+	gettimeofday (& start, NULL);
+
 	unsigned int number_of_removed_subsets = 0;
 	map<string, ElementSubset *>::iterator it;
 	for (it = my_map.begin (); it != my_map.end (); it++)
@@ -198,6 +251,10 @@ unsigned int Collection::remove_covered_subsets (ElementSubset * X, bool lower_c
 			nof_updates++;
 		}
 	}
+
+	gettimeofday (& end, NULL);
+	time_updating += (((end.tv_sec - start.tv_sec) * 1000000) + (end.tv_usec - start.tv_usec));
+
 	return number_of_removed_subsets;
 }
 
@@ -210,4 +267,16 @@ unsigned int Collection::get_nof_consults ()
 unsigned int Collection::get_nof_updates () 
 {
 	return nof_updates;
+}
+
+
+int Collection::get_time_consulting ()
+{
+	return time_consulting;
+}
+
+
+int Collection::get_time_updating ()
+{
+	return time_updating;
 }

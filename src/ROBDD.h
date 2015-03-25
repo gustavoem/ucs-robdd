@@ -5,6 +5,7 @@
 #include "ElementSet.h"
 #include "Vertex.h"
 #include "ElementSubset.h"
+#include "CostFunction.h"
 
 class ROBDD
 {
@@ -20,6 +21,15 @@ private:
 	// Stores the number of consults of the robdd
 	//
 	unsigned int nof_consults;
+
+
+	// Time spent updating the ROBDD
+	//
+	unsigned int time_updating;
+
+	// Time spent consulting the ROBDD
+	//
+	unsigned int time_consulting;
 
 	// The set of elements this ROBDD will represent
 	//
@@ -155,6 +165,27 @@ public:
 	//
 	unsigned int get_nof_updates ();
 
+
+	// Returns time elapsed updating the robdd
+	//
+	int get_time_updating ();
+
+	
+	// Returns time elapsed consulting the robdd
+	//
+	int get_time_consulting ();	
+
 };
 
 #endif /* ROBDD_H_ */
+
+
+/*
+
+timeval start, end;
+gettimeofday (& start, NULL);
+
+gettimeofday (& end, NULL);
+time_consulting += (((end.tv_sec - start.tv_sec) * 1000000) + (end.tv_usec - start.tv_usec));
+
+*/

@@ -415,6 +415,8 @@ Vertex * ROBDD::union_step (Vertex * v1, Vertex * v2, map<pair<Vertex *, Vertex*
 void ROBDD::add_interval (ElementSubset * subset, bool orientation)
 {
 	nof_updates++;
+	timeval start, end;
+	gettimeofday (& start, NULL);
 
 	int set_card = elm_set->get_set_cardinality ();
 	Vertex * zero = new Vertex (false, set_card + 1);
@@ -429,6 +431,9 @@ void ROBDD::add_interval (ElementSubset * subset, bool orientation)
 	if (!zero->mark)
 		delete zero;
 	delete_subtree (&root2, &card2);
+
+	gettimeofday (& end, NULL);
+	time_updating += (((end.tv_sec - start.tv_sec) * 1000000) + (end.tv_usec - start.tv_usec));
 }
 
 
@@ -461,6 +466,8 @@ Vertex * ROBDD::build_interval (unsigned int index, unsigned int * card, Element
 bool ROBDD::contains (ElementSubset * subset)
 {
 	nof_consults++;
+	timeval start, end;
+	gettimeofday (& start, NULL);
 	
 	Vertex * v = root;
 	unsigned int index = root->get_index ();
@@ -472,6 +479,10 @@ bool ROBDD::contains (ElementSubset * subset)
 			v = v->get_child (false);
 		index = v->get_index ();
 	}
+	
+	gettimeofday (& end, NULL);
+	time_consulting += (((end.tv_sec - start.tv_sec) * 1000000) + (end.tv_usec - start.tv_usec));
+
 	return v->get_value ();
 }
 
@@ -510,4 +521,15 @@ unsigned int ROBDD::get_nof_consults ()
 unsigned int ROBDD::get_nof_updates () 
 {
 	return nof_updates;
+}
+
+int ROBDD::get_time_consulting ()
+{
+	return time_consulting;
+}
+
+
+int ROBDD::get_time_updating ()
+{
+	return time_updating;
 }

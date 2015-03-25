@@ -146,6 +146,18 @@ int Solver::get_elapsed_time_of_the_algorithm ()
 }
 
 
+int Solver::get_elapsed_time_updating_restrictions ()
+{
+	return elapsed_time_updating_restrictions;
+}
+
+
+int Solver::get_elapsed_time_consulting_restrictions ()
+{
+	return elapsed_time_consulting_restrictions;
+}
+
+
 int Solver::get_elapsed_time_of_all_calls_of_the_minima_exhausting()
 {
 	return elapsed_time_of_all_calls_of_the_minima_exhausting;

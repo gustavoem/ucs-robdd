@@ -202,6 +202,10 @@ int main(int argc, char * argv[])
 					 << solver->get_number_of_restrictions_consults () << endl;
 				cout << endl << "Updates to restrictions: "
 					 << solver->get_number_of_restrictions_updates () << endl;
+				cout << endl << "Elapsed time updating restrictions (in microseconds): "
+					 << solver->get_elapsed_time_updating_restrictions () << endl;
+				cout << endl << "Elapsed time consulting restrictions (in microseconds): "
+					 << solver->get_elapsed_time_consulting_restrictions () << endl;
 			}
 
 			if (algorithm.compare ("ucsr2") == 0)
@@ -218,6 +222,10 @@ int main(int argc, char * argv[])
 					 << solver->get_number_of_restrictions_consults () << endl;
 				cout << endl << "Updates to restrictions: "
 					 << solver->get_number_of_restrictions_updates () << endl;
+				cout << endl << "Elapsed time updating restrictions (in microseconds): "
+					 << solver->get_elapsed_time_updating_restrictions () << endl;
+				cout << endl << "Elapsed time consulting restrictions (in microseconds): "
+					 << solver->get_elapsed_time_consulting_restrictions () << endl;
 			}
 
 			if (algorithm.compare ("pfs") == 0)
