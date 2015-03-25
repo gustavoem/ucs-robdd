@@ -200,6 +200,18 @@ int main(int argc, char * argv[])
 					 << solver->get_number_of_calls_of_minimal_and_maximal_element () << endl;
 			}
 
+			if (algorithm.compare ("ucsr2") == 0)
+			{
+				cout << endl << "Elapsed time of the minima exhausting (in microseconds): "
+				     << solver->get_elapsed_time_of_all_calls_of_the_minima_exhausting () << endl;
+				cout << endl << "Number of calls of the minima exhausting: "
+					 << solver->get_number_of_calls_of_minimum_exhausting () << endl;
+				cout << endl << "Maximum size a graph achives during the minima exhausting: "
+					 << solver->get_max_size_of_the_graph () << endl;
+				cout << endl << "Number of times a minimal (maximal) element is computed: "
+					 << solver->get_number_of_calls_of_minimal_and_maximal_element () << endl;
+			}
+
 			if (algorithm.compare ("pfs") == 0)
 			{
 				cout << endl << "Number of iterations of the main algorithm: "

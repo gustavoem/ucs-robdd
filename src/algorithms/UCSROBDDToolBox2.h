@@ -21,7 +21,6 @@ namespace UCSROBDDToolBox2
 
 	typedef struct MyNode Node;
 
-
 	// Returns a maximal subset, say X, with the following properties:
 	// - X does not contain a subset from this collection;
 	// - there is no subset Y | Y contains X and Y does not contain a subset from this collection.

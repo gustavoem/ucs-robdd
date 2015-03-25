@@ -69,6 +69,9 @@ private:
 
 public:
 
+	int nof_updates;
+	int nof_consults;
+
 	// ROBDD cardinality
 	//
 	unsigned int cardinality;

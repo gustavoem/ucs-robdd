@@ -3,6 +3,9 @@
 
 ROBDD::ROBDD (ElementSet * set)
 {
+	nof_updates  = 0;
+	nof_consults = 0;
+
 	elm_set = set;
 	root = new Vertex (false, elm_set->get_set_cardinality () + 1);
 	cardinality = 1;
@@ -58,6 +61,9 @@ ROBDD::ROBDD (ElementSet * set, int a)
 
 ROBDD::ROBDD (ElementSet * set, ElementSubset * subset)
 {
+	nof_updates  = 0;
+	nof_consults = 0;
+
 	unsigned int set_card = set->get_set_cardinality ();
 	elm_set = set;
 	Vertex * zero = new Vertex (false, set_card + 1);
@@ -408,6 +414,8 @@ Vertex * ROBDD::union_step (Vertex * v1, Vertex * v2, map<pair<Vertex *, Vertex*
 // orientation = true for upper
 void ROBDD::add_interval (ElementSubset * subset, bool orientation)
 {
+	nof_updates++;
+
 	int set_card = elm_set->get_set_cardinality ();
 	Vertex * zero = new Vertex (false, set_card + 1);
 	zero->mark = false;
@@ -452,6 +460,8 @@ Vertex * ROBDD::build_interval (unsigned int index, unsigned int * card, Element
 
 bool ROBDD::contains (ElementSubset * subset)
 {
+	nof_consults++;
+	
 	Vertex * v = root;
 	unsigned int index = root->get_index ();
 	while (!v->is_terminal ()) 
