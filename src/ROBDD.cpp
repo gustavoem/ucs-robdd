@@ -499,3 +499,15 @@ ElementSubset * ROBDD::get_random_zero_evaluated_element ()
 	}
 	return subset;
 }
+
+
+unsigned int ROBDD::get_nof_consults () 
+{
+	return nof_consults;
+}
+
+
+unsigned int ROBDD::get_nof_updates () 
+{
+	return nof_updates;
+}

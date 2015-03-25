@@ -23,7 +23,8 @@
 
 Collection::Collection ()
 {
-	// TODO
+	nof_consults = 0;
+	nof_updates = 0;
 }
 
 
@@ -38,6 +39,7 @@ Collection::~Collection ()
 
 bool Collection::lower_covers (ElementSubset * X)
 {
+	nof_consults++;
 	map<string, ElementSubset *>::iterator it;
 	if (X == NULL)
 	{
@@ -55,6 +57,7 @@ bool Collection::lower_covers (ElementSubset * X)
 
 bool Collection::upper_covers (ElementSubset * X)
 {
+	nof_consults++;
 	map<string, ElementSubset *>::iterator it;
 	if (X == NULL)
 	{
@@ -126,6 +129,7 @@ ElementSubset * Collection::add_subset (ElementSubset * X)
 	Y = new ElementSubset ("", X->get_set_that_contains_this_subset());
 	Y->copy (X);
 	ret = my_map.insert (pair<string, ElementSubset *> (Y->print_subset (), Y));
+	nof_updates++;
 	if (ret.second)
 		return ret.first->second;
 	else
@@ -143,12 +147,14 @@ ElementSubset * Collection::remove_last_subset ()
 	it = my_map.begin ();
 	X = it->second;
 	my_map.erase (it);
+	nof_updates++;
 	return X;
 }
 
 
 bool Collection::has_subset (ElementSubset * X)
 {
+	nof_consults++;
 	if (my_map.find (X->print_subset ()) == my_map.end ())
 		return false;
 	else
@@ -189,7 +195,19 @@ unsigned int Collection::remove_covered_subsets (ElementSubset * X, bool lower_c
 			delete it->second;
 			my_map.erase (it);
 			number_of_removed_subsets++;
+			nof_updates++;
 		}
 	}
 	return number_of_removed_subsets;
+}
+
+unsigned int Collection::get_nof_consults () 
+{
+	return nof_consults;
+}
+
+
+unsigned int Collection::get_nof_updates () 
+{
+	return nof_updates;
 }

@@ -11,6 +11,16 @@ class ROBDD
 
 private:
 	
+
+	// Stores the number of updates (add_interval) of the robdd
+	//
+	unsigned int nof_updates;
+	
+
+	// Stores the number of consults of the robdd
+	//
+	unsigned int nof_consults;
+
 	// The set of elements this ROBDD will represent
 	//
 	ElementSet * elm_set;
@@ -68,9 +78,6 @@ private:
 
 
 public:
-
-	int nof_updates;
-	int nof_consults;
 
 	// ROBDD cardinality
 	//
@@ -137,6 +144,17 @@ public:
 	// Returns a random subset that is evaluated by zero.
 	//
 	ElementSubset * get_random_zero_evaluated_element ();
+
+
+	// Returns nof_consults
+	//
+	unsigned int get_nof_consults ();
+
+
+	// Returns nof_updates
+	//
+	unsigned int get_nof_updates ();
+
 };
 
 #endif /* ROBDD_H_ */

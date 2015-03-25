@@ -161,6 +161,10 @@ void UCurveSearch::get_minima_list (unsigned int max_size_of_minima_list)
 	delete L;
 
 	number_of_visited_subsets =  cost_function->get_number_of_calls_of_cost_function ();
+	number_of_restrictions_consults = lower_restriction->get_nof_consults (); 
+									+ upper_restriction->get_nof_consults ();
+	number_of_restrictions_updates = lower_restriction->get_nof_updates (); 
+									+ upper_restriction->get_nof_updates ();
 
 	gettimeofday (& end_program, NULL);
 	elapsed_time_of_the_algorithm = diff_us (end_program, begin_program);

@@ -35,6 +35,8 @@ Solver::Solver ()
 	number_of_calls_of_minimum_exhausting = 0;
 	number_of_calls_of_minimal_and_maximal_element = 0;
 	max_size_of_the_graph = 0;
+	number_of_restrictions_consults = 0;
+	number_of_restrictions_updates = 0;
 
 	// Used by PFS and similar ones
 	number_of_iterations = 0;
@@ -159,6 +161,18 @@ unsigned int Solver::get_number_of_calls_of_minimum_exhausting ()
 unsigned int Solver::get_max_size_of_the_graph ()
 {
 	return max_size_of_the_graph;
+}
+
+
+unsigned int Solver::get_number_of_restrictions_consults ()
+{
+	return number_of_restrictions_consults;
+}
+
+
+unsigned int Solver::get_number_of_restrictions_updates ()
+{
+	return number_of_restrictions_updates;
 }
 
 

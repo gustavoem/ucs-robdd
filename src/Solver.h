@@ -84,6 +84,13 @@ protected:
 	//
     unsigned int number_of_iterations;
 
+    // Stores the number of consults to the restrictions
+    //
+    unsigned int number_of_restrictions_consults;
+
+    // Stores the number of updates to the restrictions
+    //
+    unsigned int number_of_restrictions_updates;
 
 	// Functor with operator () as a comparison function.
 	//
@@ -170,6 +177,14 @@ public:
 	//
 	unsigned int get_number_of_iterations ();
 
+
+	// Returns the number of consults to the restriction list
+	//
+	unsigned int get_number_of_restrictions_consults ();
+
+	// Returns the number of updates to the restriction list
+	//
+	unsigned int get_number_of_restrictions_updates ();
 
 	// Returns the maximum size of the forest A.
 	//

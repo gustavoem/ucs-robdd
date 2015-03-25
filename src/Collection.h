@@ -36,6 +36,16 @@ private:
 	//
 	unsigned int remove_covered_subsets (ElementSubset *, bool);
 
+	// Stores the number of updates (add_interval) of the robdd
+	//
+	unsigned int nof_updates;
+	
+
+	// Stores the number of consults of the robdd
+	//
+	unsigned int nof_consults;
+
+
 public:
 
 	// container map; it is implemented as a self-balancing binary search tree
@@ -122,6 +132,16 @@ public:
 	// is contained by the subset X, and false otherwise.
 	//
 	bool upper_covers(ElementSubset *);
+
+
+	// Returns nof_consults
+	//
+	unsigned int get_nof_consults ();
+
+
+	// Returns nof_updates
+	//
+	unsigned int get_nof_updates ();
 
 };
 

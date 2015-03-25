@@ -80,11 +80,9 @@ void UCSROBDD2::get_minima_list (unsigned int max_size_of_minima_list)
 	delete L;
 
 	number_of_visited_subsets =  cost_function->get_number_of_calls_of_cost_function ();
+	number_of_restrictions_consults = restrictions->get_nof_consults ();
+	number_of_restrictions_updates = restrictions->get_nof_updates ();
 
 	gettimeofday (& end_program, NULL);
 	elapsed_time_of_the_algorithm = diff_us (end_program, begin_program);
-
-	cout << "Number of restrictions updates: " << restrictions->nof_updates << endl;
-	cout << "Number of consults to the restriction list: " << restrictions->nof_consults << endl;
-	cout.flush();
 }

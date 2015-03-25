@@ -97,8 +97,8 @@ int main(int argc, char * argv[])
 			solver = new UCurveSearch ();
 		else if (algorithm.compare ("ucsr") == 0)
 			solver = new UCSROBDD ();
-                else if (algorithm.compare ("ucsr2") == 0)
-                        solver = new UCSROBDD2 ();
+        else if (algorithm.compare ("ucsr2") == 0)
+            solver = new UCSROBDD2 ();
 		else if (algorithm.compare ("es") == 0)
 			solver = new ExhaustiveSearch ();
 		else if (algorithm.compare ("sfs") == 0)
@@ -198,6 +198,10 @@ int main(int argc, char * argv[])
 					 << solver->get_max_size_of_the_graph () << endl;
 				cout << endl << "Number of times a minimal (maximal) element is computed: "
 					 << solver->get_number_of_calls_of_minimal_and_maximal_element () << endl;
+				cout << endl << "Consults to restrictions: "
+					 << solver->get_number_of_restrictions_consults () << endl;
+				cout << endl << "Updates to restrictions: "
+					 << solver->get_number_of_restrictions_updates () << endl;
 			}
 
 			if (algorithm.compare ("ucsr2") == 0)
@@ -210,6 +214,10 @@ int main(int argc, char * argv[])
 					 << solver->get_max_size_of_the_graph () << endl;
 				cout << endl << "Number of times a minimal (maximal) element is computed: "
 					 << solver->get_number_of_calls_of_minimal_and_maximal_element () << endl;
+				cout << endl << "Consults to restrictions: "
+					 << solver->get_number_of_restrictions_consults () << endl;
+				cout << endl << "Updates to restrictions: "
+					 << solver->get_number_of_restrictions_updates () << endl;
 			}
 
 			if (algorithm.compare ("pfs") == 0)
