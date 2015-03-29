@@ -157,9 +157,14 @@ print OUT "<TD><CENTER>&nbsp;</CENTER></TD>
        <TD><CENTER>&nbsp;</CENTER></TD>
        <TD colspan=$col_span><CENTER>Cost Function Time (sec)</CENTER></TD>
        <TD><CENTER>&nbsp;</CENTER></TD>
+       <TD colspan=$col_span><CENTER>Restriction update time (sec)</CENTER></TD>
+       <TD><CENTER>&nbsp;</CENTER></TD>
+       <TD colspan=$col_span><CENTER>Restriction consult time (sec)</CENTER></TD>
+       <TD><CENTER>&nbsp;</CENTER></TD>
        <TD colspan=$col_span><CENTER>\# Computed nodes</CENTER></TD>
        <TD><CENTER>&nbsp;</CENTER></TD>
        <TD colspan=$col_span><CENTER>\# The best solution</CENTER></TD>
+
        </TR>\n";
 print OUT "<TR bgcolor='yellow'>\n";
 
@@ -175,6 +180,14 @@ for (my $i = 0; $i < $number_of_solvers; $i++)
   {
     printf OUT "<TD><CENTER>&nbsp; %s &nbsp;</CENTER></TD>", $solvers[$i];
   }
+print OUT  "<TD><CENTER>&nbsp;</CENTER></TD>";
+
+for (my $i = 0; $i < 2; $i++)
+{
+  printf OUT "<TD><CENTER>&nbsp; %s &nbsp;</CENTER></TD>", $solvers[0];
+  printf OUT "<TD><CENTER>&nbsp; %s &nbsp;</CENTER></TD>", $solvers[2];
+}
+
 print OUT  "<TD><CENTER>&nbsp;</CENTER></TD>";
 for (my $i = 0; $i < $number_of_solvers; $i++)
   {
@@ -413,6 +426,10 @@ foreach my $i (@experiments)
 
   # UCS, UCS2a, and UCS2b algorithms only
   #
+  my @average_restriction_update_time;
+  my @average_restriction_consult_time;
+  my @average_restriction_update;
+  my @average_restriction_consult;
   my @average_calls_DFS;                
   my @average_graph_size;
   my @average_calls_minimal_maximal;  # equivalent to the average number of iterations of the main algorithm
@@ -425,6 +442,11 @@ foreach my $i (@experiments)
 
   for (my $k = 0; $k < $number_of_solvers; $k++)
     {
+      $average_restriction_update_time[$k] = 0;
+      $average_restriction_consult_time[$k] = 0;
+      $average_restriction_update[$k] = 0;
+      $average_restriction_consult[$k] = 0;
+
       $average_calls_of_cost_function[$k] = 0;
       $average_time_of_cost_function[$k] = 0;
       $average_time_of_solver[$k] = 0;
@@ -467,7 +489,7 @@ foreach my $i (@experiments)
 	  $average_time_of_solver[$k] += tv_interval ($t0, $t1);    
 	  open (ARQ, "result.log");
 	  while (<ARQ>)
-	    {
+	  {
 	      if ($_ =~ /(\<\d+\>)\s+\:\s+(\S+)/)
 		{
 		  if ($is_W_operator)
@@ -477,7 +499,7 @@ foreach my $i (@experiments)
 		  $minimum_of_solvers[$k] = $2;
 		}
 	      elsif ($_ =~ /^Number\s+of\s+visited\s+subsets\:\s+(\S+)/)
-		{
+		{ 
 		  $average_calls_of_cost_function[$k] += $1;
 		}
 	      elsif ($_ =~ /subsets\:\s+(\d+)\s+microseconds/)
@@ -508,7 +530,11 @@ foreach my $i (@experiments)
 		{
 		  $average_number_of_iterations[$k] += $1;
 		}
-	    }
+        elsif ($_ =~ /time\s+updating\s+restrictions\s+\(in\s+microseconds\)\:\s+(\S+)/)
+        {
+          $average_restriction_update[$k] += $1;
+        }
+	  }
 	  close(ARQ);
 
 	  if ($is_heuristic_mode == 2)
@@ -555,6 +581,9 @@ foreach my $i (@experiments)
 
   for (my $k = 0; $k < $number_of_solvers; $k++)
     {
+      $average_restriction_update[$k] /= $repeticoes;
+      $average_restriction_consult[$k] /= $repeticoes;
+
       $average_calls_of_cost_function[$k] /= $repeticoes;	 
       $average_time_of_cost_function[$k] /= ($repeticoes * 1000000);
       $average_time_of_solver[$k] /= $repeticoes;
@@ -569,7 +598,7 @@ foreach my $i (@experiments)
 
       $tempo_total{$solvers[$k]}->[$i] = $average_time_of_solver[$k];
       if ($average_time_of_solver[$k] > $max_time){    # max_time e' usado para setar a escala do eixo y dos graficos,
-	$max_time = $average_time_of_solver[$k];       # permitindo assim a comparacao entre diferentes graficos
+	     $max_time = $average_time_of_solver[$k];       # permitindo assim a comparacao entre diferentes graficos
       }
       $tempo_funcao_custo{$solvers[$k]}->[$i] = $average_time_of_cost_function[$k];
       
@@ -601,6 +630,24 @@ foreach my $i (@experiments)
     }
   printf OUT "<TD><CENTER>&nbsp;</CENTER></TD>\n";
   printf OUT2 "&";
+
+#entrei aqui
+  printf OUT "<TD><CENTER>&nbsp;</CENTER></TD>\n";
+  for (my $k = 0; $k <= 2; $k+=2)
+    {
+      printf OUT "<TD><CENTER>&nbsp;%4.2f&nbsp;</CENTER></TD>", $average_restriction_update[$k];
+      printf OUT2 "& %4.2f ", $average_restriction_update[$k];
+    }
+  
+  printf OUT "<TD><CENTER>&nbsp;</CENTER></TD>\n";
+  for (my $k = 0; $k <= 2; $k+=2)
+    {
+      printf OUT "<TD><CENTER>&nbsp;%4.2f&nbsp;</CENTER></TD>", $average_restriction_consult[$k];
+      printf OUT2 "& %4.2f ", $average_restriction_consult[$k];
+    }
+#sai
+
+  printf OUT "<TD><CENTER>&nbsp;</CENTER></TD>\n";
   for (my $k = 0; $k < $number_of_solvers; $k++)
     {
       printf OUT "<TD><CENTER>&nbsp;%5.2f&nbsp;</CENTER></TD>", $average_calls_of_cost_function[$k];
