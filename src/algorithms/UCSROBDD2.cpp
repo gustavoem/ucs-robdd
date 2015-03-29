@@ -80,6 +80,7 @@ void UCSROBDD2::get_minima_list (unsigned int max_size_of_minima_list)
 	number_of_restrictions_consults = restrictions->get_nof_consults ();
 	number_of_restrictions_updates = restrictions->get_nof_updates ();
 	elapsed_time_consulting_restrictions = restrictions->get_time_consulting ();
+	cout << "time consulting: " << elapsed_time_updating_restrictions << endl;
 	elapsed_time_updating_restrictions = restrictions->get_time_updating ();
 
 	gettimeofday (& end_program, NULL);

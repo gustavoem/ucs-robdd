@@ -5,6 +5,8 @@ ROBDD::ROBDD (ElementSet * set)
 {
 	nof_updates  = 0;
 	nof_consults = 0;
+	time_consulting = 0;
+	time_updating = 0;
 
 	elm_set = set;
 	root = new Vertex (false, elm_set->get_set_cardinality () + 1);
