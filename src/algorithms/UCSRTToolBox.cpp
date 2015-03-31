@@ -101,6 +101,17 @@ namespace UCSRTToolBox
 				}
 				else
 				{
+					if ((R->contains (X->vertex)) && ((! RL->lower_covers (X->vertex)) && (! RU->upper_covers (X->vertex))))
+					{
+						cout << "Exitem elementos da robdd que nao estao na colleciton" << endl;
+						return;
+					}
+					if ((RL->lower_covers (X->vertex) || RU->upper_covers (X->vertex)) && (!R->contains (X->vertex)))
+					{
+						cout << "Existem elementos de collection que nao estao na robdd" << endl;
+						return;
+					}
+
 					Stack.push_back (X);
 
 					// insert X into the graph
@@ -241,12 +252,6 @@ namespace UCSRTToolBox
 				X.add_element (*i);
 			}
 
-			if ((R->contains (&X)) && ((! RL->lower_covers (&X)) && (! RU->upper_covers (&X))))
-				cout << "Exitem elementos da robdd que nao estao na colleciton" << endl;
-
-			if ((RL->lower_covers (&X) || RU->upper_covers (&X)) && (!R->contains (&X)))
-				cout << "Existem elementos de collection que nao estao na robdd" << endl;
-
 		    if ((Graph->find (X.print_subset ()) == Graph->end () ) &&
 		    	(! R->contains (&X)))
 			{
@@ -257,10 +262,22 @@ namespace UCSRTToolBox
 				return N;
 			}
 
-			if ((direction == 1) && (R->contains (&X)) ) // X is lower adjacent to Y[vertex]
+
+			if ((R->contains (&X)) && ((! RL->lower_covers (&X)) && (! RU->upper_covers (&X))))
+			{
+				cout << "Exitem elementos da robdd que nao estao na colleciton" << endl;
+				return NULL;
+			}
+			if ((RL->lower_covers (&X) || RU->upper_covers (&X)) && (!R->contains (&X)))
+			{
+				cout << "Existem elementos de collection que nao estao na robdd" << endl;
+				return NULL;
+			}
+
+			if ((direction == 1) && (RL->lower_covers (&X)) ) // X is lower adjacent to Y[vertex]
 				Y->lower_flag->remove_element (*i);
 
-			if ((direction == 0) && (R->contains (&X)) ) // X is upper adjacent to Y[vertex]
+			if ((direction == 0) && (RU->upper_covers (&X)) ) // X is upper adjacent to Y[vertex]
 				Y->upper_flag->remove_element (*i);
 
 		} // while Y has adjacent elements to Y->vertex to explore
