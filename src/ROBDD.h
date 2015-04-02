@@ -178,14 +178,3 @@ public:
 };
 
 #endif /* ROBDD_H_ */
-
-
-/*
-
-timeval start, end;
-gettimeofday (& start, NULL);
-
-gettimeofday (& end, NULL);
-time_consulting += (((end.tv_sec - start.tv_sec) * 1000000) + (end.tv_usec - start.tv_usec));
-
-*/
