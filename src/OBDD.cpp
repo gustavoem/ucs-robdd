@@ -10,6 +10,7 @@ OBDD::OBDD (ElementSet * set)
 
 	elm_set = set;
 	root = new PVertex (false, elm_set->get_set_cardinality () + 1);
+	zero_node = root;
 	cardinality = 1;
 }
 
@@ -21,6 +22,7 @@ OBDD::OBDD (ElementSet * set, ElementSubset * subset)
 	unsigned int set_card = set->get_set_cardinality ();
 	elm_set = set;
 	PVertex * zero = new PVertex (false, set_card + 1);
+	zero_node = zero;
 	PVertex * one = new PVertex (true, set_card + 1);
 	root = new PVertex (elm_set->get_element (0), 1);	
 	cardinality = 3;
@@ -259,6 +261,9 @@ void OBDD::reduce ()
 	
 	root = new_root;
 	cardinality = root->get_id ();
+	
+	if (cardinality == 1) /* trivial tree*/
+		zero_node = NULL;
 
 	for (unsigned int i = 1; i <= set_card + 1; i++)
 		delete vlists[i];
@@ -279,6 +284,7 @@ void OBDD::union_to (PVertex * root2)
 	PVertex * new_root = union_step (root, root2, &pairs, &new_cardinality, \
 									one, zero);
 
+	zero_node = zero;
 	if (one->mark)
 		new_cardinality++;
 	else
@@ -287,7 +293,10 @@ void OBDD::union_to (PVertex * root2)
 	if (zero->mark)
 		new_cardinality++;
 	else
+	{
+		zero_node = NULL;
 		delete zero;
+	}
 
 	delete_subtree (&root, &cardinality);
 	cardinality = new_cardinality;
@@ -382,15 +391,21 @@ void OBDD::add_interval (ElementSubset * subset, bool orientation)
 	int set_card = elm_set->get_set_cardinality ();
 	PVertex * zero = new PVertex (false, set_card + 1);
 	zero->mark = false;
+	zero_node = zero;
 	PVertex * one = new PVertex (true, set_card + 1);
 	one->mark = false;
 	unsigned int card2 = 0;
 	PVertex * root2 = build_interval (0, &card2, subset, zero, one, orientation);
 	union_to (root2);
+
 	if (!one->mark)
 		delete one;
 	if (!zero->mark)
+	{
+		zero_node = NULL;
 		delete zero;
+	}
+
 	delete_subtree (&root2, &card2);
 
 	gettimeofday (& end, NULL);
@@ -453,24 +468,18 @@ bool OBDD::contains (ElementSubset * subset)
 
 ElementSubset * OBDD::get_random_zero_evaluated_element ()
 {
-	PVertex * v = root;
-	if (v->is_terminal () && v->get_value ())
+	PVertex * v = zero_node;
+	if (v == NULL)
 		return NULL;
 
 	ElementSubset * subset = new ElementSubset ("", elm_set);
-	while (!v->is_terminal ())
+	while (v != root)
 	{
-		PVertex * next_v;
-		if (v->get_child (true)->is_terminal () && v->get_child (true)->get_value ())
-			next_v = v->get_child (false);
-		else if (v->get_child (false)->is_terminal () && v->get_child (false)->get_value ())
-			next_v = v->get_child (true);
-		else
-			next_v = v->get_child ((int) rand() % 2);
-
-		if (next_v == v->get_child (true))
+		PVertex * parent = v->get_some_parent ();
+		if (v == parent->get_child (true))
 			subset->add_element (v->get_index () - 1);
-		v = next_v;
+
+		v = parent;
 	}
 	return subset;
 }

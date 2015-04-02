@@ -40,6 +40,10 @@ private:
 	//
 	PVertex * root;	
 
+	// The zero-node of the OBDD
+	//
+	PVertex * zero_node;
+
 	// Prints the sub-tree that has the parameter PVertex as root
 	//
 	void print(PVertex *);

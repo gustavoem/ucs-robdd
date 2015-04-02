@@ -118,5 +118,8 @@ void PVertex::add_parent (PVertex * v)
 
 PVertex * PVertex::get_some_parent ()
 {
-	return parents.front ();
+	if (parents.empty ())
+		return NULL;
+	else
+		return parents.front ();
 }
