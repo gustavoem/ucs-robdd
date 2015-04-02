@@ -39,6 +39,7 @@
 #include "algorithms/UCSROBDD.h"
 #include "algorithms/UCSROBDD2.h"
 #include "algorithms/UCSRT.h"
+#include "algorithms/UCSOBDD.h"
 
 // Function to parse and verify the correctness of the parameters.
 // It returns '0' if all the parameters were correct, '1' if there was an error,
@@ -102,6 +103,8 @@ int main(int argc, char * argv[])
             solver = new UCSROBDD2 ();
         else if (algorithm.compare ("ucsrt") == 0)
         	solver = new UCSRT ();
+        else if (algorithm.compare ("ucso") == 0)
+        	solver = new UCSOBDD ();
 		else if (algorithm.compare ("es") == 0)
 			solver = new ExhaustiveSearch ();
 		else if (algorithm.compare ("sfs") == 0)
@@ -386,7 +389,8 @@ under certain conditions; see 'LICENSE.TXT' for details.");
 			     (strcmp (argv[i], "ubb") == 0)   ||
 			     (strcmp (argv[i], "ucsr") == 0)  ||
                  (strcmp (argv[i], "ucsr2") == 0) ||
-                 (strcmp (argv[i], "ucsrt") == 0) )
+                 (strcmp (argv[i], "ucsrt") == 0) ||
+                 (strcmp (argv[i], "ucso") == 0) )
 			{
 				a->clear();
 				a->append(argv[i]);

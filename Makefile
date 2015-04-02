@@ -32,7 +32,7 @@ OBJS =		src/Element.o src/ElementSet.o src/ElementSubset.o \
 			src/Vertex.o src/ROBDD.o src/algorithms/UCSROBDD.o src/algorithms/UCSROBDDToolBox.o \
 			src/algorithms/UCSROBDD2.o src/algorithms/UCSROBDDToolBox2.o \
 			src/algorithms/UCSRT.o src/algorithms/UCSRTToolBox.o src/OBDD.o src/PVertex.o \
-			src/algorithms/UCSOBDD.o \
+			src/algorithms/UCSOBDD.o src/algorithms/UCSOBDDToolBox.o \
 			
 TOBJS =		test/ElementTest.o test/ElementSetTest.o test/ElementSubsetTest.o \
 			test/CollectionTest.o test/SolverTest.o \
