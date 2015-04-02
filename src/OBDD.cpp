@@ -301,7 +301,7 @@ void OBDD::union_to (PVertex * root2)
 	delete_subtree (&root, &cardinality);
 	cardinality = new_cardinality;
 	root = new_root;
-	reduce ();
+	//reduce ();
 }
 
 PVertex * OBDD::union_step (PVertex * v1, PVertex * v2, map<pair<PVertex *, PVertex*>,\
