@@ -7,6 +7,7 @@ ROBDD::ROBDD (ElementSet * set)
 	nof_consults = 0;
 	time_consulting = 0;
 	time_updating = 0;
+	time_reducing = 0;
 
 	elm_set = set;
 	root = new Vertex (false, elm_set->get_set_cardinality () + 1);
@@ -210,6 +211,9 @@ void ROBDD::fill_vlist (Vertex * v, list<Vertex *> ** vlists)
 
 void ROBDD::reduce ()
 { 
+	timeval start, end;
+	gettimeofday (& start, NULL);
+
 	Vertex ** subgraph = (Vertex **) calloc (cardinality + 1, sizeof (Vertex *));
 	unsigned int set_card = elm_set->get_set_cardinality ();
 	list<Vertex *> ** vlists = (list<Vertex *> **) calloc (set_card + 2, sizeof (list<Vertex *> *));
@@ -307,6 +311,9 @@ void ROBDD::reduce ()
 		delete vlists[i];
 	free (vlists);
 	free (subgraph);	
+
+	gettimeofday (& end, NULL);
+	time_reducing += (((end.tv_sec - start.tv_sec) * 1000000) + (end.tv_usec - start.tv_usec));
 }
 
 
@@ -534,4 +541,10 @@ int ROBDD::get_time_consulting ()
 int ROBDD::get_time_updating ()
 {
 	return time_updating;
+}
+
+
+int ROBDD::get_time_reducing ()
+{
+	return time_reducing;
 }

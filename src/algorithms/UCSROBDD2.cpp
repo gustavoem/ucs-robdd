@@ -81,6 +81,7 @@ void UCSROBDD2::get_minima_list (unsigned int max_size_of_minima_list)
 	number_of_restrictions_updates = restrictions->get_nof_updates ();
 	elapsed_time_consulting_restrictions = restrictions->get_time_consulting ();
 	elapsed_time_updating_restrictions = restrictions->get_time_updating ();
+	elapsed_time_reducing_restrictions = restrictions->get_time_reducing ();
 
 	gettimeofday (& end_program, NULL);
 	elapsed_time_of_the_algorithm = diff_us (end_program, begin_program);
