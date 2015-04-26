@@ -63,6 +63,12 @@ protected:
 
 
     // Stores the time (in microseconds) spent by the
+	// reduction of the restriction
+	//
+    int elapsed_time_reducing_restrictions;
+
+
+    // Stores the time (in microseconds) spent by the
 	// consults of restrictions
 	//
     int elapsed_time_consulting_restrictions;
@@ -184,6 +190,11 @@ public:
 	// Returns the elapsed time consulting restrictions
 	//
 	int get_elapsed_time_consulting_restrictions ();
+
+
+	// Returns the elapsed time reducing restrictions
+	//
+	int get_elapsed_time_reducing_restrictions ();
 
 
 	// Returns the number of calls of the minimal and maximal element subroutines.

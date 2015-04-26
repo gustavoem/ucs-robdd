@@ -193,10 +193,11 @@ int main(int argc, char * argv[])
 			cout << endl << "Elapsed time of execution of the algorithm (in microseconds): "
 				 << solver->get_elapsed_time_of_the_algorithm () << endl;
 
-			if ( algorithm.compare ("ucs") == 0   ||
-				 algorithm.compare ("ucsr2") == 0 ||
-				 algorithm.compare ("ucsrt") == 0 ||
-				 algorithm.compare ("ucso") == 0   )
+			if ( (algorithm.compare ("ucs")   == 0) ||
+				 (algorithm.compare ("ucsr")  == 0) ||
+				 (algorithm.compare ("ucsr2") == 0) ||
+				 (algorithm.compare ("ucsrt") == 0) ||
+				 (algorithm.compare ("ucso") == 0)  )
 			{
 				cout << endl << "Elapsed time of the minima exhausting (in microseconds): "
 				     << solver->get_elapsed_time_of_all_calls_of_the_minima_exhausting () << endl;
@@ -212,6 +213,8 @@ int main(int argc, char * argv[])
 					 << solver->get_number_of_restrictions_updates () << endl;
 				cout << endl << "Elapsed time updating restrictions (in microseconds): "
 					 << solver->get_elapsed_time_updating_restrictions () << endl;
+				cout << endl << "Elapsed time reducing restrictions (in microseconds): "
+					 << solver->get_elapsed_time_reducing_restrictions () << endl;
 				cout << endl << "Elapsed time consulting restrictions (in microseconds): "
 					 << solver->get_elapsed_time_consulting_restrictions () << endl;
 			}

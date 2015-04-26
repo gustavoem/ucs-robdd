@@ -31,6 +31,11 @@ private:
 	//
 	unsigned int time_consulting;
 
+
+	// Time spent reducing the ROBDD
+	//
+	unsigned int time_reducing;
+
 	// The set of elements this ROBDD will represent
 	//
 	ElementSet * elm_set;
@@ -175,6 +180,10 @@ public:
 	//
 	int get_time_consulting ();	
 
+
+	// Returns time elapsed consulting the robdd
+	//
+	int get_time_reducing ();	
 };
 
 #endif /* ROBDD_H_ */

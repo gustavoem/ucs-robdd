@@ -158,6 +158,12 @@ int Solver::get_elapsed_time_consulting_restrictions ()
 }
 
 
+int Solver::get_elapsed_time_reducing_restrictions ()
+{
+	return elapsed_time_reducing_restrictions;
+}
+
+
 int Solver::get_elapsed_time_of_all_calls_of_the_minima_exhausting()
 {
 	return elapsed_time_of_all_calls_of_the_minima_exhausting;
