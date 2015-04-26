@@ -101,7 +101,7 @@ namespace UCSRTToolBox
 				}
 				else
 				{
-					if ((R->contains (X->vertex)) && ((! RL->lower_covers (X->vertex)) && (! RU->upper_covers (X->vertex))))
+					if ((R->contains (X->vertex)) && ((! RL->lower_covers (X->vertex)) || (! RU->upper_covers (X->vertex))))
 					{
 						cout << "Exitem elementos da robdd que nao estao na colleciton" << endl;
 						return;
@@ -263,7 +263,7 @@ namespace UCSRTToolBox
 			}
 
 
-			if ((R->contains (&X)) && ((! RL->lower_covers (&X)) && (! RU->upper_covers (&X))))
+			if (R->contains (&X) && ((! RL->lower_covers (&X)) && (! RU->upper_covers (&X))))
 			{
 				cout << "Exitem elementos da robdd que nao estao na colleciton" << endl;
 				return NULL;
