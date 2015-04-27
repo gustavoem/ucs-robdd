@@ -54,6 +54,7 @@ namespace UCSRTToolBox
 
 	void update_lower_restriction (ROBDD * R, Collection * RL, ElementSubset * A)
 	{
+		cout << "Adicionado intervalo [0, " << A->print_subset () << "\b]" << endl;
 		R->add_interval (A, false);
 		if (! RL->lower_covers (A)){
 			RL->remove_lower_covered_subsets (A);
@@ -64,6 +65,7 @@ namespace UCSRTToolBox
 
 	void update_upper_restriction (ROBDD * R, Collection * RU, ElementSubset * A)
 	{
+		cout << "Adicionado intervalo [" << A->print_subset () << ", S]" << endl;
 		R->add_interval (A, true);
 		if (!RU->upper_covers (A))
 		{
@@ -92,7 +94,9 @@ namespace UCSRTToolBox
 
 			do
 			{
+				cout << "Vou selecionar X adjacente a Y = " << Y->vertex->print_subset () << endl;
 				X = select_an_unvisited_adjacent (&Graph, R, RL, RU, Y, &i);
+				cout << "Já selecionei um X = " << X->vertex->print_subset () << " adjacente a Y" << endl;
 
 				if (X == NULL)  // i.e., if Y has no unvisited adjacent element
 				{
@@ -101,15 +105,17 @@ namespace UCSRTToolBox
 				}
 				else
 				{
-					if ((R->contains (X->vertex)) && ((! RL->lower_covers (X->vertex)) || (! RU->upper_covers (X->vertex))))
+					if (R->contains (X->vertex) && (!RL->lower_covers (X->vertex)) && (!RU->upper_covers (X->vertex)))
 					{
-						cout << "Exitem elementos da robdd que nao estao na colleciton" << endl;
-						return;
+						cout << "* Exitem elementos (" << X->vertex->print_subset() << ") da robdd que nao estao na colleciton" << endl;
+						cout.flush ();
+						exit (1);
 					}
 					if ((RL->lower_covers (X->vertex) || RU->upper_covers (X->vertex)) && (!R->contains (X->vertex)))
 					{
-						cout << "Existem elementos de collection que nao estao na robdd" << endl;
-						return;
+						cout << "* Existem elementos de collection (" << X->vertex->print_subset() << ") que nao estao na robdd" << endl;
+						cout.flush ();
+						exit (1);
 					}
 
 					Stack.push_back (X);
@@ -263,15 +269,17 @@ namespace UCSRTToolBox
 			}
 
 
-			if (R->contains (&X) && ((! RL->lower_covers (&X)) && (! RU->upper_covers (&X))))
+			if ((R->contains (&X)) && (!RL->lower_covers (&X)) && (!RU->upper_covers (&X)))
 			{
 				cout << "Exitem elementos da robdd que nao estao na colleciton" << endl;
-				return NULL;
+				cout.flush ();
+				exit (1);
 			}
 			if ((RL->lower_covers (&X) || RU->upper_covers (&X)) && (!R->contains (&X)))
 			{
 				cout << "Existem elementos de collection que nao estao na robdd" << endl;
-				return NULL;
+				cout.flush ();
+				exit (1);
 			}
 
 			if ((direction == 1) && (RL->lower_covers (&X)) ) // X is lower adjacent to Y[vertex]

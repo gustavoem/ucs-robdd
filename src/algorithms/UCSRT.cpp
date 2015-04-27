@@ -24,10 +24,10 @@ UCSRT::~UCSRT ()
 
 void UCSRT::get_minima_list (unsigned int max_size_of_minima_list)
 {
-	restrictions = new ROBDD (set);
 	timeval begin_exhausting, end_exhausting, begin_program, end_program;
 	gettimeofday (& begin_program, NULL);
 
+	restrictions = new ROBDD (set);
 	unsigned int max_graph_of_this_iteration;
 	Collection * L = new Collection ();
 	bool search_space_is_empty = false;
@@ -39,16 +39,25 @@ void UCSRT::get_minima_list (unsigned int max_size_of_minima_list)
 	do
 	{
 		max_graph_of_this_iteration = 0;
-		X = restrictions->get_random_zero_evaluated_element ();
+		//X = restrictions->get_random_zero_evaluated_element ();
+		X = UCSRTToolBox::get_minimal_subset (restrictions, set);
+
 		if (X != NULL)
 		{
 			gettimeofday (& begin_exhausting, NULL);
+
 			M = UCSRTToolBox::create_node (X);
 			M->vertex->cost = cost_function->cost (M->vertex);
+
+			// X is minimal, thus there is no lower adjacent
+			UCSRTToolBox::update_lower_restriction (restrictions, lower_restriction, X);
+			M->lower_flag->set_empty_subset ();
+
 			max_graph_of_this_iteration = 1;
 			UCSRTToolBox::DFS
 				(M, L, restrictions, upper_restriction, lower_restriction,
 				 cost_function, & max_graph_of_this_iteration);
+
 			gettimeofday (& end_exhausting, NULL);
 			elapsed_time_of_all_calls_of_the_minima_exhausting +=
 			diff_us (end_exhausting, begin_exhausting);		
