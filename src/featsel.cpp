@@ -38,6 +38,7 @@
 #include "algorithms/PosetForestSearch.h"
 #include "algorithms/UCSROBDD.h"
 #include "algorithms/UCSROBDD2.h"
+#include "algorithms/UCSROBDD3.h"
 #include "algorithms/UCSRT.h"
 #include "algorithms/UCSOBDD.h"
 
@@ -105,6 +106,8 @@ int main(int argc, char * argv[])
         	solver = new UCSRT ();
         else if (algorithm.compare ("ucso") == 0)
         	solver = new UCSOBDD ();
+        else if (algorithm.compare ("ucsr3") == 0)
+        	solver = new UCSROBDD3 ();
 		else if (algorithm.compare ("es") == 0)
 			solver = new ExhaustiveSearch ();
 		else if (algorithm.compare ("sfs") == 0)
@@ -197,7 +200,8 @@ int main(int argc, char * argv[])
 				 (algorithm.compare ("ucsr")  == 0) ||
 				 (algorithm.compare ("ucsr2") == 0) ||
 				 (algorithm.compare ("ucsrt") == 0) ||
-				 (algorithm.compare ("ucso") == 0)  )
+				 (algorithm.compare ("ucso") == 0)  ||
+				 (algorithm.compare ("ucsr3") == 0) )
 			{
 				cout << endl << "Elapsed time of the minima exhausting (in microseconds): "
 				     << solver->get_elapsed_time_of_all_calls_of_the_minima_exhausting () << endl;
@@ -374,6 +378,7 @@ under certain conditions; see 'LICENSE.TXT' for details.");
 			     (strcmp (argv[i], "ubb") == 0)   ||
 			     (strcmp (argv[i], "ucsr") == 0)  ||
                  (strcmp (argv[i], "ucsr2") == 0) ||
+                 (strcmp (argv[i], "ucsr3") == 0) ||
                  (strcmp (argv[i], "ucsrt") == 0) ||
                  (strcmp (argv[i], "ucso") == 0) )
 			{
