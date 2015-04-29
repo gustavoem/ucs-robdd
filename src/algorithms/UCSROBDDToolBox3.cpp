@@ -3,7 +3,7 @@
 
 namespace UCSROBDDToolBox3
 {
-	
+
 	void update_lower_restriction (ROBDD * R, ElementSubset * A)
 	{
 		R->add_interval (A, false);
@@ -16,26 +16,26 @@ namespace UCSROBDDToolBox3
 	}
 
 
-	void DFS (Node * M, Collection * L, ROBDD * R, CostFunction * c,
-			  unsigned int * max_graph_size)
+	void DFS (Node * M, Collection * L, ROBDD * R, CostFunction * c)
 	{
 		unsigned int direction, i;
 		Node * Y, * X = NULL;
 		list<Node *> Stack;
-		map<string, Node *> Graph;
-		map<string, Node *>::iterator it;
 
 		Stack.push_back (M);
-		Graph.insert (pair<string, Node *> (M->vertex->print_subset (), M));
 		L->add_subset (M->vertex);
 
+
+		unsigned int nof_visited_nodes;
+		unsigned int nof_
 		while (Stack.size () > 0)
 		{
+
 			Y = Stack.back ();
 
 			do
 			{
-				X = UCSROBDDToolBox3::select_an_unvisited_adjacent (&Graph, R, Y, &i);
+				X = UCSROBDDToolBox3::select_an_unvisited_adjacent (R, Y, &i);
 
 				if (X == NULL)  // i.e., if Y has no unvisited adjacent element
 				{
@@ -46,16 +46,10 @@ namespace UCSROBDDToolBox3
 				{
 					Stack.push_back (X);
 
-					// insert X into the graph
-					Graph.insert (pair<string, UCSROBDDToolBox3::Node *> (X->vertex->print_subset (), X));
-
 					if (X->vertex->contains (Y->vertex))
 						direction = 0;
 					else
 						direction = 1;
-
-					if (*max_graph_size < Graph.size ()) // stores the maximum size the graph
-						*max_graph_size = Graph.size (); // has achieved so far.
 
 					X->vertex->cost = c->cost (X->vertex); // computes and stores c(X)
 
@@ -81,14 +75,12 @@ namespace UCSROBDDToolBox3
 							UCSROBDDToolBox3::update_upper_restriction (R, X->vertex);
 							X->upper_flag->set_empty_subset ();
 							Y->upper_flag->remove_element (i);
-							UCSROBDDToolBox3::prune_upper_elements (&Graph, &Stack, X);
 						}
 						else  // Proposition 3.1
 						{
 							UCSROBDDToolBox3::update_lower_restriction (R, X->vertex);
 							X->lower_flag->set_empty_subset ();
 							Y->lower_flag->remove_element (i);
-							UCSROBDDToolBox3::prune_lower_elements (&Graph, &Stack, X);
 						}
 					}
 					else if (X->vertex->cost < Y->vertex->cost)
@@ -98,17 +90,51 @@ namespace UCSROBDDToolBox3
 							UCSROBDDToolBox3::update_lower_restriction (R, Y->vertex);
 							Y->lower_flag->set_empty_subset ();
 							X->lower_flag->remove_element (i);
-							UCSROBDDToolBox3::prune_lower_elements (&Graph, &Stack, Y);
 						}
 						else  // Proposition 3.2
 						{
 							UCSROBDDToolBox3::update_upper_restriction (R, Y->vertex);
 							Y->upper_flag->set_empty_subset ();
 							X->upper_flag->remove_element (i);
-							UCSROBDDToolBox3::prune_upper_elements (&Graph, &Stack, Y);
 						}
 					}
-
+					else
+					{
+						// C(X) == C(Y)
+						Node * Z;
+						Node * A;
+						Node * B;
+						if (direction == 0) 
+						{
+							// X contains Y
+							A = Y;
+							B = X;
+						}
+						else
+						{
+							A = X;
+							B = Y;
+						}
+						Z = create_node (A->vertex);
+						if (Z->vertex->remove_random_element () != 
+							Z->vertex->get_set_cardinality ())
+							if (Z->vertex->cost > A->vertex->cost) 
+							{
+								UCSROBDDToolBox3::update_lower_restriction (R, A->vertex);
+								X = B;
+							}
+							else
+							{
+								UCSROBDDToolBox3::update_upper_restriction (R, A->vertex);
+								X = Z;
+							}
+						else
+						{
+							// A is the empty set
+							UCSROBDDToolBox3::update_lower_restriction (R, A->vertex);
+							X = B;
+						}
+					}
 				} // if X != NULL, therefore X is an unvisited adjacent
 
 			}
@@ -119,7 +145,6 @@ namespace UCSROBDDToolBox3
 			if ((Y->lower_flag->is_empty ()) && (! R->contains (Y->vertex)) )
 			{
 				UCSROBDDToolBox3::update_lower_restriction (R, Y->vertex);
-				UCSROBDDToolBox3::prune_lower_elements (&Graph, &Stack, Y);
 			}
 
 			// Pruning that applies Proposition 3.4
@@ -127,40 +152,15 @@ namespace UCSROBDDToolBox3
 			if ((Y->upper_flag->is_empty ()) && (! R->contains (Y->vertex)) )
 			{
 				UCSROBDDToolBox3::update_upper_restriction (R, Y->vertex);
-				UCSROBDDToolBox3::prune_upper_elements (&Graph, &Stack, Y);
-			}
-
-			// If the node is dead then it is removed from the graph
-			//
-			if ((Y->upper_flag->is_empty ()) && (Y->lower_flag->is_empty ()))
-			{
-				Stack.remove (Y);
-				Graph.erase (Y->vertex->print_subset ());
-				delete_node (Y);
 			}
 
 		} // while (! Stack.size () > 0)
-
-		// "Remove graph" subroutine
-		//
-		for (it = Graph.begin (); it != Graph.end (); )
-		{
-			if (it->second->upper_flag->is_empty ())
-				UCSROBDDToolBox3::update_lower_restriction (R, it->second->vertex);
-			else if (it->second->lower_flag->is_empty ())
-				UCSROBDDToolBox3::update_upper_restriction (R, it->second->vertex);
-			// delete the removed node
-			delete_node (it->second);
-			// remove the node from the graph
-			Graph.erase (it++);
-		}
 	}
 
 
-	Node * select_an_unvisited_adjacent (map<string, Node *> * Graph, ROBDD * R, Node * Y, unsigned int * i)
+	Node * select_an_unvisited_adjacent (ROBDD * R, Node * Y, unsigned int * i)
 	{
 		unsigned int direction;
-		Node * N;
 		ElementSet * set = Y->vertex->get_set_that_contains_this_subset ();
 		ElementSubset X ("", set);
 
@@ -183,16 +183,6 @@ namespace UCSROBDDToolBox3
 				X.add_element (*i);
 			}
 
-		    if ((Graph->find (X.print_subset ()) == Graph->end () ) &&
-		    	(! R->contains (&X)))
-			{
-				// if X belongs to the search space AND it is not contained
-				// in a node of the graph, then X is an unvisited adjacent to
-				// Y, therefore a node N such that N[vertex] = X is returned.
-				N = create_node (&X);
-				return N;
-			}
-
 			if ((direction == 1) && (R->contains (&X)) ) // X is lower adjacent to Y[vertex]
 				Y->lower_flag->remove_element (*i);
 
@@ -203,45 +193,6 @@ namespace UCSROBDDToolBox3
 
 		               // if there are no more adjacent elements to Y->vertex to explore,
 		return NULL;   // then Y has no more unvisited adjacent and NULL is returned.
-	}
-
-	void prune_lower_elements (map<string, Node *> * Graph, list<Node *> * Stack, Node * A)
-	{
-		map<string, Node *>::iterator it;
-
-		for (it = Graph->begin (); it != Graph->end ();)
-			if ((A->vertex->contains (it->second->vertex)) &&
-				(! A->vertex->is_equal (it->second->vertex)))
-			{
-				// remove the node from the stack
-				Stack->remove (it->second);
-				// delete the removed node
-				delete_node (it->second);
-				// remove the node from the graph
-				Graph->erase (it++);
-			}
-			else
-				it++;
-	}
-
-
-	void prune_upper_elements (map<string, Node *> * Graph, list<Node *> * Stack, Node * A)
-	{
-	 	map<string, Node *>::iterator it;
-
-		for (it = Graph->begin (); it != Graph->end ();)
-			if ((A->vertex->is_contained_by (it->second->vertex)) &&
-				(! A->vertex->is_equal (it->second->vertex)))
-			{
-				// remove the node from the stack
-				Stack->remove (it->second);
-				// delete the removed node
-				delete_node (it->second);
-				// remove the node from the graph
-				Graph->erase (it++);
-			}
-			else
-				it++;
 	}
 
 
