@@ -39,8 +39,8 @@ void UCSRT::get_minima_list (unsigned int max_size_of_minima_list)
 	do
 	{
 		max_graph_of_this_iteration = 0;
-		//X = restrictions->get_random_zero_evaluated_element ();
-		X = UCSRTToolBox::get_minimal_subset (restrictions, set);
+		X = restrictions->get_random_zero_evaluated_element ();
+		//X = UCSRTToolBox::get_minimal_subset (restrictions, set);
 
 		if (X != NULL)
 		{
@@ -50,8 +50,8 @@ void UCSRT::get_minima_list (unsigned int max_size_of_minima_list)
 			M->vertex->cost = cost_function->cost (M->vertex);
 
 			// X is minimal, thus there is no lower adjacent
-			UCSRTToolBox::update_lower_restriction (restrictions, lower_restriction, X);
-			M->lower_flag->set_empty_subset ();
+			//UCSRTToolBox::update_lower_restriction (restrictions, lower_restriction, X);
+			//M->lower_flag->set_empty_subset ();
 
 			max_graph_of_this_iteration = 1;
 			UCSRTToolBox::DFS

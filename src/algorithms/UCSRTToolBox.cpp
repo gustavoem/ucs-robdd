@@ -94,9 +94,7 @@ namespace UCSRTToolBox
 
 			do
 			{
-				cout << "Vou selecionar X adjacente a Y = " << Y->vertex->print_subset () << endl;
 				X = select_an_unvisited_adjacent (&Graph, R, RL, RU, Y, &i);
-				cout << "Já selecionei um X = " << X->vertex->print_subset () << " adjacente a Y" << endl;
 
 				if (X == NULL)  // i.e., if Y has no unvisited adjacent element
 				{
