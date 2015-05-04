@@ -22,127 +22,122 @@ namespace UCSROBDDToolBox3
 		Node * Y, * X = NULL;
 
     	Y = M;
+    	X = UCSROBDDToolBox3::select_an_unvisited_adjacent (R, Y, &i);
 
-		do
+		while (X != NULL)
 	 	{
-				X = UCSROBDDToolBox3::select_an_unvisited_adjacent (R, Y, &i);
+			if (X->vertex->contains (Y->vertex))
+				direction = 0;
+			else
+				direction = 1;
 
-				if (X != NULL)
+			X->vertex->cost = c->cost (X->vertex); // computes and stores c(X)
+
+			// If the DFS criterion is attained, then X->element is stored
+			//
+			if (X->vertex->cost <= Y->vertex->cost)
+			{
+				L->add_subset (X->vertex);
+			}
+
+			// if the algorithm is working under heuristic mode 1 or 2
+			// and has reached threshold, then the search is stopped.
+			//
+			if (c->has_reached_threshold ())
+				return;
+
+			// Pruning that applies Propositions 3.1 and 3.2
+			//
+			if (X->vertex->cost > Y->vertex->cost)
+			{
+				if (direction == 0)  // Proposition 3.2
 				{
+					UCSROBDDToolBox3::update_upper_restriction (R, X->vertex);
+					delete X;
+				}
+				else  // Proposition 3.1
+				{
+					UCSROBDDToolBox3::update_lower_restriction (R, X->vertex);
+					delete X;
+					}
+			}
+			else if (X->vertex->cost < Y->vertex->cost)
+			{
+				if (direction == 0)  // Proposition 3.1
+				{
+					UCSROBDDToolBox3::update_lower_restriction (R, Y->vertex);
+					delete Y;
+					Y = X;
+				}
+				else  // Proposition 3.2
+				{
+					UCSROBDDToolBox3::update_upper_restriction (R, Y->vertex);
+					delete Y;
+					Y = X;
+				}
+			}
+			else
+			{
+				cout << "Temos um empate!!!!\n"; cout.flush ();
+				// c(X) == c(Y)
+				Node * Z;
+				ElementSubset ZSUB ("", X->vertex->get_set_that_contains_this_subset ());
+				Node * A;
+				Node * B;
 
-					if (X->vertex->contains (Y->vertex))
-						direction = 0;
+				if (direction == 0) 
+				{
+					// X contains Y
+					A = Y;
+					B = X;
+				}
+				else
+				{
+					A = X;
+					B = Y;
+				}
+
+				ZSUB.copy (A->vertex);
+				Z = create_node (&ZSUB);
+
+				if (Z->vertex->remove_random_element () != Z->vertex->get_set_cardinality ())
+				{
+					if (Z->vertex->cost > A->vertex->cost) 
+					{
+						UCSROBDDToolBox3::update_lower_restriction (R, A->vertex);
+						delete Z;
+						delete A;
+						Y = B;
+					}
 					else
-						direction = 1;
-
-					X->vertex->cost = c->cost (X->vertex); // computes and stores c(X)
-
-					// If the DFS criterion is attained, then X->element is stored
-					//
-					if (X->vertex->cost <= Y->vertex->cost)
 					{
-						L->add_subset (X->vertex);
+						UCSROBDDToolBox3::update_upper_restriction (R, A->vertex);
+						delete A;
+						delete B;
+						Y = Z;
 					}
-
-					// if the algorithm is working under heuristic mode 1 or 2
-					// and has reached threshold, then the search is stopped.
-					//
-					if (c->has_reached_threshold ())
-						return;
-
-					// Pruning that applies Propositions 3.1 and 3.2
-					//
-					if (X->vertex->cost > Y->vertex->cost)
-					{
-						if (direction == 0)  // Proposition 3.2
-						{
-							UCSROBDDToolBox3::update_upper_restriction (R, X->vertex);
-							delete X;
-							Y->upper_flag->remove_element (i);
-						}
-						else  // Proposition 3.1
-						{
-							UCSROBDDToolBox3::update_lower_restriction (R, X->vertex);
-							delete X;
-							Y->lower_flag->remove_element (i);
-						}
-					}
-					else if (X->vertex->cost < Y->vertex->cost)
-					{
-						if (direction == 0)  // Proposition 3.1
-						{
-							UCSROBDDToolBox3::update_lower_restriction (R, Y->vertex);
-							delete Y;
-							X->lower_flag->remove_element (i);
-							Y = X;
-						}
-						else  // Proposition 3.2
-						{
-							UCSROBDDToolBox3::update_upper_restriction (R, Y->vertex);
-							delete Y;
-							X->upper_flag->remove_element (i);
-							Y = X;
-						}
-					}
-					else
-					{
-					  cout << "Temos um empate!!!!\n"; cout.flush ();
-						// c(X) == c(Y)
-						Node * Z;
-						Node * A;
-						Node * B;
-						if (direction == 0) 
-						{
-							// X contains Y
-							A = Y;
-							B = X;
-						}
-						else
-						{
-							A = X;
-							B = Y;
-						}
-						Z = create_node (A->vertex);
-
-						if (Z->vertex->remove_random_element () != Z->vertex->get_set_cardinality ())
-						{
-							if (Z->vertex->cost > A->vertex->cost) 
-							{
-								UCSROBDDToolBox3::update_lower_restriction (R, A->vertex);
-								Y = B;
-								delete Z;
-							}
-							else
-							{
-								UCSROBDDToolBox3::update_upper_restriction (R, A->vertex);
-								delete Y;
-								Y = Z;
-							}
-					  }
-						else
-						{
-							// A is the empty set
-							UCSROBDDToolBox3::update_lower_restriction (R, A->vertex);
-							Y = B;
-							delete Z;
-						}
-					}
-				} // if X != NULL, therefore X is an unvisited adjacent
-
-
-	} while (X != NULL);
-    
-    // Temos que verificar se podemos fazer esta poda sem remover caras errados do espaço de busca!
-    //
-    UCSROBDDToolBox3::update_upper_restriction (R, Y->vertex);
-    UCSROBDDToolBox3::update_lower_restriction (R, Y->vertex);
-    delete Y;
-}
-
+				}
+				else
+				{
+					// A is the empty set
+					UCSROBDDToolBox3::update_lower_restriction (R, A->vertex);
+					delete Z;
+					delete A;
+					Y = B;
+				}
+			}
+			X = UCSROBDDToolBox3::select_an_unvisited_adjacent (R, Y, &i);
+		} // if X != NULL, therefore X is an unvisited adjacent
+	    
+	    // Temos que verificar se podemos fazer esta poda sem remover caras errados do espaço de busca!
+	    //
+	    UCSROBDDToolBox3::update_upper_restriction (R, Y->vertex);
+	    UCSROBDDToolBox3::update_lower_restriction (R, Y->vertex);
+	    delete Y;
+	} 
 
 	Node * select_an_unvisited_adjacent (ROBDD * R, Node * Y, unsigned int * i)
 	{
-		unsigned int direction;
 		ElementSet * set = Y->vertex->get_set_that_contains_this_subset ();
 		ElementSubset X ("", set);
 
@@ -155,15 +150,9 @@ namespace UCSROBDDToolBox3
 			// selection of an element that is either upper or lower adjacent to A->vertex
 			X.copy (Y->vertex);
 			if (Y->vertex->has_element (*i))
-			{
-				direction = 1;           // top-down and X is lower adjacent to Y
-				X.remove_element (*i);
-			}
+				X.remove_element (*i); // top-down and X is lower adjacent to Y
 			else
-			{
-				direction = 0;          // bottom-up and X is upper adjacent to Y
-				X.add_element (*i);
-			}
+				X.add_element (*i);    // bottom-up and X is upper adjacent to Y
 
 			if (!R->contains (&X))
       			return create_node (&X);
