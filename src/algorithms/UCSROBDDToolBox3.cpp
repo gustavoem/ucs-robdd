@@ -175,11 +175,6 @@ namespace UCSROBDDToolBox3
 		N->vertex->copy (X);
 		N->unverified = new ElementSubset ("", set);
 		N->unverified->set_complete_subset ();
-		N->lower_flag = new ElementSubset ("", set);
-		N->lower_flag->copy (X);
-		N->upper_flag = new ElementSubset ("", set);
-		N->upper_flag->copy (X);
-		N->upper_flag->set_complement_subset ();
 		return N;
 	}
 
@@ -188,8 +183,6 @@ namespace UCSROBDDToolBox3
 	{
 		delete N->vertex;
 		delete N->unverified;
-		delete N->lower_flag;
-		delete N->upper_flag;
 		delete N;
 	}
 

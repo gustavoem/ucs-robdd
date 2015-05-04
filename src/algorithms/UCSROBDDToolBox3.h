@@ -14,9 +14,7 @@ namespace UCSROBDDToolBox3
 	struct MyNode
 	{
 		ElementSubset * vertex,      // the subset contained in the node
-					  * unverified,  // the unverified elements of vertex
-					  * upper_flag,  // "upper" and "lower" restriction flags
-					  * lower_flag;
+					  * unverified;  // the unverified elements of vertex
 	};
 
 	typedef struct MyNode Node;
@@ -52,18 +50,6 @@ namespace UCSROBDDToolBox3
 	// DFS subroutine
 	//
 	void DFS (Node *, Collection *, ROBDD *, CostFunction *);
-
-
-	// Prunes the elements of the minima exhausting graph that were lower removed from
-	// the search space by the ElementSubset from the Node A.
-	//
-	void prune_lower_elements (map<string, Node *> *, list<Node *> *, Node *);
-
-
-	// Prunes the elements of the minima exhausting graph that were upper removed from
-	// the search space by the ElementSubset from the Node A.
-	//
-	void prune_upper_elements (map<string, Node *> *, list<Node *> *, Node *);
 
 
 	// Deletes the content of a node; it assumes that all variables are pointers to
