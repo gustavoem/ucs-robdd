@@ -1,12 +1,4 @@
 
-= = = = UCS{2a, 2b} additional data, average of 10 runnings = = = =
+= = = = UCS{2a, 2b} additional data, average of 20 runnings = = = =
 
 Solver    2^|S|     Time (s)     # Nodes     # Max graph size     # Calls of DFS     # Calls of Minimal (Maximal)
-UCS             2          0.02           2.00           2.00           1.00           2.60
-UCS             4          0.01           3.80           3.00           1.30           3.20
-UCS             8          0.01           7.40           4.00           2.40           6.10
-UCS            16          0.02          12.80           5.00           3.10          11.20
-UCS            32          0.02          21.70           6.40           2.90          15.40
-UCS            64          0.02          33.20           7.30           4.80          29.80
-UCS           128          0.03          63.90           9.10           9.90          72.70
-UCS           256          0.05          85.60           9.80           7.70          154.80

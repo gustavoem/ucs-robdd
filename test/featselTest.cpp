@@ -440,15 +440,6 @@ int main(void) {
 
 
 	// Testing Class "UCSROBDDToolBox"
-	cout << "UCSROBDDToolBoxTest::theres_no_minial_element_when_all_subsets_are_restricted";
-	cout.flush ();
-	printResult (UCSROBDDToolBoxTest::theres_no_minial_element_when_all_subsets_are_restricted ());
-	cout << "UCSROBDDToolBoxTest::theres_no_maximal_element_when_all_subsets_are_restricted";
-	cout.flush ();
-	printResult (UCSROBDDToolBoxTest::theres_no_maximal_element_when_all_subsets_are_restricted ());
-	cout << "UCSROBDDToolBoxTest::when_empty_set_is_not_restricted_its_the_minimal_subset";
-	cout.flush ();
-	printResult (UCSROBDDToolBoxTest::when_empty_set_is_not_restricted_its_the_minimal_subset ());
 	cout << "UCSROBDDToolBoxTest::it_should_return_null_when_theres_no_unvisited_adjacent";
 	cout.flush ();
 	printResult (UCSROBDDToolBoxTest::it_should_return_null_when_theres_no_unvisited_adjacent ());

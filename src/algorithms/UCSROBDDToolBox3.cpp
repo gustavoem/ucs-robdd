@@ -21,10 +21,10 @@ namespace UCSROBDDToolBox3
 		unsigned int direction, i;
 		Node * Y, * X = NULL;
 
-    Y = M;
+    	Y = M;
 
-	  do
-	  {
+		do
+	 	{
 				X = UCSROBDDToolBox3::select_an_unvisited_adjacent (R, Y, &i);
 
 				if (X != NULL)
@@ -165,13 +165,9 @@ namespace UCSROBDDToolBox3
 				X.add_element (*i);
 			}
 
-			if ((direction == 1) && (R->contains (&X)) ) // X is lower adjacent to Y[vertex]
-				Y->lower_flag->remove_element (*i);
+			if (!R->contains (&X))
+      			return create_node (&X);
 
-			if ((direction == 0) && (R->contains (&X)) ) // X is upper adjacent to Y[vertex]
-				Y->upper_flag->remove_element (*i);
-
-      		return create_node (&X);
 		} // while Y has adjacent elements to Y->vertex to explore
 
 		               // if there are no more adjacent elements to Y->vertex to explore,
