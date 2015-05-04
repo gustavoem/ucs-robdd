@@ -49,7 +49,7 @@ namespace UCSROBDDToolBox3
 					//
 					if (c->has_reached_threshold ())
 						return;
-						
+
 					// Pruning that applies Propositions 3.1 and 3.2
 					//
 					if (X->vertex->cost > Y->vertex->cost)
@@ -57,7 +57,7 @@ namespace UCSROBDDToolBox3
 						if (direction == 0)  // Proposition 3.2
 						{
 							UCSROBDDToolBox3::update_upper_restriction (R, X->vertex);
-							delete X;							
+							delete X;
 							Y->upper_flag->remove_element (i);
 						}
 						else  // Proposition 3.1
@@ -87,7 +87,6 @@ namespace UCSROBDDToolBox3
 					else
 					{
 					  cout << "Temos um empate!!!!\n"; cout.flush ();
-					
 						// c(X) == c(Y)
 						Node * Z;
 						Node * A;
@@ -104,6 +103,7 @@ namespace UCSROBDDToolBox3
 							B = Y;
 						}
 						Z = create_node (A->vertex);
+
 						if (Z->vertex->remove_random_element () != Z->vertex->get_set_cardinality ())
 						{
 							if (Z->vertex->cost > A->vertex->cost) 
@@ -129,15 +129,15 @@ namespace UCSROBDDToolBox3
 					}
 				} // if X != NULL, therefore X is an unvisited adjacent
 
-	  }
-    while (X != NULL);
+
+	} while (X != NULL);
     
     // Temos que verificar se podemos fazer esta poda sem remover caras errados do espaço de busca!
     //
     UCSROBDDToolBox3::update_upper_restriction (R, Y->vertex);
     UCSROBDDToolBox3::update_lower_restriction (R, Y->vertex);
     delete Y;
-	}
+}
 
 
 	Node * select_an_unvisited_adjacent (ROBDD * R, Node * Y, unsigned int * i)
@@ -148,7 +148,6 @@ namespace UCSROBDDToolBox3
 
 		while (! Y->unverified->is_empty ())
 		{
-				
 			// here we can put any criterion to the selection of adjacent elements
 			// (for instance, preference for subsets of lower cardinality)
 			*i = Y->unverified->remove_random_element ();
@@ -172,8 +171,7 @@ namespace UCSROBDDToolBox3
 			if ((direction == 0) && (R->contains (&X)) ) // X is upper adjacent to Y[vertex]
 				Y->upper_flag->remove_element (*i);
 
-      return create_node (&X);
-
+      		return create_node (&X);
 		} // while Y has adjacent elements to Y->vertex to explore
 
 		               // if there are no more adjacent elements to Y->vertex to explore,

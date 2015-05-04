@@ -42,7 +42,7 @@ void UCSROBDD3::get_minima_list (unsigned int max_size_of_minima_list)
 			UCSROBDDToolBox3::DFS
 				(M, L, restrictions, cost_function);
 			number_of_calls_of_minimum_exhausting++;
-						
+			
 			gettimeofday (& end_exhausting, NULL);
 			elapsed_time_of_all_calls_of_the_minima_exhausting +=
 			diff_us (end_exhausting, begin_exhausting);		
