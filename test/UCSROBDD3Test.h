@@ -1,17 +1,15 @@
-#ifndef UCSROBDDTEST_H_
-#define UCSROBDDTEST_H_
+#ifndef UCSROBDD3TEST_H_
+#define UCSROBDD3TEST_H_
 
-#include "../src/algorithms/UCSROBDD2.h"
+#include "../src/algorithms/UCSROBDD3.h"
 #include "../src/functions/MeanAbsSum.h"
 #include "../src/functions/HammingDistance.h"
 #include "../src/functions/Explicit.h"
 #include "../src/functions/AbsSum.h"
 
-namespace UCSROBDDTest
+namespace UCSROBDD3Test
 {
-
-	bool a_lattice_with_constant_cost_should_be_totally_exausted ();
-
+	
 	bool it_should_find_a_global_minimum ();
 
 	bool it_should_converge_for_large_hamming_sets ();
@@ -26,4 +24,4 @@ namespace UCSROBDDTest
 	
 }
 
-#endif /* UCSROBDDTEST_H_ */
+#endif /* UCSROBDD3TEST_H_ */

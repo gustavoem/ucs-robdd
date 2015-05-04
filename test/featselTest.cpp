@@ -34,6 +34,7 @@
 
 #include "UCSROBDDToolBoxTest.h"
 #include "UCSROBDDTest.h"
+#include "UCSROBDD3Test.h"
 
 // Objective functions
 //
@@ -473,6 +474,26 @@ int main(void) {
 	printResult (UCSROBDDTest::it_should_always_give_the_correct_answer ());
 	cout << endl;
 
+	// Testing Class "UCSROBDD3"
+	cout << "UCSROBDD3Test::it_should_find_a_global_minimum";
+	cout.flush ();
+	printResult (UCSROBDDTest::it_should_find_a_global_minimum ());
+	cout << "UCSROBDD3Test::it_should_converge_for_large_hamming_sets";
+	cout.flush ();
+	printResult (UCSROBDDTest::it_should_converge_for_large_hamming_sets ());
+	cout << "UCSROBDD3Test::it_should_converge_for_large_abs_sum_sets";
+	cout.flush ();
+	printResult (UCSROBDD3Test::it_should_converge_for_large_abs_sum_sets());
+	cout << "UCSROBDD3Test::it_should_store_all_the_visited_subsets";
+	cout.flush ();
+	printResult (UCSROBDD3Test::it_should_store_all_the_visited_subsets ());
+	cout << "UCSROBDD3Test::it_should_give_the_number_of_the_visited_subsets";
+	cout.flush ();
+	printResult (UCSROBDD3Test::it_should_give_the_number_of_the_visited_subsets ());
+	cout << "UCSROBDD3Test::it_should_always_give_the_correct_answer";
+	cout.flush ();
+	printResult (UCSROBDD3Test::it_should_always_give_the_correct_answer ());
+	cout << endl;
 
 	cout << "Total " << number_of_passed_tests + number_of_failed_tests << " test(s), ";
 	cout << number_of_passed_tests << " test(s) passed, " << number_of_failed_tests;

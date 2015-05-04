@@ -22,10 +22,12 @@ namespace UCSROBDDToolBox3
 		Node * Y, * X = NULL;
 
     	Y = M;
+    	L->add_subset (Y->vertex);
     	X = UCSROBDDToolBox3::select_an_unvisited_adjacent (R, Y, &i);
 
 		while (X != NULL)
 	 	{
+	 		//cout << "X: " << X->vertex->print_subset () << " Y: " << Y->vertex->print_subset () << endl;
 			if (X->vertex->contains (Y->vertex))
 				direction = 0;
 			else
@@ -37,6 +39,7 @@ namespace UCSROBDDToolBox3
 			//
 			if (X->vertex->cost <= Y->vertex->cost)
 			{
+				//cout << "adding subset: " << X->vertex->print_subset () << endl;
 				L->add_subset (X->vertex);
 			}
 
