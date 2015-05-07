@@ -81,7 +81,6 @@ namespace UCSROBDDToolBox3
 			}
 			else
 			{
-				cout << "Temos um empate!!!!\n"; cout.flush ();
 				// c(X) == c(Y)
 				Node * Z;
 				ElementSubset ZSUB ("", X->vertex->get_set_that_contains_this_subset ());

@@ -3,53 +3,7 @@
 
 namespace UCSRTToolBox
 {
-	ElementSubset * get_minimal_subset (ROBDD * R, ElementSet * a_set)
-	{
-		ElementSubset * A, B ("", a_set);
-		unsigned int i;
-
-		B.set_complete_subset ();
-		if (R->contains (&B))
-			return NULL;
-		else
-		{
-			A = new ElementSubset ("", a_set);
-			A->set_complete_subset ();
-			while (! B.is_empty ())
-			{
-				i = B.remove_random_element ();
-				A->remove_element (i);
-				if (R->contains (A))
-					A->add_element (i);
-			}
-			return A;
-		}
-	}
-
-
-	ElementSubset * get_maximal_subset (ROBDD * R, ElementSet * a_set)
-	{
-		ElementSubset * A, B ("", a_set);
-		unsigned int i;
-
-		B.set_empty_subset ();
-		if (R->contains (&B))
-			return NULL;
-		else
-		{
-			A = new ElementSubset ("", a_set);
-			A->set_empty_subset ();
-			B.set_complete_subset ();
-			while (! B.is_empty ())
-			{
-				i = B.remove_random_element ();
-				A->add_element (i);
-				if (R->contains (A))
-					A->remove_element (i);
-			}
-			return A;
-		}
-	}
+	
 
 
 	void update_lower_restriction (ROBDD * R, Collection * RL, ElementSubset * A)

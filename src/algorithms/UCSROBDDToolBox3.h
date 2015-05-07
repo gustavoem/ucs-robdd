@@ -19,19 +19,7 @@ namespace UCSROBDDToolBox3
 
 	typedef struct MyNode Node;
 
-	// Returns a maximal subset, say X, with the following properties:
-	// - X does not contain a subset from this collection;
-	// - there is no subset Y | Y contains X and Y does not contain a subset from this collection.
-	//
-	ElementSubset * get_maximal_subset (ROBDD *, ElementSet *);
-
-
-	// Returns a minimal subset, say X, with the following properties:
-	// - X is not contained by a subset from this collection;
-	// - there is no subset Y | Y is contained by X and Y is not contained by a subset
-	//   from this collection.
-	//
-	ElementSubset * get_minimal_subset (ROBDD *, ElementSet *);
+	
 
 
 	// Receives a subset A, a collection of restrictions and add A into the latter.
