@@ -8,7 +8,7 @@ namespace UCSROBDDToolBox4Test {
 		ROBDD R (&elm_set);
 		ElementSubset X ("", &elm_set);
 		UCSROBDDToolBox4::Node * A, * Y;
-		unsigned int i;
+		unsigned int i = 0;
 
 		X.set_complete_subset ();
 		A = UCSROBDDToolBox4::create_node (&X);
@@ -30,7 +30,7 @@ namespace UCSROBDDToolBox4Test {
 		ElementSubset X ("", &elm_set);
 		ElementSubset X2 ("", &elm_set);
 		UCSROBDDToolBox4::Node * A, * Y;
-		unsigned int i;
+		unsigned int i = 0;
 
 		X.add_element (0);
 		X2.add_element (1);

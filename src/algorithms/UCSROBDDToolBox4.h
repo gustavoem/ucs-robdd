@@ -55,7 +55,7 @@ namespace UCSROBDDToolBox4
 	// Receives the collections of restrictions, a graph, and a node M.
 	//
 	// Returns:
-	// - a node N such that N[vertex] is an unvisited adjacent to the node's element
+	// - a node N such that N[vertex] is an unvisited adjacent to the node's element and the element different between them is the j-th element such that j >= i
 	// - NULL, if there are no such X (in this case, the value of the integer doesn't care).
 	//
 	Node * select_an_unvisited_adjacent (ROBDD *, Node *, unsigned int *);

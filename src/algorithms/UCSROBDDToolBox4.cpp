@@ -23,9 +23,8 @@ namespace UCSROBDDToolBox4
 
 		Y = M;
 		L->add_subset (Y->vertex);
-		while (X != NULL)
-		{
-			i = 0;
+		do
+                {
                         cout << "iterando em dfs! com i = " << i << endl;
                         cout.flush();
 			X = select_an_unvisited_adjacent (R, Y, &i);
@@ -52,6 +51,7 @@ namespace UCSROBDDToolBox4
 				i++;
 			}
 		}
+		while (X != NULL);
 		UCSROBDDToolBox4::update_upper_restriction (R, Y->vertex);
 		UCSROBDDToolBox4::update_lower_restriction (R, Y->vertex);
 		delete Y;
@@ -61,7 +61,6 @@ namespace UCSROBDDToolBox4
 	{
 		ElementSet * set = Y->vertex->get_set_that_contains_this_subset ();
 		ElementSubset X ("", set);
-                *i = 0;
 		while (! Y->unverified->is_empty ())
 		{
 			// here we can put any criterion to the selection of adjacent elements
