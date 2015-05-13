@@ -12,7 +12,6 @@ namespace UCSROBDDToolBox4Test {
 
 		X.set_complete_subset ();
 		A = UCSROBDDToolBox4::create_node (&X);
-                cout << "passei daqui" << endl;
 		UCSROBDDToolBox4::update_lower_restriction (&R, &X);
                 
 		Y = UCSROBDDToolBox4::select_an_unvisited_adjacent (&R, A, &i);

@@ -97,44 +97,6 @@ namespace UCSROBDD3Test
 		return true;
 	}
 
-
-	bool it_should_store_all_the_visited_subsets ()
-	{
-		ElementSet set1 ("S1", 3, 1);    // |S1| = 3
-		UCSROBDD3 ucs1;
-		MeanAbsSum c1 (&set1);
-		string list;
-		ucs1.set_parameters (&c1, &set1, true);
-		ucs1.get_minima_list (1);
-		list = ucs1.print_list_of_visited_subsets ();
-		if((list.find ("<000>") != string::npos) &&
-		   (list.find ("<001>") != string::npos) &&
-		   (list.find ("<010>") != string::npos) &&
-		   (list.find ("<011>") != string::npos) &&
-		   (list.find ("<100>") != string::npos) &&
-		   (list.find ("<101>") != string::npos) &&
-		   (list.find ("<110>") != string::npos) &&
-		   (list.find ("<111>") != string::npos))
-			return true;
-		else
-			return false;
-	}
-
-	// It may visit a node more than once (for instance, when the cost function if a constant)
-	//
-	bool it_should_give_the_number_of_the_visited_subsets ()
-	{
-		ElementSet set1 ("S1", 3, 1);    // |S1| = 3
-		UCSROBDD3 ucs;
-		MeanAbsSum c1 (&set1);
-		ucs.set_parameters (&c1, &set1, true);
-		ucs.get_minima_list (1);
-		if((ucs.print_list_of_visited_subsets ().size () / (set1.get_set_cardinality() + 4)) >= 8)
-			return true;
-		else
-			return false;
-	}
-
 	// repeats the test k times (default: k = 10)
 	//
 	bool it_should_always_give_the_correct_answer ()

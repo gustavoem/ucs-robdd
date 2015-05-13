@@ -493,12 +493,6 @@ int main(void) {
 	cout << "UCSROBDD3Test::it_should_converge_for_large_abs_sum_sets";
 	cout.flush ();
 	printResult (UCSROBDD3Test::it_should_converge_for_large_abs_sum_sets());
-	cout << "UCSROBDD3Test::it_should_store_all_the_visited_subsets";
-	cout.flush ();
-	printResult (UCSROBDD3Test::it_should_store_all_the_visited_subsets ());
-	cout << "UCSROBDD3Test::it_should_give_the_number_of_the_visited_subsets";
-	cout.flush ();
-	printResult (UCSROBDD3Test::it_should_give_the_number_of_the_visited_subsets ());
 	cout << "UCSROBDD3Test::it_should_always_give_the_correct_answer";
 	cout.flush ();
 	printResult (UCSROBDD3Test::it_should_always_give_the_correct_answer ());
