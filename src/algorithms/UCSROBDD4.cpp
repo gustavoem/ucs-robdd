@@ -25,7 +25,7 @@ void UCSROBDD4::get_minima_list (unsigned int max_size_of_minima_list)
 	Collection * L = new Collection ();
 	bool search_space_is_empty = false;
 	ElementSubset * X, Y ("", set);
-	UCSROBDDToolBox3::Node * M;
+	UCSROBDDToolBox4::Node * M;
 
 	srand ( (unsigned) time (NULL) );
 
@@ -36,10 +36,10 @@ void UCSROBDD4::get_minima_list (unsigned int max_size_of_minima_list)
 		{
 			gettimeofday (& begin_exhausting, NULL);
 			
-			M = UCSROBDDToolBox3::create_node (X);
+			M = UCSROBDDToolBox4::create_node (X);
 			M->vertex->cost = cost_function->cost (M->vertex);
 			
-			UCSROBDDToolBox3::DFS
+			UCSROBDDToolBox4::DFS
 				(M, L, restrictions, cost_function);
 			number_of_calls_of_minimum_exhausting++;
 			

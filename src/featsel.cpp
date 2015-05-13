@@ -39,8 +39,9 @@
 #include "algorithms/UCSROBDD.h"
 #include "algorithms/UCSROBDD2.h"
 #include "algorithms/UCSROBDD3.h"
-#include "algorithms/UCSRT.h"
-#include "algorithms/UCSOBDD.h"
+#include "algorithms/UCSROBDD4.h"
+//#include "algorithms/UCSRT.h"
+//#include "algorithms/UCSOBDD.h"
 
 // Function to parse and verify the correctness of the parameters.
 // It returns '0' if all the parameters were correct, '1' if there was an error,
@@ -100,14 +101,17 @@ int main(int argc, char * argv[])
 			solver = new UCurveSearch ();
 		else if (algorithm.compare ("ucsr") == 0)
 			solver = new UCSROBDD ();
-        else if (algorithm.compare ("ucsr2") == 0)
-            solver = new UCSROBDD2 ();
-        else if (algorithm.compare ("ucsrt") == 0)
+                else if (algorithm.compare ("ucsr2") == 0)
+                    solver = new UCSROBDD2 ();
+        /*else if (algorithm.compare ("ucsrt") == 0)
         	solver = new UCSRT ();
         else if (algorithm.compare ("ucso") == 0)
-        	solver = new UCSOBDD ();
-        else if (algorithm.compare ("ucsr3") == 0)
-        	solver = new UCSROBDD3 ();
+        	solver = new UCSOBDD ();*/
+                else if (algorithm.compare ("ucsr3") == 0)
+        	    solver = new UCSROBDD3 ();
+                else if (algorithm.compare ("ucsr4") == 0)
+        	    solver = new UCSROBDD4 ();
+
 		else if (algorithm.compare ("es") == 0)
 			solver = new ExhaustiveSearch ();
 		else if (algorithm.compare ("sfs") == 0)
@@ -201,7 +205,8 @@ int main(int argc, char * argv[])
 				 (algorithm.compare ("ucsr2") == 0) ||
 				 (algorithm.compare ("ucsrt") == 0) ||
 				 (algorithm.compare ("ucso") == 0)  ||
-				 (algorithm.compare ("ucsr3") == 0) )
+				 (algorithm.compare ("ucsr3") == 0) ||
+                                 (algorithm.compare ("ucsr4") == 0)   )
 			{
 				cout << endl << "Elapsed time of the minima exhausting (in microseconds): "
 				     << solver->get_elapsed_time_of_all_calls_of_the_minima_exhausting () << endl;
@@ -379,6 +384,7 @@ under certain conditions; see 'LICENSE.TXT' for details.");
 			     (strcmp (argv[i], "ucsr") == 0)  ||
                  (strcmp (argv[i], "ucsr2") == 0) ||
                  (strcmp (argv[i], "ucsr3") == 0) ||
+                 (strcmp (argv[i], "ucsr4") == 0) ||
                  (strcmp (argv[i], "ucsrt") == 0) ||
                  (strcmp (argv[i], "ucso") == 0) )
 			{
