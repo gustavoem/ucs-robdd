@@ -30,12 +30,12 @@ OBJS =		src/Element.o src/ElementSet.o src/ElementSubset.o \
 			src/functions/AbsSum.o src/functions/Explicit.o src/functions/MeanAbsSum.o \
 			src/functions/HammingDistance.o src/functions/MeanConditionalEntropy.o \
 			src/Vertex.o src/ROBDD.o src/algorithms/UCSROBDD.o src/algorithms/UCSROBDDToolBox.o \
-			src/algorithms/UCSOBDD.o src/algorithms/UCSOBDDToolBox.o \
 			src/algorithms/UCSROBDD2.o src/algorithms/UCSROBDDToolBox2.o \
 			src/algorithms/UCSROBDD3.o src/algorithms/UCSROBDDToolBox3.o \
 			src/algorithms/UCSROBDD4.o src/algorithms/UCSROBDDToolBox4.o \
 			#src/algorithms/UCSRT.o src/algorithms/UCSRTToolBox.o src/OBDD.o src/PVertex.o \
-			
+			#src/algorithms/UCSOBDD.o src/algorithms/UCSOBDDToolBox.o \
+			    
 TOBJS =		test/ElementTest.o test/ElementSetTest.o test/ElementSubsetTest.o \
 			test/CollectionTest.o test/SolverTest.o \
 			test/SolverMock.o test/UCurveToolBoxTest.o test/UCurveSearchTest.o \
@@ -44,7 +44,8 @@ TOBJS =		test/ElementTest.o test/ElementSetTest.o test/ElementSubsetTest.o \
 			test/SFFSTest.o test/SFFSMock.o test/PosetForestSearchMock.o \
 			test/BranchAndBoundTest.o test/PosetForestSearchTest.o \
 			test/VertexTest.o test/ROBDDTest.o test/UCSROBDDTest.o \
-			test/UCSROBDDToolBoxTest.o test/UCSROBDD3Test.o\
+			test/UCSROBDD3Test.o \
+			#test/UCSROBDDToolBoxTest.o \
 
 LIBS = -lm
 

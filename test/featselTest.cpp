@@ -33,6 +33,7 @@
 #include "ROBDDTest.h"
 
 #include "UCSROBDDToolBoxTest.h"
+#include "UCSROBDDToolBox4Test.h"
 #include "UCSROBDDTest.h"
 #include "UCSROBDD3Test.h"
 
@@ -449,6 +450,14 @@ int main(void) {
 	printResult (UCSROBDDToolBoxTest::it_should_return_an_unvisited_adjacent ());
 	cout << endl;
 
+        // Testing Class "UCSROBDDToolBox4"
+	cout << "UCSROBDDToolBox4Test::it_should_return_null_when_theres_no_unvisited_adjacent";
+	cout.flush ();
+	printResult (UCSROBDDToolBox4Test::it_should_return_null_when_theres_no_unvisited_adjacent ());
+	cout << "UCSROBDDToolBox4Test::it_should_return_an_unvisited_adjacent";
+	cout.flush ();
+	printResult (UCSROBDDToolBox4Test::it_should_return_an_unvisited_adjacent ());
+	cout << endl;
 
 	// Testing Class "UCSROBDD2"
 	cout << "UCSROBDDTest::a_lattice_with_constant_cost_should_be_totally_exausted";

@@ -18,41 +18,41 @@ namespace UCSROBDDToolBox4
 
 	void DFS (Node * M, Collection * L, ROBDD * R, CostFunction * c)
 	{
-	    unsigned int direction, i;
-	    Node * Y, * X = NULL;
+		unsigned int i;
+		Node * Y, * X = NULL;
 
-    	    Y = M;
-    	    L->add_subset (Y->vertex);
-	    while (X != NULL)
-            {
-                i = 0;
-                X = select_an_unvisited_adjacent (R, Y, &i);
-                if (X != NULL)
-                {
-                    int direction;
-                    if (X->vertex->contains (Y->vertex))
-                        direction = 0;
-                    else
-                        direction = 1;
+		Y = M;
+		L->add_subset (Y->vertex);
+		while (X != NULL)
+		{
+			i = 0;
+			X = select_an_unvisited_adjacent (R, Y, &i);
+			if (X != NULL)
+			{
+				int direction;
+				if (X->vertex->contains (Y->vertex))
+					direction = 0;
+				else
+					direction = 1;
 
-                    X->vertex->cost = c->cost (X->vertex);
+				X->vertex->cost = c->cost (X->vertex);
 
-                    if (X->vertex->cost < Y->vertex->cost)
-                    {
-                        L->add_subset (X->vertex);
-                        if (direction)
-                            UCSROBDDToolBox4::update_upper_restrictions (R, Y->vertex);
-                        else
-                            UCSROBDDToolBox4::update_lower_restrictions (R, Y->vertex);
-                        delete Y;
-                        Y = X
-                    }
-                    i++;
-                }
-            }
-            UCSROBDDToolBox4::update_upper_restriction (R, Y->vertex);
-	    UCSROBDDToolBox4::update_lower_restriction (R, Y->vertex);
-	    delete Y;
+				if (X->vertex->cost < Y->vertex->cost)
+				{
+					L->add_subset (X->vertex);
+					if (direction)
+						UCSROBDDToolBox4::update_upper_restriction (R, Y->vertex);
+					else
+						UCSROBDDToolBox4::update_lower_restriction (R, Y->vertex);
+					delete Y;
+					Y = X;
+				}
+				i++;
+			}
+		}
+		UCSROBDDToolBox4::update_upper_restriction (R, Y->vertex);
+		UCSROBDDToolBox4::update_lower_restriction (R, Y->vertex);
+		delete Y;
 	} 
 
 	Node * select_an_unvisited_adjacent (ROBDD * R, Node * Y, unsigned int * i)
@@ -65,7 +65,7 @@ namespace UCSROBDDToolBox4
 			// here we can put any criterion to the selection of adjacent elements
 			// (for instance, preference for subsets of lower cardinality)
 			*i = Y->unverified->remove_element (*i);
-                        
+						
 			// selection of an element that is either upper or lower adjacent to A->vertex
 			X.copy (Y->vertex);
 			if (Y->vertex->has_element (*i))
@@ -74,13 +74,13 @@ namespace UCSROBDDToolBox4
 				X.add_element (*i);    // bottom-up and X is upper adjacent to Y
 
 			if (!R->contains (&X))
-      			    return create_node (&X);
-                        else
-                            (*i)++;
+					return create_node (&X);
+						else
+							(*i)++;
 
 		} // while Y has adjacent elements to Y->vertex to explore
 
-		               // if there are no more adjacent elements to Y->vertex to explore,
+					   // if there are no more adjacent elements to Y->vertex to explore,
 		return NULL;   // then Y has no more unvisited adjacent and NULL is returned.
 	}
 
