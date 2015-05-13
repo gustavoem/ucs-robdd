@@ -44,8 +44,8 @@ TOBJS =		test/ElementTest.o test/ElementSetTest.o test/ElementSubsetTest.o \
 			test/SFFSTest.o test/SFFSMock.o test/PosetForestSearchMock.o \
 			test/BranchAndBoundTest.o test/PosetForestSearchTest.o \
 			test/VertexTest.o test/ROBDDTest.o test/UCSROBDDTest.o \
-			test/UCSROBDD3Test.o \
-			#test/UCSROBDDToolBoxTest.o \
+			test/UCSROBDD3Test.o test/UCSROBDDToolBoxTest.o \
+			test/UCSROBDDToolBox4Test.o \
 
 LIBS = -lm
 

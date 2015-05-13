@@ -26,6 +26,8 @@ namespace UCSROBDDToolBox4
 		while (X != NULL)
 		{
 			i = 0;
+                        cout << "iterando em dfs! com i = " << i << endl;
+                        cout.flush();
 			X = select_an_unvisited_adjacent (R, Y, &i);
 			if (X != NULL)
 			{
@@ -59,12 +61,12 @@ namespace UCSROBDDToolBox4
 	{
 		ElementSet * set = Y->vertex->get_set_that_contains_this_subset ();
 		ElementSubset X ("", set);
-
+                *i = 0;
 		while (! Y->unverified->is_empty ())
 		{
 			// here we can put any criterion to the selection of adjacent elements
 			// (for instance, preference for subsets of lower cardinality)
-			*i = Y->unverified->remove_element (*i);
+			Y->unverified->remove_element (*i);
 						
 			// selection of an element that is either upper or lower adjacent to A->vertex
 			X.copy (Y->vertex);
@@ -74,9 +76,9 @@ namespace UCSROBDDToolBox4
 				X.add_element (*i);    // bottom-up and X is upper adjacent to Y
 
 			if (!R->contains (&X))
-					return create_node (&X);
-						else
-							(*i)++;
+			        return create_node (&X);
+			else
+				(*i)++;
 
 		} // while Y has adjacent elements to Y->vertex to explore
 
