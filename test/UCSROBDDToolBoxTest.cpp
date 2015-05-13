@@ -6,7 +6,8 @@ namespace UCSROBDDToolBoxTest {
 	{
 		ElementSet elm_set ("", 3, 100);
 		map<string, UCSROBDDToolBox::Node *>  Graph;
-		ROBDD R (&elm_set);
+		ROBDD RU (&elm_set);
+		ROBDD
 		ElementSubset X ("", &elm_set);
 		UCSROBDDToolBox::Node * A, * Y;
 		unsigned int i;

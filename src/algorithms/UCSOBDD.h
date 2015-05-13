@@ -11,10 +11,9 @@ class UCSOBDD : public Solver
 
 private:
 
-	// The collection of restrictions
+	// The obdd of restrictions
 	//
 	OBDD * restrictions;
-	//OBDD * lower_restriction, * upper_restriction;
 
 
 

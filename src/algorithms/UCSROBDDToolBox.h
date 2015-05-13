@@ -52,7 +52,7 @@ namespace UCSROBDDToolBox
 
 	// DFS subroutine
 	//
-	void DFS (Node *, Collection *, ROBDD *, CostFunction *, unsigned int *);
+	void DFS (Node *, Collection *, ROBDD *, ROBDD*, CostFunction *, unsigned int *);
 
 
 	// Prunes the elements of the minima exhausting graph that were lower removed from
@@ -85,7 +85,7 @@ namespace UCSROBDDToolBox
 	// - a node N such that N[vertex] is an unvisited adjacent to the node's element
 	// - NULL, if there are no such X (in this case, the value of the integer doesn't care).
 	//
-	Node * select_an_unvisited_adjacent (map<string, Node *> *, ROBDD *, Node *, unsigned int *);
+	Node * select_an_unvisited_adjacent (map<string, Node *> *, ROBDD *, ROBDD *, Node *, unsigned int *);
 
 
 	// Returns true if a given vertex belongs to a node list, and false otherwise.

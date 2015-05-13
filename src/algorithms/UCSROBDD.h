@@ -11,10 +11,9 @@ class UCSROBDD : public Solver
 
 private:
 
-	// The collection of restrictions
+	// The robdds of restrictions
 	//
-	ROBDD * restrictions;
-	//ROBDD * lower_restriction, * upper_restriction;
+	ROBDD * lower_restriction, * upper_restriction;
 
 
 
