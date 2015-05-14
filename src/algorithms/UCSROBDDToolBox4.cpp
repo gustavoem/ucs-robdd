@@ -25,7 +25,7 @@ namespace UCSROBDDToolBox4
 		L->add_subset (Y->vertex);
 		do
                 {
-                        cout << "iterando em dfs! com i = " << i << endl;
+                        // cout << "iterando em dfs! com i = " << i << endl;
                         cout.flush();
 			X = select_an_unvisited_adjacent (R, Y, &i);
 			if (X != NULL)
@@ -61,7 +61,7 @@ namespace UCSROBDDToolBox4
 	{
 		ElementSet * set = Y->vertex->get_set_that_contains_this_subset ();
 		ElementSubset X ("", set);
-		while (! Y->unverified->is_empty ())
+		while (! Y->unverified->is_empty () && *i < set->get_set_cardinality ())
 		{
 			// here we can put any criterion to the selection of adjacent elements
 			// (for instance, preference for subsets of lower cardinality)
