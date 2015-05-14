@@ -20,16 +20,18 @@ namespace UCSROBDDToolBox4
 	{
 		unsigned int i;
 		Node * Y, * X = NULL;
-
 		Y = M;
 		L->add_subset (Y->vertex);
 		do
                 {
-                        // cout << "iterando em dfs! com i = " << i << endl;
-                        cout.flush();
+                    if (R->contains (Y->vertex))
+                        cout << "opa, isto está erradissimo" << endl;
+                        //cout << "i = "<< i << " estou em Y =  " << Y->vertex->print_subset () << endl;
 			X = select_an_unvisited_adjacent (R, Y, &i);
+                        cout.flush();
 			if (X != NULL)
 			{
+                                //cout << "i = " << i << ". Selecionei X = " << X->vertex->print_subset () << endl;
 				int direction;
 				if (X->vertex->contains (Y->vertex))
 					direction = 0;
@@ -41,17 +43,25 @@ namespace UCSROBDDToolBox4
 				if (X->vertex->cost < Y->vertex->cost)
 				{
 					L->add_subset (X->vertex);
+                                  //      cout << "X tem custo menor" << endl;
 					if (direction)
+                                        {
+                                     //       cout << "pode todos pra cima de Y" << endl;
 						UCSROBDDToolBox4::update_upper_restriction (R, Y->vertex);
+                                        }
 					else
+                                        {
+                                    //            cout << "pode todos pra baixo de Y" << endl;
 						UCSROBDDToolBox4::update_lower_restriction (R, Y->vertex);
+                                        }
 					delete Y;
 					Y = X;
+                                        i = 0;
 				}
-				i++;
+                                else
+				    i++;
 			}
-		}
-		while (X != NULL);
+		} while (X != NULL);
 		UCSROBDDToolBox4::update_upper_restriction (R, Y->vertex);
 		UCSROBDDToolBox4::update_lower_restriction (R, Y->vertex);
 		delete Y;

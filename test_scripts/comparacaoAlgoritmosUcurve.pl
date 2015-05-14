@@ -405,6 +405,9 @@ foreach my $i (@experiments)
 	       {
 		 $best_solution = $minimum_of_solvers[$k];
 	       }
+               else {
+                   exit;
+               }
 	   }
 	 
 	 for (my $k = 0; $k < $number_of_solvers; $k++)
