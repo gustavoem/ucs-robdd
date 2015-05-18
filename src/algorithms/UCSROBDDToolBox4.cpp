@@ -23,15 +23,11 @@ namespace UCSROBDDToolBox4
 		Y = M;
 		L->add_subset (Y->vertex);
 		do
-                {
-                    if (R->contains (Y->vertex))
-                        cout << "opa, isto está erradissimo" << endl;
-                        //cout << "i = "<< i << " estou em Y =  " << Y->vertex->print_subset () << endl;
+		{
 			X = select_an_unvisited_adjacent (R, Y, &i);
-                        cout.flush();
+			cout.flush();
 			if (X != NULL)
 			{
-                                //cout << "i = " << i << ". Selecionei X = " << X->vertex->print_subset () << endl;
 				int direction;
 				if (X->vertex->contains (Y->vertex))
 					direction = 0;
@@ -43,23 +39,20 @@ namespace UCSROBDDToolBox4
 				if (X->vertex->cost < Y->vertex->cost)
 				{
 					L->add_subset (X->vertex);
-                                  //      cout << "X tem custo menor" << endl;
 					if (direction)
-                                        {
-                                     //       cout << "pode todos pra cima de Y" << endl;
+					{
 						UCSROBDDToolBox4::update_upper_restriction (R, Y->vertex);
-                                        }
+					}
 					else
-                                        {
-                                    //            cout << "pode todos pra baixo de Y" << endl;
+					{
 						UCSROBDDToolBox4::update_lower_restriction (R, Y->vertex);
-                                        }
+					}
 					delete Y;
 					Y = X;
-                                        i = 0;
+					i = 0;
 				}
-                                else
-				    i++;
+				else
+					i++;
 			}
 		} while (X != NULL);
 		UCSROBDDToolBox4::update_upper_restriction (R, Y->vertex);
@@ -71,13 +64,10 @@ namespace UCSROBDDToolBox4
 	{
 		ElementSet * set = Y->vertex->get_set_that_contains_this_subset ();
 		ElementSubset X ("", set);
+		
 		while (! Y->unverified->is_empty () && *i < set->get_set_cardinality ())
 		{
-			// here we can put any criterion to the selection of adjacent elements
-			// (for instance, preference for subsets of lower cardinality)
 			Y->unverified->remove_element (*i);
-						
-			// selection of an element that is either upper or lower adjacent to A->vertex
 			X.copy (Y->vertex);
 			if (Y->vertex->has_element (*i))
 				X.remove_element (*i); // top-down and X is lower adjacent to Y
@@ -85,7 +75,7 @@ namespace UCSROBDDToolBox4
 				X.add_element (*i);    // bottom-up and X is upper adjacent to Y
 
 			if (!R->contains (&X))
-			        return create_node (&X);
+				return create_node (&X);
 			else
 				(*i)++;
 
@@ -122,8 +112,8 @@ namespace UCSROBDDToolBox4
 		for (it = List->begin (); it != List->end (); it++)
 			if ((*it)->vertex->is_equal (X))
 				return true;
-		return false;
-	}
+			return false;
+		}
 
 
 } // end of namespace

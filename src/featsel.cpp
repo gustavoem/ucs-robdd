@@ -40,6 +40,7 @@
 #include "algorithms/UCSROBDD2.h"
 #include "algorithms/UCSROBDD3.h"
 #include "algorithms/UCSROBDD4.h"
+#include "algorithms/UCSROBDD5.h"
 //#include "algorithms/UCSRT.h"
 //#include "algorithms/UCSOBDD.h"
 
@@ -48,8 +49,8 @@
 // and '2' if the option '-h' (help) was called.
 //
 int parse_parameters
-    (int, char **, string *, unsigned int *, string *,
-     unsigned int *, unsigned int *, bool *, string *, float *, unsigned int *);
+	(int, char **, string *, unsigned int *, string *,
+	 unsigned int *, unsigned int *, bool *, string *, float *, unsigned int *);
 
 
 // The main function.
@@ -74,8 +75,8 @@ int main(int argc, char * argv[])
 
 	// parses the parameters
 	i = parse_parameters(argc, argv, &file_name, &max_number_of_minima, &a_cost_function,
-			             &n, &range, &store_visited_subsets, &algorithm, &threshold,
-			             &max_number_of_calls_of_cost_function);
+						 &n, &range, &store_visited_subsets, &algorithm, &threshold,
+						 &max_number_of_calls_of_cost_function);
 
 	if (i != EXIT_SUCCESS)    // help or error in parameters
 		return EXIT_FAILURE;
@@ -89,7 +90,7 @@ int main(int argc, char * argv[])
 		else if ((file_name.size () > 0) &&
 				((file_name.find (".dat") != string::npos) || (file_name.find (".DAT") != string::npos)))
 		{
-		    // IMPORTANT: the use of .dat file requires the -n option!
+			// IMPORTANT: the use of .dat file requires the -n option!
 			S = new ElementSet (file_name.data (), n);
 		}
 		else
@@ -101,16 +102,18 @@ int main(int argc, char * argv[])
 			solver = new UCurveSearch ();
 		else if (algorithm.compare ("ucsr") == 0)
 			solver = new UCSROBDD ();
-                else if (algorithm.compare ("ucsr2") == 0)
-                    solver = new UCSROBDD2 ();
-        /*else if (algorithm.compare ("ucsrt") == 0)
-        	solver = new UCSRT ();
-        else if (algorithm.compare ("ucso") == 0)
-        	solver = new UCSOBDD ();*/
-                else if (algorithm.compare ("ucsr3") == 0)
-        	    solver = new UCSROBDD3 ();
-                else if (algorithm.compare ("ucsr4") == 0)
-        	    solver = new UCSROBDD4 ();
+		else if (algorithm.compare ("ucsr2") == 0)
+			solver = new UCSROBDD2 ();
+		/*else if (algorithm.compare ("ucsrt") == 0)
+			solver = new UCSRT ();
+		else if (algorithm.compare ("ucso") == 0)
+			solver = new UCSOBDD ();*/
+		else if (algorithm.compare ("ucsr3") == 0)
+			solver = new UCSROBDD3 ();
+		else if (algorithm.compare ("ucsr4") == 0)
+			solver = new UCSROBDD4 ();
+		else if (algorithm.compare ("ucsr5") == 0)
+			solver = new UCSROBDD5 ();
 
 		else if (algorithm.compare ("es") == 0)
 			solver = new ExhaustiveSearch ();
@@ -159,7 +162,7 @@ int main(int argc, char * argv[])
 		//
 		if (max_number_of_calls_of_cost_function > 0)
 			cost_function->set_max_number_of_calls_of_cost_function
-			                  (max_number_of_calls_of_cost_function);
+							  (max_number_of_calls_of_cost_function);
 
 		// Sets the solver parameters
 		//
@@ -206,10 +209,11 @@ int main(int argc, char * argv[])
 				 (algorithm.compare ("ucsrt") == 0) ||
 				 (algorithm.compare ("ucso") == 0)  ||
 				 (algorithm.compare ("ucsr3") == 0) ||
-                                 (algorithm.compare ("ucsr4") == 0)   )
+				 (algorithm.compare ("ucsr4") == 0) ||
+				 (algorithm.compare ("ucsr5") == 0)   )
 			{
 				cout << endl << "Elapsed time of the minima exhausting (in microseconds): "
-				     << solver->get_elapsed_time_of_all_calls_of_the_minima_exhausting () << endl;
+					 << solver->get_elapsed_time_of_all_calls_of_the_minima_exhausting () << endl;
 				cout << endl << "Number of calls of the minima exhausting: "
 					 << solver->get_number_of_calls_of_minimum_exhausting () << endl;
 				cout << endl << "Maximum size a graph achives during the minima exhausting: "
@@ -243,9 +247,9 @@ int main(int argc, char * argv[])
 
 		// exits to the OS
 		//
-        delete S;
-        delete solver;
-        delete cost_function;
+		delete S;
+		delete solver;
+		delete cost_function;
 		return EXIT_SUCCESS;
 	}
 } // end of main
@@ -255,10 +259,10 @@ int main(int argc, char * argv[])
 // function implementation
 //
 int parse_parameters (int argc, char ** argv, string * file_name,
-	                  unsigned int * m, string * c, unsigned int * n,
-	                  unsigned int * range, bool * keep_subsets,
-	                  string * a, float * threshold,
-	                  unsigned int * max_number_of_calls_of_cost_function)
+					  unsigned int * m, string * c, unsigned int * n,
+					  unsigned int * range, bool * keep_subsets,
+					  string * a, float * threshold,
+					  unsigned int * max_number_of_calls_of_cost_function)
 {
 	int i;
 	bool error = false;
@@ -356,7 +360,7 @@ under certain conditions; see 'LICENSE.TXT' for details.");
 		{
 			i++;
 			if ( (strcmp (argv[i], "abs_sum") == 0) ||
-			 	 (strcmp (argv[i], "mean_abs_sum") == 0) ||
+				 (strcmp (argv[i], "mean_abs_sum") == 0) ||
 				 (strcmp (argv[i], "mce") == 0) ||
 				 (strcmp (argv[i], "explicit") == 0) ||
 				 (strcmp (argv[i], "hamming_distance") == 0) )
@@ -376,17 +380,18 @@ under certain conditions; see 'LICENSE.TXT' for details.");
 		{
 			i++;
 			if ( (strcmp (argv[i], "ucs") == 0)   ||
-			     (strcmp (argv[i], "es") == 0)    ||
-			     (strcmp (argv[i], "sfs") == 0)   ||
-			     (strcmp (argv[i], "sffs") == 0)  ||
-			     (strcmp (argv[i], "pfs") == 0)   ||
-			     (strcmp (argv[i], "ubb") == 0)   ||
-			     (strcmp (argv[i], "ucsr") == 0)  ||
-                 (strcmp (argv[i], "ucsr2") == 0) ||
-                 (strcmp (argv[i], "ucsr3") == 0) ||
-                 (strcmp (argv[i], "ucsr4") == 0) ||
-                 (strcmp (argv[i], "ucsrt") == 0) ||
-                 (strcmp (argv[i], "ucso") == 0) )
+				 (strcmp (argv[i], "es") == 0)    ||
+				 (strcmp (argv[i], "sfs") == 0)   ||
+				 (strcmp (argv[i], "sffs") == 0)  ||
+				 (strcmp (argv[i], "pfs") == 0)   ||
+				 (strcmp (argv[i], "ubb") == 0)   ||
+				 (strcmp (argv[i], "ucsr") == 0)  ||
+				 (strcmp (argv[i], "ucsr2") == 0) ||
+				 (strcmp (argv[i], "ucsr3") == 0) ||
+				 (strcmp (argv[i], "ucsr4") == 0) ||
+				 (strcmp (argv[i], "ucsr5") == 0) ||
+				 (strcmp (argv[i], "ucsrt") == 0) ||
+				 (strcmp (argv[i], "ucso") == 0) )
 			{
 				a->clear();
 				a->append(argv[i]);
