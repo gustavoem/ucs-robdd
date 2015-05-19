@@ -22,9 +22,8 @@ namespace UCSROBDDToolBox5
 		Node * Y, * X = NULL;
 		Y = M;
 		L->add_subset (Y->vertex);
-		
 
-		while (!Y->unverified->is_empty ())
+		while (!Y->upper_unverified->is_empty () || !Y->lower_unverified->is_empty ())
 		{
 			X = select_ul_unvisited_adjacent (R, Y, direction);
 			visit_adjacent (R, L, &Y, X, direction, c);
@@ -73,14 +72,9 @@ namespace UCSROBDDToolBox5
 
 		if (dir == 0) // we are searching for a upper adjacent element
 		{
-			ElementSubset upper_set ("", set);
-			upper_set.copy (Y->vertex);
-			upper_set.set_complement_subset ();
-			upper_set.subset_intersection (Y->unverified);
 			do 
 			{
-				elm_index = upper_set.remove_random_element ();
-				Y->unverified->remove_element (elm_index);
+				elm_index = Y->upper_unverified->remove_random_element ();
 				if (X.add_element (elm_index) && !R->contains (&X))
 					return create_node (&X);
 				else
@@ -90,13 +84,9 @@ namespace UCSROBDDToolBox5
 		}
 		else
 		{
-			ElementSubset lower_set ("", set);
-			lower_set.copy (Y->vertex);
-			lower_set.subset_intersection (Y->unverified);
 			do 
 			{
-				elm_index = lower_set.remove_random_element ();
-				Y->unverified->remove_element (elm_index);
+				elm_index = Y->lower_unverified->remove_random_element ();
 				if (X.remove_element (elm_index) && !R->contains (&X))
 					return create_node (&X);
 				else
@@ -114,8 +104,14 @@ namespace UCSROBDDToolBox5
 		ElementSet * set = X->get_set_that_contains_this_subset ();
 		N->vertex = new ElementSubset ("", set);
 		N->vertex->copy (X);
-		N->unverified = new ElementSubset ("", set);
-		N->unverified->set_complete_subset ();
+		
+		N->upper_unverified = new ElementSubset ("", set);
+		N->upper_unverified->copy (X);
+		N->upper_unverified->set_complement_subset ();
+
+		N->lower_unverified = new ElementSubset ("", set);
+		N->lower_unverified->copy (X);
+
 		return N;
 	}
 
@@ -123,7 +119,8 @@ namespace UCSROBDDToolBox5
 	void delete_node (Node * N)
 	{
 		delete N->vertex;
-		delete N->unverified;
+		delete N->upper_unverified;
+		delete N->lower_unverified;
 		delete N;
 	}
 
