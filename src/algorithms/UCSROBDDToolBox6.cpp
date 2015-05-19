@@ -23,12 +23,19 @@ namespace UCSROBDDToolBox5
 		Y = M;
 		L->add_subset (Y->vertex);
 		
+		X = select_ul_unvisited_adjacent (R, Y, 0);
 
-		while (!Y->unverified->is_empty ())
+		while (X != NULL)
 		{
-			X = select_ul_unvisited_adjacent (R, Y, direction);
 			visit_adjacent (R, L, &Y, X, direction, c);
 			direction = 1 - direction;
+			
+			X = select_ul_unvisited_adjacent (R, Y, direction);
+			if (X == NULL)
+			{
+				direction = 1 - direction;
+				X = select_ul_unvisited_adjacent (R, Y, direction);
+			}
 		}
 
 		UCSROBDDToolBox5::update_upper_restriction (R, Y->vertex);
@@ -69,13 +76,18 @@ namespace UCSROBDDToolBox5
 		ElementSet * set = Y->vertex->get_set_that_contains_this_subset ();
 		ElementSubset X ("", set);
 		X.copy (Y->vertex);
+
 		unsigned int elm_index;
+		
+		ElementSubset upper_set ("", set);
+		upper_set.copy (Y->vertex);
+		upper_set.set_complement_subset ();
+
+		ElementSubset lower_set ("", set);
+		lower_set.copy (Y->vertex);
 
 		if (dir == 0) // we are searching for a upper adjacent element
 		{
-			ElementSubset upper_set ("", set);
-			upper_set.copy (Y->vertex);
-			upper_set.set_complement_subset ();
 			upper_set.subset_intersection (Y->unverified);
 			do 
 			{
@@ -90,8 +102,6 @@ namespace UCSROBDDToolBox5
 		}
 		else
 		{
-			ElementSubset lower_set ("", set);
-			lower_set.copy (Y->vertex);
 			lower_set.subset_intersection (Y->unverified);
 			do 
 			{
