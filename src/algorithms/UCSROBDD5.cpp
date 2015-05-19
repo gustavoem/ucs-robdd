@@ -35,7 +35,6 @@ void UCSROBDD5::get_minima_list (unsigned int max_size_of_minima_list)
 		if (X != NULL)
 		{
 			gettimeofday (& begin_exhausting, NULL);
-			cout << "set do X: " << X->get_set_that_contains_this_subset ()<< endl;
 			M = UCSROBDDToolBox5::create_node (X);
 			M->vertex->cost = cost_function->cost (M->vertex);
 			

@@ -23,29 +23,21 @@ namespace UCSROBDDToolBox5
 		Y = M;
 		L->add_subset (Y->vertex);
 		
-		cout << "Vou pegar alguém adjacente a Y:" << Y->vertex->print_subset ()<< endl;
 		X = select_ul_unvisited_adjacent (R, Y, 0);
-		if (X != NULL)
-		cout << "Peguei X:" << X->vertex->print_subset ()<< endl;
+
 		while (X != NULL)
 		{
 			visit_adjacent (R, L, &Y, X, direction, c);
-			// see that Y may change in the last line
-			cout << "Y vertex:" << Y->vertex << endl;
-			cout << "Vou pegar alguém adjacente a Y:" << Y->vertex->print_subset ()<< endl;
 			direction = 1 - direction;
+			
 			X = select_ul_unvisited_adjacent (R, Y, direction);
-			if (X != NULL)
-			cout << "Peguei X:" << X->vertex->print_subset ()<< endl;
 			if (X == NULL)
 			{
-				cout << "X deu null, Vou pegar alguém adjacente a Y:" << Y->vertex->print_subset ()<< endl;
 				direction = 1 - direction;
 				X = select_ul_unvisited_adjacent (R, Y, direction);
-				if (X !=NULL)
-				cout << "Peguei X:" << X->vertex->print_subset ()<< endl;
 			}
 		}
+
 		UCSROBDDToolBox5::update_upper_restriction (R, Y->vertex);
 		UCSROBDDToolBox5::update_lower_restriction (R, Y->vertex);
 		delete Y;
@@ -61,7 +53,6 @@ namespace UCSROBDDToolBox5
 		
 		if (X->vertex->cost < (*Y)->vertex->cost)
 		{
-			cout << "custo de X foi menor\n";
 			L->add_subset (X->vertex);
 			if (direction) // Y covers X
 			{ 
@@ -73,11 +64,9 @@ namespace UCSROBDDToolBox5
 			}
 			delete (*Y);
 			(*Y) = X;
-			cout << "Novo Y:" << (*Y)->vertex << endl;
 		}
 		else
 		{
-			cout <<"custo de X foi maior ou igual\n";
 			delete X;
 		}
 	}
