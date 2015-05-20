@@ -36,7 +36,7 @@ my $n;
 #
 
 my @solvers = (#"UCSO", "UCSRT",
-                "UCSR4", "UCSR3", "UCSR2", "UCS", "UBB", "ES");
+                "UCSR5", "UCSR4", "UCSR3", "UCSR2", "UCS", "UBB", "ES");
 
 my $number_of_solvers = @solvers;
 

@@ -65,6 +65,9 @@ namespace UCSROBDDToolBox5
 
 	Node * select_ul_unvisited_adjacent (ROBDD * R, Node * Y, unsigned int dir)
 	{
+		if ((dir == 1 && Y->lower_unverified->is_empty ()) ||
+			(dir == 0 && Y->upper_unverified->is_empty ()))
+			return NULL;
 		ElementSet * set = Y->vertex->get_set_that_contains_this_subset ();
 		ElementSubset X ("", set);
 		X.copy (Y->vertex);
