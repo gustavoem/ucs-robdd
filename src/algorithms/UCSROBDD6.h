@@ -1,12 +1,12 @@
-#ifndef UCS_ROBDD5_H_
-#define UCS_ROBDD5_H_
+#ifndef UCS_ROBDD6_H_
+#define UCS_ROBDD6_H_
 
 #include "../ROBDD.h"
 #include "../global.h"
 #include "../Solver.h"
-#include "UCSROBDDToolBox5.h"
+#include "UCSROBDDToolBox6.h"
 
-class UCSROBDD5 : public Solver
+class UCSROBDD6 : public Solver
 {
 
 private:
@@ -22,18 +22,18 @@ public:
 
 	// Default constructor.
 	//
-	UCSROBDD5 ();
+	UCSROBDD6 ();
 
 
 	// Default destructor.
 	//
-	virtual ~UCSROBDD5 ();
+	virtual ~UCSROBDD6 ();
 
 
-	// Runs the UCSROBDD5 algorithm, getting up to 'max_size_of_minima_list' minimum subsets.
+	// Runs the UCSROBDD6 algorithm, getting up to 'max_size_of_minima_list' minimum subsets.
 	//
 	void get_minima_list (unsigned int);
 
 };
 
-#endif /* UCS_ROBDD5_H_ */
+#endif /* UCS_ROBDD6_H_ */

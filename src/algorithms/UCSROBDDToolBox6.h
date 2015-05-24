@@ -1,12 +1,12 @@
-#ifndef UCSROBDDTOOLBOX5_H_
-#define UCSROBDDTOOLBOX5_H_
+#ifndef UCSROBDDTOOLBOX6_H_
+#define UCSROBDDTOOLBOX6_H_
 
 #include "../ROBDD.h"
 #include "../CostFunction.h"
 #include "../Collection.h"
 
 
-namespace UCSROBDDToolBox5
+namespace UCSROBDDToolBox6
 {
 	//
 	// Node data structure
@@ -47,7 +47,12 @@ namespace UCSROBDDToolBox5
 	// [0, Y] to restrictions.
 	// 
 	void visit_adjacent (ROBDD *, Collection *, Node **, Node *, unsigned int direction,
-						CostFunction *);
+					   CostFunction *, list<ElementSubset *> *, list<ElementSubset *> *);
+
+	// Receives a list of subsets l, an ROBDD and a direction.
+	// If direction = 1 (0), then l contains lower (upper) visited greater subsets.
+	// So, for each l[i], we add the interval [0, l[i]] ([l[i], S]) to restrictions.
+	void restrict_visited_adjacents (ROBDD *, list<ElementSubset *> *, unsigned int);
 
 
 	// Deletes the content of a node; it assumes that all variables are pointers to
@@ -80,4 +85,4 @@ namespace UCSROBDDToolBox5
 
 } // end of namespace
 
-#endif /* UCSROBDDTOOLBOX5_H_ */
+#endif /* UCSROBDDTOOLBOX6_H_ */

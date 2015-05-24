@@ -1,13 +1,13 @@
-#include "UCSROBDD5.h"
+#include "UCSROBDD6.h"
 
-UCSROBDD5::UCSROBDD5 ()
+UCSROBDD6::UCSROBDD6 ()
 {
 	list_of_visited_subsets = new Collection ();
 	cost_function = NULL;
 }
 
 
-UCSROBDD5::~UCSROBDD5 ()
+UCSROBDD6::~UCSROBDD6 ()
 {
 	if (restrictions != NULL)
 		delete restrictions;
@@ -16,7 +16,7 @@ UCSROBDD5::~UCSROBDD5 ()
 }
 
 
-void UCSROBDD5::get_minima_list (unsigned int max_size_of_minima_list)
+void UCSROBDD6::get_minima_list (unsigned int max_size_of_minima_list)
 {
 	restrictions = new ROBDD (set);
 	timeval begin_exhausting, end_exhausting, begin_program, end_program;
@@ -25,7 +25,7 @@ void UCSROBDD5::get_minima_list (unsigned int max_size_of_minima_list)
 	Collection * L = new Collection ();
 	bool search_space_is_empty = false;
 	ElementSubset * X, Y ("", set);
-	UCSROBDDToolBox5::Node * M;
+	UCSROBDDToolBox6::Node * M;
 
 	srand ( (unsigned) time (NULL) );
 
@@ -35,10 +35,10 @@ void UCSROBDD5::get_minima_list (unsigned int max_size_of_minima_list)
 		if (X != NULL)
 		{
 			gettimeofday (& begin_exhausting, NULL);
-			M = UCSROBDDToolBox5::create_node (X);
+			M = UCSROBDDToolBox6::create_node (X);
 			M->vertex->cost = cost_function->cost (M->vertex);
 			
-			UCSROBDDToolBox5::DFS
+			UCSROBDDToolBox6::DFS
 				(M, L, restrictions, cost_function);
 			number_of_calls_of_minimum_exhausting++;
 			
