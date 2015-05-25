@@ -62,16 +62,16 @@ namespace UCSROBDDToolBox6
 			L->add_subset (X->vertex);
 			if (direction) // Y covers X
 			{ 
-				/*restrict_visited_adjacents (R, lower_greater, direction);
+				restrict_visited_adjacents (R, lower_greater, direction);
 				upper_greater->clear ();
-				lower_greater->clear ();*/
+				lower_greater->clear ();
 				UCSROBDDToolBox6::update_upper_restriction (R, (*Y)->vertex);
 			}
 			else 		   // X covers Y
 			{
-				/*restrict_visited_adjacents (R, upper_greater, direction);
+				restrict_visited_adjacents (R, upper_greater, direction);
 				upper_greater->clear ();
-				lower_greater->clear ();*/
+				lower_greater->clear ();
 				UCSROBDDToolBox6::update_lower_restriction (R, (*Y)->vertex);
 			}
 
@@ -81,14 +81,14 @@ namespace UCSROBDDToolBox6
 		else
 		{
 			cout << "";
-			/*if (X->vertex->cost > (*Y)->vertex->cost)
+			if (X->vertex->cost > (*Y)->vertex->cost)
 			{
 				if (direction) // Y covers X
 					lower_greater->push_back (X->vertex);
 				else
 					upper_greater->push_back (X->vertex);
 			}
-			delete X;*/
+			delete X;
 		}
 	}
 
