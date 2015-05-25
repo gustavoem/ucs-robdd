@@ -116,7 +116,7 @@ int main(int argc, char * argv[])
 		else if (algorithm.compare ("ucsr5") == 0)
 			solver = new UCSROBDD5 ();
 		else if (algorithm.compare ("ucsr6") == 0)
-			solver = new UCSROBDD5 ();
+			solver = new UCSROBDD6 ();
 
 		else if (algorithm.compare ("es") == 0)
 			solver = new ExhaustiveSearch ();
