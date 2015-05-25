@@ -28,13 +28,7 @@ namespace UCSROBDDToolBox6
 
 		while (!Y->upper_unverified->is_empty () || !Y->lower_unverified->is_empty ())
 		{
-			cout << "Vou selecionar alguem adjacente a Y: " << Y->vertex->print_subset () << " . Na direção: " << direction << endl;
 			X = select_ul_unvisited_adjacent (R, Y, direction);
-			if (X != NULL)
-				cout << "Selecionei X: " << X->vertex->print_subset () << endl;
-			else
-				cout << "X nulo\n";
-
 			visit_adjacent (R, L, &Y, X, direction, c, &upper_greater, &lower_greater);
 			direction = 1 - direction;
 		}
@@ -51,14 +45,11 @@ namespace UCSROBDDToolBox6
 	{
 		if (X == NULL || (*Y) == NULL)
 			return;
-		
-		cout << "Vou visitar esse X\n";
 
 		X->vertex->cost = c->cost (X->vertex);
 		
 		if (X->vertex->cost < (*Y)->vertex->cost)
 		{
-			cout << "X possui custo menor\n";
 			L->add_subset (X->vertex);
 			if (direction) // Y covers X
 			{ 
@@ -80,7 +71,6 @@ namespace UCSROBDDToolBox6
 		}
 		else
 		{
-			cout << "";
 			if (X->vertex->cost > (*Y)->vertex->cost)
 			{
 				if (direction) // Y covers X
@@ -96,7 +86,10 @@ namespace UCSROBDDToolBox6
 	{
 		while (!l->empty ())
 		{
-			R->add_interval (l->back (), !direction);
+			if (direction)
+				update_lower_restriction (R, l->back ());
+			else
+				update_upper_restriction (R, l->back ());
 			l->pop_back ();
 		}
 	}
