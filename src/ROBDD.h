@@ -145,8 +145,8 @@ public:
 						 Vertex *> *, unsigned int *, Vertex *, Vertex *);
 
 
-	// Adds to the ROBDD all the subsets covered (if bool true) or that covers (if bool
-	// false) by ElementSubset *
+	// Adds to the ROBDD all the subsets covered (if bool false) or that covers (if bool
+	// true) by ElementSubset *
 	//
 	void add_interval (ElementSubset *, bool);
 

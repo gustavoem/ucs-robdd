@@ -14,9 +14,10 @@ namespace UCSROBDDToolBox6
 	struct MyNode
 	{
 		ElementSubset * vertex,      // the subset contained in the node
-					  * unverified;  // the unverified elements of vertex
+					  * upper_unverified, // upper adjacent unverified subsets
+					  * lower_unverified; // lower adjacent unverified subsets
 	};
-
+	
 	typedef struct MyNode Node;
 
 	
