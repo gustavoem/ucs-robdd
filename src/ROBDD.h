@@ -9,11 +9,11 @@
 
 class ROBDD
 {
-
+    
 private:
-	
+        int round;	
 
-	// Stores the number of updates (add_interval) of the robdd
+	// Stores the number of updates (add_interval) of the robdd 
 	//
 	unsigned int nof_updates;
 	

@@ -12,6 +12,8 @@ ROBDD::ROBDD (ElementSet * set)
 	elm_set = set;
 	root = new Vertex (false, elm_set->get_set_cardinality () + 1);
 	cardinality = 1;
+
+        round = 0;
 }
 
 ROBDD::ROBDD (ElementSet * set, int a)
@@ -74,6 +76,8 @@ ROBDD::ROBDD (ElementSet * set, ElementSubset * subset)
 	root = new Vertex (elm_set->get_element (0), 1);	
 	cardinality = 3;
 	build (root, 1, set_card, subset, zero, one);
+
+        round = 0;
 }
 
 
@@ -213,6 +217,12 @@ void ROBDD::reduce ()
 { 
 	timeval start, end;
 	gettimeofday (& start, NULL);
+        
+        
+        round++;
+        if (round % 2)
+            return;
+        
 
 	Vertex ** subgraph = (Vertex **) calloc (cardinality + 1, sizeof (Vertex *));
 	unsigned int set_card = elm_set->get_set_cardinality ();
