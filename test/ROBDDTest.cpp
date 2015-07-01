@@ -132,6 +132,29 @@ namespace ROBDDTest {
 		return answ;
 	}
 
+	bool the_robdd_maintains_a_log_of_restrictions ()
+	{
+		ElementSet elm_set ("", 2, 2);	
+		ROBDD robdd (&elm_set);
+		ElementSubset subset1 ("", &elm_set);
+		ElementSubset subset2 ("", &elm_set);
+		subset1.add_element (0);
+		subset2.add_element (1);
+		robdd.add_interval (&subset1, true);
+		robdd.add_interval (&subset2, false);
+		list < pair<bool, ElementSubset *> > log_of_r;
+		pair <bool, ElementSubset *> first_pair = log_of_r.back ();
+		log_of_r.pop_back ();
+		pair <bool, ElementSubset *> second_pair = log_of_r.back ();
+		if (first_pair.second != &subset1  ||
+			//first_pair.first != true    ||
+			//second_pair.second != subset2 ||
+			second_pair.first != false)
+			return false;
+		else
+			return true;
+	}
+
 	/*not a test*/
 	bool print_r () 
 	{

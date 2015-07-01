@@ -11,7 +11,6 @@ class ROBDD
 {
     
 private:
-        int round;	
 
 	// Stores the number of updates (add_interval) of the robdd 
 	//
@@ -44,6 +43,10 @@ private:
 	// The root of the ROBDD
 	//
 	Vertex * root;	
+
+	// A log of all intervals added to the ROBDD
+	//
+	list <pair <bool, ElementSubset *> > log_of_intervals;
 
 	// Prints the sub-tree that has the parameter Vertex as root
 	//
@@ -184,6 +187,9 @@ public:
 	// Returns time elapsed consulting the robdd
 	//
 	int get_time_reducing ();	
+
+	// Returns the log list
+	list< pair<bool, ElementSubset *> > get_log ();
 };
 
 #endif /* ROBDD_H_ */

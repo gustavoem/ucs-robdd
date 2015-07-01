@@ -12,8 +12,6 @@ ROBDD::ROBDD (ElementSet * set)
 	elm_set = set;
 	root = new Vertex (false, elm_set->get_set_cardinality () + 1);
 	cardinality = 1;
-
-        round = 0;
 }
 
 ROBDD::ROBDD (ElementSet * set, int a)
@@ -77,7 +75,6 @@ ROBDD::ROBDD (ElementSet * set, ElementSubset * subset)
 	cardinality = 3;
 	build (root, 1, set_card, subset, zero, one);
 
-        round = 0;
 }
 
 
@@ -217,12 +214,6 @@ void ROBDD::reduce ()
 { 
 	timeval start, end;
 	gettimeofday (& start, NULL);
-        
-        
-        round++;
-        if (round % 2)
-            return;
-        
 
 	Vertex ** subgraph = (Vertex **) calloc (cardinality + 1, sizeof (Vertex *));
 	unsigned int set_card = elm_set->get_set_cardinality ();
@@ -437,6 +428,7 @@ void ROBDD::add_interval (ElementSubset * subset, bool orientation)
 	timeval start, end;
 	gettimeofday (& start, NULL);
 
+	//log_of_intervals.push_front (make_pair (orientation, subset));
 	int set_card = elm_set->get_set_cardinality ();
 	Vertex * zero = new Vertex (false, set_card + 1);
 	zero->mark = false;
@@ -557,4 +549,10 @@ int ROBDD::get_time_updating ()
 int ROBDD::get_time_reducing ()
 {
 	return time_reducing;
+}
+
+
+list< pair<bool, ElementSubset *> > ROBDD::get_log ()
+{
+	return log_of_intervals;
 }
