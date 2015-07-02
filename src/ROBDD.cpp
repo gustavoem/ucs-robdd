@@ -121,7 +121,6 @@ ROBDD::~ROBDD ()
 {
 	cout.flush ();
 	log_of_intervals.erase (log_of_intervals.begin (), log_of_intervals.end ());
-	//delete log_of_intervals;
 	delete_subtree (&root, &cardinality);
 }
 
@@ -161,8 +160,8 @@ void ROBDD::fill_vertice (Vertex ** vertice, int * last_index, Vertex * v)
 	v->mark = true;
 	(*last_index)++;
 
-	fill_vertice(vertice, last_index, v->get_child (true));
-	fill_vertice(vertice, last_index, v->get_child (false));
+	fill_vertice (vertice, last_index, v->get_child (true));
+	fill_vertice (vertice, last_index, v->get_child (false));
 }
 
 
@@ -433,7 +432,7 @@ void ROBDD::add_interval (ElementSubset * subset, bool orientation)
 	gettimeofday (& start, NULL);
 
 	//cout << "adicionano ao log: < " << orientation << ", " << subset->print_subset () << ">" << endl;
-	//log_of_intervals.push_front (make_pair (orientation, subset));
+	log_of_intervals.push_front (make_pair (orientation, subset));
 	int set_card = elm_set->get_set_cardinality ();
 	Vertex * zero = new Vertex (false, set_card + 1);
 	zero->mark = false;

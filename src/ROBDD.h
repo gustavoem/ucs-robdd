@@ -35,6 +35,10 @@ private:
 	//
 	unsigned int time_reducing;
 
+	// The current variable ordering
+	//
+	unsigned int * ordering;
+
 	// The set of elements this ROBDD will represent
 	//
 	ElementSet * elm_set;

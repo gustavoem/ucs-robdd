@@ -453,7 +453,7 @@ int main(void) {
 	printResult (UCSROBDDToolBoxTest::it_should_return_an_unvisited_adjacent ());
 	cout << endl;
 
-        // Testing Class "UCSROBDDToolBox4"
+    // Testing Class "UCSROBDDToolBox4"
 	cout << "UCSROBDDToolBox4Test::it_should_return_null_when_theres_no_unvisited_adjacent";
 	cout.flush ();
 	printResult (UCSROBDDToolBox4Test::it_should_return_null_when_theres_no_unvisited_adjacent ());
