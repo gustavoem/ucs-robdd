@@ -119,7 +119,6 @@ void ROBDD::unmark_all_vertex (Vertex * v)
 
 ROBDD::~ROBDD ()
 {
-	cout << "Voou deletar a ROBDD\n";
 	cout.flush ();
 	log_of_intervals.erase (log_of_intervals.begin (), log_of_intervals.end ());
 	//delete log_of_intervals;
