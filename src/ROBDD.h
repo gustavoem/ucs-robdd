@@ -189,6 +189,7 @@ public:
 	int get_time_reducing ();	
 
 	// Returns the log list
+	//
 	list< pair<bool, ElementSubset *> > get_log ();
 };
 

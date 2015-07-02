@@ -12,6 +12,7 @@ ROBDD::ROBDD (ElementSet * set)
 	elm_set = set;
 	root = new Vertex (false, elm_set->get_set_cardinality () + 1);
 	cardinality = 1;
+
 }
 
 ROBDD::ROBDD (ElementSet * set, int a)
@@ -118,6 +119,10 @@ void ROBDD::unmark_all_vertex (Vertex * v)
 
 ROBDD::~ROBDD ()
 {
+	cout << "Voou deletar a ROBDD\n";
+	cout.flush ();
+	log_of_intervals.erase (log_of_intervals.begin (), log_of_intervals.end ());
+	//delete log_of_intervals;
 	delete_subtree (&root, &cardinality);
 }
 
@@ -428,6 +433,7 @@ void ROBDD::add_interval (ElementSubset * subset, bool orientation)
 	timeval start, end;
 	gettimeofday (& start, NULL);
 
+	//cout << "adicionano ao log: < " << orientation << ", " << subset->print_subset () << ">" << endl;
 	//log_of_intervals.push_front (make_pair (orientation, subset));
 	int set_card = elm_set->get_set_cardinality ();
 	Vertex * zero = new Vertex (false, set_card + 1);
