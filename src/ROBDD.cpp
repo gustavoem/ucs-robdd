@@ -10,9 +10,14 @@ ROBDD::ROBDD (ElementSet * set)
 	time_reducing = 0;
 
 	elm_set = set;
-	root = new Vertex (false, elm_set->get_set_cardinality () + 1);
+	unsigned int n = elm_set->get_set_cardinality ();
+	root = new Vertex (false, n + 1);
 	cardinality = 1;
 
+	// initial ordering is 0, 1, ..., n-1
+	ordering = (unsigned int *) malloc (sizeof(unsigned int) * n);
+	for (unsigned int i = 0; i < n; i++)
+		ordering[i] = i;
 }
 
 ROBDD::ROBDD (ElementSet * set, int a)
@@ -67,8 +72,13 @@ ROBDD::ROBDD (ElementSet * set, ElementSubset * subset)
 {
 	nof_updates  = 0;
 	nof_consults = 0;
-
 	unsigned int set_card = set->get_set_cardinality ();
+
+	// initial ordering is 0, 1, ..., n-1
+	ordering = (unsigned int *) malloc (sizeof(unsigned int) * set_card);
+	for (unsigned int i = 0; i < set_card; i++)
+		ordering[i] = i;
+
 	elm_set = set;
 	Vertex * zero = new Vertex (false, set_card + 1);
 	Vertex * one = new Vertex (true, set_card + 1);
@@ -83,7 +93,7 @@ void ROBDD::build (Vertex * v, unsigned int elm_index, unsigned int set_card, \
 ElementSubset * subset, Vertex * zero, Vertex * one)
 {
 	bool zeroside;
-	zeroside = !subset->has_element (elm_index - 1);
+	zeroside = !subset->has_element (ordering[elm_index - 1]);
 	v->set_child (zero, zeroside);
 	
 	if (elm_index == set_card) 
@@ -92,11 +102,11 @@ ElementSubset * subset, Vertex * zero, Vertex * one)
 		return;
 	}
 
-	unsigned int child_id = elm_index + 1;
-	Vertex * next_vertice = new Vertex (elm_set->get_element (child_id - 1), child_id);
+	unsigned int child_index = ordering[elm_index] + 1;
+	Vertex * next_vertice = new Vertex (elm_set->get_element (child_index - 1), child_index);
 	v->set_child (next_vertice, !zeroside);
 	cardinality++;
-	build (next_vertice, child_id, set_card, subset, zero, one);	
+	build (next_vertice, elm_index + 1, set_card, subset, zero, one);	
 }
 
 
@@ -461,11 +471,11 @@ Vertex * ROBDD::build_interval (unsigned int index, unsigned int * card, Element
 		return one;
 	}
 	
-	if ((orientation == false && subset->has_element (index)) ||
-		(orientation == true && !subset->has_element (index)))
+	if ((orientation == false && subset->has_element (ordering[index])) ||
+		(orientation == true && !subset->has_element (ordering[index])))
 		return build_interval (index + 1, card, subset, zero, one, orientation);
 	
-	Vertex * v = new Vertex (elm_set->get_element (index), index + 1);
+	Vertex * v = new Vertex (elm_set->get_element (ordering[index]), ordering[index] + 1);
 	(*card)++;
 	v->set_child (zero, !orientation);
 	if (!zero->mark)
@@ -477,7 +487,7 @@ Vertex * ROBDD::build_interval (unsigned int index, unsigned int * card, Element
 	return v;
 }
 
-
+/*Arrumar isso aqui: ficou feio*/
 bool ROBDD::contains (ElementSubset * subset)
 {
 	nof_consults++;
@@ -485,14 +495,13 @@ bool ROBDD::contains (ElementSubset * subset)
 	gettimeofday (& start, NULL);
 	
 	Vertex * v = root;
-	unsigned int index = root->get_index ();
+
 	while (!v->is_terminal ()) 
 	{
-		if (subset->has_element (index - 1))
+		if (subset->has_element (v->get_index () - 1))
 			v = v->get_child (true);
 		else
 			v = v->get_child (false);
-		index = v->get_index ();
 	}
 	
 	gettimeofday (& end, NULL);

@@ -211,10 +211,9 @@ bool ElementSubset::is_equal(ElementSubset * Y)
 	return true;
 }
 
-/*bug*/
 bool ElementSubset::has_element (unsigned int index)
 {
-	if (index > set->get_set_cardinality ())
+	if (index >= set->get_set_cardinality ())
 	{
 		cout << "Error in ElementSubset::has_element: index out of range!" << endl;
 		return false;

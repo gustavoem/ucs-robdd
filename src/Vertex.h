@@ -13,8 +13,8 @@ private:
 	Vertex * hi;
 	Element * var;
 	bool value;
-	unsigned int id;
-	unsigned int index;
+	unsigned int id;		// just an integer for identification
+	unsigned int index; 	// the index of *var at ElementSet plus one
 	
 public:
 
