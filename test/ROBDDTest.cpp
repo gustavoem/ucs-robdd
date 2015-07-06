@@ -161,14 +161,14 @@ namespace ROBDDTest {
 	{
 		ElementSet * elm_set = new ElementSet ("", 3, 100);
 		
-		/*ROBDD * robdd = new ROBDD (elm_set);
+		ROBDD * robdd = new ROBDD (elm_set);
 		robdd->print ();
 		cout.flush();
 		robdd->reduce ();
 		cout << "depois de reduzir" << endl;
 		robdd->print ();
 		cout << " fim da robdd 1 " << endl  << endl;
-		delete robdd;*/
+		delete robdd;
 		
 		ElementSubset * subset = new ElementSubset("", elm_set);
 		subset->add_element(0);
@@ -193,13 +193,13 @@ namespace ROBDDTest {
 		delete robdd3;
 		delete elm_set2;*/
 
-		/*agora para testar a union*/
+		/*agora para testar a union */
 		/*ElementSubset * subset1 = new ElementSubset("", elm_set);
 		subset1->add_element(0);
 		subset1->add_element(2);
 		ROBDD * robdd4 = new ROBDD (elm_set, subset1);
 		cout << "robdd4" << endl;
-		robdd4->print ();*/
+		robdd4->print ();
 		ElementSubset * subset2 = new ElementSubset("", elm_set);
 		subset2->add_element (1);
 		ROBDD * robdd5 = new ROBDD (elm_set, subset2);
@@ -216,7 +216,7 @@ namespace ROBDDTest {
 
 
 
-		delete elm_set;
+		delete elm_set;*/
 		return true;
 	}
 

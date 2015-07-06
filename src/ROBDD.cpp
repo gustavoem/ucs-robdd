@@ -17,7 +17,7 @@ ROBDD::ROBDD (ElementSet * set)
 	// initial ordering is 0, 1, ..., n-1
 	ordering = (unsigned int *) malloc (sizeof(unsigned int) * n);
 	for (unsigned int i = 0; i < n; i++)
-		ordering[i] = i;
+		ordering[i] = n - i - 1;
 }
 
 ROBDD::ROBDD (ElementSet * set, int a)
@@ -140,7 +140,7 @@ void ROBDD::delete_subtree (Vertex ** v, unsigned int * n)
 	Vertex ** vertice = get_all_vertex (*v, *n);
 	for (unsigned int i = 0; i < *n; i++)
 	{
-		delete vertice[i];
+		delete vertice[i];	
 		vertice [i] = NULL;
 	}
 	*n = 0;
