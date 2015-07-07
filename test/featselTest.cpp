@@ -98,7 +98,7 @@ int main(void) {
 	cout.flush ();
 	printResult (ElementTest::an_added_value_should_be_found ());
 	cout << endl;
-
+*/
 	// Testing Class "ElementSet"
 	cout << "ElementSetTest::a_set_should_have_a_name";
 	cout.flush ();
@@ -127,8 +127,11 @@ int main(void) {
 	cout << "ElementSetTest::values_from_a_random_set_should_be_within_the_given_range";
 	cout.flush ();
 	printResult (ElementSetTest::values_from_a_random_set_should_be_within_the_given_range ());
+	cout << "ElementSetTest::it_should_store_element_index";
+	cout.flush ();
+	printResult (ElementSetTest::it_should_store_element_index ());
 	cout << endl;
-
+/*
 	// Testing Class "ElementSubset"
 	cout << "ElementSubsetTest::a_new_subset_should_be_an_empty_set";
 	cout.flush ();

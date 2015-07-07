@@ -77,12 +77,12 @@ ROBDD::ROBDD (ElementSet * set, ElementSubset * subset)
 	// initial ordering is 0, 1, ..., n-1
 	ordering = (unsigned int *) malloc (sizeof(unsigned int) * set_card);
 	for (unsigned int i = 0; i < set_card; i++)
-		ordering[i] = i;
+		ordering[i] = set_card - i - 1;
 
 	elm_set = set;
 	Vertex * zero = new Vertex (false, set_card + 1);
 	Vertex * one = new Vertex (true, set_card + 1);
-	root = new Vertex (elm_set->get_element (0), 1);	
+	root = new Vertex (elm_set->get_element (ordering[0]), 1);	
 	cardinality = 3;
 	build (root, 1, set_card, subset, zero, one);
 

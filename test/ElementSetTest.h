@@ -45,6 +45,8 @@ namespace ElementSetTest
 	bool it_should_not_return_an_element_that_not_belongs_to_the_set ();
 
 	bool values_from_a_random_set_should_be_within_the_given_range ();
+
+	bool it_should_store_element_index ();
 }
 
 #endif /* ELEMENTSETTEST_H_ */

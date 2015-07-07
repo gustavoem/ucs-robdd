@@ -146,4 +146,14 @@ namespace ElementSetTest
 		return true;
 	}
 
+	bool it_should_store_element_index ()
+	{
+		ElementSet set1 ("S1", 100, 1000);
+		unsigned int i;
+		for (i = 0; i < 100; i++)
+			if (i != set1.get_element_index (set1.get_element (i)))
+				return false;
+		return true;
+	}
+
 } // end namespace

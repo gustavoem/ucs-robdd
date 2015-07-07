@@ -46,17 +46,19 @@ ElementSet::ElementSet (string a_set_name, string file_name)
 	has_extra_element = false;
 	number_of_elements = 0;
 
-    if (driver.parse (file_name.data ()))
-    {
-    	std::cout << "Error in ElementSet, processing the XML file!" << std::endl;
-    }
-    else
-    {
-    	list_of_elements = driver.list_of_elements;
-    	number_of_elements = driver.number_of_elements;
-    	name = driver.set_name;
-    	explicit_cost = driver.explicit_cost;
-    }
+	if (driver.parse (file_name.data ()))
+	{
+		std::cout << "Error in ElementSet, processing the XML file!" << std::endl;
+	}
+	else
+	{
+		list_of_elements = driver.list_of_elements;
+		number_of_elements = driver.number_of_elements;
+		name = driver.set_name;
+		explicit_cost = driver.explicit_cost;
+	}
+
+	set_elm_indexes ();
 }
 
 
@@ -104,6 +106,8 @@ ElementSet::ElementSet (string file_name, unsigned int n)
 			i = 0;
 	}
 	my_file.close ();
+
+	set_elm_indexes ();
 }
 
 
@@ -140,6 +144,8 @@ ElementSet::ElementSet (string set_name, unsigned int n, unsigned int range)
 			}
 		}
 	}
+
+	set_elm_indexes	();
 }
 
 
@@ -163,6 +169,13 @@ ElementSet::~ElementSet ()
 }
 
 
+void ElementSet::set_elm_indexes ()
+{
+	for (unsigned int i = 0; i < number_of_elements; i++)
+		element_indexes.insert (make_pair (list_of_elements[i], i));
+}
+
+
 void ElementSet::print_list_of_elements ()
 {
 	unsigned int i;
@@ -182,12 +195,22 @@ unsigned int ElementSet::get_set_cardinality ()
 Element * ElementSet::get_element (unsigned int index)
 {
 	if ( (has_extra_element && (index <= (number_of_elements + 1)) ) ||
-	     (index < number_of_elements)
+		 (index < number_of_elements)
 	   )
 		return list_of_elements[index];
 	else
 		// ElementSet error: index out of range!
 		return NULL;
+}
+
+
+unsigned int ElementSet::get_element_index (Element * elm)
+{
+	map<Element *, unsigned int>::iterator it = element_indexes.find (elm);
+	if (it == element_indexes.end ())
+		return -1;
+	else
+		return it->second;
 }
 
 
