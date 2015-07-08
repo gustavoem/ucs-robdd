@@ -82,31 +82,32 @@ ROBDD::ROBDD (ElementSet * set, ElementSubset * subset)
 	elm_set = set;
 	Vertex * zero = new Vertex (false, set_card + 1);
 	Vertex * one = new Vertex (true, set_card + 1);
-	root = new Vertex (elm_set->get_element (ordering[0]), 1);	
+	Element * root_elm = elm_set->get_element (ordering[0]);
+	root = new Vertex (root_elm, elm_set->get_element_index (root_elm) + 1);
 	cardinality = 3;
 	build (root, 1, set_card, subset, zero, one);
 
 }
 
 
-void ROBDD::build (Vertex * v, unsigned int elm_index, unsigned int set_card, \
+void ROBDD::build (Vertex * v, unsigned int ord_index, unsigned int set_card, \
 ElementSubset * subset, Vertex * zero, Vertex * one)
 {
 	bool zeroside;
-	zeroside = !subset->has_element (ordering[elm_index - 1]);
+	zeroside = !subset->has_element (ordering[ord_index - 1]);
 	v->set_child (zero, zeroside);
 	
-	if (elm_index == set_card) 
+	if (ord_index == set_card) 
 	{
 		v->set_child (one, !zeroside);
 		return;
 	}
 
-	unsigned int child_index = ordering[elm_index] + 1;
+	unsigned int child_index = ordering[ord_index] + 1;
 	Vertex * next_vertice = new Vertex (elm_set->get_element (child_index - 1), child_index);
 	v->set_child (next_vertice, !zeroside);
 	cardinality++;
-	build (next_vertice, elm_index + 1, set_card, subset, zero, one);	
+	build (next_vertice, ord_index + 1, set_card, subset, zero, one);	
 }
 
 
