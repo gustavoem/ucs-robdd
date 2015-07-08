@@ -83,7 +83,7 @@ ROBDD::ROBDD (ElementSet * set, ElementSubset * subset)
 	Vertex * zero = new Vertex (false, set_card + 1);
 	Vertex * one = new Vertex (true, set_card + 1);
 	Element * root_elm = elm_set->get_element (ordering[0]);
-	root = new Vertex (root_elm, elm_set->get_element_index (root_elm) + 1);
+	root = new Vertex (root_elm, 1);
 	cardinality = 3;
 	build (root, 1, set_card, subset, zero, one);
 
@@ -104,10 +104,10 @@ ElementSubset * subset, Vertex * zero, Vertex * one)
 	}
 
 	unsigned int child_index = ordering[ord_index] + 1;
-	Vertex * next_vertice = new Vertex (elm_set->get_element (child_index - 1), child_index);
+	Vertex * next_vertice = new Vertex (elm_set->get_element (child_index - 1), ++ord_index);
 	v->set_child (next_vertice, !zeroside);
 	cardinality++;
-	build (next_vertice, ord_index + 1, set_card, subset, zero, one);	
+	build (next_vertice, ord_index, set_card, subset, zero, one);	
 }
 
 
@@ -213,7 +213,7 @@ void ROBDD::fill_vlist (Vertex * v, list<Vertex *> ** vlists)
 {	
 	if (v == NULL || v->mark)
 		return;
-	unsigned int i = v->get_id ();
+	unsigned int i = v->get_index ();
 	cout.flush ();
 	vlists[i]->push_back (v);	
 	v->mark = true;

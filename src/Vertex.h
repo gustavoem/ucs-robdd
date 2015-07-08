@@ -14,7 +14,7 @@ private:
 	Element * var;
 	bool value;
 	unsigned int id;		// just an integer for identification
-	unsigned int index; 	// the index of *var at ElementSet plus one
+	unsigned int index; 	// the index of *var at the ordering plus one
 	
 public:
 
