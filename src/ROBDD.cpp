@@ -22,39 +22,39 @@ ROBDD::ROBDD (ElementSet * set)
 
 ROBDD::ROBDD (ElementSet * set, int a)
 {
-/*	elm_set = set;
+	elm_set = set;
 	Element * elm = elm_set->get_element (0);
 	root = new Vertex (elm, 1);
 	// teste obdd1
-	elm = elm_set->get_element (1);
-	Vertex * v_lo = new Vertex (elm, 2);
-	Vertex * v_hi = new Vertex (elm, 2);
-	Vertex * zero = new Vertex (false, 3);
-	Vertex * one = new Vertex (true, 3);
-	v_lo->set_child (one, true);
-	v_lo->set_child (zero, false);
-	v_hi->set_child (one, true);
-	v_hi->set_child (zero, false);
-	root->set_child (v_hi, true);
-	root->set_child (v_lo, false);
-	cardinality = 5;
+	// elm = elm_set->get_element (1);
+	// Vertex * v_lo = new Vertex (elm, 2);
+	// Vertex * v_hi = new Vertex (elm, 2);
+	// Vertex * zero = new Vertex (false, 3);
+	// Vertex * one = new Vertex (true, 3);
+	// v_lo->set_child (one, true);
+	// v_lo->set_child (zero, false);
+	// v_hi->set_child (one, true);
+	// v_hi->set_child (zero, false);
+	// root->set_child (v_hi, true);
+	// root->set_child (v_lo, false);
+	// cardinality = 5;
 
 	// test obdd2
-	elm = elm_set->get_element (1);
-	Vertex * v_lo = new Vertex (elm, 2);
-	Vertex * v_hi = new Vertex (elm, 2);
-	Vertex * zero = new Vertex (false, 3);
-	Vertex * one = new Vertex (true, 3);
-	v_lo->set_child (one, true);
-	v_lo->set_child (one, false);
-	v_hi->set_child (one, true);
-	v_hi->set_child (zero, false);
-	root->set_child (v_hi, true);
-	root->set_child (v_lo, false);
-	cardinality = 5;*/
+	// elm = elm_set->get_element (1);
+	// Vertex * v_lo = new Vertex (elm, 2);
+	// Vertex * v_hi = new Vertex (elm, 2);
+	// Vertex * zero = new Vertex (false, 3);
+	// Vertex * one = new Vertex (true, 3);
+	// v_lo->set_child (one, true);
+	// v_lo->set_child (one, false);
+	// v_hi->set_child (one, true);
+	// v_hi->set_child (zero, false);
+	// root->set_child (v_hi, true);
+	// root->set_child (v_lo, false);
+	// cardinality = 5;
 
 	// teste obdd3
-	/*elm = elm_set->get_element (1);
+	elm = elm_set->get_element (1);
 	Vertex * v_lo = new Vertex (elm, 2);
 	Vertex * v_hi = new Vertex (elm, 2);
 	Vertex * one = new Vertex (true, 3);
@@ -64,7 +64,7 @@ ROBDD::ROBDD (ElementSet * set, int a)
 	v_hi->set_child (one, false);
 	root->set_child (v_hi, true);
 	root->set_child (v_lo, false);
-	cardinality = 4;*/
+	cardinality = 4;
 }	
 
 
