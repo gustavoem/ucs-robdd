@@ -17,7 +17,7 @@ ROBDD::ROBDD (ElementSet * set)
 	// initial ordering is 0, 1, ..., n-1
 	ordering = (unsigned int *) malloc (sizeof(unsigned int) * n);
 	for (unsigned int i = 0; i < n; i++)
-		ordering[i] = n - i - 1;
+		ordering[i] = i;
 }
 
 ROBDD::ROBDD (ElementSet * set, int a)
@@ -77,7 +77,7 @@ ROBDD::ROBDD (ElementSet * set, ElementSubset * subset)
 	// initial ordering is 0, 1, ..., n-1
 	ordering = (unsigned int *) malloc (sizeof(unsigned int) * set_card);
 	for (unsigned int i = 0; i < set_card; i++)
-		ordering[i] = set_card - i - 1;
+		ordering[i] = i;
 
 	elm_set = set;
 	Vertex * zero = new Vertex (false, set_card + 1);
