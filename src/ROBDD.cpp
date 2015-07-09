@@ -54,17 +54,17 @@ ROBDD::ROBDD (ElementSet * set, int a)
 	// cardinality = 5;
 
 	// teste obdd3
-	elm = elm_set->get_element (1);
-	Vertex * v_lo = new Vertex (elm, 2);
-	Vertex * v_hi = new Vertex (elm, 2);
-	Vertex * one = new Vertex (true, 3);
-	v_lo->set_child (one, true);
-	v_lo->set_child (one, false);
-	v_hi->set_child (one, true);
-	v_hi->set_child (one, false);
-	root->set_child (v_hi, true);
-	root->set_child (v_lo, false);
-	cardinality = 4;
+	// elm = elm_set->get_element (1);
+	// Vertex * v_lo = new Vertex (elm, 2);
+	// Vertex * v_hi = new Vertex (elm, 2);
+	// Vertex * one = new Vertex (true, 3);
+	// v_lo->set_child (one, true);
+	// v_lo->set_child (one, false);
+	// v_hi->set_child (one, true);
+	// v_hi->set_child (one, false);
+	// root->set_child (v_hi, true);
+	// root->set_child (v_lo, false);
+	// cardinality = 4;
 }	
 
 
