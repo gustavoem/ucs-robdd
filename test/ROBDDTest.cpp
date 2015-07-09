@@ -205,7 +205,7 @@ namespace ROBDDTest {
 		ROBDD * robdd5 = new ROBDD (elm_set, subset2);
 		cout << "robdd5" << endl;
 		robdd5->print ();
-		robdd5->union_to (robdd2->get_root ());
+		robdd5->union_to (robdd4->get_root ());
 		cout << "juntas:" << endl;
 		robdd5->print ();
 		//delete robdd4;
