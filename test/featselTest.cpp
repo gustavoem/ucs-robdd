@@ -417,7 +417,7 @@ int main(void) {
 	cout << endl;
 
 	// Testing Class "ROBDD"
-	/*cout << "ROBDDTest::a_new_robdd_has_only_a_terminal_node";
+	cout << "ROBDDTest::a_new_robdd_has_only_a_terminal_node";
 	cout.flush ();
 	printResult (ROBDDTest::a_new_robdd_has_only_a_terminal_node ());
 	cout << "ROBDDTest::the_union_of_a_new_robdd_with_itself_should_be_itself";
@@ -443,9 +443,8 @@ int main(void) {
 	printResult (ROBDDTest::its_possible_to_get_a_random_subset_evaluated_zero ());
 	cout << "ROBDDTest::the_robdd_maintains_a_log_of_restrictions";
 	cout.flush ();
-	printResult (ROBDDTest::the_robdd_maintains_a_log_of_restrictions ());*/
+	printResult (ROBDDTest::the_robdd_maintains_a_log_of_restrictions ());
 
-	ROBDDTest::print_r ();
 	cout << endl;
 
 /*
