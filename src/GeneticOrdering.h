@@ -8,14 +8,20 @@ class ROBDD; /* this was made to solve cyclic dependency of robdd and GeneticOrd
 
 class GeneticOrdering
 {
+
 	//
 	// Data structure for solutions
 	//
+	
 	struct Node
 	{
+
 		unsigned int * permutation; // the node's variable order
 		ROBDD * robdd;
-		float selectp; 			// probability of begin selected in selection
+		double normalized_fitness; 			// probability of begin selected in selection
+		double accumulate_fitness;          // probability of choosing any element with 
+											// 	fitness greater or equal to 
+											// 	normalized_fitness
 
 	};
 
@@ -62,6 +68,20 @@ private:
 	// Creates the ROBDD using the solution 
 	//
 	void build_robdd (OrderingNode *);
+
+
+	// Calculates the normalized fitness of all elements from a population
+	//
+	void normalize_fitness ();
+
+	// Shuffle solution_size elements from an individual
+	//
+	void shuffle_individual (unsigned int *);
+
+
+	// Shuffle population_size elements from a population
+	//
+	void shuffle_population (OrderingNode *);
 
 
 public:
