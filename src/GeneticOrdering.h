@@ -4,6 +4,7 @@
 #include "ROBDD.h"
 #include "Element.h"
 
+class ROBDD; /* this was made to solve cyclic dependency of robdd and GeneticOrdering*/
 
 class GeneticOrdering
 {
@@ -12,7 +13,7 @@ class GeneticOrdering
 	//
 	struct Node
 	{
-		Element ** permutation; // the node's variable order
+		unsigned int * permutation; // the node's variable order
 		ROBDD * robdd;
 		float selectp; 			// probability of begin selected in selection
 
@@ -28,9 +29,20 @@ private:
 	OrderingNode * solutions;
 	
 
-	// Creates an initial population filling the solutions array
+	// Population size
 	//
-	void start_population ();
+	unsigned int population_size;
+
+
+	// Size of the solutions
+	//
+	unsigned int solution_size;
+
+
+	// Creates a single random solution
+	//
+	unsigned int * random_indivudual ();
+
 
 	// Selects the elements that fits best the environment
 	//
@@ -51,7 +63,7 @@ private:
 
 public:
 
-	GeneticOrdering (ROBDD *);
+	GeneticOrdering (ROBDD *, unsigned int, unsigned int);
 
 	// Gives a good ordering using a Genetic Algorithm Heuristic for 
 	Vertex * reorder ();

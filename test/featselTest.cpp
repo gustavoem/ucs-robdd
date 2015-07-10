@@ -37,6 +37,8 @@
 #include "UCSROBDDTest.h"
 #include "UCSROBDD3Test.h"
 
+#include "GeneticOrderingTest.h"
+
 // Objective functions
 //
 #include "CostFunctionTest.h"
@@ -467,7 +469,7 @@ int main(void) {
 	cout << endl;
 
 	// Testing Class "UCSROBDD2"
-	cout << "UCSROBDDTest::a_lattice_with_constant_cost_should_be_totally_exausted";
+	/*cout << "UCSROBDDTest::a_lattice_with_constant_cost_should_be_totally_exausted";
 	cout.flush ();
 	printResult (UCSROBDDTest::a_lattice_with_constant_cost_should_be_totally_exausted ());
 	cout << "UCSROBDDTest::it_should_find_a_global_minimum";
@@ -503,7 +505,14 @@ int main(void) {
 	cout << "UCSROBDD3Test::it_should_always_give_the_correct_answer";
 	cout.flush ();
 	printResult (UCSROBDD3Test::it_should_always_give_the_correct_answer ());
+	cout << endl;*/
+
+	// Testing Class "GeneticOrdering"
+	cout << "GeneticOrderingTest::it_should_create_an_initial_population";
+	cout.flush ();
+	printResult (GeneticOrderingTest::it_should_create_an_initial_population ());
 	cout << endl;
+
 
 	cout << "Total " << number_of_passed_tests + number_of_failed_tests << " test(s), ";
 	cout << number_of_passed_tests << " test(s) passed, " << number_of_failed_tests;

@@ -20,11 +20,35 @@ ROBDD::ROBDD (ElementSet * set)
 		ordering[i] = i;
 }
 
+
+ROBDD::ROBDD (ElementSet * set, unsigned int * ord)
+{
+	nof_updates  = 0;
+	nof_consults = 0;
+	time_consulting = 0;
+	time_updating = 0;
+	time_reducing = 0;
+
+	elm_set = set;
+	unsigned int n = elm_set->get_set_cardinality ();
+	root = new Vertex (false, n + 1);
+	cardinality = 1;
+
+	// initial ordering is 0, 1, ..., n-1
+	ordering = (unsigned int *) malloc (sizeof(unsigned int) * n);
+	for (unsigned int i = 0; i < n; i++)
+		ordering[i] = ord[i];
+}
+
+
 ROBDD::ROBDD (ElementSet * set, int a)
 {
 	elm_set = set;
 	Element * elm = elm_set->get_element (0);
 	root = new Vertex (elm, 1);
+
+	ordering = NULL;
+	
 	// teste obdd1
 	// elm = elm_set->get_element (1);
 	// Vertex * v_lo = new Vertex (elm, 2);
@@ -133,6 +157,8 @@ ROBDD::~ROBDD ()
 	cout.flush ();
 	log_of_intervals.erase (log_of_intervals.begin (), log_of_intervals.end ());
 	delete_subtree (&root, &cardinality);
+	if (ordering != NULL)
+		free (ordering);
 }
 
 

@@ -6,6 +6,7 @@
 #include "Vertex.h"
 #include "ElementSubset.h"
 #include "CostFunction.h"
+#include "GeneticOrdering.h"
 
 class ROBDD
 {
@@ -109,6 +110,11 @@ public:
 	// Builds a ROBDD representing the function "0"
 	//
 	ROBDD (ElementSet *);
+
+
+	// Builds a ROBDD representing the function "0" using the ordering in unsigned int *
+	//
+	ROBDD (ElementSet *, unsigned int *);
 
 
 	// this is for testing reduce ()
