@@ -447,7 +447,7 @@ int main(void) {
 
 	cout << endl;
 
-/*
+
 	// Testing Class "UCSROBDDToolBox"
 	cout << "UCSROBDDToolBoxTest::it_should_return_null_when_theres_no_unvisited_adjacent";
 	cout.flush ();
@@ -504,7 +504,7 @@ int main(void) {
 	cout.flush ();
 	printResult (UCSROBDD3Test::it_should_always_give_the_correct_answer ());
 	cout << endl;
-*/
+
 	cout << "Total " << number_of_passed_tests + number_of_failed_tests << " test(s), ";
 	cout << number_of_passed_tests << " test(s) passed, " << number_of_failed_tests;
 	cout << " test(s) failed." << endl << endl;
