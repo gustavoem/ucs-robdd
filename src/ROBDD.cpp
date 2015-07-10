@@ -154,7 +154,6 @@ void ROBDD::unmark_all_vertex (Vertex * v)
 
 ROBDD::~ROBDD ()
 {
-	cout.flush ();
 	log_of_intervals.erase (log_of_intervals.begin (), log_of_intervals.end ());
 	delete_subtree (&root, &cardinality);
 	if (ordering != NULL)
@@ -240,7 +239,6 @@ void ROBDD::fill_vlist (Vertex * v, list<Vertex *> ** vlists)
 	if (v == NULL || v->mark)
 		return;
 	unsigned int i = v->get_index ();
-	cout.flush ();
 	vlists[i]->push_back (v);	
 	v->mark = true;
 
@@ -468,10 +466,6 @@ void ROBDD::add_interval (ElementSubset * subset, bool orientation)
 	timeval start, end;
 	gettimeofday (& start, NULL);
 
-	cout << "adicionano intervalo: < " << orientation << ", " << subset->print_subset () << ">" << endl;
-	cout << "\n Antes de adicionar\n";
-	print ();
-	cout.flush ();
 	log_of_intervals.push_front (make_pair (orientation, subset));
 	int set_card = elm_set->get_set_cardinality ();
 	Vertex * zero = new Vertex (false, set_card + 1);

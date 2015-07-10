@@ -23,7 +23,7 @@ GeneticOrdering::GeneticOrdering (ROBDD * robdd, unsigned int pop_size,
 		for (unsigned int x = 0; x < solution_size; x++)
 			cout << solutions[i].permutation[x] << " ";
 		cout << "normalized_fitness: " << solutions[i].normalized_fitness;
-		//cout << "accumulate_fitness: " << solutions[i].accumulate_fitness;
+		cout << " accumulate_fitness: " << solutions[i].accumulate_fitness;
 	}
 	cout.flush ();
 }
@@ -68,19 +68,18 @@ void GeneticOrdering::normalize_fitness ()
 	for (unsigned int i = 0; i < population_size; i++)
 	{
 		build_robdd (&solutions[i]);
-		solutions[i].robdd->print ();
-		double fr = solutions[i].robdd->get_cardinality ();
+		double fr = 1.0 / solutions[i].robdd->get_cardinality ();
 		solutions[i].normalized_fitness = fr;
 		total_fitness += fr;
 	}
 
-	// double accumulate = 0;
-	// for (unsigned int i; i < population_size; i++)
-	// {
-	// 	solutions[i].normalized_fitness /= total_fitness;
-	// 	accumulate += solutions[i].normalized_fitness;
-	// 	solutions[i].accumulate_fitness = accumulate;
-	// }
+	double accumulate = 0;
+	for (unsigned int i; i < population_size; i++)
+	{
+		solutions[i].normalized_fitness /= total_fitness;
+		accumulate += solutions[i].normalized_fitness;
+		solutions[i].accumulate_fitness = accumulate;
+	}
 }
 
 
