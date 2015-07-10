@@ -468,7 +468,10 @@ void ROBDD::add_interval (ElementSubset * subset, bool orientation)
 	timeval start, end;
 	gettimeofday (& start, NULL);
 
-	//cout << "adicionano ao log: < " << orientation << ", " << subset->print_subset () << ">" << endl;
+	cout << "adicionano intervalo: < " << orientation << ", " << subset->print_subset () << ">" << endl;
+	cout << "\n Antes de adicionar\n";
+	print ();
+	cout.flush ();
 	log_of_intervals.push_front (make_pair (orientation, subset));
 	int set_card = elm_set->get_set_cardinality ();
 	Vertex * zero = new Vertex (false, set_card + 1);
@@ -489,7 +492,8 @@ void ROBDD::add_interval (ElementSubset * subset, bool orientation)
 }
 
 
-Vertex * ROBDD::build_interval (unsigned int index, unsigned int * card, ElementSubset * subset, Vertex * zero, Vertex * one, bool orientation)
+Vertex * ROBDD::build_interval (unsigned int index, unsigned int * card, 
+	ElementSubset * subset, Vertex * zero, Vertex * one, bool orientation)
 {
 	if (index == elm_set->get_set_cardinality ())
 	{
@@ -502,7 +506,7 @@ Vertex * ROBDD::build_interval (unsigned int index, unsigned int * card, Element
 		(orientation == true && !subset->has_element (ordering[index])))
 		return build_interval (index + 1, card, subset, zero, one, orientation);
 	
-	Vertex * v = new Vertex (elm_set->get_element (ordering[index]), ordering[index] + 1);
+	Vertex * v = new Vertex (elm_set->get_element (ordering[index]), index + 1);
 	(*card)++;
 	v->set_child (zero, !orientation);
 	if (!zero->mark)
