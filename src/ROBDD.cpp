@@ -596,3 +596,13 @@ list< pair<bool, ElementSubset *> > ROBDD::get_log ()
 {
 	return log_of_intervals;
 }
+
+ElementSet * ROBDD::get_element_set ()
+{
+	return elm_set;
+}
+
+unsigned int ROBDD::get_cardinality ()
+{
+	return cardinality;
+}

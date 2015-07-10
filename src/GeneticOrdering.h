@@ -27,7 +27,10 @@ private:
 	// List of solutions
 	//
 	OrderingNode * solutions;
-	
+
+	// Original ROBDD
+	//
+	ROBDD * R;
 
 	// Population size
 	//

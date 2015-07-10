@@ -6,6 +6,7 @@ GeneticOrdering::GeneticOrdering (ROBDD * R, unsigned int pop_size,
 {
 	population_size = pop_size;
 	this->solution_size = solution_size;
+	this->R = R;
 	solutions = (OrderingNode *) malloc (population_size * sizeof (OrderingNode));
 	
 	for (unsigned int i = 0; i < population_size; i++)
@@ -64,7 +65,11 @@ void GeneticOrdering::mutate ()
 
 void GeneticOrdering::build_robdd (OrderingNode * node)
 {
-	return;
+	list <pair <bool, ElementSubset *> > log_of_intervals = R->get_log ();
+	node->robdd = new ROBDD (R->get_element_set ());
+	for (list <pair <bool, ElementSubset *> >::iterator it; 
+		it != log_of_intervals.end (); it++)
+		node->robdd->add_interval (it->second, it->first);
 }
 
 

@@ -45,6 +45,11 @@ private:
 	ElementSet * elm_set;
 
 
+	// ROBDD cardinality
+	//
+	unsigned int cardinality;
+
+
 	// The root of the ROBDD
 	//
 	Vertex * root;	
@@ -102,9 +107,6 @@ private:
 
 public:
 
-	// ROBDD cardinality
-	//
-	unsigned int cardinality;
 
 
 	// Builds a ROBDD representing the function "0"
@@ -201,6 +203,14 @@ public:
 	// Returns the log list
 	//
 	list< pair<bool, ElementSubset *> > get_log ();
+
+	// Returns the ElementSet used to build the ROBDD
+	//
+	ElementSet * get_element_set ();
+
+	// Returns the number of vertice of the ROBDD
+	//
+	unsigned int get_cardinality ();
 };
 
 #endif /* ROBDD_H_ */

@@ -179,7 +179,7 @@ namespace ROBDDTest {
 		robdd2->reduce ();
 		cout << "depois de reduzir" << endl;
 		robdd2->print ();
-		cout << " fim da robdd 2. |G| = " << robdd2->cardinality << endl << endl;
+		cout << " fim da robdd 2. |G| = " << endl << endl;
 		delete subset;
 
 		// ElementSet * elm_set2 = new ElementSet ("", 2, 100);
@@ -189,7 +189,7 @@ namespace ROBDDTest {
 		// robdd3->reduce ();
 		// cout << "depois de reduzir" << endl;
 		// robdd3->print ();
-		// cout << " fim da robdd 3. |G| = " << robdd3->cardinality << endl << endl;
+		// cout << " fim da robdd 3. |G| = "  << endl << endl;
 		// delete robdd3;
 		// delete elm_set2;
 
