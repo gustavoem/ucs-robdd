@@ -4,12 +4,30 @@ namespace OrderingNodeTest {
 
 	bool it_should_create_a_random_permutation ()
 	{	
-		unsigned int setsize = 3;
+		unsigned int setsize = 10;
+		unsigned int * occour = (unsigned int *) malloc
+		 (setsize * sizeof (unsigned int));
 		ElementSet elm_set ("", setsize, 100);
-		ROBDD robdd (&elm_set);
-		ElementSubset subset ("", &elm_set);
 		list <pair <bool, ElementSubset *> > l;
 		OrderingNode solution (&elm_set, l);
+		for (unsigned int i = 0; i < setsize; i++)
+			occour[i] = 0;
+
+		unsigned int * perm = solution.get_ordering ();
+		for (unsigned int i = 0; i < setsize; i++)
+			occour[perm[i]]++;
+
+		for (unsigned int i = 0; i < setsize; i++)
+			if (occour[i] != 1)
+				return false;
+		return true;
+
+	}
+
+	bool it_should_represent_the_original_robdd ()
+	{
+		return true;
+	}
 		// subset.add_element (0);
 		// robdd.add_interval (&subset, false);
 		// subset.remove_element (0);
@@ -17,9 +35,6 @@ namespace OrderingNodeTest {
 		// robdd.add_interval (&subset, false);
 		// subset.add_element (1);
 		// robdd.add_interval (&subset, true);
-
-		return true;
-	}
 
 } // end of namespace
 
