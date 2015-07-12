@@ -38,6 +38,7 @@
 #include "UCSROBDD3Test.h"
 
 #include "GeneticOrderingTest.h"
+#include "OrderingNodeTest.h"
 
 // Objective functions
 //
@@ -512,6 +513,14 @@ int main(void) {
 	cout.flush ();
 	printResult (GeneticOrderingTest::it_should_create_an_initial_population ());
 	cout << endl;
+
+
+	// Testing Class "OrderingNode"
+	cout << "OrderingNodeTest::it_should_create_a_random_permutation";
+	cout.flush ();
+	printResult (OrderingNodeTest::it_should_create_a_random_permutation ());
+	cout << endl;
+
 
 
 	cout << "Total " << number_of_passed_tests + number_of_failed_tests << " test(s), ";

@@ -7,6 +7,7 @@
 #include "OrderingNode.h"
 
 class ROBDD; /* this was made to solve cyclic dependency of robdd and GeneticOrdering*/
+class OrderingNode;
 
 class GeneticOrdering
 {
@@ -15,7 +16,7 @@ private:
 
 	// List of solutions
 	//
-	OrderingNode * solutions;
+	OrderingNode ** solutions;
 
 	// Original ROBDD
 	//
