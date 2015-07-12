@@ -7,6 +7,7 @@ namespace OrderingNodeTest {
 		unsigned int setsize = 10;
 		unsigned int * occour = (unsigned int *) malloc
 		 (setsize * sizeof (unsigned int));
+		bool answ = true;
 		ElementSet elm_set ("", setsize, 100);
 		list <pair <bool, ElementSubset *> > l;
 		OrderingNode solution (&elm_set, l);
@@ -15,13 +16,17 @@ namespace OrderingNodeTest {
 
 		unsigned int * perm = solution.get_ordering ();
 		for (unsigned int i = 0; i < setsize; i++)
-			occour[perm[i]]++;
+			if (perm[i] < setsize && perm[i] >= 0)
+				occour[perm[i]]++;
+			else
+				answ = false;
 
 		for (unsigned int i = 0; i < setsize; i++)
 			if (occour[i] != 1)
-				return false;
-		return true;
+				answ = false;
 
+		free (occour);
+		return answ;
 	}
 
 	bool it_should_represent_the_original_robdd ()
