@@ -3,10 +3,7 @@
 
 #include "ElementSet.h"
 #include "ElementSubset.h"
-#include "ROBDD.h"
-
-// This was made to solve cyclic dependency of robdd and GeneticOrdering
-class ROBDD; 
+#include "GAROBDD.h"
 
 
 class OrderingNode
@@ -17,7 +14,7 @@ private:
 
 	// The ROBDD with the corresponding variable Ordering
 	//
-	ROBDD * robdd;
+	GAROBDD * garobdd;
 
 	
 	// Probability of begin selected in selection
@@ -56,11 +53,6 @@ private:
 	void mutate ();
 
 
-	// Creates the ROBDD using the solution 
-	//
-	void build_robdd (ElementSet *, list <pair <bool, ElementSubset *> >);
-
-
 	// Shuffle solution_size elements from an individual
 	//
 	void shuffle_individual ();
@@ -68,13 +60,13 @@ private:
 
 public:
 
-	OrderingNode (ElementSet *, list <pair <bool, ElementSubset *> >);
+	OrderingNode (ElementSet *, list <pair <bool, ElementSubset *> > *);
 
 
 	unsigned int * get_ordering ();
 
 
-	ROBDD * get_robdd ();
+	GAROBDD * get_robdd ();
 
 
 	double get_normalized_fitness ();

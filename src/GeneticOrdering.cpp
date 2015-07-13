@@ -8,8 +8,9 @@ GeneticOrdering::GeneticOrdering (ROBDD * robdd, unsigned int pop_size,
 	R = robdd;
 	solutions = (OrderingNode **) malloc (population_size * sizeof (OrderingNode *));
 	
+	list <pair <bool, ElementSubset *> > l = robdd->get_log ();
 	for (unsigned int i = 0; i < population_size; i++)
-		solutions[i] = new OrderingNode (robdd->get_element_set (), robdd->get_log ());
+		solutions[i] = new OrderingNode (robdd->get_element_set (), &l);
 
 	// sort solutions by normalized fitness (?)
 	normalize_fitness ();

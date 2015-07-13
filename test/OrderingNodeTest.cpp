@@ -10,7 +10,7 @@ namespace OrderingNodeTest {
 		bool answ = true;
 		ElementSet elm_set ("", setsize, 100);
 		list <pair <bool, ElementSubset *> > l;
-		OrderingNode solution (&elm_set, l);
+		OrderingNode solution (&elm_set, &l);
 		for (unsigned int i = 0; i < setsize; i++)
 			occour[i] = 0;
 
@@ -42,7 +42,7 @@ namespace OrderingNodeTest {
 		cout << "\n";
 		robdd.print ();
 
- 		list <pair <bool, ElementSubset *> >	l = robdd.get_log ();
+ 		list <pair <bool, ElementSubset *> > l = robdd.get_log ();
  		cout << "\noriginal:\n";
 		for (list <pair <bool, ElementSubset *> >::iterator it = l.begin (); 
 			it != l.end (); it++)
@@ -55,13 +55,13 @@ namespace OrderingNodeTest {
 		b_sub.add_element (1);
 		ElementSubset ab_sub = subset;
 
-		OrderingNode solution (&elm_set, robdd.get_log ());
+		OrderingNode solution (&elm_set, &l);
 		unsigned int * perm = solution.get_ordering ();
 		cout << "\npermutação: ";
 		for (unsigned int i = 0; i < elm_set.get_set_cardinality (); i++)
 			cout << perm[i] << " ";
 		cout << endl;
-		ROBDD * r = solution.get_robdd ();
+		GAROBDD * r = solution.get_robdd ();
 
 		r->print ();
 		if (r->contains (&b_sub)    ||

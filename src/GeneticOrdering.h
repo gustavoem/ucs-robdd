@@ -1,13 +1,10 @@
 #ifndef GENETICORDERING_H_
 #define GENETICORDERING_H_
 
-#include "ROBDD.h"
 #include "Element.h"
 #include "global.h"
 #include "OrderingNode.h"
-
-class ROBDD; /* this was made to solve cyclic dependency of robdd and GeneticOrdering*/
-class OrderingNode;
+#include "ROBDD.h"
 
 class GeneticOrdering
 {
@@ -60,7 +57,7 @@ public:
 	GeneticOrdering (ROBDD *, unsigned int, unsigned int);
 
 	// Gives a good ordering using a Genetic Algorithm Heuristic for 
-	Vertex * reorder ();
+	ROBDD * reorder ();
 
 	
 };

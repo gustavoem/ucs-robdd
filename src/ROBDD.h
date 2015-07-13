@@ -6,7 +6,6 @@
 #include "Vertex.h"
 #include "ElementSubset.h"
 #include "CostFunction.h"
-#include "GeneticOrdering.h"
 
 class ROBDD
 {

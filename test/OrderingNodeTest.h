@@ -3,6 +3,7 @@
 
 #include "../src/OrderingNode.h"
 #include "../src/ROBDD.h"
+#include "../src/GAROBDD.h"
 
 namespace OrderingNodeTest {
 
