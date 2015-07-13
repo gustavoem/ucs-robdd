@@ -11,7 +11,7 @@
 class ROBDD
 {
     
-private:
+protected:
 
 	// Stores the number of updates (add_interval) of the robdd 
 	//

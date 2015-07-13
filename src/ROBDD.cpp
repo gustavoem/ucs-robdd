@@ -34,8 +34,7 @@ ROBDD::ROBDD (ElementSet * set, unsigned int * ord)
 	unsigned int n = elm_set->get_set_cardinality ();
 	root = new Vertex (false, n + 1);
 	cardinality = 1;
-
-	// initial ordering is 0, 1, ..., n-1
+	
 	ordering = (unsigned int *) malloc (sizeof(unsigned int) * n);
 	for (unsigned int i = 0; i < n; i++)
 		ordering[i] = ord[i];

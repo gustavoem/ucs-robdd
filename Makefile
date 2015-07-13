@@ -35,7 +35,7 @@ OBJS =		src/Element.o src/ElementSet.o src/ElementSubset.o \
 			src/algorithms/UCSROBDD4.o src/algorithms/UCSROBDDToolBox4.o \
 			src/algorithms/UCSROBDD5.o src/algorithms/UCSROBDDToolBox5.o \
 			src/algorithms/UCSROBDD6.o src/algorithms/UCSROBDDToolBox6.o \
-			src/GeneticOrdering.o src/OrderingNode.o\
+			src/GeneticOrdering.o src/OrderingNode.o src/GAROBDD.o\
 
 			#src/algorithms/UCSRT.o src/algorithms/UCSRTToolBox.o src/OBDD.o src/PVertex.o \
 			#src/algorithms/UCSOBDD.o src/algorithms/UCSOBDDToolBox.o \
