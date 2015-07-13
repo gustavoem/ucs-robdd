@@ -31,15 +31,39 @@ namespace OrderingNodeTest {
 
 	bool it_should_represent_the_original_robdd ()
 	{
+		ElementSet elm_set ("", 2, 100);
+		ROBDD robdd (&elm_set);
+		ElementSubset subset ("", &elm_set);
+		
+		subset.add_element (0);
+		robdd.add_interval (&subset, false);
+		subset.add_element (1);
+		robdd.add_interval (&subset, true);
+		robdd.print ();
+
+ 		list <pair <bool, ElementSubset *> >	l = robdd.get_log ();
+ 		cout << "\noriginal:\n";
+		for (list <pair <bool, ElementSubset *> >::iterator it = l.begin (); 
+			it != l.end (); it++)
+			cout << it->first << " " << it->second->print_subset () << endl;
+
+		ElementSubset emp_sub ("", &elm_set);
+		ElementSubset a_sub ("", &elm_set);
+		a_sub.add_element (0);
+		ElementSubset b_sub ("", &elm_set);
+		b_sub.add_element (1);
+		ElementSubset ab_sub = subset;
+
+		OrderingNode solution (&elm_set, robdd.get_log ());
+		ROBDD * r = solution.get_robdd ();
+		r->print ();
+		if (r->contains (&b_sub)    ||
+			!r->contains (&a_sub)   ||
+			!r->contains (&emp_sub) || 
+			!r->contains (&ab_sub))
+			return false;
 		return true;
 	}
-		// subset.add_element (0);
-		// robdd.add_interval (&subset, false);
-		// subset.remove_element (0);
-		// subset.add_element (2);
-		// robdd.add_interval (&subset, false);
-		// subset.add_element (1);
-		// robdd.add_interval (&subset, true);
 
 } // end of namespace
 
