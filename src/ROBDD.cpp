@@ -435,7 +435,7 @@ Vertex * ROBDD::union_step (Vertex * v1, Vertex * v2, map<pair<Vertex *, Vertex*
 		int index = min(v1->get_index (), v2->get_index ());
 		u->set_index (index);
 		u->set_id (index);
-		u->set_var (elm_set->get_element (index - 1));
+		u->set_var (elm_set->get_element (ordering[index - 1]));
 		if (u->get_index () == v1->get_index ())
 		{
 			vlow1 = v1->get_child (false);
@@ -471,14 +471,22 @@ void ROBDD::add_interval (ElementSubset * subset, bool orientation)
 	timeval start, end;
 	gettimeofday (& start, NULL);
 
-	log_of_intervals->push_front (make_pair (orientation, subset));
+	ElementSubset * sub = new ElementSubset ("copia", elm_set);
+	sub->copy (subset);
+
+	log_of_intervals->push_front (make_pair (orientation, sub));
 	int set_card = elm_set->get_set_cardinality ();
 	Vertex * zero = new Vertex (false, set_card + 1);
 	zero->mark = false;
 	Vertex * one = new Vertex (true, set_card + 1);
 	one->mark = false;
 	unsigned int card2 = 0;
+	// cout << "vou construir o intervalo" << subset->print_subset () <<" com ordem: ";
+	// for (unsigned int i = 0; i < elm_set->get_set_cardinality (); i++)
+	// 		cout << ordering[i] << " ";
 	Vertex * root2 = build_interval (0, &card2, subset, zero, one, orientation);
+	// cout << "\nintervalo: \n";
+	// print (root2);
 	union_to (root2);
 	if (!one->mark)
 		delete one;
@@ -528,7 +536,7 @@ bool ROBDD::contains (ElementSubset * subset)
 
 	while (!v->is_terminal ()) 
 	{
-		if (subset->has_element (v->get_index () - 1))
+		if (subset->has_element (ordering[v->get_index () - 1]))
 			v = v->get_child (true);
 		else
 			v = v->get_child (false);
