@@ -22,7 +22,6 @@ ROBDD::ROBDD (ElementSet * set)
 	log_of_intervals = new list <pair <bool, ElementSubset *> >();
 }
 
-
 ROBDD::ROBDD (ElementSet * set, unsigned int * ord)
 {
 	nof_updates  = 0;
@@ -43,7 +42,6 @@ ROBDD::ROBDD (ElementSet * set, unsigned int * ord)
 
 	log_of_intervals = new list <pair <bool, ElementSubset *> >();
 }
-
 
 ROBDD::ROBDD (ElementSet * set, int a)
 {
@@ -119,7 +117,6 @@ ROBDD::ROBDD (ElementSet * set, ElementSubset * subset)
 	log_of_intervals = new list <pair <bool, ElementSubset *> >();
 }
 
-
 void ROBDD::build (Vertex * v, unsigned int ord_index, unsigned int set_card, \
 ElementSubset * subset, Vertex * zero, Vertex * one)
 {
@@ -164,6 +161,8 @@ ROBDD::~ROBDD ()
 	delete_subtree (&root, &cardinality);
 	if (ordering != NULL)
 		free (ordering);
+	
+	free (log_of_intervals);
 }
 
 
