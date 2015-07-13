@@ -18,6 +18,8 @@ ROBDD::ROBDD (ElementSet * set)
 	ordering = (unsigned int *) malloc (sizeof(unsigned int) * n);
 	for (unsigned int i = 0; i < n; i++)
 		ordering[i] = i;
+
+	log_of_intervals = new list <pair <bool, ElementSubset *> >();
 }
 
 
@@ -38,6 +40,8 @@ ROBDD::ROBDD (ElementSet * set, unsigned int * ord)
 	ordering = (unsigned int *) malloc (sizeof(unsigned int) * n);
 	for (unsigned int i = 0; i < n; i++)
 		ordering[i] = ord[i];
+
+	log_of_intervals = new list <pair <bool, ElementSubset *> >();
 }
 
 
@@ -48,6 +52,7 @@ ROBDD::ROBDD (ElementSet * set, int a)
 	root = new Vertex (elm, 1);
 
 	ordering = NULL;
+	log_of_intervals = NULL;
 	
 	// teste obdd1
 	// elm = elm_set->get_element (1);
@@ -111,6 +116,7 @@ ROBDD::ROBDD (ElementSet * set, ElementSubset * subset)
 	cardinality = 3;
 	build (root, 1, set_card, subset, zero, one);
 
+	log_of_intervals = new list <pair <bool, ElementSubset *> >();
 }
 
 
@@ -154,7 +160,7 @@ void ROBDD::unmark_all_vertex (Vertex * v)
 
 ROBDD::~ROBDD ()
 {
-	log_of_intervals.erase (log_of_intervals.begin (), log_of_intervals.end ());
+	log_of_intervals->erase (log_of_intervals->begin (), log_of_intervals->end ());
 	delete_subtree (&root, &cardinality);
 	if (ordering != NULL)
 		free (ordering);
@@ -466,7 +472,7 @@ void ROBDD::add_interval (ElementSubset * subset, bool orientation)
 	timeval start, end;
 	gettimeofday (& start, NULL);
 
-	log_of_intervals.push_front (make_pair (orientation, subset));
+	log_of_intervals->push_front (make_pair (orientation, subset));
 	int set_card = elm_set->get_set_cardinality ();
 	Vertex * zero = new Vertex (false, set_card + 1);
 	zero->mark = false;
@@ -592,7 +598,7 @@ int ROBDD::get_time_reducing ()
 
 list< pair<bool, ElementSubset *> > ROBDD::get_log ()
 {
-	return log_of_intervals;
+	return *log_of_intervals;
 }
 
 ElementSet * ROBDD::get_element_set ()

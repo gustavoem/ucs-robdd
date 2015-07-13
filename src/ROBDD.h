@@ -56,7 +56,7 @@ private:
 
 	// A log of all intervals added to the ROBDD
 	//
-	list <pair <bool, ElementSubset *> > log_of_intervals;
+	list <pair <bool, ElementSubset *> > * log_of_intervals;
 
 	// Prints the sub-tree that has the parameter Vertex as root
 	//
