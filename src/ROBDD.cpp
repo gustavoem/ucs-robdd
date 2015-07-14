@@ -156,12 +156,13 @@ void ROBDD::unmark_all_vertex (Vertex * v)
 
 ROBDD::~ROBDD ()
 {
-	log_of_intervals->erase (log_of_intervals->begin (), log_of_intervals->end ());
 	delete_subtree (&root, &cardinality);
 	if (ordering != NULL)
 		free (ordering);
-	
-	free (log_of_intervals);
+	for (list <pair <bool, ElementSubset *> >::iterator it = log_of_intervals->begin (); 
+		it != log_of_intervals->end (); it++)
+		delete it->second;
+	delete log_of_intervals;
 }
 
 

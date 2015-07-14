@@ -6,9 +6,16 @@ OrderingNode::OrderingNode (ElementSet * elm_set, list <pair <bool, ElementSubse
 	permutation = (unsigned int *) malloc (size * sizeof (unsigned int));
 	for (unsigned int i = 0; i < size; i++)
 		permutation[i] = i;
-	srand (time (NULL));
-	shuffle_individual ();
-	garobdd = new GAROBDD (elm_set, l, permutation);
+	// srand (time (NULL));
+	// this->shuffle_individual ();
+	std::srand (std::time (0));
+	random_shuffle (&permutation[0], &permutation[size - 1]);
+	cout << "\nEndereço da permutação: " << permutation;
+	cout << "\nordem que original: ";
+	for (unsigned int i = 0; i < elm_set->get_set_cardinality (); i++)
+		cout << permutation[i] << " ";
+	cout.flush ();
+	garobdd = new GAROBDD (elm_set, l, this->permutation);
 }
 
 
@@ -18,10 +25,12 @@ void OrderingNode::shuffle_individual ()
 	for (unsigned int n = size; n > 0; n--)
 	{
 		// here sol[n - 1, ..., solution_size - 1] is a random shuffle
-		unsigned int j = ((unsigned int) rand () % n);   // random number between 0 and n - 1
+		unsigned int j = ((unsigned int) rand () % size);   // random number between 0 and n - 1
+		unsigned int i = ((unsigned int) rand () % size);   // random number between 0 and n - 1
+		cout << "i: " << i << ", j: " << j << endl;
 		unsigned int aux = permutation[j];
-		permutation[j] = permutation[n - 1];
-		permutation[n - 1] = aux;
+		permutation[j] = permutation[i];
+		permutation[i] = aux;
 	}
 	cout << "\nindivíduo gerado: " << endl;
 	for (unsigned int i = 0; i < size; i++)

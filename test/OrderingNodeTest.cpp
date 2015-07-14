@@ -46,7 +46,8 @@ namespace OrderingNodeTest {
 		a_sub.add_element (0);
 		ElementSubset b_sub ("", &elm_set);
 		b_sub.add_element (1);
-		ElementSubset ab_sub = subset;
+		ElementSubset ab_sub ("", &elm_set);
+		ab_sub.copy (&subset);
 
 		OrderingNode solution (&elm_set, &l);
 		GAROBDD * r = solution.get_robdd ();
