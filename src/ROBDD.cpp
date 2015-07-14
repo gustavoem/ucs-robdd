@@ -476,7 +476,7 @@ void ROBDD::add_interval (ElementSubset * subset, bool orientation)
 	// timeval start, end;
 	// gettimeofday (& start, NULL);
 
-	ElementSubset * sub = new ElementSubset ("copia", elm_set);
+	ElementSubset * sub = new ElementSubset ("	", elm_set);
 	cout << "(RO) ElementSubset do log: " << sub << endl;
 	sub->copy (subset);
 

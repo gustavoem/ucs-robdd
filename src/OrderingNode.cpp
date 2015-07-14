@@ -12,6 +12,7 @@ OrderingNode::OrderingNode (ElementSet * elm_set, list <pair <bool, ElementSubse
 		permutation[i] = i;
 
 	random_shuffle (&permutation[0], &permutation[size - 1]);
+	//shuffle_individual ();
 
 	cout << "(ON) Valores da permutação: ";
 	for (unsigned int i = 0; i < elm_set->get_set_cardinality (); i++)
