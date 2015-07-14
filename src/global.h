@@ -34,6 +34,7 @@
 # include <string>
 # include <vector>
 # include <algorithm>
+# include <iterator>
 
 // # include <omp.h>        // OpenMP 3.0 Library
 // to include the OpenMP functions, add the -fopenmp flag in the Makefile file!

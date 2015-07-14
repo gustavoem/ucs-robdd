@@ -25,13 +25,28 @@ GeneticOrdering::GeneticOrdering (ROBDD * robdd, unsigned int pop_size,
 		cout << "normalized_fitness: " << solutions[i]->get_normalized_fitness ();
 	}
 	cout.flush ();
+
+	selection ();
 }
 
 
 void GeneticOrdering::selection ()
 {
-	return;
-}
+	OrderingNode ** new_gen = 
+		(OrderingNode **) malloc (population_size * sizeof (OrderingNode *));
+	unsigned int ** selected_perm = 
+		(unsigned int **) malloc (population_size * sizeof (unsigned int *));
+	vector<double> random_sorts (population_size, 0.0);
+	
+	for (unsigned int i = 0; i < population_size; i++)
+		random_sorts[i] = ((double) rand () / (RAND_MAX));
+
+	sort (random_sorts.begin (), random_sorts.end ());
+
+	cout << "\nsorted guys:\n";
+	for (unsigned int i = 0; i < population_size; i++)
+		cout << random_sorts[i] << " ";
+}	
 
 
 void GeneticOrdering::normalize_fitness ()

@@ -24,6 +24,18 @@ void OrderingNode::shuffle_individual ()
 }
 
 
+void OrderingNode::recombine_to (unsigned int *)
+{
+	return;
+}
+
+
+void OrderingNode::mutate ()
+{
+	return;
+}
+
+
 void OrderingNode::print_solution ()
 {
 	cout << "\nsolução: ";

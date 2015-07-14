@@ -38,24 +38,19 @@ private:
 	unsigned int size;
 
 
-	// Creates a single random solution
+	// Shuffle solution_size elements from an individual
 	//
-	unsigned int * randomize ();
+	void shuffle_individual ();
 
 
 	// Makes crossovers in solutions
 	//
-	void recombine_to (OrderingNode *);
+	void recombine_to (unsigned int *);
 
 
 	// Mutate solutions
 	//
 	void mutate ();
-
-
-	// Shuffle solution_size elements from an individual
-	//
-	void shuffle_individual ();
 
 
 public:

@@ -39,15 +39,8 @@ namespace OrderingNodeTest {
 		robdd.add_interval (&subset, false);
 		subset.add_element (1);
 		robdd.add_interval (&subset, true);
-		cout << "\n";
-		robdd.print ();
 
  		list <pair <bool, ElementSubset *> > l = robdd.get_log ();
- 		cout << "\noriginal:\n";
-		for (list <pair <bool, ElementSubset *> >::iterator it = l.begin (); 
-			it != l.end (); it++)
-			cout << it->first << " " << it->second->print_subset () << endl;
-
 		ElementSubset emp_sub ("", &elm_set);
 		ElementSubset a_sub ("", &elm_set);
 		a_sub.add_element (0);
@@ -56,14 +49,8 @@ namespace OrderingNodeTest {
 		ElementSubset ab_sub = subset;
 
 		OrderingNode solution (&elm_set, &l);
-		unsigned int * perm = solution.get_ordering ();
-		cout << "\npermutação: ";
-		for (unsigned int i = 0; i < elm_set.get_set_cardinality (); i++)
-			cout << perm[i] << " ";
-		cout << endl;
 		GAROBDD * r = solution.get_robdd ();
 
-		r->print ();
 		if (r->contains (&b_sub)    ||
 			!r->contains (&a_sub)   ||
 			!r->contains (&emp_sub) || 
