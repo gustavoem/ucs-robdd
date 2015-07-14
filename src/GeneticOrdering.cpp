@@ -9,11 +9,17 @@ GeneticOrdering::GeneticOrdering (ROBDD * robdd, unsigned int pop_size,
 	solutions = (OrderingNode **) malloc (population_size * sizeof (OrderingNode *));
 	
 	list <pair <bool, ElementSubset *> > l = robdd->get_log ();
-	for (unsigned int i = 0; i < population_size; i++)
+	for (unsigned int i = 0; i < population_size; i++) {
 		solutions[i] = new OrderingNode (robdd->get_element_set (), &l);
+		cout << "\nendereço da solução: " << solutions[i] << endl;
+		// for (unsigned int x = 0; x < solution_size; x++)
+		// 	cout << solutions[i]->get_ordering ()[x] << " ";
+		cout << endl;
+	}
 
 	// sort solutions by normalized fitness (?)
 	normalize_fitness ();
+	accumulate_fitness ();
 
 	cout << "população inicial:\n";
 	for (unsigned int i = 0; i < population_size; i++)
@@ -23,6 +29,7 @@ GeneticOrdering::GeneticOrdering (ROBDD * robdd, unsigned int pop_size,
 		for (unsigned int x = 0; x < solution_size; x++)
 			cout << permutation[x] << " ";
 		cout << "normalized_fitness: " << solutions[i]->get_normalized_fitness ();
+		cout << " accumulated_fitness: " << solutions[i]->get_accumulated_fitness ();
 	}
 	cout.flush ();
 
@@ -53,8 +60,12 @@ void GeneticOrdering::normalize_fitness ()
 {
 	// fitness funciton: f(R) = 1 / cardinality (R);
 	double total_fitness = 0;
-	for (unsigned int i = 0; i < population_size; i++)
-		total_fitness += solutions[i]->get_robdd ()->get_cardinality ();
+	// for (unsigned int i = 0; i < population_size; i++)
+	// {
+	// 	solutions[i]->get_robdd ()->print ();
+	// 	cout << "\nCardinalidade: " << solutions[i]->get_robdd ()->get_cardinality () << endl;
+	// 	total_fitness += solutions[i]->get_robdd ()->get_cardinality ();
+	// }
 
 	for (unsigned int i = 0; i < population_size; i++) {
 		OrderingNode * node = solutions[i];

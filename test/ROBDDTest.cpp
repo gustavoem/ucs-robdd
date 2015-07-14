@@ -144,12 +144,7 @@ namespace ROBDDTest {
 		robdd.add_interval (&subset2, false);
 		list < pair<bool, ElementSubset *> > l (robdd.get_log ());
 
-		for (list <pair <bool, ElementSubset *> >::iterator it = l.begin (); 
-			it != l.end (); it++)
-			cout << it->first << " " << it->second->print_subset () << endl;
-
 		pair <bool, ElementSubset *> first_pair = l.back ();
-		cout.flush();
 		l.pop_back ();
 		pair <bool, ElementSubset *> second_pair = l.back ();
 		if (first_pair.second->print_subset () != subset1.print_subset ()  ||
