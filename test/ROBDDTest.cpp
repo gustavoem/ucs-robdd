@@ -145,7 +145,8 @@ namespace ROBDDTest {
 		list < pair<bool, ElementSubset *> > l (robdd.get_log ());
 
 		pair <bool, ElementSubset *> first_pair = l.back ();
-		l.pop_back ();
+		if (! l.empty ())
+			l.pop_back ();
 		pair <bool, ElementSubset *> second_pair = l.back ();
 		if (first_pair.second->print_subset () != subset1.print_subset ()  ||
 			first_pair.first != true    ||

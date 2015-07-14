@@ -19,7 +19,7 @@ OrderingNode::OrderingNode (ElementSet * elm_set, list <pair <bool, ElementSubse
 		cout << permutation[i] << " ";
 	cout << endl;
 	cout.flush ();
-	garobdd = new GAROBDD (elm_set, l, this->permutation);
+	//garobdd = new GAROBDD (elm_set, l, this->permutation);
 }
 
 
