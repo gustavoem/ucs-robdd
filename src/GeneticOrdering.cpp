@@ -7,11 +7,15 @@ GeneticOrdering::GeneticOrdering (ROBDD * robdd, unsigned int pop_size,
 	this->solution_size = solution_size;
 	R = robdd;
 	solutions = (OrderingNode **) malloc (population_size * sizeof (OrderingNode *));
+	cout << "\n-------\n(GO) Ponteiros para soluções: de" << (&solutions[0]) << " até " << &solutions[population_size - 1] << endl;
 	list <pair <bool, ElementSubset *> > l (robdd->get_log ());
 	
 	for (unsigned int i = 0; i < population_size; i++) {
+		srand (time(0));
 		solutions[i] = new OrderingNode (robdd->get_element_set (), &l);
-		cout << "\nendereço da solução: " << solutions[i] << endl;
+		cout << "(GO) Instanciei uma solução em: " << &solutions[i] << " que aponta para: " \
+		<< solutions[i] << endl;
+		cout << "(GO) Endereço da solução: " << solutions[i] << endl;
 		for (unsigned int x = 0; x < solution_size; x++)
 		{
 		 	cout << solutions[i]->get_ordering ()[x] << " ";

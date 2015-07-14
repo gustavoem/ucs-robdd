@@ -30,16 +30,19 @@ ROBDD::ROBDD (ElementSet * set, unsigned int * ord)
 	time_updating = 0;
 	time_reducing = 0;
 
+	cout << "(RO) Malloca log de intervalos em " << &log_of_intervals << endl;
+	log_of_intervals = new list <pair <bool, ElementSubset *> >();
 	elm_set = set;
 	unsigned int n = elm_set->get_set_cardinality ();
 	root = new Vertex (false, n + 1);
 	cardinality = 1;
 	
 	ordering = (unsigned int *) malloc (sizeof(unsigned int) * n);
+	cout << "(RO) Malloca ordering de " << &ordering[0] << " até " <<
+		&ordering[n - 1] << endl;
 	for (unsigned int i = 0; i < n; i++)
 		ordering[i] = ord[i];
 
-	log_of_intervals = new list <pair <bool, ElementSubset *> >();
 }
 
 ROBDD::ROBDD (ElementSet * set, int a)
@@ -105,6 +108,7 @@ ROBDD::ROBDD (ElementSet * set, ElementSubset * subset)
 	for (unsigned int i = 0; i < set_card; i++)
 		ordering[i] = i;
 
+
 	elm_set = set;
 	Vertex * zero = new Vertex (false, set_card + 1);
 	Vertex * one = new Vertex (true, set_card + 1);
@@ -156,6 +160,7 @@ void ROBDD::unmark_all_vertex (Vertex * v)
 
 ROBDD::~ROBDD ()
 {
+	cout << "\nentrei no destrutor da ROBDD\n";
 	delete_subtree (&root, &cardinality);
 	if (ordering != NULL)
 		free (ordering);
@@ -467,35 +472,39 @@ Vertex * ROBDD::union_step (Vertex * v1, Vertex * v2, map<pair<Vertex *, Vertex*
 // orientation = true for upper
 void ROBDD::add_interval (ElementSubset * subset, bool orientation)
 {
-	nof_updates++;
-	timeval start, end;
-	gettimeofday (& start, NULL);
+	// nof_updates++;
+	// timeval start, end;
+	// gettimeofday (& start, NULL);
 
 	ElementSubset * sub = new ElementSubset ("copia", elm_set);
+	cout << "(RO) ElementSubset do log: " << sub << endl;
 	sub->copy (subset);
 
-	log_of_intervals->push_front (make_pair (orientation, sub));
-	int set_card = elm_set->get_set_cardinality ();
-	Vertex * zero = new Vertex (false, set_card + 1);
-	zero->mark = false;
-	Vertex * one = new Vertex (true, set_card + 1);
-	one->mark = false;
-	unsigned int card2 = 0;
-	// cout << "vou construir o intervalo" << subset->print_subset () <<" com ordem: ";
+	pair <bool, ElementSubset *> par (orientation, sub);
+	log_of_intervals->push_back (par);
+	cout << "(RO) log_of_intervals: de " << &log_of_intervals->front () << " até " << &log_of_intervals->back ()<< endl;
+	// int set_card = elm_set->get_set_cardinality ();
+	// Vertex * zero = new Vertex (false, set_card + 1);
+	// zero->mark = false;
+	// Vertex * one = new Vertex (true, set_card + 1);
+	// one->mark = false;
+	// unsigned int card2 = 0;
+	// cout << "(RO) Vou construir o intervalo" << subset->print_subset () <<" com ordem: ";
 	// for (unsigned int i = 0; i < elm_set->get_set_cardinality (); i++)
-	// 		cout << ordering[i] << " ";
-	Vertex * root2 = build_interval (0, &card2, subset, zero, one, orientation);
-	// cout << "\nintervalo: \n";
-	// print (root2);
-	union_to (root2);
-	if (!one->mark)
-		delete one;
-	if (!zero->mark)
-		delete zero;
-	delete_subtree (&root2, &card2);
+	//  		cout << ordering[i] << " ";
+	// cout << endl;
+	// Vertex * root2 = build_interval (0, &card2, subset, zero, one, orientation);
+	// // cout << "\nintervalo: \n";
+	// // print (root2);
+	// union_to (root2);
+	// if (!one->mark)
+	// 	delete one;
+	// if (!zero->mark)
+	// 	delete zero;
+	// delete_subtree (&root2, &card2);
 
-	gettimeofday (& end, NULL);
-	time_updating += (((end.tv_sec - start.tv_sec) * 1000000) + (end.tv_usec - start.tv_usec));
+	// gettimeofday (& end, NULL);
+	// time_updating += (((end.tv_sec - start.tv_sec) * 1000000) + (end.tv_usec - start.tv_usec));
 }
 
 
