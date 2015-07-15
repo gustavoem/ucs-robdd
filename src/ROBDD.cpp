@@ -481,7 +481,7 @@ void ROBDD::add_interval (ElementSubset * subset, bool orientation)
 	sub->copy (subset);
 
 	pair <bool, ElementSubset *> par (orientation, sub);
-	//log_of_intervals->push_back (par);
+	log_of_intervals->push_back (par);
 	cout << "(RO) log_of_intervals: de " << &log_of_intervals->front () << " até " << &log_of_intervals->back ()<< endl;
 	// int set_card = elm_set->get_set_cardinality ();
 	// Vertex * zero = new Vertex (false, set_card + 1);
