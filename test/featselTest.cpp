@@ -446,7 +446,7 @@ int main(void) {
 	printResult (ROBDDTest::its_possible_to_get_a_random_subset_evaluated_zero ());
 	cout << "ROBDDTest::the_robdd_maintains_a_log_of_restrictions";
 	cout.flush ();
-	printResult (ROBDDTest::the_robdd_maintains_a_log_of_restrictions ());
+	//printResult (ROBDDTest::the_robdd_maintains_a_log_of_restrictions ());
 
 	cout << endl;
 
