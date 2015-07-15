@@ -10,21 +10,20 @@ GAROBDD::GAROBDD (ElementSet * set, list <pair <bool, ElementSubset *> > * l,
 	
 	cout << "(GARO) Meu endereço: " << this << endl;
 
-	// for (list <pair <bool, ElementSubset *> >::iterator it = l->begin (); 
-	// 	it != l->end (); it++)
-	// 	this->add_interval (it->second, it->first);
+	for (list <pair <bool, ElementSubset *> >::iterator it = l->begin (); 
+		it != l->end (); it++)
+		this->add_interval (it->second, it->first);
 	
-	//while (!log_of_intervals->empty())
-	//	log_of_intervals->pop_back ();
+	while (!log_of_intervals->empty())
+		log_of_intervals->pop_back ();
 	
-	//delete log_of_intervals;
-	//log_of_intervals = NULL;
-	//log_of_intervals = l;
+	delete log_of_intervals;
+	log_of_intervals = NULL;
+	log_of_intervals = l;
 }
 
 GAROBDD::~GAROBDD ()
 {
-	cout << "\nDestrutor da GAROBDD\n";
 	delete_subtree (&root, &cardinality);
 	if (ordering != NULL)
 		free (ordering);
