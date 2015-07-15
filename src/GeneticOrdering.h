@@ -19,6 +19,11 @@ private:
 	//
 	ROBDD * R;
 
+
+	// A copy of the ROBDD log
+	//
+	list <pair <bool, ElementSubset *> > robdd_log;
+
 	// Population size
 	//
 	unsigned int population_size;
@@ -42,12 +47,13 @@ private:
 	void mutate_solutions ();
 
 
-	// Calculates the normalized fitness of all elements from a population
+	// Calculates the normalized fitness of all elements from a population. The 
+	// normalized fitness of a solution s is the probability of choosing s randomly
 	//
 	void normalize_fitness ();
 
-	// Calculates the accumulate probability of choosing any element with fitness greater
-	// or equal to normalized_fitness
+	// Calculates, for every solution, the probability of choosing this solution
+	// or any previous in OrderingNode ** solutions.
 	//
 	void accumulate_fitness ();
 
@@ -57,8 +63,8 @@ public:
 	GeneticOrdering (ROBDD *, unsigned int, unsigned int);
 
 	// Gives a good ordering using a Genetic Algorithm Heuristic for 
+	//
 	ROBDD * reorder ();
-
 	
 };
 

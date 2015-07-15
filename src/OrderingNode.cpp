@@ -4,21 +4,18 @@ OrderingNode::OrderingNode (ElementSet * elm_set, list <pair <bool, ElementSubse
 {
 	this->size = elm_set->get_set_cardinality ();
 	permutation = (unsigned int *) malloc (size * sizeof (unsigned int));
-	// cout << "\n\n(ON) Na solução: " << this << endl;
-	// cout << "(ON) Alocado vetor de permutação indo de " << &permutation[0] << " até " << \
-	// 	&permutation[size - 1] << endl;
 	
 	for (unsigned int i = 0; i < size; i++)
 		permutation[i] = i;
 
-	//random_shuffle (&permutation[0], &permutation[size - 1]);
-	shuffle_individual ();
+	random_shuffle (&permutation[0], &permutation[size - 1]);
+	// shuffle_individual ();
 
-	// cout << "(ON) Valores da permutação: ";
+	/*cout << "(ON) Valores da permutação: ";
 	for (unsigned int i = 0; i < elm_set->get_set_cardinality (); i++)
 		cout << permutation[i] << " ";
 	cout << endl;
-	cout.flush ();
+	cout.flush ();*/
 	garobdd = new GAROBDD (elm_set, l, this->permutation);
 }
 
