@@ -71,6 +71,11 @@ void GeneticOrdering::selection ()
 			cout << selected_perm[i][j] << " ";
 		cout << endl;
 	}
+
+	for (unsigned int i = 0; i < population_size; i++)
+	{
+		solutions[i]->recombine_to (selected_perm[i]);
+	}
 }	
 
 
@@ -98,6 +103,26 @@ void GeneticOrdering::normalize_fitness ()
 		unsigned int rsize = node->get_robdd ()->get_cardinality ();
 		node->set_normalized_fitness (rsize / total_fitness);
 	}
+}
+
+
+void GeneticOrdering::set_best_solution ()
+{
+	unsigned int best_index = 0;
+	unsigned int best_size = solutions[0]->get_robdd ()->get_cardinality ();
+
+	for (unsigned int i = 1; i < population_size; i++)
+	{
+		unsigned int isize = solutions[i]->get_robdd ()->get_cardinality ();
+		if (isize < best_size)
+		{
+			best_size = isize;
+			best_index = i;
+		}
+	}
+
+	best_solution_index = best_index;
+	best_solution = best_size;
 }
 
 

@@ -50,10 +50,23 @@ private:
 	//
 	void normalize_fitness ();
 
+
+	// Look at all the current solutions and update best_solution and
+	// best_solution_index
+	//
+	void set_best_solution ();
+
+
 	// Calculates, for every solution, the probability of choosing this solution
 	// or any previous in OrderingNode ** solutions.
 	//
 	void accumulate_fitness ();
+
+
+	unsigned int best_solution_index;
+
+
+	unsigned int best_solution;
 
 
 public:
