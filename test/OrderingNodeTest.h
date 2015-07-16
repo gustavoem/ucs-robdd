@@ -11,6 +11,7 @@ namespace OrderingNodeTest {
 	bool it_should_represent_the_original_robdd ();
 	bool it_should_recombine_to_other_permutations ();
 	bool it_should_perform_a_mut ();
+	bool it_should_perform_a_neighbour_mut ();
 
 }
 

@@ -106,17 +106,50 @@ namespace OrderingNodeTest {
 			perm[i] = solution.get_ordering ()[i];
 
 		solution.mut ();
-		unsigned int i;
+		unsigned int i = 0;
 		while (i < setsize && perm[i] == solution.get_ordering ()[i])
 			i++;	
-		unsigned int j = i;
+		unsigned int j = i + 1;
 		while (j < setsize && perm[j] == solution.get_ordering ()[j])
 			j++;
 		if (i < setsize) {
-			if (!j < setsize)
+			if (!(j < setsize))
 				answ = false;
 			else
-				answ = perm[i] == solution.get_ordering ()[j];
+				answ = perm[i] == solution.get_ordering ()[j] && \
+					   perm[j] == solution.get_ordering ()[i];
+		}
+
+		free (perm);
+		return answ;
+	}
+
+
+	bool it_should_perform_a_neighbour_mut ()
+	{
+		unsigned int setsize = 5;
+		bool answ = true;
+		ElementSet elm_set ("", setsize, 100);
+		list <pair <bool, ElementSubset *> > l;
+		OrderingNode solution (&elm_set, &l);
+		unsigned int * perm =
+			(unsigned int *) malloc (setsize * sizeof (unsigned int));
+		for (unsigned int i = 0; i < setsize; i++)
+			perm[i] = solution.get_ordering ()[i];
+
+		
+		solution.neighbour_mut ();
+		unsigned int i = 0;
+		while (i < setsize - 1 && perm[i] == solution.get_ordering ()[i])
+			i++;
+		unsigned int j = i + 1;
+		if (i < setsize) {
+			if (!(j < setsize))
+				answ = false;
+			else
+			{
+				answ = (perm[i] == solution.get_ordering ()[j]) && (perm[j] == solution.get_ordering ()[i]);
+			}
 		}
 
 		free (perm);

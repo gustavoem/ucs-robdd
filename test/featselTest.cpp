@@ -528,6 +528,9 @@ int main(void) {
 	cout << "OrderingNodeTest::it_should_perform_a_mut";
 	cout.flush ();
 	printResult (OrderingNodeTest::it_should_perform_a_mut ());
+	cout << "OrderingNodeTest::it_should_perform_a_neighbour_mut";
+	cout.flush ();
+	printResult (OrderingNodeTest::it_should_perform_a_neighbour_mut ());
 	cout << endl;
 
 
