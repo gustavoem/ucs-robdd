@@ -36,8 +36,7 @@ GeneticOrdering::GeneticOrdering (ROBDD * robdd, unsigned int pop_size,
 		cout << " accumulated_fitness: " << solutions[i]->get_accumulated_fitness ();
 	}
 	cout.flush ();
-
-	selection ();
+	set_best_solution ();
 }
 
 
@@ -54,9 +53,9 @@ void GeneticOrdering::selection ()
 		random_sorts[i] = ((double) rand () / (RAND_MAX));
 	sort (&random_sorts[0], &random_sorts[population_size]);
 
-	cout << "\nsorted guys:\n";
-	for (unsigned int i = 0; i < population_size; i++)
-		cout << random_sorts[i] << " ";
+	// cout << "\nsorted guys:\n";
+	// for (unsigned int i = 0; i < population_size; i++)
+	// 	cout << random_sorts[i] << " ";
 
 	unsigned int k = 0;
 	for (unsigned int i = 0; i < population_size; i++) {
@@ -65,17 +64,18 @@ void GeneticOrdering::selection ()
 		selected_perm[i] = solutions[k]->get_ordering ();
 	}
 
-	cout << "elementos selecionados: " << endl;
-	for (unsigned int i = 0; i < population_size; i++) {
-		for (unsigned int j = 0; j < solution_size; j++)
-			cout << selected_perm[i][j] << " ";
-		cout << endl;
-	}
+	// cout << "elementos selecionados: " << endl;
+	// for (unsigned int i = 0; i < population_size; i++) {
+	// 	for (unsigned int j = 0; j < solution_size; j++)
+	// 		cout << selected_perm[i][j] << " ";
+	// 	cout << endl;
+	// }
 
 	for (unsigned int i = 0; i < population_size; i++)
-	{
 		solutions[i]->recombine_to (selected_perm[i]);
-	}
+	free (new_gen);
+	free (selected_perm);
+	free (random_sorts);
 }	
 
 
@@ -83,8 +83,26 @@ void GeneticOrdering::selection ()
 
 void GeneticOrdering::mutate_solutions ()
 {
-	for (unsigned int i = 0; i < population_size; i++)
+	bool decision = ((double) rand () / (RAND_MAX));
+	if (decision < 0.15)
+	{
+		unsigned int i = ((unsigned int) rand () % population_size);
 		solutions[i]->mut ();
+	}
+
+	decision = ((double) rand () / (RAND_MAX));
+	if (decision < 0.15)
+	{
+		unsigned int i = ((unsigned int) rand () % population_size);
+		solutions[i]->mut_twice ();
+	}
+
+	decision = ((double) rand () / (RAND_MAX));
+	if (decision < 0.15)
+	{
+		unsigned int i = ((unsigned int) rand () % population_size);
+		solutions[i]->neighbour_mut ();
+	}
 }
 
 
@@ -96,12 +114,12 @@ void GeneticOrdering::normalize_fitness ()
 	{
 		// solutions[i]->get_robdd ()->print ();
 		// cout << "\nCardinalidade: " << solutions[i]->get_robdd ()->get_cardinality () << endl;
-		total_fitness += solutions[i]->get_robdd ()->get_cardinality ();
+		total_fitness += solutions[i]->get_robdd_size ();
 	}
 
 	for (unsigned int i = 0; i < population_size; i++) {
 		OrderingNode * node = solutions[i];
-		unsigned int rsize = node->get_robdd ()->get_cardinality ();
+		unsigned int rsize = node->get_robdd_size ();
 		node->set_normalized_fitness (rsize / total_fitness);
 	}
 }
@@ -110,11 +128,11 @@ void GeneticOrdering::normalize_fitness ()
 void GeneticOrdering::set_best_solution ()
 {
 	unsigned int best_index = 0;
-	unsigned int best_size = solutions[0]->get_robdd ()->get_cardinality ();
+	unsigned int best_size = solutions[0]->get_robdd_size ();
 
 	for (unsigned int i = 1; i < population_size; i++)
 	{
-		unsigned int isize = solutions[i]->get_robdd ()->get_cardinality ();
+		unsigned int isize = solutions[i]->get_robdd_size ();
 		if (isize < best_size)
 		{
 			best_size = isize;
@@ -135,4 +153,36 @@ void GeneticOrdering::accumulate_fitness ()
 		accumulate += solutions[i]->get_normalized_fitness ();
 		solutions[i]->set_accumulated_fitness (accumulate);
 	}
+}
+
+
+void GeneticOrdering::recalculate_fitness ()
+{
+	for (unsigned int i = 0; i < population_size; i++)
+	{
+		solution[i]->update_garobdd ();
+	}
+}
+
+
+ROBDD * reorder ()
+{
+	unsigned int old_best_size = R->get_cardinality ();
+	unsigned int * old_best = 
+		(unsigned int *) malloc (solution_size * sizeof (unsgined int));
+	for (unsigned int i = 0; i < solution_size; i++)
+		old_best[i] = solutions[best_solution_index]->get_ordering[i];
+	
+	do
+	{
+		unsigned int old_best = best_solution;
+		selection ();
+		mutate_solutions ();
+		recalculate_fitness ();
+		set_best_solution ();
+		for (unsigned int i = 0; i < solution_size; i++)
+			old_best[i] = solutions[best_solution_index]->get_ordering[i];
+	}while (best_solution <=  old_best_size);
+
+	return R;
 }

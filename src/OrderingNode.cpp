@@ -17,6 +17,23 @@ OrderingNode::OrderingNode (ElementSet * elm_set, list <pair <bool, ElementSubse
 	cout << endl;
 	cout.flush ();*/
 	garobdd = new GAROBDD (elm_set, l, this->permutation);
+	robdd_size = garobdd->get_cardinality ();
+}
+
+OrderingNode::~OrderingNode ()
+{
+	delete garobdd;
+	free (permutation);
+}
+
+
+void OrderingNode::recalculate_fitness ()
+{
+	list <pair <bool, ElementSubset *> > * l = garobdd->get_log ();
+	ElementSet * elm_set = garobdd->get_element_set ();
+	GAROBDD * old_garobdd = garobdd;
+	garobdd = new GAROBDD (elm_set, l, permutation);
+	delete old_garobdd;
 }
 
 
@@ -140,6 +157,12 @@ void OrderingNode::set_accumulated_fitness (double x)
 unsigned int * OrderingNode::get_ordering ()
 {
 	return permutation;
+}
+
+
+unsigned int OrderingNode::get_robdd_size ()
+{
+	return robdd_size;
 }
 
 

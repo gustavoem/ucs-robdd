@@ -27,3 +27,8 @@ GAROBDD::~GAROBDD ()
 		log_of_intervals->pop_back ();
 	
 }
+
+GAROBDD * GAROBDD::get_log ()
+{
+	return log_of_intervals;
+}

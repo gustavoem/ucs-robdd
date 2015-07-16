@@ -63,6 +63,11 @@ private:
 	void accumulate_fitness ();
 
 
+	//	Recalculate fitness of all solutions
+	//
+	void recalculate_fitness ();
+	
+
 	unsigned int best_solution_index;
 
 
@@ -72,6 +77,8 @@ private:
 public:
 
 	GeneticOrdering (ROBDD *, unsigned int, unsigned int);
+
+	virtual ~GeneticOrdering ();
 
 	// Gives a good ordering using a Genetic Algorithm Heuristic for 
 	//

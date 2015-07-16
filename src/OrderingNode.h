@@ -16,6 +16,7 @@ private:
 	//
 	GAROBDD * garobdd;
 
+	unsigned int robdd_size;
 	
 	// Probability of begin selected in selection
 	//
@@ -49,9 +50,15 @@ public:
 	OrderingNode (ElementSet *, list <pair <bool, ElementSubset *> > *);
 
 
+	virtual ~OrderingNode ();
+
+
 	// Makes crossovers in solutions
 	//
 	void recombine_to (unsigned int *);
+
+
+	void recalculate_fitness ();
 
 
 	// Performs a MUT, an exchange of two randomly chosen variables in the permutation
@@ -73,6 +80,10 @@ public:
 
 
 	GAROBDD * get_robdd ();
+
+	// Returns the cardinality of the robdd associated to that solution
+	//
+	unsigned int get_robdd_size ();
 
 
 	double get_normalized_fitness ();

@@ -512,6 +512,9 @@ int main(void) {
 	cout << "GeneticOrderingTest::it_should_create_an_initial_population";
 	cout.flush ();
 	printResult (GeneticOrderingTest::it_should_create_an_initial_population ());
+	cout << "GeneticOrderingTest::it_should_give_a_better_ordering_robdd";
+	cout.flush ();
+	printResult (GeneticOrderingTest::it_should_give_a_better_ordering_robdd ());
 	cout << endl;
 
 
