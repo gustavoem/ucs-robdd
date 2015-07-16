@@ -522,6 +522,9 @@ int main(void) {
 	cout << "OrderingNodeTest::it_should_represent_the_original_robdd";
 	cout.flush ();
 	printResult (OrderingNodeTest::it_should_represent_the_original_robdd ());
+	cout << "OrderingNodeTest::it_should_recombine_to_other_permutations";
+	cout.flush ();
+	printResult (OrderingNodeTest::it_should_recombine_to_other_permutations ());
 	cout << endl;
 
 

@@ -47,16 +47,30 @@ void GeneticOrdering::selection ()
 		(OrderingNode **) malloc (population_size * sizeof (OrderingNode *));
 	unsigned int ** selected_perm = 
 		(unsigned int **) malloc (population_size * sizeof (unsigned int *));
-	vector<double> random_sorts (population_size, 0.0);
+	double * random_sorts = 
+		(double *) malloc (population_size * sizeof (double));
 	
 	for (unsigned int i = 0; i < population_size; i++)
 		random_sorts[i] = ((double) rand () / (RAND_MAX));
-
-	sort (random_sorts.begin (), random_sorts.end ());
+	sort (&random_sorts[0], &random_sorts[population_size]);
 
 	cout << "\nsorted guys:\n";
 	for (unsigned int i = 0; i < population_size; i++)
 		cout << random_sorts[i] << " ";
+
+	unsigned int k = 0;
+	for (unsigned int i = 0; i < population_size; i++) {
+		while (solutions[k]->get_accumulated_fitness () < random_sorts[i])
+			k++;
+		selected_perm[i] = solutions[k]->get_ordering ();
+	}
+
+	cout << "elementos selecionados: " << endl;
+	for (unsigned int i = 0; i < population_size; i++) {
+		for (unsigned int j = 0; j < solution_size; j++)
+			cout << selected_perm[i][j] << " ";
+		cout << endl;
+	}
 }	
 
 

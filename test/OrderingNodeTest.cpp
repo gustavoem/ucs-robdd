@@ -60,5 +60,38 @@ namespace OrderingNodeTest {
 		return true;
 	}
 
+	bool it_should_recombine_to_other_permutations ()
+	{
+		unsigned int setsize = 5;
+		unsigned int * occour = (unsigned int *) malloc
+		 (setsize * sizeof (unsigned int));
+		bool answ = true;
+		ElementSet elm_set ("", setsize, 100);
+		list <pair <bool, ElementSubset *> > l;
+		OrderingNode solution (&elm_set, &l);
+		unsigned int * v =
+			(unsigned int *) malloc (setsize * sizeof (unsigned int));
+		for (unsigned int i = 0; i < setsize; i++)
+		{
+			v[i] = i;
+			occour[i] = 0;
+		}
+
+		solution.recombine_to (v);
+		unsigned int * perm = solution.get_ordering ();
+		for (unsigned int i = 0; i < setsize; i++)
+			if (perm[i] < setsize && perm[i] >= 0)
+				occour[perm[i]]++;
+			else
+				answ = false;
+		for (unsigned int i = 0; i < setsize; i++)
+			if (occour[i] != 1)
+				answ = false;
+
+		free (occour);
+		free (v);
+		return answ;
+	}
+
 } // end of namespace
 

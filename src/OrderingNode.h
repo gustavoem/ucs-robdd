@@ -43,11 +43,6 @@ private:
 	void shuffle_individual ();
 
 
-	// Makes crossovers in solutions
-	//
-	void recombine_to (unsigned int *);
-
-
 	// Mutate solutions
 	//
 	void mutate ();
@@ -56,6 +51,11 @@ private:
 public:
 
 	OrderingNode (ElementSet *, list <pair <bool, ElementSubset *> > *);
+
+
+	// Makes crossovers in solutions
+	//
+	void recombine_to (unsigned int *);
 
 
 	unsigned int * get_ordering ();

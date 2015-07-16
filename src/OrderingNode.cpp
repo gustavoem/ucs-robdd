@@ -8,7 +8,7 @@ OrderingNode::OrderingNode (ElementSet * elm_set, list <pair <bool, ElementSubse
 	for (unsigned int i = 0; i < size; i++)
 		permutation[i] = i;
 
-	random_shuffle (&permutation[0], &permutation[size - 1]);
+	random_shuffle (&permutation[0], &permutation[size]);
 	// shuffle_individual ();
 
 	/*cout << "(ON) Valores da permutação: ";
@@ -39,9 +39,26 @@ void OrderingNode::shuffle_individual ()
 }
 
 
-void OrderingNode::recombine_to (unsigned int *)
+void OrderingNode::recombine_to (unsigned int * perm2)
 {
-	return;
+	bool * indexed = (bool *) malloc (size * sizeof (bool));
+	for (unsigned int i = 0; i < size; i++)
+		indexed[i] = 0;
+	unsigned int p1_i = 0;
+	unsigned int p2_i = 0;
+	unsigned int candidate = permutation[0];
+	for (unsigned int i = 0; i < size; i++)
+	{
+		while (indexed[candidate])
+		{
+			if (i % 2)
+				candidate = permutation[p1_i++];
+			else
+				candidate = perm2[p2_i++];
+		}
+		indexed[candidate] = 1;
+		permutation[i] = candidate;
+	}
 }
 
 
