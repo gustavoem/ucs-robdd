@@ -74,6 +74,14 @@ void GeneticOrdering::selection ()
 }	
 
 
+
+
+void GeneticOrdering::mutate_solutions ()
+{
+	return;
+}
+
+
 void GeneticOrdering::normalize_fitness ()
 {
 	// fitness funciton: f(R) = 1 / cardinality (R);

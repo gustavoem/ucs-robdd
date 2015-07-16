@@ -34,13 +34,11 @@ private:
 	unsigned int solution_size;
 
 
-	// Selects the elements that fits best the environment
+	// Selects the elements that fits best the environment and do crossing over
+	// between the actual population and these elements.
 	//
 	void selection ();
 
-	// Makes crossovers in solutions
-	//
-	void recombine_solutions ();
 
 	// Mutate solutions
 	//
