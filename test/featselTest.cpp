@@ -525,6 +525,9 @@ int main(void) {
 	cout << "OrderingNodeTest::it_should_recombine_to_other_permutations";
 	cout.flush ();
 	printResult (OrderingNodeTest::it_should_recombine_to_other_permutations ());
+	cout << "OrderingNodeTest::it_should_perform_a_mut";
+	cout.flush ();
+	printResult (OrderingNodeTest::it_should_perform_a_mut ());
 	cout << endl;
 
 

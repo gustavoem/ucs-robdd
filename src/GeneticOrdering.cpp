@@ -83,7 +83,8 @@ void GeneticOrdering::selection ()
 
 void GeneticOrdering::mutate_solutions ()
 {
-	return;
+	for (unsigned int i = 0; i < population_size; i++)
+		solutions[i]->mut ();
 }
 
 

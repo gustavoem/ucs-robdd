@@ -43,10 +43,6 @@ private:
 	void shuffle_individual ();
 
 
-	// Mutate solutions
-	//
-	void mutate ();
-
 
 public:
 
@@ -56,6 +52,21 @@ public:
 	// Makes crossovers in solutions
 	//
 	void recombine_to (unsigned int *);
+
+
+	// Performs a MUT, an exchange of two randomly chosen variables in the permutation
+	//
+	void mut ();
+
+
+	// Performs 2 MUT
+	//
+	void mut_twice ();
+
+
+	// Performs the exchange of the i-th and i + 1 th variables, with i chosen randomly
+	//
+	void neighbour_mut ();
 
 
 	unsigned int * get_ordering ();

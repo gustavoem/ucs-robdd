@@ -78,9 +78,29 @@ void OrderingNode::recombine_to (unsigned int * perm2)
 }
 
 
-void OrderingNode::mutate ()
+void OrderingNode::mut ()
 {
-	return;
+	unsigned int j = ((unsigned int) rand () % size);
+	unsigned int i = ((unsigned int) rand () % size);
+	unsigned int aux = permutation[j];
+	permutation[j] = permutation[i];
+	permutation[i] = aux;
+}
+
+
+void OrderingNode::mut_twice ()
+{
+	mut ();
+	mut ();
+}
+
+
+void OrderingNode::neighbour_mut ()
+{
+	unsigned int i = ((unsigned int) rand () % (size - 1));
+	unsigned int aux = permutation[i];
+	permutation[i] = permutation[i + 1];
+	permutation[i + 1] = aux;
 }
 
 

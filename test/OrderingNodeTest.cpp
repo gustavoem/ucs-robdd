@@ -93,5 +93,35 @@ namespace OrderingNodeTest {
 		return answ;
 	}
 
+	bool it_should_perform_a_mut ()
+	{
+		unsigned int setsize = 5;
+		bool answ = true;
+		ElementSet elm_set ("", setsize, 100);
+		list <pair <bool, ElementSubset *> > l;
+		OrderingNode solution (&elm_set, &l);
+		unsigned int * perm =
+			(unsigned int *) malloc (setsize * sizeof (unsigned int));
+		for (unsigned int i = 0; i < setsize; i++)
+			perm[i] = solution.get_ordering ()[i];
+
+		solution.mut ();
+		unsigned int i;
+		while (i < setsize && perm[i] == solution.get_ordering ()[i])
+			i++;	
+		unsigned int j = i;
+		while (j < setsize && perm[j] == solution.get_ordering ()[j])
+			j++;
+		if (i < setsize) {
+			if (!j < setsize)
+				answ = false;
+			else
+				answ = perm[i] == solution.get_ordering ()[j];
+		}
+
+		free (perm);
+		return answ;
+	}
+
 } // end of namespace
 
