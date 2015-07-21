@@ -14,13 +14,13 @@ namespace GeneticOrderingTest {
 		robdd.add_interval (&subset, true);
 		subset.add_element (5);
 		robdd.add_interval (&subset, false);
-		cout << "\ncardinality: " << robdd.get_cardinality () << endl;
 		GeneticOrdering gen_ord (&robdd, 10, setsize);
 		return true;
 	}
 
 	bool it_should_give_a_better_ordering_robdd ()
 	{
+		bool answ;
 		unsigned int setsize = 5;
 		ElementSet elm_set ("", setsize, 2);
 		ROBDD robdd (&elm_set);
@@ -34,7 +34,9 @@ namespace GeneticOrderingTest {
 		GeneticOrdering gen_ord (&robdd, 10, setsize);
 		ROBDD * robdd2 = gen_ord.reorder ();
 		robdd2->print ();
-		return true;
+		answ = robdd2->get_cardinality () <= robdd.get_cardinality ();
+		free (robdd2);
+		return answ;
 	}
 
 } // end of namespace
