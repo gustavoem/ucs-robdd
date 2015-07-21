@@ -18,15 +18,12 @@ GAROBDD::GAROBDD (ElementSet * set, list <pair <bool, ElementSubset *> > * l,
 
 GAROBDD::~GAROBDD ()
 {
+	cout << "Deletador da GAROBDD!\n";
+	cout.flush();
 	delete_subtree (&root, &cardinality);
 	if (ordering != NULL)
 		free (ordering);
 	ordering = NULL;
-	
-	for (list <pair <bool, ElementSubset *> >::iterator it = log_of_intervals->begin ();
-		it != log_of_intervals->end (); it++)
-		log_of_intervals->pop_back ();
-	
 }
 
 

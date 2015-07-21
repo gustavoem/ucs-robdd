@@ -160,9 +160,6 @@ ROBDD::~ROBDD ()
 	delete_subtree (&root, &cardinality);
 	if (ordering != NULL)
 		free (ordering);
-	for (list <pair <bool, ElementSubset *> >::iterator it = log_of_intervals->begin (); 
-		it != log_of_intervals->end (); it++)
-		delete it->second;
 	delete log_of_intervals;
 }
 
