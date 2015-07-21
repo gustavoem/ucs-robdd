@@ -176,13 +176,14 @@ ROBDD * GeneticOrdering::reorder ()
 {
 	set_best_solution ();
 	unsigned int old_best_size;
-	OrderingNode * best_node = new OrderingNode (*solutions[best_solution_index]);
+	OrderingNode * best_node = new OrderingNode (R->get_element_set (), &robdd_log);
 	/* Cuidado! Não sei muito bem como cópias funcionam. É possível que quando 
 	   deletarmos a solução ótima, ela delete a GAROBDD associada, deletando a árvore com
 	   raíz Vertex * root, logo deletaria a árvore de todas as GAROBDD que tem essa raíz.
 	   Solução fácil seria mudar o atributo da ROBDD de Vertex * pra Vertex. */
 	do
 	{
+		/*problema: autocopia*/
 		best_node->copy (&*solutions[best_solution_index]);
 		old_best_size = best_solution;
 		selection ();

@@ -97,12 +97,15 @@ void OrderingNode::recombine_to (unsigned int * perm2)
 
 void OrderingNode::copy (OrderingNode * node)
 {
-	delete this->garobdd;
-	this->garobdd = new GAROBDD (*node->get_robdd ());
+	GAROBDD * old_garobdd = this->garobdd;
+	GAROBDD * node_garobdd = node->get_robdd ();
+	this->garobdd = new GAROBDD (node_garobdd->get_element_set (),
+					 node_garobdd->get_log (), node->get_ordering ());
 	this->normalized_fitness = node->get_normalized_fitness ();
 	this->accumulated_fitness = node->get_accumulated_fitness ();
 	for (unsigned int i = 0; i < size; i++)
 		this->permutation[i] = node->get_ordering ()[i];
+	delete old_garobdd;
 }
 
 
