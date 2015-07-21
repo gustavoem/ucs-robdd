@@ -15,6 +15,7 @@ GAROBDD::GAROBDD (ElementSet * set, list <pair <bool, ElementSubset *> > * l,
 	log_of_intervals = l;
 }
 
+
 GAROBDD::~GAROBDD ()
 {
 	delete_subtree (&root, &cardinality);
@@ -28,7 +29,8 @@ GAROBDD::~GAROBDD ()
 	
 }
 
-GAROBDD * GAROBDD::get_log ()
+
+list< pair<bool, ElementSubset *> > * GAROBDD::get_log ()
 {
 	return log_of_intervals;
 }

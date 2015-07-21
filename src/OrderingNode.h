@@ -12,9 +12,11 @@ class OrderingNode
 private:
 
 
-	// The ROBDD with the corresponding variable Ordering
+	// The ROBDD with a variable ordering equal to the argument permutation or equal to
+	// the value of permutation in the last call of recalculate_fitness ()
 	//
 	GAROBDD * garobdd;
+
 
 	unsigned int robdd_size;
 	
@@ -58,6 +60,13 @@ public:
 	void recombine_to (unsigned int *);
 
 
+	// Copies the atributes of OrderingNode *
+	//
+	void copy (OrderingNode *);
+
+
+	// Builds the ROBDD associated to permutation
+	//
 	void recalculate_fitness ();
 
 
@@ -76,10 +85,15 @@ public:
 	void neighbour_mut ();
 
 
+	// Returns the value of permutation
+	//
 	unsigned int * get_ordering ();
 
 
+	// Returns garobdd attribute.
+	// 
 	GAROBDD * get_robdd ();
+
 
 	// Returns the cardinality of the robdd associated to that solution
 	//

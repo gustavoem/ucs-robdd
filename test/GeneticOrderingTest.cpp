@@ -33,6 +33,8 @@ namespace GeneticOrderingTest {
 		robdd.add_interval (&subset, false);
 		GeneticOrdering gen_ord (&robdd, 10, setsize);
 		ROBDD * robdd2 = gen_ord.reorder ();
+		robdd2->print ();
+		return true;
 	}
 
 } // end of namespace

@@ -40,6 +40,13 @@ GeneticOrdering::GeneticOrdering (ROBDD * robdd, unsigned int pop_size,
 }
 
 
+GeneticOrdering::~GeneticOrdering ()
+{
+	for (unsigned int i = 0; i < population_size; i++)
+		delete &*solutions[i];
+	free (solutions);
+}
+
 void GeneticOrdering::selection ()
 {
 	OrderingNode ** new_gen = 
@@ -160,29 +167,33 @@ void GeneticOrdering::recalculate_fitness ()
 {
 	for (unsigned int i = 0; i < population_size; i++)
 	{
-		solution[i]->update_garobdd ();
+		solutions[i]->recalculate_fitness ();
 	}
 }
 
 
-ROBDD * reorder ()
+ROBDD * GeneticOrdering::reorder ()
 {
 	unsigned int old_best_size = R->get_cardinality ();
 	unsigned int * old_best = 
-		(unsigned int *) malloc (solution_size * sizeof (unsgined int));
-	for (unsigned int i = 0; i < solution_size; i++)
-		old_best[i] = solutions[best_solution_index]->get_ordering[i];
+		(unsigned int *) malloc (solution_size * sizeof (unsigned int));
 	
+	set_best_solution ();
+	
+	OrderingNode * best_node = new OrderingNode (*solutions[best_solution_index]);
+	/* Cuidado! Não sei muito bem como cópias funcionam. É possível que quando 
+	   deletarmos a solução ótima, ela delete a GAROBDD associada, deletando a árvore com
+	   raíz Vertex * root, logo deletaria a árvore de todas as GAROBDD que tem essa raíz.
+	   Solução fácil seria mudar o atributo da ROBDD de Vertex * pra Vertex. */
 	do
 	{
+		best_node->copy (&*solutions[best_solution_index]);
 		unsigned int old_best = best_solution;
 		selection ();
 		mutate_solutions ();
 		recalculate_fitness ();
 		set_best_solution ();
-		for (unsigned int i = 0; i < solution_size; i++)
-			old_best[i] = solutions[best_solution_index]->get_ordering[i];
 	}while (best_solution <=  old_best_size);
-
+	// R = ROBDD ();
 	return R;
 }

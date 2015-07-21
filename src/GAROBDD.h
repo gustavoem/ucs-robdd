@@ -10,7 +10,11 @@ public:
 
 	GAROBDD (ElementSet *, list <pair <bool, ElementSubset *> > *, unsigned int *);
 
+
 	virtual ~GAROBDD ();
+
+
+	list< pair<bool, ElementSubset *> > * get_log ();
 	
 };
 
