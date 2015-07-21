@@ -174,12 +174,8 @@ void GeneticOrdering::recalculate_fitness ()
 
 ROBDD * GeneticOrdering::reorder ()
 {
-	unsigned int old_best_size = R->get_cardinality ();
-	unsigned int * old_best = 
-		(unsigned int *) malloc (solution_size * sizeof (unsigned int));
-	
 	set_best_solution ();
-	
+	unsigned int old_best_size;
 	OrderingNode * best_node = new OrderingNode (*solutions[best_solution_index]);
 	/* Cuidado! Não sei muito bem como cópias funcionam. É possível que quando 
 	   deletarmos a solução ótima, ela delete a GAROBDD associada, deletando a árvore com
@@ -188,12 +184,12 @@ ROBDD * GeneticOrdering::reorder ()
 	do
 	{
 		best_node->copy (&*solutions[best_solution_index]);
-		unsigned int old_best = best_solution;
+		old_best_size = best_solution;
 		selection ();
 		mutate_solutions ();
 		recalculate_fitness ();
 		set_best_solution ();
-	}while (best_solution <=  old_best_size);
+	}while (best_solution < old_best_size);
 	// R = ROBDD ();
 	return R;
 }
