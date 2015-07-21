@@ -24,6 +24,7 @@ GAROBDD::~GAROBDD ()
 	if (ordering != NULL)
 		free (ordering);
 	ordering = NULL;
+	log_of_intervals = NULL;
 }
 
 
