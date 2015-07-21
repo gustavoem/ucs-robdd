@@ -58,17 +58,6 @@ void OrderingNode::shuffle_individual ()
 
 void OrderingNode::recombine_to (unsigned int * perm2)
 {
-	cout << "Original: " << endl;
-	for (unsigned int i = 0; i < size; i++)
-		cout << permutation[i] << " ";
-	cout << endl;
-
-	cout << "Combinando com: " << endl;
-	for (unsigned int i = 0; i < size; i++)
-		cout << perm2[i] << " ";
-	cout << endl;
-
-
 	bool * indexed = (bool *) malloc (size * sizeof (bool));
 	for (unsigned int i = 0; i < size; i++)
 		indexed[i] = 0;
@@ -87,11 +76,7 @@ void OrderingNode::recombine_to (unsigned int * perm2)
 		indexed[candidate] = 1;
 		permutation[i] = candidate;
 	}
-	cout << "Crossover: " << endl;
-	for (unsigned int i = 0; i < size; i++)
-		cout << permutation[i] << " ";
-	cout << endl;
-	cout.flush ();
+	free (indexed);
 }
 
 

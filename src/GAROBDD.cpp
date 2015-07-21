@@ -7,8 +7,9 @@ GAROBDD::GAROBDD (ElementSet * set, list <pair <bool, ElementSubset *> > * l,
 		it != l->end (); it++)
 		this->add_interval (it->second, it->first);
 	
-	while (!log_of_intervals->empty())
-		log_of_intervals->pop_back ();
+	for (list <pair <bool, ElementSubset *> >::iterator it = log_of_intervals->begin (); 
+		it != log_of_intervals->end (); it++)
+		delete it->second;
 	
 	delete log_of_intervals;
 	log_of_intervals = NULL;

@@ -103,7 +103,7 @@ int main(void) {
 	cout << endl;
 */
 	// Testing Class "ElementSet"
-	cout << "ElementSetTest::a_set_should_have_a_name";
+/*	cout << "ElementSetTest::a_set_should_have_a_name";
 	cout.flush ();
 	printResult (ElementSetTest::a_set_should_have_a_name ());
 	cout << "ElementSetTest::an_empty_set_should_not_have_elements";
@@ -133,7 +133,7 @@ int main(void) {
 	cout << "ElementSetTest::it_should_store_element_index";
 	cout.flush ();
 	printResult (ElementSetTest::it_should_store_element_index ());
-	cout << endl;
+	cout << endl;*/
 /*
 	// Testing Class "ElementSubset"
 	cout << "ElementSubsetTest::a_new_subset_should_be_an_empty_set";
@@ -408,7 +408,7 @@ int main(void) {
 	cout << endl;
 */
 	// Testing Class "Vertex"
-	cout << "VertexTest::a_new_vertex_should_have_no_child";
+	/*cout << "VertexTest::a_new_vertex_should_have_no_child";
 	cout.flush ();
 	printResult (VertexTest::a_new_vertex_should_have_no_child ());
 	cout << "VertexTest::a_terminal_vertex_should_have_no_var";
@@ -417,10 +417,10 @@ int main(void) {
 	cout << "VertexTest::a_nonterminal_vertex_should_have_no_value";
 	cout.flush ();
 	printResult (VertexTest::a_nonterminal_vertex_should_have_no_value ());
-	cout << endl;
+	cout << endl;*/
 
 	// Testing Class "ROBDD"
-	cout << "ROBDDTest::a_new_robdd_has_only_a_terminal_node";
+	/*cout << "ROBDDTest::a_new_robdd_has_only_a_terminal_node";
 	cout.flush ();
 	printResult (ROBDDTest::a_new_robdd_has_only_a_terminal_node ());
 	cout << "ROBDDTest::the_union_of_a_new_robdd_with_itself_should_be_itself";
@@ -446,13 +446,13 @@ int main(void) {
 	printResult (ROBDDTest::its_possible_to_get_a_random_subset_evaluated_zero ());
 	cout << "ROBDDTest::the_robdd_maintains_a_log_of_restrictions";
 	cout.flush ();
-	//printResult (ROBDDTest::the_robdd_maintains_a_log_of_restrictions ());
+	printResult (ROBDDTest::the_robdd_maintains_a_log_of_restrictions ());*/
 
 	cout << endl;
 
 
 	// Testing Class "UCSROBDDToolBox"
-	cout << "UCSROBDDToolBoxTest::it_should_return_null_when_theres_no_unvisited_adjacent";
+/*	cout << "UCSROBDDToolBoxTest::it_should_return_null_when_theres_no_unvisited_adjacent";
 	cout.flush ();
 	printResult (UCSROBDDToolBoxTest::it_should_return_null_when_theres_no_unvisited_adjacent ());
 	cout << "UCSROBDDToolBoxTest::it_should_return_an_unvisited_adjacent";
@@ -467,7 +467,7 @@ int main(void) {
 	cout << "UCSROBDDToolBox4Test::it_should_return_an_unvisited_adjacent";
 	cout.flush ();
 	printResult (UCSROBDDToolBox4Test::it_should_return_an_unvisited_adjacent ());
-	cout << endl;
+	cout << endl;*/
 
 	// Testing Class "UCSROBDD2"
 	/*cout << "UCSROBDDTest::a_lattice_with_constant_cost_should_be_totally_exausted";
@@ -509,14 +509,14 @@ int main(void) {
 	cout << endl;*/
 
 	// Testing Class "GeneticOrdering"
-	cout << "GeneticOrderingTest::it_should_create_an_initial_population";
+/*	cout << "GeneticOrderingTest::it_should_create_an_initial_population";
 	cout.flush ();
 	printResult (GeneticOrderingTest::it_should_create_an_initial_population ());
 	cout << "GeneticOrderingTest::it_should_give_a_better_ordering_robdd";
 	cout.flush ();
 	printResult (GeneticOrderingTest::it_should_give_a_better_ordering_robdd ());
 	cout << endl;
-
+*/
 
 	// Testing Class "OrderingNode"
 	cout << "OrderingNodeTest::it_should_create_a_random_permutation";

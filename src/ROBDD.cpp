@@ -531,7 +531,7 @@ Vertex * ROBDD::build_interval (unsigned int index, unsigned int * card,
 	return v;
 }
 
-/*Arrumar isso aqui: ficou feio*/
+
 bool ROBDD::contains (ElementSubset * subset)
 {
 	nof_consults++;
