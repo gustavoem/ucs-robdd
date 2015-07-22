@@ -15,7 +15,7 @@ ROBDD::ROBDD (ElementSet * set)
 	cardinality = 1;
 
 	// initial ordering is 0, 1, ..., n-1
-	ordering = (unsigned int *) malloc (sizeof(unsigned int) * n);
+	ordering = (unsigned int *) malloc (sizeof (unsigned int) * n);
 	for (unsigned int i = 0; i < n; i++)
 		ordering[i] = i;
 
@@ -36,7 +36,7 @@ ROBDD::ROBDD (ElementSet * set, unsigned int * ord)
 	root = new Vertex (false, n + 1);
 	cardinality = 1;
 	
-	ordering = (unsigned int *) malloc (sizeof(unsigned int) * n);
+	ordering = (unsigned int *) malloc (sizeof (unsigned int) * n);
 	for (unsigned int i = 0; i < n; i++)
 		ordering[i] = ord[i];
 
@@ -187,7 +187,7 @@ void ROBDD::delete_subtree (Vertex ** v, unsigned int * n)
 Vertex ** ROBDD::get_all_vertex (Vertex * root, unsigned int n)
 {
 	Vertex ** v = (Vertex **) malloc (sizeof (Vertex *) * n + 1);
-	int * last_index = (int *) malloc (sizeof (int *));
+	int * last_index = (int *) malloc (sizeof (int));
 	*last_index = 0;
 	unmark_all_vertex (root);
 	fill_vertice (v, last_index, root);
@@ -494,6 +494,7 @@ void ROBDD::add_interval (ElementSubset * subset, bool orientation)
 	// cout << endl;
 	Vertex * root2 = build_interval (0, &card2, subset, zero, one, orientation);
 	union_to (root2);
+
 	if (!one->mark)
 		delete one;
 	if (!zero->mark)

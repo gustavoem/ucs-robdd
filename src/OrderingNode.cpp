@@ -22,8 +22,8 @@ OrderingNode::OrderingNode (ElementSet * elm_set, list <pair <bool, ElementSubse
 
 OrderingNode::~OrderingNode ()
 {
-	delete garobdd;
 	free (permutation);
+	delete garobdd;
 }
 
 
@@ -82,6 +82,7 @@ void OrderingNode::recombine_to (unsigned int * perm2)
 
 void OrderingNode::copy (OrderingNode * node)
 {
+	cout << "Made a copy!" << endl;
 	GAROBDD * old_garobdd = this->garobdd;
 	GAROBDD * node_garobdd = node->get_robdd ();
 	this->garobdd = new GAROBDD (node_garobdd->get_element_set (),

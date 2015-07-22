@@ -22,28 +22,18 @@ GeneticOrdering::GeneticOrdering (ROBDD * robdd, unsigned int pop_size,
 	}
 
 	// sort solutions by normalized fitness (?)
-	normalize_fitness ();
+	/*normalize_fitness ();
 	accumulate_fitness ();
-
-	cout << "população inicial:\n";
-	for (unsigned int i = 0; i < population_size; i++)
-	{
-		cout << "\nsolução " << i << ":\n";
-		unsigned int * permutation = solutions[i]->get_ordering ();
-		for (unsigned int x = 0; x < solution_size; x++)
-			cout << permutation[x] << " ";
-		cout << "normalized_fitness: " << solutions[i]->get_normalized_fitness ();
-		cout << " accumulated_fitness: " << solutions[i]->get_accumulated_fitness ();
-	}
-	cout.flush ();
-	set_best_solution ();
+	set_best_solution ();*/
 }
 
 
 GeneticOrdering::~GeneticOrdering ()
 {
+	cout << "~GeneticOrdering\n";
+	cout.flush();
 	for (unsigned int i = 0; i < population_size; i++)
-		delete &*solutions[i];
+		delete solutions[i];
 	free (solutions);
 }
 
@@ -179,6 +169,7 @@ ROBDD * GeneticOrdering::reorder ()
 	OrderingNode * best_node = new OrderingNode (R->get_element_set (), &robdd_log);
 	do
 	{
+		cout.flush ();
 		best_node->copy (&*solutions[best_solution_index]);
 		old_best_size = best_solution;
 		selection ();

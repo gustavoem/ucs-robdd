@@ -94,7 +94,7 @@ void OBDD::delete_subtree (PVertex ** v, unsigned int * n)
 PVertex ** OBDD::get_all_vertex (PVertex * root, unsigned int n)
 {
 	PVertex ** v = (PVertex **) malloc (sizeof (PVertex *) * n + 1);
-	int * last_index = (int *) malloc (sizeof (int *));
+	int * last_index = (int *) malloc (sizeof (int));
 	*last_index = 0;
 	unmark_all_vertex (root);
 	fill_vertice (v, last_index, root);
