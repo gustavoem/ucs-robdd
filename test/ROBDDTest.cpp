@@ -143,7 +143,7 @@ namespace ROBDDTest {
 		robdd.add_interval (&subset1, true);
 		robdd.add_interval (&subset2, false);
 		list < pair<bool, ElementSubset *> > l (robdd.get_log ());
-
+		
 		pair <bool, ElementSubset *> first_pair = l.back ();
 		if (! l.empty ())
 			l.pop_back ();

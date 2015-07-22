@@ -447,7 +447,6 @@ int main(void) {
 	cout << "ROBDDTest::the_robdd_maintains_a_log_of_restrictions";
 	cout.flush ();
 	printResult (ROBDDTest::the_robdd_maintains_a_log_of_restrictions ());
-
 	cout << endl;
 
 
