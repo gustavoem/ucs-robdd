@@ -42,6 +42,7 @@
 #include "algorithms/UCSROBDD4.h"
 #include "algorithms/UCSROBDD5.h"
 #include "algorithms/UCSROBDD6.h"
+#include "algorithms/UCSROBDD7.h"
 //#include "algorithms/UCSRT.h"
 //#include "algorithms/UCSOBDD.h"
 
@@ -117,6 +118,9 @@ int main(int argc, char * argv[])
 			solver = new UCSROBDD5 ();
 		else if (algorithm.compare ("ucsr6") == 0)
 			solver = new UCSROBDD6 ();
+		else if (algorithm.compare ("ucsr7") == 0)
+			solver = new UCSROBDD7 ();
+
 
 		else if (algorithm.compare ("es") == 0)
 			solver = new ExhaustiveSearch ();
@@ -214,7 +218,8 @@ int main(int argc, char * argv[])
 				 (algorithm.compare ("ucsr3") == 0) ||
 				 (algorithm.compare ("ucsr4") == 0) ||
 				 (algorithm.compare ("ucsr5") == 0) ||
-				 (algorithm.compare ("ucsr6") == 0) )
+				 (algorithm.compare ("ucsr6") == 0) ||
+				 (algorithm.compare ("ucsr7")))
 			{
 				cout << endl << "Elapsed time of the minima exhausting (in microseconds): "
 					 << solver->get_elapsed_time_of_all_calls_of_the_minima_exhausting () << endl;
@@ -228,6 +233,8 @@ int main(int argc, char * argv[])
 					 << solver->get_number_of_restrictions_consults () << endl;
 				cout << endl << "Updates to restrictions: "
 					 << solver->get_number_of_restrictions_updates () << endl;
+				cout << endl << "Reorderings to restrictions: "
+					 << solver->get_number_of_restrictions_reorderings () << endl;
 				cout << endl << "Elapsed time updating restrictions (in microseconds): "
 					 << solver->get_elapsed_time_updating_restrictions () << endl;
 				cout << endl << "Elapsed time reducing restrictions (in microseconds): "
@@ -395,6 +402,7 @@ under certain conditions; see 'LICENSE.TXT' for details.");
 				 (strcmp (argv[i], "ucsr4") == 0) ||
 				 (strcmp (argv[i], "ucsr5") == 0) ||
 				 (strcmp (argv[i], "ucsr6") == 0) ||
+				 (strcmp (argv[i], "ucsr7") == 0) ||
 				 (strcmp (argv[i], "ucsrt") == 0) ||
 				 (strcmp (argv[i], "ucso") == 0) )
 			{

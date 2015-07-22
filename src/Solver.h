@@ -119,7 +119,7 @@ protected:
 
 	// Stores the number of reorders applied to the restrictions
     //
-    unsigned int number_of_restrictions_reorders;
+    unsigned int number_of_restrictions_reorderings;
 
 
 	// Functor with operator () as a comparison function.
@@ -208,6 +208,11 @@ public:
 	int get_elapsed_time_reducing_restrictions ();
 
 
+	// Returns the elapsed time reordering restrictions
+	//
+	int get_elapsed_time_reordering_restrictions ();
+
+
 	// Returns the number of calls of the minimal and maximal element subroutines.
 	//
 	unsigned int get_number_of_calls_of_minimal_and_maximal_element ();
@@ -227,9 +232,16 @@ public:
 	//
 	unsigned int get_number_of_restrictions_consults ();
 
+
 	// Returns the number of updates to the restriction list
 	//
 	unsigned int get_number_of_restrictions_updates ();
+
+
+	// Returns the number of reorderings to the restriction list
+	//
+	unsigned int get_number_of_restrictions_reorderings ();
+
 
 	// Returns the maximum size of the forest A.
 	//

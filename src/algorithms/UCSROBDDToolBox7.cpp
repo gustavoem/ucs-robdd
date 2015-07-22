@@ -10,19 +10,29 @@ namespace UCSROBDDToolBox7
 		  f(x) = 0.7 * 2^n + 50
 		  Dividing it by 70 (or any other number)
 		  we will reorder in every 2^n / 100 steps*/
-		int reorder_param = floor (pow (2, n) / 100);
+		int reorder_param = ceil (pow (2, R->get_element_set  ()->get_set_cardinality ()) / 100.0);
 		R->add_interval (A, false);
 		if ((R->get_nof_updates () % reorder_param) == 0)
 		{
-			GeneticOrdering genord = new GeneticOrdering (R);
+			GeneticOrdering * genord = new GeneticOrdering (R);
 			unsigned int * new_ord = genord->reorder ();
+			R->change_ordering (new_ord);
+			free (new_ord);
 		}
 	}
 
 
 	void update_upper_restriction (ROBDD * R, ElementSubset * A)
 	{
+		int reorder_param = ceil (pow (2, R->get_element_set  ()->get_set_cardinality ()) / 100.0);
 		R->add_interval (A, true);
+		if ((R->get_nof_updates () % reorder_param) == 0)
+		{
+			GeneticOrdering * genord = new GeneticOrdering (R);
+			unsigned int * new_ord = genord->reorder ();
+			R->change_ordering (new_ord);
+			free (new_ord);
+		}
 	}
 
 

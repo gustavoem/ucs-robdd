@@ -30,6 +30,16 @@ public:
 	virtual ~UCSROBDD7 ();
 
 
+	// Stores the number of reorder operations applied to the restrictions
+	//
+	unsigned int number_of_restrictions_reorders;
+
+
+	// Stores the elapsed time (in microseconds) reodering restrictions
+	//
+	int elapsed_time_reordering_restrictions;
+
+
 	// Runs the UCSROBDD7 algorithm, getting up to 'max_size_of_minima_list' minimum subsets.
 	//
 	void get_minima_list (unsigned int);

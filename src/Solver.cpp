@@ -40,7 +40,7 @@ Solver::Solver ()
 
 	// Used by UCS7
 	elapsed_time_reordering_restrictions = 0;
-	number_of_restrictions_reorders = 0;
+	number_of_restrictions_reorderings = 0;
 
 	// Used by PFS and similar ones
 	number_of_iterations = 0;
@@ -168,6 +168,12 @@ int Solver::get_elapsed_time_reducing_restrictions ()
 }
 
 
+int Solver::get_elapsed_time_reordering_restrictions ()
+{
+	return elapsed_time_reordering_restrictions;
+}
+
+
 int Solver::get_elapsed_time_of_all_calls_of_the_minima_exhausting()
 {
 	return elapsed_time_of_all_calls_of_the_minima_exhausting;
@@ -195,6 +201,12 @@ unsigned int Solver::get_number_of_restrictions_consults ()
 unsigned int Solver::get_number_of_restrictions_updates ()
 {
 	return number_of_restrictions_updates;
+}
+
+
+unsigned int Solver::get_number_of_restrictions_reorderings ()
+{
+	return number_of_restrictions_reorderings;
 }
 
 

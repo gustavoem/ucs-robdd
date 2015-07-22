@@ -71,7 +71,7 @@ void UCSROBDD7::get_minima_list (unsigned int max_size_of_minima_list)
 	number_of_visited_subsets =  cost_function->get_number_of_calls_of_cost_function ();
 	number_of_restrictions_consults = restrictions->get_nof_consults ();
 	number_of_restrictions_updates = restrictions->get_nof_updates ();
-	//number_of_restrictions_reorders = UCSROBDDToolBox7::n_of_restriction_reorders ();
+	//number_of_restrictions_reorderings = UCSROBDDToolBox7::n_of_restriction_reorders ();
 	elapsed_time_consulting_restrictions = restrictions->get_time_consulting ();
 	elapsed_time_updating_restrictions = restrictions->get_time_updating ();
 	elapsed_time_reducing_restrictions = restrictions->get_time_reducing ();
