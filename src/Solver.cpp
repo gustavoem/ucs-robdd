@@ -38,6 +38,10 @@ Solver::Solver ()
 	number_of_restrictions_consults = 0;
 	number_of_restrictions_updates = 0;
 
+	// Used by UCS7
+	elapsed_time_reordering_restrictions = 0;
+	number_of_restrictions_reorders = 0;
+
 	// Used by PFS and similar ones
 	number_of_iterations = 0;
 	max_size_of_the_forest_A = 0;

@@ -32,10 +32,12 @@ namespace GeneticOrderingTest {
 		subset.add_element (5);
 		robdd.add_interval (&subset, false);
 		GeneticOrdering gen_ord (&robdd);
-		ROBDD * robdd2 = gen_ord.reorder ();
-		robdd2->print ();
-		answ = robdd2->get_cardinality () <= robdd.get_cardinality ();
-		free (robdd2);
+		
+		unsigned int old_size = robdd.get_cardinality ();
+		unsigned int * new_order = gen_ord.reorder ();
+		robdd.change_ordering (new_order);
+		answ = old_size >= robdd.get_cardinality ();
+		free (new_order);
 		return answ;
 	}
 

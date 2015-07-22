@@ -19,7 +19,7 @@ GAROBDD::GAROBDD (ElementSet * set, list <pair <bool, ElementSubset *> > * l,
 
 GAROBDD::~GAROBDD ()
 {
-	delete_subtree (&root, &cardinality);
+	cout << "~GAROBDD\n";
 	if (ordering != NULL)
 		free (ordering);
 	ordering = NULL;

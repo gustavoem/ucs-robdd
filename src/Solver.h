@@ -73,7 +73,13 @@ protected:
 	//
     int elapsed_time_consulting_restrictions;
 
+	
+	// Stores the time (in microseconds) spent by the
+	// reordering of restrictions
+	//
+    int elapsed_time_reordering_restrictions;
 
+	
 	// Stores the maximum size that a forest A achieves during all
 	// iterations of the PFS algorithm and similar ones.
 	//
@@ -110,6 +116,11 @@ protected:
     // Stores the number of updates to the restrictions
     //
     unsigned int number_of_restrictions_updates;
+
+	// Stores the number of reorders applied to the restrictions
+    //
+    unsigned int number_of_restrictions_reorders;
+
 
 	// Functor with operator () as a comparison function.
 	//

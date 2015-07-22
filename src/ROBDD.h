@@ -133,6 +133,11 @@ public:
 	virtual ~ROBDD ();	
 
 
+	// Represents the robdd in the ordering passed by parameter
+	//
+	void change_ordering (unsigned int *);
+
+
 	// Returns the root vertex
 	//
 	Vertex * get_root ();

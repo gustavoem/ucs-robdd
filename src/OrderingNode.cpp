@@ -22,8 +22,9 @@ OrderingNode::OrderingNode (ElementSet * elm_set, list <pair <bool, ElementSubse
 
 OrderingNode::~OrderingNode ()
 {
-	free (permutation);
+	cout << "~OrderingNode\n";
 	delete garobdd;
+	free (permutation);
 }
 
 

@@ -157,6 +157,8 @@ void ROBDD::unmark_all_vertex (Vertex * v)
 
 ROBDD::~ROBDD ()
 {
+	cout << "~ROBDD\n";
+	cout.flush ();
 	delete_subtree (&root, &cardinality);
 	if (ordering != NULL)
 		free (ordering);
@@ -166,6 +168,7 @@ ROBDD::~ROBDD ()
 			it != log_of_intervals->end (); it++)
 			delete it->second;
 		delete log_of_intervals;
+		log_of_intervals = NULL;
 	}
 }
 
@@ -207,6 +210,36 @@ void ROBDD::fill_vertice (Vertex ** vertice, int * last_index, Vertex * v)
 
 	fill_vertice (vertice, last_index, v->get_child (true));
 	fill_vertice (vertice, last_index, v->get_child (false));
+}
+
+
+void ROBDD::change_ordering (unsigned int * ord)
+{
+	list <pair <bool, ElementSubset *> > robdd_log = this->get_log ();
+
+	delete_subtree (&root, &cardinality);
+	if (ordering != NULL)
+		free (ordering);
+	if (log_of_intervals != NULL)
+	{
+		for (list <pair <bool, ElementSubset *> >::iterator it = log_of_intervals->begin (); 
+			it != log_of_intervals->end (); it++)
+			delete it->second;
+		delete log_of_intervals;
+		log_of_intervals = NULL;
+	}
+
+	unsigned int n = elm_set->get_set_cardinality ();
+	log_of_intervals = new list <pair <bool, ElementSubset *> >();
+	root = new Vertex (false, n + 1);
+	cardinality = 1;
+	ordering = (unsigned int *) malloc (sizeof (unsigned int) * n);
+	for (unsigned int i = 0; i < n; i++)
+		ordering[i] = ord[i];
+
+	for (list <pair <bool, ElementSubset *> >::iterator it = robdd_log.begin (); 
+		it != robdd_log.end (); it++)
+		this->add_interval (it->second, it->first);
 }
 
 

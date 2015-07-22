@@ -82,7 +82,7 @@ public:
 
 	// Gives a good ordering using a Genetic Algorithm Heuristic for 
 	//
-	ROBDD * reorder ();
+	unsigned int * reorder ();
 	
 };
 

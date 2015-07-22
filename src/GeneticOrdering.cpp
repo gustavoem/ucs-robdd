@@ -2,7 +2,7 @@
 
 GeneticOrdering::GeneticOrdering (ROBDD * robdd)
 {
-	/* Parameter setting as seen in ...*/
+	/* Parameter setting as seen in (paper)*/
 	solution_size = robdd->get_element_set ()->get_set_cardinality ();
 	if (solution_size > 40)
 		population_size = 120;
@@ -165,7 +165,7 @@ void GeneticOrdering::recalculate_fitness ()
 }
 
 
-ROBDD * GeneticOrdering::reorder ()
+unsigned int * GeneticOrdering::reorder ()
 {
 	set_best_solution ();
 	unsigned int old_best_size;
@@ -181,10 +181,10 @@ ROBDD * GeneticOrdering::reorder ()
 		set_best_solution ();
 	}while (best_solution < old_best_size);
 
-	ROBDD * better_R = new ROBDD (R->get_element_set (), best_node->get_ordering ());
-	for (list <pair <bool, ElementSubset *> >::iterator it = robdd_log.begin (); 
-		it != robdd_log.end (); it++)
-		better_R->add_interval (it->second, it->first);
+	unsigned int * best_order = (unsigned int *) malloc (sizeof (int) * solution_size);
+	for (unsigned int i = 0; i < solution_size; i++)
+		best_order[i] = best_node->get_ordering ()[i];
+
 	delete best_node;
-	return better_R;
+	return best_order;
 }
