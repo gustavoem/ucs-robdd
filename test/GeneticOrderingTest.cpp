@@ -14,7 +14,7 @@ namespace GeneticOrderingTest {
 		robdd.add_interval (&subset, true);
 		subset.add_element (5);
 		robdd.add_interval (&subset, false);
-		GeneticOrdering gen_ord (&robdd, 10, setsize);
+		GeneticOrdering gen_ord (&robdd);
 		return true;
 	}
 
@@ -31,7 +31,7 @@ namespace GeneticOrderingTest {
 		robdd.add_interval (&subset, true);
 		subset.add_element (5);
 		robdd.add_interval (&subset, false);
-		GeneticOrdering gen_ord (&robdd, 10, setsize);
+		GeneticOrdering gen_ord (&robdd);
 		ROBDD * robdd2 = gen_ord.reorder ();
 		robdd2->print ();
 		answ = robdd2->get_cardinality () <= robdd.get_cardinality ();

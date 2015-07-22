@@ -76,7 +76,7 @@ private:
 
 public:
 
-	GeneticOrdering (ROBDD *, unsigned int, unsigned int);
+	GeneticOrdering (ROBDD *);
 
 	virtual ~GeneticOrdering ();
 

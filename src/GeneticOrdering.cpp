@@ -1,14 +1,17 @@
 #include "GeneticOrdering.h"
 
-GeneticOrdering::GeneticOrdering (ROBDD * robdd, unsigned int pop_size, 
-	unsigned int solution_size)
+GeneticOrdering::GeneticOrdering (ROBDD * robdd)
 {
-	population_size = pop_size;
-	this->solution_size = solution_size;
+	/* Parameter setting as seen in ...*/
+	solution_size = robdd->get_element_set ()->get_set_cardinality ();
+	if (solution_size > 40)
+		population_size = 120;
+	else
+		population_size = solution_size * 3;
+
 	R = robdd;
 	solutions = (OrderingNode **) malloc (population_size * sizeof (OrderingNode *));
 	robdd_log = robdd->get_log ();
-	
 	srand (time(0));
 	for (unsigned int i = 0; i < population_size; i++) {
 		srand (i);
@@ -22,9 +25,9 @@ GeneticOrdering::GeneticOrdering (ROBDD * robdd, unsigned int pop_size,
 	}
 
 	// sort solutions by normalized fitness (?)
-	/*normalize_fitness ();
+	normalize_fitness ();
 	accumulate_fitness ();
-	set_best_solution ();*/
+	set_best_solution ();
 }
 
 
