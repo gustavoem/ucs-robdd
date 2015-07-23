@@ -2,7 +2,6 @@
 
 OrderingNode::OrderingNode (ElementSet * elm_set, list <pair <bool, ElementSubset *> > * l)
 {
-	cout << "Criado o nó: " << this << endl;
 	this->size = elm_set->get_set_cardinality ();
 	permutation = (unsigned int *) malloc (size * sizeof (unsigned int));
 	
@@ -18,7 +17,6 @@ OrderingNode::OrderingNode (ElementSet * elm_set, list <pair <bool, ElementSubse
 
 OrderingNode::~OrderingNode ()
 {
-	cout << "Deletado o nó: " << this << endl;
 	delete garobdd;
 	free (permutation);
 }
@@ -79,7 +77,6 @@ void OrderingNode::recombine_to (unsigned int * perm2)
 
 void OrderingNode::copy (OrderingNode * node)
 {
-	cout << "Made a copy!" << endl;
 	GAROBDD * old_garobdd = this->garobdd;
 	GAROBDD * node_garobdd = node->get_robdd ();
 	this->garobdd = new GAROBDD (node_garobdd->get_element_set (),

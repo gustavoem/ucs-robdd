@@ -496,7 +496,7 @@ int main(void) {
 	cout << endl;*/
 
 	// Testing Class "UCSROBDD3"
-/*	cout << "UCSROBDD3Test::it_should_find_a_global_minimum";
+	cout << "UCSROBDD3Test::it_should_find_a_global_minimum";
 	cout.flush ();
 	printResult (UCSROBDDTest::it_should_find_a_global_minimum ());
 	cout << "UCSROBDD3Test::it_should_converge_for_large_hamming_sets";
@@ -509,7 +509,7 @@ int main(void) {
 	cout.flush ();
 	printResult (UCSROBDD3Test::it_should_always_give_the_correct_answer ());
 	cout << endl;
-*/
+	
 	// Testing Class "GeneticOrdering"
 	cout << "GeneticOrderingTest::it_should_create_an_initial_population";
 	cout.flush ();

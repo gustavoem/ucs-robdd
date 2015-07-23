@@ -168,6 +168,8 @@ void GeneticOrdering::recalculate_fitness ()
 
 unsigned int * GeneticOrdering::reorder ()
 {
+	cout << "Entrei no reorder\n";
+	cout.flush ();
 	set_best_solution ();
 	unsigned int old_best_size;
 	OrderingNode * best_node = new OrderingNode (R->get_element_set (), &robdd_log);

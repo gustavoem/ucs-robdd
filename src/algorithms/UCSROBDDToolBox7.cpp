@@ -38,6 +38,7 @@ namespace UCSROBDDToolBox7
 
 	void DFS (Node * M, Collection * L, ROBDD * R, CostFunction * c)
 	{
+		cout << "DFS\n";
 		unsigned int direction = 0;
 		Node * Y, * X = NULL;
 		Y = M;

@@ -208,8 +208,6 @@ namespace ROBDDTest {
 			answ = true;
 		else
 			answ = false;
-
-		cout << "Terminei o teste. Hora de botar pra quebrar!\n";
 		return answ;
 	}
 

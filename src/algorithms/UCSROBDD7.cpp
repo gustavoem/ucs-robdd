@@ -32,6 +32,7 @@ void UCSROBDD7::get_minima_list (unsigned int max_size_of_minima_list)
 	do
 	{
 		X = restrictions->get_random_zero_evaluated_element ();
+		cout << "Loop principal UCSR7\n";
 		if (X != NULL)
 		{
 			gettimeofday (& begin_exhausting, NULL);
