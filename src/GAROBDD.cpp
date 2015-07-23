@@ -5,7 +5,9 @@ GAROBDD::GAROBDD (ElementSet * set, list <pair <bool, ElementSubset *> > * l,
 {
 	for (list <pair <bool, ElementSubset *> >::iterator it = l->begin (); 
 		it != l->end (); it++)
+	{
 		this->add_interval (it->second, it->first);
+	}
 	
 	for (list <pair <bool, ElementSubset *> >::iterator it = log_of_intervals->begin (); 
 		it != log_of_intervals->end (); it++)
@@ -19,7 +21,6 @@ GAROBDD::GAROBDD (ElementSet * set, list <pair <bool, ElementSubset *> > * l,
 
 GAROBDD::~GAROBDD ()
 {
-	cout << "~GAROBDD\n";
 	if (ordering != NULL)
 		free (ordering);
 	ordering = NULL;

@@ -9,6 +9,8 @@ GeneticOrdering::GeneticOrdering (ROBDD * robdd)
 	else
 		population_size = solution_size * 3;
 
+	population_size = 1;
+
 	R = robdd;
 	solutions = (OrderingNode **) malloc (population_size * sizeof (OrderingNode *));
 	robdd_log = robdd->get_log ();
@@ -33,7 +35,6 @@ GeneticOrdering::GeneticOrdering (ROBDD * robdd)
 
 GeneticOrdering::~GeneticOrdering ()
 {
-	cout << "~GeneticOrdering\n";
 	cout.flush();
 	for (unsigned int i = 0; i < population_size; i++)
 		delete solutions[i];

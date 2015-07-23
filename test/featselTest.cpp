@@ -518,7 +518,7 @@ int main(void) {
 
 
 	// Testing Class "OrderingNode"
-/*	cout << "OrderingNodeTest::it_should_create_a_random_permutation";
+	cout << "OrderingNodeTest::it_should_create_a_random_permutation";
 	cout.flush ();
 	printResult (OrderingNodeTest::it_should_create_a_random_permutation ());
 	cout << "OrderingNodeTest::it_should_represent_the_original_robdd";
@@ -534,7 +534,6 @@ int main(void) {
 	cout.flush ();
 	printResult (OrderingNodeTest::it_should_perform_a_neighbour_mut ());
 	cout << endl;
-*/
 
 
 	cout << "Total " << number_of_passed_tests + number_of_failed_tests << " test(s), ";

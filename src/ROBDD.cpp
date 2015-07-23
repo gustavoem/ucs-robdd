@@ -3,6 +3,7 @@
 
 ROBDD::ROBDD (ElementSet * set)
 {
+	cout << "Criei a ROBDD: " << this << endl;
 	nof_updates  = 0;
 	nof_consults = 0;
 	time_consulting = 0;
@@ -24,6 +25,7 @@ ROBDD::ROBDD (ElementSet * set)
 
 ROBDD::ROBDD (ElementSet * set, unsigned int * ord)
 {
+	cout << "Criei a ROBDD: " << this << endl;
 	nof_updates  = 0;
 	nof_consults = 0;
 	time_consulting = 0;
@@ -157,8 +159,7 @@ void ROBDD::unmark_all_vertex (Vertex * v)
 
 ROBDD::~ROBDD ()
 {
-	cout << "~ROBDD\n";
-	cout.flush ();
+	cout << "Deletei a ROBDD: " << this << endl;
 	delete_subtree (&root, &cardinality);
 	if (ordering != NULL)
 		free (ordering);

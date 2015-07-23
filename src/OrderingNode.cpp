@@ -2,6 +2,7 @@
 
 OrderingNode::OrderingNode (ElementSet * elm_set, list <pair <bool, ElementSubset *> > * l)
 {
+	cout << "Criado o nó: " << this << endl;
 	this->size = elm_set->get_set_cardinality ();
 	permutation = (unsigned int *) malloc (size * sizeof (unsigned int));
 	
@@ -11,18 +12,13 @@ OrderingNode::OrderingNode (ElementSet * elm_set, list <pair <bool, ElementSubse
 	random_shuffle (&permutation[0], &permutation[size]);
 	// shuffle_individual ();
 
-	/*cout << "(ON) Valores da permutação: ";
-	for (unsigned int i = 0; i < elm_set->get_set_cardinality (); i++)
-		cout << permutation[i] << " ";
-	cout << endl;
-	cout.flush ();*/
 	garobdd = new GAROBDD (elm_set, l, this->permutation);
 	robdd_size = garobdd->get_cardinality ();
 }
 
 OrderingNode::~OrderingNode ()
 {
-	cout << "~OrderingNode\n";
+	cout << "Deletado o nó: " << this << endl;
 	delete garobdd;
 	free (permutation);
 }
