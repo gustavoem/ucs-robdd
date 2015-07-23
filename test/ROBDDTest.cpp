@@ -168,12 +168,13 @@ namespace ROBDDTest {
 		subset1.add_element (0);
 		subset2.add_element (1);
 		robdd.add_interval (&subset1, false);
-		robdd.add_interval (&subset2, true);
 		GeneticOrdering genord (&robdd);
 		list <pair <bool, ElementSubset *> > robdd_log = robdd.get_log ();
 		unsigned int * perm = genord.reorder ();
 		robdd.change_ordering (perm);
 		free (perm);
+		
+		robdd.add_interval (&subset2, true);
 
 		ElementSubset empty_subset ("", &elm_set);
 		ElementSubset a_subset ("", &elm_set);
@@ -195,6 +196,10 @@ namespace ROBDDTest {
 		abc_subset.add_element (0);
 		abc_subset.add_element (1);
 		abc_subset.add_element (2);
+
+		perm = genord.reorder ();
+		robdd.change_ordering (perm);
+		free (perm);
 
 		if (robdd.contains (&empty_subset) &&
 			robdd.contains (&a_subset)     &&

@@ -11,34 +11,42 @@ namespace UCSROBDDToolBox7
 		  Dividing it by 70 (or any other number)
 		  we will reorder in every 2^n / 100 steps*/
 		int reorder_param = ceil (pow (2, R->get_element_set  ()->get_set_cardinality ()) / 100.0);
-		R->add_interval (A, false);
 		if ((R->get_nof_updates () % reorder_param) == 0)
 		{
 			GeneticOrdering * genord = new GeneticOrdering (R);
 			unsigned int * new_ord = genord->reorder ();
-			R->change_ordering (new_ord);
+			//R->change_ordering (new_ord);
 			free (new_ord);
 		}
+		cout << "adding interval\n";
+		cout << R->contains (A) << endl;
+		R->add_interval (A, false);
+		cout << R->contains (A) << endl;
 	}
 
 
 	void update_upper_restriction (ROBDD * R, ElementSubset * A)
 	{
 		int reorder_param = ceil (pow (2, R->get_element_set  ()->get_set_cardinality ()) / 100.0);
-		R->add_interval (A, true);
 		if ((R->get_nof_updates () % reorder_param) == 0)
 		{
 			GeneticOrdering * genord = new GeneticOrdering (R);
 			unsigned int * new_ord = genord->reorder ();
-			R->change_ordering (new_ord);
+			//R->change_ordering (new_ord);
 			free (new_ord);
 		}
+		cout << "adding interval\n";
+		cout << R->contains (A) << endl;
+		R->add_interval (A, true);
+		cout << R->contains (A) << endl;
 	}
 
 
 	void DFS (Node * M, Collection * L, ROBDD * R, CostFunction * c)
 	{
+		cout << "Endereço que eu to mudando no toolbox: " << R << endl;
 		cout << "DFS\n";
+		cout << "Tamanho do log: " << R->get_log ().size () << endl;
 		unsigned int direction = 0;
 		Node * Y, * X = NULL;
 		Y = M;

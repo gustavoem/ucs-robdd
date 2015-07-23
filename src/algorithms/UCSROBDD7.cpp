@@ -18,10 +18,10 @@ UCSROBDD7::~UCSROBDD7 ()
 
 void UCSROBDD7::get_minima_list (unsigned int max_size_of_minima_list)
 {
-	restrictions = new ROBDD (set);
 	timeval begin_exhausting, end_exhausting, begin_program, end_program;
 	gettimeofday (& begin_program, NULL);
 
+	restrictions = new ROBDD (set);
 	Collection * L = new Collection ();
 	bool search_space_is_empty = false;
 	ElementSubset * X, Y ("", set);
@@ -39,10 +39,17 @@ void UCSROBDD7::get_minima_list (unsigned int max_size_of_minima_list)
 			M = UCSROBDDToolBox7::create_node (X);
 			M->vertex->cost = cost_function->cost (M->vertex);
 			
+			cout << "Endereço ROBDD: " << restrictions << endl;
+			cout << "ROBDD antes: " << endl;
+			restrictions->print ();
+			
 			UCSROBDDToolBox7::DFS
 				(M, L, restrictions, cost_function);
 			number_of_calls_of_minimum_exhausting++;
 			
+			cout << "ROBDD depois: " << endl;
+			restrictions->print ();
+
 			gettimeofday (& end_exhausting, NULL);
 			elapsed_time_of_all_calls_of_the_minima_exhausting +=
 			diff_us (end_exhausting, begin_exhausting);		
