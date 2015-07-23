@@ -157,6 +157,58 @@ namespace ROBDDTest {
 			return true;
 	}
 
+
+	bool it_should_represent_the_same_space_after_reordering ()
+	{
+		ElementSet elm_set ("", 3, 2);	
+		ROBDD robdd (&elm_set);
+		ElementSubset subset1 ("", &elm_set);
+		ElementSubset subset2 ("", &elm_set);
+		subset1.add_element (0);
+		subset2.add_element (1);
+		robdd.add_interval (&subset1, false);
+		robdd.add_interval (&subset2, true);
+		GeneticOrdering genord (&robdd);
+		list <pair <bool, ElementSubset *> > robdd_log = robdd.get_log ();
+		unsigned int * perm = genord.reorder ();
+		robdd.change_ordering (perm);
+
+		ElementSubset empty_subset ("", &elm_set);
+		ElementSubset a_subset ("", &elm_set);
+		a_subset.add_element (0);
+		ElementSubset b_subset ("", &elm_set);
+		b_subset.add_element (1);
+		ElementSubset c_subset ("", &elm_set);
+		c_subset.add_element (2);
+		ElementSubset ab_subset ("", &elm_set);
+		ab_subset.add_element (0);
+		ab_subset.add_element (1);
+		ElementSubset ac_subset ("", &elm_set);
+		ac_subset.add_element (0);
+		ac_subset.add_element (2);
+		ElementSubset bc_subset ("", &elm_set);
+		bc_subset.add_element (1);
+		bc_subset.add_element (2);
+		ElementSubset abc_subset ("", &elm_set);
+		abc_subset.add_element (0);
+		abc_subset.add_element (1);
+		abc_subset.add_element (2);
+
+		if (robdd.contains (&empty_subset) &&
+			robdd.contains (&a_subset)     &&
+			robdd.contains (&b_subset)     &&
+			!robdd.contains (&c_subset)    &&
+			robdd.contains (&ab_subset)    &&
+			robdd.contains (&bc_subset)    &&
+			!robdd.contains (&ac_subset)   &&
+			robdd.contains (&abc_subset)
+			)
+			return true;
+		else
+			return false;
+	}
+
+
 	/*not a test*/
 	bool print_r () 
 	{

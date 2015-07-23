@@ -3,7 +3,6 @@
 
 ROBDD::ROBDD (ElementSet * set)
 {
-	cout << "Criei a ROBDD: " << this << endl;
 	nof_updates  = 0;
 	nof_consults = 0;
 	time_consulting = 0;
@@ -25,7 +24,6 @@ ROBDD::ROBDD (ElementSet * set)
 
 ROBDD::ROBDD (ElementSet * set, unsigned int * ord)
 {
-	cout << "Criei a ROBDD: " << this << endl;
 	nof_updates  = 0;
 	nof_consults = 0;
 	time_consulting = 0;
@@ -159,7 +157,6 @@ void ROBDD::unmark_all_vertex (Vertex * v)
 
 ROBDD::~ROBDD ()
 {
-	cout << "Deletei a ROBDD: " << this << endl;
 	delete_subtree (&root, &cardinality);
 	if (ordering != NULL)
 		free (ordering);
@@ -216,19 +213,10 @@ void ROBDD::fill_vertice (Vertex ** vertice, int * last_index, Vertex * v)
 
 void ROBDD::change_ordering (unsigned int * ord)
 {
-	list <pair <bool, ElementSubset *> > robdd_log = this->get_log ();
+	list <pair <bool, ElementSubset *> > robdd_log (this->get_log ());
 
 	delete_subtree (&root, &cardinality);
-	if (ordering != NULL)
-		free (ordering);
-	if (log_of_intervals != NULL)
-	{
-		for (list <pair <bool, ElementSubset *> >::iterator it = log_of_intervals->begin (); 
-			it != log_of_intervals->end (); it++)
-			delete it->second;
-		delete log_of_intervals;
-		log_of_intervals = NULL;
-	}
+	delete log_of_intervals;
 
 	unsigned int n = elm_set->get_set_cardinality ();
 	log_of_intervals = new list <pair <bool, ElementSubset *> >();
@@ -240,7 +228,10 @@ void ROBDD::change_ordering (unsigned int * ord)
 
 	for (list <pair <bool, ElementSubset *> >::iterator it = robdd_log.begin (); 
 		it != robdd_log.end (); it++)
+	{
+		cout << "adicionando o intervalo: " << it->second->print_subset () << endl;
 		this->add_interval (it->second, it->first);
+	}
 }
 
 

@@ -447,6 +447,9 @@ int main(void) {
 	cout << "ROBDDTest::the_robdd_maintains_a_log_of_restrictions";
 	cout.flush ();
 	printResult (ROBDDTest::the_robdd_maintains_a_log_of_restrictions ());
+	cout << "ROBDDTest::it_should_represent_the_same_space_after_reordering";
+	cout.flush ();
+	printResult (ROBDDTest::it_should_represent_the_same_space_after_reordering ());
 	cout << endl;
 
 
@@ -490,10 +493,10 @@ int main(void) {
 	cout << "UCSROBDDTest::it_should_always_give_the_correct_answer";
 	cout.flush ();
 	printResult (UCSROBDDTest::it_should_always_give_the_correct_answer ());
-	cout << endl;
+	cout << endl;*/
 
 	// Testing Class "UCSROBDD3"
-	cout << "UCSROBDD3Test::it_should_find_a_global_minimum";
+/*	cout << "UCSROBDD3Test::it_should_find_a_global_minimum";
 	cout.flush ();
 	printResult (UCSROBDDTest::it_should_find_a_global_minimum ());
 	cout << "UCSROBDD3Test::it_should_converge_for_large_hamming_sets";
@@ -505,13 +508,13 @@ int main(void) {
 	cout << "UCSROBDD3Test::it_should_always_give_the_correct_answer";
 	cout.flush ();
 	printResult (UCSROBDD3Test::it_should_always_give_the_correct_answer ());
-	cout << endl;*/
-
+	cout << endl;
+*/
 	// Testing Class "GeneticOrdering"
-	cout << "GeneticOrderingTest::it_should_create_an_initial_population";
+	/*cout << "GeneticOrderingTest::it_should_create_an_initial_population";
 	cout.flush ();
 	printResult (GeneticOrderingTest::it_should_create_an_initial_population ());
-	/*cout << "GeneticOrderingTest::it_should_give_a_better_ordering_robdd";
+	cout << "GeneticOrderingTest::it_should_give_a_better_ordering_robdd";
 	cout.flush ();
 	printResult (GeneticOrderingTest::it_should_give_a_better_ordering_robdd ());
 	cout << endl;*/
