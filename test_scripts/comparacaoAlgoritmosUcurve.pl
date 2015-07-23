@@ -36,6 +36,7 @@ my $n;
 #
 
 my @solvers = (#"UCSO", "UCSRT",
+                "UCSR7",
                  "UCSR6", "UCSR5", 
                  # "UCSR4", "UCS", 
                  "UBB", "ES");

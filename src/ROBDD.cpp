@@ -600,7 +600,7 @@ ElementSubset * ROBDD::get_random_zero_evaluated_element ()
 			next_v = v->get_child ((int) rand() % 2);
 
 		if (next_v == v->get_child (true))
-			subset->add_element (v->get_index () - 1);
+			subset->add_element (ordering[v->get_index () - 1]);
 		v = next_v;
 	}
 	return subset;

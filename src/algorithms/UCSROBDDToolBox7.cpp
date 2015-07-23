@@ -15,7 +15,7 @@ namespace UCSROBDDToolBox7
 		{
 			GeneticOrdering * genord = new GeneticOrdering (R);
 			unsigned int * new_ord = genord->reorder ();
-			//R->change_ordering (new_ord);
+			R->change_ordering (new_ord);
 			free (new_ord);
 		}
 		cout << "adding interval\n";
@@ -32,7 +32,7 @@ namespace UCSROBDDToolBox7
 		{
 			GeneticOrdering * genord = new GeneticOrdering (R);
 			unsigned int * new_ord = genord->reorder ();
-			//R->change_ordering (new_ord);
+			R->change_ordering (new_ord);
 			free (new_ord);
 		}
 		cout << "adding interval\n";
