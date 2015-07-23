@@ -160,6 +160,7 @@ namespace ROBDDTest {
 
 	bool it_should_represent_the_same_space_after_reordering ()
 	{
+		bool answ;
 		ElementSet elm_set ("", 3, 2);	
 		ROBDD robdd (&elm_set);
 		ElementSubset subset1 ("", &elm_set);
@@ -172,6 +173,7 @@ namespace ROBDDTest {
 		list <pair <bool, ElementSubset *> > robdd_log = robdd.get_log ();
 		unsigned int * perm = genord.reorder ();
 		robdd.change_ordering (perm);
+		free (perm);
 
 		ElementSubset empty_subset ("", &elm_set);
 		ElementSubset a_subset ("", &elm_set);
@@ -203,9 +205,12 @@ namespace ROBDDTest {
 			!robdd.contains (&ac_subset)   &&
 			robdd.contains (&abc_subset)
 			)
-			return true;
+			answ = true;
 		else
-			return false;
+			answ = false;
+
+		cout << "Terminei o teste. Hora de botar pra quebrar!\n";
+		return answ;
 	}
 
 

@@ -216,22 +216,23 @@ void ROBDD::change_ordering (unsigned int * ord)
 	list <pair <bool, ElementSubset *> > robdd_log (this->get_log ());
 
 	delete_subtree (&root, &cardinality);
-	delete log_of_intervals;
+	list <pair <bool, ElementSubset *> > * old_log = log_of_intervals;
 
 	unsigned int n = elm_set->get_set_cardinality ();
 	log_of_intervals = new list <pair <bool, ElementSubset *> >();
 	root = new Vertex (false, n + 1);
 	cardinality = 1;
-	ordering = (unsigned int *) malloc (sizeof (unsigned int) * n);
 	for (unsigned int i = 0; i < n; i++)
 		ordering[i] = ord[i];
 
 	for (list <pair <bool, ElementSubset *> >::iterator it = robdd_log.begin (); 
 		it != robdd_log.end (); it++)
-	{
-		cout << "adicionando o intervalo: " << it->second->print_subset () << endl;
 		this->add_interval (it->second, it->first);
-	}
+
+	for (list <pair <bool, ElementSubset *> >::iterator it = old_log->begin (); 
+		it != old_log->end (); it++)
+		delete it->second;
+	delete old_log;
 }
 
 
