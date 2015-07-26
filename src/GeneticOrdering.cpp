@@ -14,7 +14,7 @@ GeneticOrdering::GeneticOrdering (ROBDD * robdd)
 	robdd_log = robdd->get_log ();
 	srand (time(0));
 	for (unsigned int i = 0; i < population_size; i++) {
-		srand (i);
+		srand (time (0) / (i + 1));
 		solutions[i] = new OrderingNode (robdd->get_element_set (), &robdd_log);
 		/*cout << "(GO) Instanciei uma solução em: " << &solutions[i] << " que aponta para: " \
 		<< solutions[i] << endl;*/
