@@ -22,6 +22,11 @@ protected:
 	unsigned int nof_consults;
 
 
+	// Stores the number of reorderings the robdd suffered
+	//
+	unsigned int nof_reorderings;
+
+
 	// Time spent updating the ROBDD
 	//
 	unsigned int time_updating;
@@ -29,6 +34,11 @@ protected:
 	// Time spent consulting the ROBDD
 	//
 	unsigned int time_consulting;
+
+
+	// Time spent reordering the ROBDD
+	//
+	unsigned int time_reordering;
 
 
 	// Time spent reducing the ROBDD
@@ -180,6 +190,21 @@ public:
 	ElementSubset * get_random_zero_evaluated_element ();
 
 
+	// Returns the log list
+	//
+	list< pair<bool, ElementSubset *> > get_log ();
+
+
+	// Returns the ElementSet used to build the ROBDD
+	//
+	ElementSet * get_element_set ();
+
+
+	// Returns the number of vertice of the ROBDD
+	//
+	unsigned int get_cardinality ();
+
+
 	// Returns nof_consults
 	//
 	unsigned int get_nof_consults ();
@@ -188,6 +213,11 @@ public:
 	// Returns nof_updates
 	//
 	unsigned int get_nof_updates ();
+
+
+	// Returns nof_reorderings
+	//
+	unsigned int get_nof_reorderings ();
 
 
 	// Returns time elapsed updating the robdd
@@ -202,19 +232,12 @@ public:
 
 	// Returns time elapsed consulting the robdd
 	//
-	int get_time_reducing ();	
+	int get_time_reducing ();
 
-	// Returns the log list
-	//
-	list< pair<bool, ElementSubset *> > get_log ();
 
-	// Returns the ElementSet used to build the ROBDD
+	// Returns time elapsed consulting the robdd
 	//
-	ElementSet * get_element_set ();
-
-	// Returns the number of vertice of the ROBDD
-	//
-	unsigned int get_cardinality ();
+	int get_time_reordering ();
 };
 
 #endif /* ROBDD_H_ */

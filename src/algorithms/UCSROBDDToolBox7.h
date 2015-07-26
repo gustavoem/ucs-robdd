@@ -21,14 +21,6 @@ namespace UCSROBDDToolBox7
 	
 	typedef struct MyNode Node;
 
-	// Stores the number of reorder operations applied to the restrictions
-	//
-	extern unsigned int number_of_restrictions_reorders;
-
-	// Stores the elapsed time (in microseconds) reodering restrictions
-	//
-	extern int elapsed_time_reordering_restrictions;
-
 	// Receives a subset A, a collection of restrictions and add A into the latter.
 	//
 	void update_lower_restriction(ROBDD *, ElementSubset *);

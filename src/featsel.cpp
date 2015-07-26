@@ -219,7 +219,7 @@ int main(int argc, char * argv[])
 				 (algorithm.compare ("ucsr4") == 0) ||
 				 (algorithm.compare ("ucsr5") == 0) ||
 				 (algorithm.compare ("ucsr6") == 0) ||
-				 (algorithm.compare ("ucsr7")))
+				 (algorithm.compare ("ucsr7") == 0))
 			{
 				cout << endl << "Elapsed time of the minima exhausting (in microseconds): "
 					 << solver->get_elapsed_time_of_all_calls_of_the_minima_exhausting () << endl;
@@ -241,6 +241,9 @@ int main(int argc, char * argv[])
 					 << solver->get_elapsed_time_reducing_restrictions () << endl;
 				cout << endl << "Elapsed time consulting restrictions (in microseconds): "
 					 << solver->get_elapsed_time_consulting_restrictions () << endl;
+				cout << endl << "Elapsed time reordering restrictions (in microseconds): "
+					 << solver->get_elapsed_time_reordering_restrictions () << endl;
+
 			}
 
 			if (algorithm.compare ("pfs") == 0)

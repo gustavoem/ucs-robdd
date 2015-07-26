@@ -213,11 +213,14 @@ void ROBDD::fill_vertice (Vertex ** vertice, int * last_index, Vertex * v)
 
 void ROBDD::change_ordering (unsigned int * ord)
 {
-	list <pair <bool, ElementSubset *> > robdd_log (this->get_log ());
+	nof_reorderings++;
+	timeval start, end;
+	gettimeofday (& start, NULL);
 
+
+	list <pair <bool, ElementSubset *> > robdd_log (this->get_log ());
 	delete_subtree (&root, &cardinality);
 	list <pair <bool, ElementSubset *> > * old_log = log_of_intervals;
-
 	unsigned int n = elm_set->get_set_cardinality ();
 	log_of_intervals = new list <pair <bool, ElementSubset *> >();
 	root = new Vertex (false, n + 1);
@@ -233,6 +236,9 @@ void ROBDD::change_ordering (unsigned int * ord)
 		it != old_log->end (); it++)
 		delete it->second;
 	delete old_log;
+
+	gettimeofday (& end, NULL);
+	time_reordering += (((end.tv_sec - start.tv_sec) * 1000000) + (end.tv_usec - start.tv_usec));
 }
 
 
@@ -607,6 +613,24 @@ ElementSubset * ROBDD::get_random_zero_evaluated_element ()
 }
 
 
+list< pair<bool, ElementSubset *> > ROBDD::get_log ()
+{
+	return *log_of_intervals;
+}
+
+
+ElementSet * ROBDD::get_element_set ()
+{
+	return elm_set;
+}
+
+
+unsigned int ROBDD::get_cardinality ()
+{
+	return cardinality;
+}
+
+
 unsigned int ROBDD::get_nof_consults () 
 {
 	return nof_consults;
@@ -617,6 +641,7 @@ unsigned int ROBDD::get_nof_updates ()
 {
 	return nof_updates;
 }
+
 
 int ROBDD::get_time_consulting ()
 {
@@ -636,17 +661,13 @@ int ROBDD::get_time_reducing ()
 }
 
 
-list< pair<bool, ElementSubset *> > ROBDD::get_log ()
+unsigned int ROBDD::get_nof_reorderings ()
 {
-	return *log_of_intervals;
+	return nof_reorderings;
 }
 
-ElementSet * ROBDD::get_element_set ()
-{
-	return elm_set;
-}
 
-unsigned int ROBDD::get_cardinality ()
+int ROBDD::get_time_reordering ()
 {
-	return cardinality;
+	return time_reordering;
 }

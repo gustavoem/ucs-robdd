@@ -9,8 +9,6 @@ GeneticOrdering::GeneticOrdering (ROBDD * robdd)
 	else
 		population_size = solution_size * 3;
 
-	population_size = 1;
-
 	R = robdd;
 	solutions = (OrderingNode **) malloc (population_size * sizeof (OrderingNode *));
 	robdd_log = robdd->get_log ();
@@ -19,11 +17,11 @@ GeneticOrdering::GeneticOrdering (ROBDD * robdd)
 		srand (i);
 		solutions[i] = new OrderingNode (robdd->get_element_set (), &robdd_log);
 		/*cout << "(GO) Instanciei uma solução em: " << &solutions[i] << " que aponta para: " \
-		<< solutions[i] << endl;
+		<< solutions[i] << endl;*/
 		cout << "(GO) Endereço da solução: " << solutions[i] << endl;
 		for (unsigned int x = 0; x < solution_size; x++)
 		 	cout << solutions[i]->get_ordering ()[x] << " ";
-		cout << endl;*/
+		cout << endl;
 	}
 
 	// sort solutions by normalized fitness (?)
@@ -168,8 +166,7 @@ void GeneticOrdering::recalculate_fitness ()
 
 unsigned int * GeneticOrdering::reorder ()
 {
-	cout << "Entrei no reorder\n";
-	cout.flush ();
+	unsigned int reorder_loops = 0;
 	set_best_solution ();
 	unsigned int old_best_size;
 	OrderingNode * best_node = new OrderingNode (R->get_element_set (), &robdd_log);
@@ -182,7 +179,10 @@ unsigned int * GeneticOrdering::reorder ()
 		mutate_solutions ();
 		recalculate_fitness ();
 		set_best_solution ();
+		reorder_loops++;
 	}while (best_solution < old_best_size);
+
+	cout << "Loops no reorder: " << reorder_loops << endl;
 
 	unsigned int * best_order = (unsigned int *) malloc (sizeof (int) * solution_size);
 	for (unsigned int i = 0; i < solution_size; i++)

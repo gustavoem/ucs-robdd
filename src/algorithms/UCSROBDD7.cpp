@@ -32,24 +32,17 @@ void UCSROBDD7::get_minima_list (unsigned int max_size_of_minima_list)
 	do
 	{
 		X = restrictions->get_random_zero_evaluated_element ();
-		cout << "Loop principal UCSR7\n";
+
 		if (X != NULL)
 		{
 			gettimeofday (& begin_exhausting, NULL);
 			M = UCSROBDDToolBox7::create_node (X);
 			M->vertex->cost = cost_function->cost (M->vertex);
 			
-			cout << "Endereço ROBDD: " << restrictions << endl;
-			cout << "ROBDD antes: " << endl;
-			restrictions->print ();
-			
 			UCSROBDDToolBox7::DFS
 				(M, L, restrictions, cost_function);
 			number_of_calls_of_minimum_exhausting++;
 			
-			cout << "ROBDD depois: " << endl;
-			restrictions->print ();
-
 			gettimeofday (& end_exhausting, NULL);
 			elapsed_time_of_all_calls_of_the_minima_exhausting +=
 			diff_us (end_exhausting, begin_exhausting);		
@@ -79,11 +72,11 @@ void UCSROBDD7::get_minima_list (unsigned int max_size_of_minima_list)
 	number_of_visited_subsets =  cost_function->get_number_of_calls_of_cost_function ();
 	number_of_restrictions_consults = restrictions->get_nof_consults ();
 	number_of_restrictions_updates = restrictions->get_nof_updates ();
-	//number_of_restrictions_reorderings = UCSROBDDToolBox7::n_of_restriction_reorders ();
+	number_of_restrictions_reorderings = restrictions->get_nof_reorderings ();
 	elapsed_time_consulting_restrictions = restrictions->get_time_consulting ();
 	elapsed_time_updating_restrictions = restrictions->get_time_updating ();
 	elapsed_time_reducing_restrictions = restrictions->get_time_reducing ();
-	//elapsed_time_reordering_restrictions = UCSROBDDToolBox7::time_reordering_restrictions ();
+	elapsed_time_reordering_restrictions = restrictions->get_time_reordering ();
 
 	gettimeofday (& end_program, NULL);
 	elapsed_time_of_the_algorithm = diff_us (end_program, begin_program);

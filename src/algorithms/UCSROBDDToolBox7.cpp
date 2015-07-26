@@ -18,10 +18,7 @@ namespace UCSROBDDToolBox7
 			R->change_ordering (new_ord);
 			free (new_ord);
 		}
-		cout << "adding interval\n";
-		cout << R->contains (A) << endl;
 		R->add_interval (A, false);
-		cout << R->contains (A) << endl;
 	}
 
 
@@ -35,18 +32,12 @@ namespace UCSROBDDToolBox7
 			R->change_ordering (new_ord);
 			free (new_ord);
 		}
-		cout << "adding interval\n";
-		cout << R->contains (A) << endl;
 		R->add_interval (A, true);
-		cout << R->contains (A) << endl;
 	}
 
 
 	void DFS (Node * M, Collection * L, ROBDD * R, CostFunction * c)
 	{
-		cout << "Endereço que eu to mudando no toolbox: " << R << endl;
-		cout << "DFS\n";
-		cout << "Tamanho do log: " << R->get_log ().size () << endl;
 		unsigned int direction = 0;
 		Node * Y, * X = NULL;
 		Y = M;
