@@ -53,25 +53,49 @@ void OrderingNode::shuffle_individual ()
 
 void OrderingNode::recombine_to (unsigned int * perm2)
 {
+	cout << "Vou recombinar: " << endl;
+	for (unsigned int i = 0;  i < size; i++)
+		cout << permutation[i] << " " << perm2[i] << endl;
+
 	bool * indexed = (bool *) malloc (size * sizeof (bool));
 	for (unsigned int i = 0; i < size; i++)
 		indexed[i] = 0;
+
+	unsigned int * perm1 = 
+		(unsigned int *) malloc (sizeof (unsigned int) * size);
+	for (unsigned int i = 0; i < size; i++)
+		perm1[i] = permutation[i];
+
 	unsigned int p1_i = 0;
 	unsigned int p2_i = 0;
-	unsigned int candidate = permutation[0];
+	unsigned int candidate = permutation[p1_i++];
+
 	for (unsigned int i = 0; i < size; i++)
 	{
 		while (indexed[candidate])
 		{
-			if (i % 2)
-				candidate = permutation[p1_i++];
-			else
+			cout << "p1_i: " << p1_i << " | p2_i: " << p2_i << endl;
+			if (i % 2) 
+			{
+				candidate = perm1[p1_i++];
+				cout << "pegou p1: " << candidate << endl;
+			}
+			else 
+			{
 				candidate = perm2[p2_i++];
+				cout << "pegou p2: " << candidate << endl;
+			}
 		}
 		indexed[candidate] = 1;
 		permutation[i] = candidate;
 	}
+
+	cout << "resultado: ";
+	for (unsigned int i = 0;  i < size; i++)
+		cout << permutation[i] << " ";
+	cout << "\n";
 	free (indexed);
+	free (perm1);
 }
 
 

@@ -52,9 +52,9 @@ void GeneticOrdering::selection ()
 		random_sorts[i] = ((double) rand () / (RAND_MAX));
 	sort (&random_sorts[0], &random_sorts[population_size]);
 
-	// cout << "\nsorted guys:\n";
-	// for (unsigned int i = 0; i < population_size; i++)
-	// 	cout << random_sorts[i] << " ";
+	cout << "\nsorted guys:\n";
+	for (unsigned int i = 0; i < population_size; i++)
+	 	cout << random_sorts[i] << " ";
 
 	unsigned int k = 0;
 	for (unsigned int i = 0; i < population_size; i++) {
@@ -63,12 +63,12 @@ void GeneticOrdering::selection ()
 		selected_perm[i] = solutions[k]->get_ordering ();
 	}
 
-	// cout << "elementos selecionados: " << endl;
-	// for (unsigned int i = 0; i < population_size; i++) {
-	// 	for (unsigned int j = 0; j < solution_size; j++)
-	// 		cout << selected_perm[i][j] << " ";
-	// 	cout << endl;
-	// }
+	cout << "elementos selecionados: " << endl;
+	for (unsigned int i = 0; i < population_size; i++) {
+		for (unsigned int j = 0; j < solution_size; j++)
+			cout << selected_perm[i][j] << " ";
+		cout << endl;
+	}
 
 	for (unsigned int i = 0; i < population_size; i++)
 		solutions[i]->recombine_to (selected_perm[i]);
@@ -180,7 +180,7 @@ unsigned int * GeneticOrdering::reorder ()
 		recalculate_fitness ();
 		set_best_solution ();
 		reorder_loops++;
-	}while (best_solution < old_best_size);
+	} while (best_solution < old_best_size);
 
 	cout << "Loops no reorder: " << reorder_loops << endl;
 

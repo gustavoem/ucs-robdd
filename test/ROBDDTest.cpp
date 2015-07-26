@@ -197,10 +197,6 @@ namespace ROBDDTest {
 		abc_subset.add_element (1);
 		abc_subset.add_element (2);
 
-		perm = genord.reorder ();
-		robdd.change_ordering (perm);
-		free (perm);
-
 		if (robdd.contains (&empty_subset) &&
 			robdd.contains (&a_subset)     &&
 			robdd.contains (&b_subset)     &&
