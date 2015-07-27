@@ -18,10 +18,10 @@ GeneticOrdering::GeneticOrdering (ROBDD * robdd)
 		solutions[i] = new OrderingNode (robdd->get_element_set (), &robdd_log);
 		/*cout << "(GO) Instanciei uma solução em: " << &solutions[i] << " que aponta para: " \
 		<< solutions[i] << endl;*/
-		cout << "(GO) Endereço da solução: " << solutions[i] << endl;
-		for (unsigned int x = 0; x < solution_size; x++)
-		 	cout << solutions[i]->get_ordering ()[x] << " ";
-		cout << endl;
+		// cout << "(GO) Endereço da solução: " << solutions[i] << endl;
+		// for (unsigned int x = 0; x < solution_size; x++)
+		//  	cout << solutions[i]->get_ordering ()[x] << " ";
+		// cout << endl;
 	}
 
 	// sort solutions by normalized fitness (?)
@@ -52,9 +52,9 @@ void GeneticOrdering::selection ()
 		random_sorts[i] = ((double) rand () / (RAND_MAX));
 	sort (&random_sorts[0], &random_sorts[population_size]);
 
-	cout << "\nsorted guys:\n";
-	for (unsigned int i = 0; i < population_size; i++)
-	 	cout << random_sorts[i] << " ";
+	// cout << "\nsorted guys:\n";
+	// for (unsigned int i = 0; i < population_size; i++)
+	//  	cout << random_sorts[i] << " ";
 
 	unsigned int k = 0;
 	for (unsigned int i = 0; i < population_size; i++) {
@@ -63,12 +63,12 @@ void GeneticOrdering::selection ()
 		selected_perm[i] = solutions[k]->get_ordering ();
 	}
 
-	cout << "elementos selecionados: " << endl;
-	for (unsigned int i = 0; i < population_size; i++) {
-		for (unsigned int j = 0; j < solution_size; j++)
-			cout << selected_perm[i][j] << " ";
-		cout << endl;
-	}
+	// cout << "elementos selecionados: " << endl;
+	// for (unsigned int i = 0; i < population_size; i++) {
+	// 	for (unsigned int j = 0; j < solution_size; j++)
+	// 		cout << selected_perm[i][j] << " ";
+	// 	cout << endl;
+	// }
 
 	for (unsigned int i = 0; i < population_size; i++)
 		solutions[i]->recombine_to (selected_perm[i]);
@@ -168,26 +168,23 @@ unsigned int * GeneticOrdering::reorder ()
 {
 	unsigned int reorder_loops = 0;
 	set_best_solution ();
-	unsigned int old_best_size;
-	OrderingNode * best_node = new OrderingNode (R->get_element_set (), &robdd_log);
+	unsigned int best_seen_size;
+	OrderingNode * best_seen = new OrderingNode (R->get_element_set (), &robdd_log);
 	do
 	{
-		cout.flush ();
-		best_node->copy (&*solutions[best_solution_index]);
-		old_best_size = best_solution;
+		best_seen->copy (&*solutions[best_solution_index]);
+		best_seen_size = best_solution;
 		selection ();
 		mutate_solutions ();
 		recalculate_fitness ();
 		set_best_solution ();
 		reorder_loops++;
-	} while (best_solution < old_best_size);
-
-	cout << "Loops no reorder: " << reorder_loops << endl;
+	} while (best_solution < best_seen_size);
 
 	unsigned int * best_order = (unsigned int *) malloc (sizeof (int) * solution_size);
 	for (unsigned int i = 0; i < solution_size; i++)
-		best_order[i] = best_node->get_ordering ()[i];
+		best_order[i] = best_seen->get_ordering ()[i];
 
-	delete best_node;
+	delete best_seen;
 	return best_order;
 }

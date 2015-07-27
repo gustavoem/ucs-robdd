@@ -4,6 +4,11 @@ UCSROBDD7::UCSROBDD7 ()
 {
 	list_of_visited_subsets = new Collection ();
 	cost_function = NULL;
+
+	ofstream myfile;
+  	myfile.open ("rsizes.txt");
+  	myfile << "# numero de updated da robdd | tamanho da robdd" << endl;
+  	myfile.close ();
 }
 
 

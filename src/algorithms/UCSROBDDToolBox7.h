@@ -5,6 +5,7 @@
 #include "../CostFunction.h"
 #include "../Collection.h"
 #include "../GeneticOrdering.h"
+#include "../global.h"
 
 
 namespace UCSROBDDToolBox7
