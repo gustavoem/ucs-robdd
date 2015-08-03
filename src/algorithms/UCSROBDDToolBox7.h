@@ -22,6 +22,12 @@ namespace UCSROBDDToolBox7
 	
 	typedef struct MyNode Node;
 
+
+	// Intended number of times the ROBDD should suffer a reordering
+	//
+	extern unsigned int reorderings;
+
+
 	// Receives a subset A, a collection of restrictions and add A into the latter.
 	//
 	void update_lower_restriction(ROBDD *, ElementSubset *);
@@ -37,7 +43,7 @@ namespace UCSROBDDToolBox7
 
 	// DFS subroutine
 	//
-	void DFS (Node *, Collection *, ROBDD *, CostFunction *);
+	void DFS (Node *, Collection *, ROBDD *, CostFunction *, unsigned int);
 
 
 	// Visits a node X from node Y

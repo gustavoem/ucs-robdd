@@ -1,7 +1,10 @@
 #include "UCSROBDD7.h"
 
-UCSROBDD7::UCSROBDD7 ()
+UCSROBDD7::UCSROBDD7 (unsigned int nof_reorderings)
 {
+	intended_nof_reorderings = nof_reorderings;
+	UCSROBDDToolBox7::reorderings = intended_nof_reorderings;
+
 	list_of_visited_subsets = new Collection ();
 	cost_function = NULL;
 
@@ -45,7 +48,8 @@ void UCSROBDD7::get_minima_list (unsigned int max_size_of_minima_list)
 			M->vertex->cost = cost_function->cost (M->vertex);
 			
 			UCSROBDDToolBox7::DFS
-				(M, L, restrictions, cost_function);
+				(M, L, restrictions, cost_function,
+					intended_nof_reorderings);
 			number_of_calls_of_minimum_exhausting++;
 			
 			gettimeofday (& end_exhausting, NULL);

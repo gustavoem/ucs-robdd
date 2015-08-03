@@ -52,7 +52,8 @@
 //
 int parse_parameters
 	(int, char **, string *, unsigned int *, string *,
-	 unsigned int *, unsigned int *, bool *, string *, float *, unsigned int *);
+	 unsigned int *, unsigned int *, bool *, string *, float *, unsigned int *,
+	 unsigned int *);
 
 
 // The main function.
@@ -63,6 +64,7 @@ int main(int argc, char * argv[])
 	unsigned int n = 3;
 	unsigned int range = 1000;
 	unsigned int max_number_of_calls_of_cost_function = 0; // if == 0, then there is no limit
+	unsigned int number_of_reorderings = 0;
 	int i;
 	CostFunction * cost_function;
 	Solver * solver;
@@ -78,7 +80,7 @@ int main(int argc, char * argv[])
 	// parses the parameters
 	i = parse_parameters(argc, argv, &file_name, &max_number_of_minima, &a_cost_function,
 						 &n, &range, &store_visited_subsets, &algorithm, &threshold,
-						 &max_number_of_calls_of_cost_function);
+						 &max_number_of_calls_of_cost_function, &number_of_reorderings);
 
 	if (i != EXIT_SUCCESS)    // help or error in parameters
 		return EXIT_FAILURE;
@@ -119,7 +121,7 @@ int main(int argc, char * argv[])
 		else if (algorithm.compare ("ucsr6") == 0)
 			solver = new UCSROBDD6 ();
 		else if (algorithm.compare ("ucsr7") == 0)
-			solver = new UCSROBDD7 ();
+			solver = new UCSROBDD7 (number_of_reorderings);
 
 
 		else if (algorithm.compare ("es") == 0)
@@ -276,7 +278,8 @@ int parse_parameters (int argc, char ** argv, string * file_name,
 					  unsigned int * m, string * c, unsigned int * n,
 					  unsigned int * range, bool * keep_subsets,
 					  string * a, float * threshold,
-					  unsigned int * max_number_of_calls_of_cost_function)
+					  unsigned int * max_number_of_calls_of_cost_function,
+					  unsigned int * number_of_reorderings)
 {
 	int i;
 	bool error = false;
@@ -438,6 +441,23 @@ under certain conditions; see 'LICENSE.TXT' for details.");
 		else if ( (strcmp (argv[i],"-m") == 0) && ((i+1) >= argc) )
 		{
 			cout << "\nError: parameter '-m' must have a value." << endl;
+			error = true;
+		}
+		// -d
+		//
+		else if ( (strcmp (argv[i],"-d") == 0) && ((i+1) < argc) )
+		{
+			if (atoi (argv[++i]) > 0)
+				*number_of_reorderings = atoi (argv[i]);
+			else
+			{
+				cout << "\nError: maximum number of minima should be a positive integer!" << endl;
+				error = true;
+			}
+		}
+		else if ( (strcmp (argv[i],"-d") == 0) && ((i+1) >= argc) )
+		{
+			cout << "\nError: parameter '-d' must have a value." << endl;
 			error = true;
 		}
 		// -s

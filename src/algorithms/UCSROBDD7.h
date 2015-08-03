@@ -14,7 +14,11 @@ private:
 	// The collection of restrictions
 	//
 	ROBDD * restrictions;
-	//ROBDD * lower_restriction, * upper_restriction;
+
+
+	// Used to set the number of reorderings
+	//
+	unsigned int intended_nof_reorderings;
 
 
 
@@ -22,7 +26,7 @@ public:
 
 	// Default constructor.
 	//
-	UCSROBDD7 ();
+	UCSROBDD7 (unsigned int);
 
 
 	// Default destructor.

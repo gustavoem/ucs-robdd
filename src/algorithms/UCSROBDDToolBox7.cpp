@@ -4,6 +4,8 @@
 namespace UCSROBDDToolBox7
 {
 
+	unsigned int reorderings;
+
 	void update_lower_restriction (ROBDD * R, ElementSubset * A)
 	{
 		/*f(x): 2^n ---> average number of restrictions updates
@@ -12,10 +14,12 @@ namespace UCSROBDDToolBox7
 		  we will reorder in every 2^n / 100 steps*/
 		ofstream myfile;
   		myfile.open ("rsizes.txt", std::ios_base::app);
-		int reorder_param = ceil (pow (2, R->get_element_set  ()->get_set_cardinality ()) / 2.0);
-		if ((R->get_nof_updates () % reorder_param) == 0)
+		int reorder_param = ceil (pow (2, R->get_element_set  ()->get_set_cardinality ()) / (reorderings + 1));
+		if (((R->get_nof_updates () % reorder_param) == 0) && reorderings > 0)
 		{
 			GeneticOrdering * genord = new GeneticOrdering (R);
+			cout << "\nREORDERING!";
+			cout.flush ();
 			unsigned int * new_ord = genord->reorder ();
 			R->change_ordering (new_ord);
 			myfile << R->get_nof_updates () << " " << R->get_cardinality () << endl;
@@ -30,9 +34,9 @@ namespace UCSROBDDToolBox7
 	void update_upper_restriction (ROBDD * R, ElementSubset * A)
 	{
 		ofstream myfile;
-		myfile.open ("rsizes.txt", std::ios_base::app);
-		int reorder_param = ceil (pow (2, R->get_element_set  ()->get_set_cardinality ()) / 2.0);
-		if ((R->get_nof_updates () % reorder_param) == 0)
+  		myfile.open ("rsizes.txt", std::ios_base::app);
+		int reorder_param = ceil (pow (2, R->get_element_set  ()->get_set_cardinality ()) / (reorderings + 1));
+		if (((R->get_nof_updates () % reorder_param) == 0) && reorderings > 0)
 		{
 			GeneticOrdering * genord = new GeneticOrdering (R);
 			unsigned int * new_ord = genord->reorder ();
@@ -46,7 +50,7 @@ namespace UCSROBDDToolBox7
 	}
 
 
-	void DFS (Node * M, Collection * L, ROBDD * R, CostFunction * c)
+	void DFS (Node * M, Collection * L, ROBDD * R, CostFunction * c, unsigned int nof_reord)
 	{
 		unsigned int direction = 0;
 		Node * Y, * X = NULL;
