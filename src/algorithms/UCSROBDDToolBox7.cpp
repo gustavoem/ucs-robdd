@@ -18,7 +18,6 @@ namespace UCSROBDDToolBox7
 		if (((R->get_nof_updates () % reorder_param) == 0) && reorderings > 0)
 		{
 			GeneticOrdering * genord = new GeneticOrdering (R);
-			cout << "\nREORDERING!";
 			cout.flush ();
 			unsigned int * new_ord = genord->reorder ();
 			R->change_ordering (new_ord);

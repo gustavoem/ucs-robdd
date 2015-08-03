@@ -86,6 +86,7 @@ void UCSROBDD7::get_minima_list (unsigned int max_size_of_minima_list)
 	elapsed_time_updating_restrictions = restrictions->get_time_updating ();
 	elapsed_time_reducing_restrictions = restrictions->get_time_reducing ();
 	elapsed_time_reordering_restrictions = restrictions->get_time_reordering ();
+	max_restriction_size = restrictions->get_max_size ();
 
 	gettimeofday (& end_program, NULL);
 	elapsed_time_of_the_algorithm = diff_us (end_program, begin_program);

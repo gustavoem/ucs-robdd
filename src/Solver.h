@@ -79,6 +79,10 @@ protected:
 	//
     int elapsed_time_reordering_restrictions;
 
+
+    // Stores the maximum size of the restrictions
+    //
+    int max_restriction_size;
 	
 	// Stores the maximum size that a forest A achieves during all
 	// iterations of the PFS algorithm and similar ones.
@@ -256,6 +260,11 @@ public:
 	// Returns the maximum size of the graph data structure.
 	//
 	unsigned int get_max_size_of_the_graph ();
+
+
+	// Returns the maximum sizeo of the restriction
+	//
+	unsigned int get_max_restriction_size ();
 
 
 	// Returns a string with all the subsets of the list of minima.

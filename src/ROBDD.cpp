@@ -13,6 +13,7 @@ ROBDD::ROBDD (ElementSet * set)
 	unsigned int n = elm_set->get_set_cardinality ();
 	root = new Vertex (false, n + 1);
 	cardinality = 1;
+	max_size = 1;
 
 	// initial ordering is 0, 1, ..., n-1
 	ordering = (unsigned int *) malloc (sizeof (unsigned int) * n);
@@ -35,7 +36,8 @@ ROBDD::ROBDD (ElementSet * set, unsigned int * ord)
 	unsigned int n = elm_set->get_set_cardinality ();
 	root = new Vertex (false, n + 1);
 	cardinality = 1;
-	
+	max_size = 1;
+
 	ordering = (unsigned int *) malloc (sizeof (unsigned int) * n);
 	for (unsigned int i = 0; i < n; i++)
 		ordering[i] = ord[i];
@@ -113,6 +115,7 @@ ROBDD::ROBDD (ElementSet * set, ElementSubset * subset)
 	root = new Vertex (root_elm, 1);
 	cardinality = 3;
 	build (root, 1, set_card, subset, zero, one);
+	max_size = cardinality;
 
 	log_of_intervals = new list <pair <bool, ElementSubset *> >();
 }
@@ -533,6 +536,9 @@ void ROBDD::add_interval (ElementSubset * subset, bool orientation)
 		delete zero;
 	delete_subtree (&root2, &card2);
 
+	if (cardinality > max_size)
+		max_size = cardinality;
+
 	gettimeofday (& end, NULL);
 	time_updating += (((end.tv_sec - start.tv_sec) * 1000000) + (end.tv_usec - start.tv_usec));
 }
@@ -670,4 +676,9 @@ unsigned int ROBDD::get_nof_reorderings ()
 int ROBDD::get_time_reordering ()
 {
 	return time_reordering;
+}
+
+unsigned int ROBDD::get_max_size ()
+{
+	return max_size;
 }

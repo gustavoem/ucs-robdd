@@ -234,6 +234,12 @@ unsigned int Solver::get_max_size_of_the_forest_B ()
 }
 
 
+unsigned int Solver::get_max_restriction_size ()
+{
+	return max_restriction_size;
+}
+
+
 // "diff" in microseconds
 //
 int Solver::diff_us (timeval t1, timeval t2)

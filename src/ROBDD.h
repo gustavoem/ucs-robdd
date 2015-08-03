@@ -45,6 +45,12 @@ protected:
 	//
 	unsigned int time_reducing;
 
+
+	// The maximum size an ROBDD had
+	//
+	unsigned int max_size;
+
+
 	// The current variable ordering
 	//
 	unsigned int * ordering;
@@ -238,6 +244,12 @@ public:
 	// Returns time elapsed consulting the robdd
 	//
 	int get_time_reordering ();
+
+
+	// Returns the maximum size the ROBDD had
+	//
+	unsigned int get_max_size ();
+
 };
 
 #endif /* ROBDD_H_ */
