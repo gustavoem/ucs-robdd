@@ -245,7 +245,7 @@ int main(int argc, char * argv[])
 					 << solver->get_elapsed_time_consulting_restrictions () << endl;
 				cout << endl << "Elapsed time reordering restrictions (in microseconds): "
 					 << solver->get_elapsed_time_reordering_restrictions () << endl;
-				cout << endl << "Maximum size of the ROBDD:" 
+				cout << endl << "Maximum size of the ROBDD: " 
 					 << solver->get_max_restriction_size () << endl;
 
 			}

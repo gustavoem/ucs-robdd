@@ -170,6 +170,8 @@ unsigned int * GeneticOrdering::reorder ()
 	set_best_solution ();
 	unsigned int best_seen_size;
 	OrderingNode * best_seen = new OrderingNode (R->get_element_set (), &robdd_log);
+
+
 	do
 	{
 		best_seen->copy (&*solutions[best_solution_index]);
@@ -179,8 +181,9 @@ unsigned int * GeneticOrdering::reorder ()
 		recalculate_fitness ();
 		set_best_solution ();
 		reorder_loops++;
-	} while (best_solution < best_seen_size);
 
+	} while (best_solution < best_seen_size);
+ 
 	unsigned int * best_order = (unsigned int *) malloc (sizeof (int) * solution_size);
 	for (unsigned int i = 0; i < solution_size; i++)
 		best_order[i] = best_seen->get_ordering ()[i];

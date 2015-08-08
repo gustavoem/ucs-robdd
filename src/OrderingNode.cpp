@@ -28,6 +28,7 @@ void OrderingNode::recalculate_fitness ()
 	ElementSet * elm_set = garobdd->get_element_set ();
 	GAROBDD * old_garobdd = garobdd;
 	garobdd = new GAROBDD (elm_set, l, permutation);
+	robdd_size = garobdd->get_cardinality ();
 	delete old_garobdd;
 }
 

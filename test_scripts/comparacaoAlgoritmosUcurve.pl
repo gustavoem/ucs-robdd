@@ -302,6 +302,8 @@ foreach my $i (@experiments)
   my @average_time_of_solver;
   my @number_of_times_that_has_a_best_solution;
 
+
+
   for (my $k = 0; $k < $number_of_solvers; $k++)
     { 
       $average_calls_of_cost_function[$k] = 0;
@@ -468,6 +470,9 @@ foreach my $i (@experiments)
   my @average_calls_DFS;                
   my @average_graph_size;
   my @average_calls_minimal_maximal;  # equivalent to the average number of iterations of the main algorithm
+  my $average_restriction_max0;
+  my $average_restriction_max1;
+  my $average_restriction_max100;
 
   # PFS algorithm only
   #
@@ -482,6 +487,10 @@ foreach my $i (@experiments)
       $average_restriction_reduce_time[$k] = 0;
       $average_restriction_update[$k] = 0;
       $average_restriction_consult[$k] = 0;
+
+      $average_restriction_max0 = 0;
+      $average_restriction_max1 = 0;
+      $average_restriction_max100 = 0;
 
       $average_calls_of_cost_function[$k] = 0;
       $average_time_of_cost_function[$k] = 0;
@@ -543,7 +552,7 @@ foreach my $i (@experiments)
 		  $average_time_of_cost_function[$k] += $1;
 		}
 	      elsif ($_ =~ /^Number\s+of\s+calls\s+of\s+the\s+minima\s+exhausting\:\s+(\d+)/)
-		{
+		{   
 		  $average_calls_DFS[$k] += $1;
 		}
 	      elsif ($_ =~ /during\s+the\s+minima\s+exhausting\:\s+(\d+)/)
@@ -585,9 +594,23 @@ foreach my $i (@experiments)
        elsif ($_ =~ /^Consults\s+to\s+restrictions\:\s+(\S+)/)
     {
       $average_restriction_consult[$k] += $1;
-    } 
-	  }
-	  close(ARQ);
+    }
+      # Toda vez que rodarmos o ucsr7 temos que rodá-lo de novo testando reordenações na ROBDD
+    elsif ($_ =~ /^Maximum\s+size\s+of\s+the\s+ROBDD\:\s+(\S+)/ and $current_solver eq "ucsr7")
+    {
+      print "\n" . $current_solver . ": " . $1;
+      system ("./bin/featsel $window_size -a " . $current_solver . " -c $funcao -d 1 -f input/" . $arquivo[$j-1]  . $argument_t2 . " > result.log");
+      open (ARQ2, "result.log");
+      print "resultado para 1";
+      while (<ARQ2>)
+      {
+        print $_;
+      }
+    }
+    }
+    close(ARQ);
+
+
 
 	  if ($is_heuristic_mode == 2)
 	    {
