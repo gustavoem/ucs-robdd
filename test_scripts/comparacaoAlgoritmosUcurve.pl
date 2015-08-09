@@ -165,6 +165,8 @@ print OUT "<TD><CENTER>&nbsp;</CENTER></TD>
        <TD><CENTER>&nbsp;</CENTER></TD>
        <TD colspan=4><CENTER>Average time reducing restrictions (sec)</CENTER></TD>
        <TD><CENTER>&nbsp;</CENTER></TD>
+       <TD colspan=2><CENTER>Average restriction reduction</CENTER></TD>
+       <TD><CENTER>&nbsp;</CENTER></TD>
        <TD colspan=4><CENTER>Average time consulting restrictions (sec)</CENTER></TD>
        <TD><CENTER>&nbsp;</CENTER></TD>
        <TD colspan=4><CENTER>\# Restrictions updates</CENTER></TD>
@@ -178,13 +180,17 @@ print OUT "<TD><CENTER>&nbsp;</CENTER></TD>
        </TR>\n";
 print OUT "<TR bgcolor='yellow'>\n";
 
+# Size of instance
 print OUT "<TD><CENTER>&nbsp;|S|&nbsp;</CENTER></TD><TD><CENTER>&nbsp;2^|S|&nbsp;</CENTER></TD>";
 
+# Total Time
 print OUT  "<TD><CENTER>&nbsp;</CENTER></TD>";
 for (my $i = 0; $i < $number_of_solvers; $i++)
   {
     printf OUT "<TD><CENTER>&nbsp; %s &nbsp;</CENTER></TD>", $solvers[$i];
   }
+
+# Cost Function Time
 print OUT  "<TD><CENTER>&nbsp;</CENTER></TD>";
 for (my $i = 0; $i < $number_of_solvers; $i++)
   {
@@ -192,38 +198,55 @@ for (my $i = 0; $i < $number_of_solvers; $i++)
   }
 
 #entrei
+# Time updating restrictions
 print OUT  "<TD><CENTER>&nbsp;</CENTER></TD>";
 for (my $i = 0; $i < 4; $i++)
   {
     printf OUT "<TD><CENTER>&nbsp; %s &nbsp;</CENTER></TD>", $solvers[$i];
   }
-  print OUT  "<TD><CENTER>&nbsp;</CENTER></TD>";
-for (my $i = 0; $i < 4; $i++)
-  {
-    printf OUT "<TD><CENTER>&nbsp; %s &nbsp;</CENTER></TD>", $solvers[$i];
-  }
+
+# Time reducing restrictions
 print OUT  "<TD><CENTER>&nbsp;</CENTER></TD>";
 for (my $i = 0; $i < 4; $i++)
   {
     printf OUT "<TD><CENTER>&nbsp; %s &nbsp;</CENTER></TD>", $solvers[$i];
   }
+
+# Restriction reduction
+print OUT  "<TD><CENTER>&nbsp;</CENTER></TD>";
+print OUT "<TD><CENTER>&nbsp; 1 Red.   &nbsp;</CENTER></TD>";
+print OUT "<TD><CENTER>&nbsp; 100 Red. &nbsp;</CENTER></TD>";
+
+# Time consulting
 print OUT  "<TD><CENTER>&nbsp;</CENTER></TD>";
 for (my $i = 0; $i < 4; $i++)
   {
     printf OUT "<TD><CENTER>&nbsp; %s &nbsp;</CENTER></TD>", $solvers[$i];
   }
-  print OUT  "<TD><CENTER>&nbsp;</CENTER></TD>";
+
+# # of restriction Updates
+print OUT  "<TD><CENTER>&nbsp;</CENTER></TD>";
+for (my $i = 0; $i < 4; $i++)
+  {
+    printf OUT "<TD><CENTER>&nbsp; %s &nbsp;</CENTER></TD>", $solvers[$i];
+  }
+
+# # of restriction consults
+print OUT  "<TD><CENTER>&nbsp;</CENTER></TD>";
 for (my $i = 0; $i < 4; $i++)
   {
     printf OUT "<TD><CENTER>&nbsp; %s &nbsp;</CENTER></TD>", $solvers[$i];
   }
 #sai
 
+# # of computed nodes
 print OUT  "<TD><CENTER>&nbsp;</CENTER></TD>";
 for (my $i = 0; $i < $number_of_solvers; $i++)
   {
     printf OUT "<TD><CENTER>&nbsp; %s &nbsp;</CENTER></TD>", $solvers[$i];
   }
+
+# # of best solutions found
 print OUT  "<TD><CENTER>&nbsp;</CENTER></TD>";
 for (my $i = 0; $i < $number_of_solvers; $i++)
   {
