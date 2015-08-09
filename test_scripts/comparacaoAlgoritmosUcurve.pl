@@ -666,7 +666,10 @@ foreach my $i (@experiments)
       
     } # foreach(1..$repeticoes)
   
-    print "\navg0: " . $average_restriction_max0 . " | avgred1: " . $average_restriction_red1 . " | avgred100: " . $average_restriction_red100;
+  $average_restriction_red100 /= $repeticoes;
+  $average_restriction_red1 /= $repeticoes;
+
+  print "\navg0: " . $average_restriction_max0 . " | avgred1: " . $average_restriction_red1 . " | avgred100: " . $average_restriction_red100;
 
   ################################################################################################
   ################################################################################################
