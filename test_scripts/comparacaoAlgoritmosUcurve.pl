@@ -214,8 +214,8 @@ for (my $i = 0; $i < 4; $i++)
 
 # Restriction reduction
 print OUT  "<TD><CENTER>&nbsp;</CENTER></TD>";
-print OUT "<TD><CENTER>&nbsp; 1 Red.   &nbsp;</CENTER></TD>";
-print OUT "<TD><CENTER>&nbsp; 100 Red. &nbsp;</CENTER></TD>";
+print OUT "<TD><CENTER>&nbsp; 1&nbsp;Red.   &nbsp;</CENTER></TD>";
+print OUT "<TD><CENTER>&nbsp; 100&nbsp;Red. &nbsp;</CENTER></TD>";
 
 # Time consulting
 print OUT  "<TD><CENTER>&nbsp;</CENTER></TD>";
@@ -696,7 +696,8 @@ foreach my $i (@experiments)
 
   ################################################################################################
   ################################################################################################
-
+    
+  # Size of the instance
   printf OUT "<TR><TD><CENTER>&nbsp;%2d&nbsp;</CENTER></TD>", $i;
   printf OUT  "<TD><CENTER>&nbsp;%7d&nbsp;</CENTER></TD>", 2 ** $i;
   printf OUT2 "%2d & ", $i;
@@ -742,59 +743,72 @@ foreach my $i (@experiments)
 	}
       
     }
-
+  
+  # Total Time
   printf OUT "<TD><CENTER>&nbsp;</CENTER></TD>\n";
   for (my $k = 0; $k < $number_of_solvers; $k++)
     {
       printf OUT "<TD><CENTER>&nbsp;%4.2f&nbsp;</CENTER></TD>", $average_time_of_solver[$k];
       printf OUT2 "& %4.2f ", $average_time_of_solver[$k];
     }
+  # Cost Function Time
   printf OUT "<TD><CENTER>&nbsp;</CENTER></TD>\n";
-
   for (my $k = 0; $k < $number_of_solvers; $k++)
     {
       printf OUT "<TD><CENTER>&nbsp;%4.2f&nbsp;</CENTER></TD>", $average_time_of_cost_function[$k];
     }
-  printf OUT "<TD><CENTER>&nbsp;</CENTER></TD>\n";
 #entrei aqui
+  # Time updating restrictions
+  printf OUT "<TD><CENTER>&nbsp;</CENTER></TD>\n";
   for (my $k = 0; $k < 4; $k++)
     {
       printf OUT "<TD><CENTER>&nbsp;%4.2f&nbsp;</CENTER></TD>", $average_restriction_update_time[$k];
     }
-  printf OUT "<TD><CENTER>&nbsp;</CENTER></TD>\n";
   
+  # Time reducing restrictions
+  printf OUT "<TD><CENTER>&nbsp;</CENTER></TD>\n";
   for (my $k = 0; $k < 4; $k++)
     {
       printf OUT "<TD><CENTER>&nbsp;%4.2f&nbsp;</CENTER></TD>", $average_restriction_reduce_time[$k];
     }
+  
+  # Restriction Reduction 
   printf OUT "<TD><CENTER>&nbsp;</CENTER></TD>\n";
-
+  printf OUT "<TD><CENTER>&nbsp;%4.2f&nbsp;</CENTER></TD>", $average_restriction_red1;
+  printf OUT "<TD><CENTER>&nbsp;%4.2f&nbsp;</CENTER></TD>", $average_restriction_red100;
+  
+  #Time consulting
+  printf OUT "<TD><CENTER>&nbsp;</CENTER></TD>\n";
   for (my $k = 0; $k < 4; $k++)
     {
       printf OUT "<TD><CENTER>&nbsp;%4.2f&nbsp;</CENTER></TD>", $average_restriction_consult_time[$k];
     }
+  
+  # # of restriction updates
   printf OUT "<TD><CENTER>&nbsp;</CENTER></TD>\n";
-
   for (my $k = 0; $k < 4; $k++)
     {
       printf OUT "<TD><CENTER>&nbsp;%4.2f&nbsp;</CENTER></TD>", $average_restriction_update[$k];
     }
-  printf OUT "<TD><CENTER>&nbsp;</CENTER></TD>\n";
 
+  # # of restriction consults  
+  printf OUT "<TD><CENTER>&nbsp;</CENTER></TD>\n";
   for (my $k = 0; $k < 4; $k++)
     {
       printf OUT "<TD><CENTER>&nbsp;%4.2f&nbsp;</CENTER></TD>", $average_restriction_consult[$k];
     }
-  printf OUT "<TD><CENTER>&nbsp;</CENTER></TD>\n";
-
 #sai aqui
+ 
+  # # of computed nodes
+  printf OUT "<TD><CENTER>&nbsp;</CENTER></TD>\n";
   for (my $k = 0; $k < $number_of_solvers; $k++)
     {
       printf OUT "<TD><CENTER>&nbsp;%5.2f&nbsp;</CENTER></TD>", $average_calls_of_cost_function[$k];
       printf OUT2 "& %5.2f ", $average_calls_of_cost_function[$k];
     }
-  printf OUT "<TD><CENTER>&nbsp;</CENTER></TD>\n";
 
+  # # of best solutions found  
+  printf OUT "<TD><CENTER>&nbsp;</CENTER></TD>\n";
   for (my $k = 0; $k < $number_of_solvers; $k++)
     {
       printf OUT "<TD><CENTER>&nbsp;%d&nbsp;</CENTER></TD>", $number_of_times_that_has_a_best_solution[$k];
