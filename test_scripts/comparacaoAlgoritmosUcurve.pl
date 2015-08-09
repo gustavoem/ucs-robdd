@@ -470,9 +470,10 @@ foreach my $i (@experiments)
   my @average_calls_DFS;                
   my @average_graph_size;
   my @average_calls_minimal_maximal;  # equivalent to the average number of iterations of the main algorithm
+  
   my $average_restriction_max0;
-  my $average_restriction_max1;
-  my $average_restriction_max100;
+  my $average_restriction_red1;
+  my $average_restriction_red100;
 
   # PFS algorithm only
   #
@@ -489,8 +490,8 @@ foreach my $i (@experiments)
       $average_restriction_consult[$k] = 0;
 
       $average_restriction_max0 = 0;
-      $average_restriction_max1 = 0;
-      $average_restriction_max100 = 0;
+      $average_restriction_red1 = 0;
+      $average_restriction_red100 = 0;
 
       $average_calls_of_cost_function[$k] = 0;
       $average_time_of_cost_function[$k] = 0;
@@ -598,53 +599,74 @@ foreach my $i (@experiments)
       # Toda vez que rodarmos o ucsr7 temos que rodá-lo de novo testando reordenações na ROBDD
     elsif ($_ =~ /^Maximum\s+size\s+of\s+the\s+ROBDD\:\s+(\S+)/ and $current_solver eq "ucsr7")
     {
-      print "\n" . $current_solver . ": " . $1;
+      $average_restriction_max0 += $1;
+      
+      # d = 1
       system ("./bin/featsel $window_size -a " . $current_solver . " -c $funcao -d 1 -f input/" . $arquivo[$j-1]  . $argument_t2 . " > result.log");
       open (ARQ2, "result.log");
-      print "resultado para 1";
       while (<ARQ2>)
       {
-        print $_;
+        if ($_ =~ /^Maximum\s+size\s+of\s+the\s+ROBDD\:\s+(\S+)/)
+        {
+          $average_restriction_red1 += $average_restriction_max0 - $1;
+        }
       }
+      close (ARQ2);
+
+      # d = 100
+      system ("./bin/featsel $window_size -a " . $current_solver . " -c $funcao -d 100 -f input/" . $arquivo[$j-1]  . $argument_t2 . " > result.log");
+      open (ARQ2, "result.log");
+      while (<ARQ2>)
+      {
+        if ($_ =~ /^Maximum\s+size\s+of\s+the\s+ROBDD\:\s+(\S+)/)
+        {
+          $average_restriction_red100 += $average_restriction_max0 - $1;
+        }
+      }
+      close (ARQ2);
     }
     }
     close(ARQ);
 
 
 
-	  if ($is_heuristic_mode == 2)
-	    {
-	      printf OUT7 $solvers[$k] . " " . $minimum_of_solvers[$k] . "\n";
-	    }
 
-	  if ($best_solution > $minimum_of_solvers[$k])
-	    {
-	      $best_solution = $minimum_of_solvers[$k];
-	    }
-	} 
+    if ($is_heuristic_mode == 2)
+      {
+        printf OUT7 $solvers[$k] . " " . $minimum_of_solvers[$k] . "\n";
+      }
+
+    if ($best_solution > $minimum_of_solvers[$k])
+      {
+        $best_solution = $minimum_of_solvers[$k];
+      }
+  } 
       
+    
+
       for (my $k = 0; $k < $number_of_solvers; $k++)
-	{
-	  if ($minimum_of_solvers[$k] == $best_solution)
-	    {
-	      $number_of_times_that_has_a_best_solution[$k]++;
-	    }
-	  elsif ( ($is_heuristic_mode == 0) &&
+  {
+    if ($minimum_of_solvers[$k] == $best_solution)
+      {
+        $number_of_times_that_has_a_best_solution[$k]++;
+      }
+    elsif ( ($is_heuristic_mode == 0) &&
                   (($solvers[$k] eq "UCS") || ($solvers[$k] eq "UCS2a") ||  ($solvers[$k] eq "UCS2b") ||  ($solvers[$k] eq "PFS") ) )
-	    {
-	      printf "\n%s did not find a minimum: %3.2f  :-P~\n\n", $solvers[$k], $minimum_of_solvers[$k];
-	      system ("cp input/" . $arquivo[$j-1] . " teste_com_erro_no_" . $solvers[$k] . "_" . $i . "_elements.xml");
-	      exit 0;
-	    }
-	}
+      {
+        printf "\n%s did not find a minimum: %3.2f  :-P~\n\n", $solvers[$k], $minimum_of_solvers[$k];
+        system ("cp input/" . $arquivo[$j-1] . " teste_com_erro_no_" . $solvers[$k] . "_" . $i . "_elements.xml");
+        exit 0;
+      }
+  }
 
       if ($is_W_operator)
-	{
-	  print OUT5 "\n";
-	}
+  {
+    print OUT5 "\n";
+  }
       
     } # foreach(1..$repeticoes)
   
+    print "\navg0: " . $average_restriction_max0 . " | avgred1: " . $average_restriction_red1 . " | avgred100: " . $average_restriction_red100;
 
   ################################################################################################
   ################################################################################################
