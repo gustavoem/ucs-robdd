@@ -494,7 +494,7 @@ foreach my $i (@experiments)
   my @average_graph_size;
   my @average_calls_minimal_maximal;  # equivalent to the average number of iterations of the main algorithm
   
-  my $average_restriction_max0;
+  my $restriction_max0;
   my $average_restriction_red1;
   my $average_restriction_red100;
 
@@ -512,7 +512,7 @@ foreach my $i (@experiments)
       $average_restriction_update[$k] = 0;
       $average_restriction_consult[$k] = 0;
 
-      $average_restriction_max0 = 0;
+      $restriction_max0 = 0;
       $average_restriction_red1 = 0;
       $average_restriction_red100 = 0;
 
@@ -622,8 +622,9 @@ foreach my $i (@experiments)
       # Toda vez que rodarmos o ucsr7 temos que rodá-lo de novo testando reordenações na ROBDD
     elsif ($_ =~ /^Maximum\s+size\s+of\s+the\s+ROBDD\:\s+(\S+)/ and $current_solver eq "ucsr7")
     {
-      $average_restriction_max0 += $1;
+      $restriction_max0 = $1;
       
+      # print "\n Com zero: " . $_;
       # d = 1
       system ("./bin/featsel $window_size -a " . $current_solver . " -c $funcao -d 1 -f input/" . $arquivo[$j-1]  . $argument_t2 . " > result.log");
       open (ARQ2, "result.log");
@@ -631,7 +632,8 @@ foreach my $i (@experiments)
       {
         if ($_ =~ /^Maximum\s+size\s+of\s+the\s+ROBDD\:\s+(\S+)/)
         {
-          $average_restriction_red1 += $average_restriction_max0 - $1;
+          # print "\n Com 1: " . $_;
+          $average_restriction_red1 += ($restriction_max0 - $1) / $restriction_max0;
         }
       }
       close (ARQ2);
@@ -643,7 +645,8 @@ foreach my $i (@experiments)
       {
         if ($_ =~ /^Maximum\s+size\s+of\s+the\s+ROBDD\:\s+(\S+)/)
         {
-          $average_restriction_red100 += $average_restriction_max0 - $1;
+          # print "\n Com 100: " . $_;
+          $average_restriction_red100 += ($restriction_max0 - $1) / $restriction_max0;
         }
       }
       close (ARQ2);
@@ -692,7 +695,7 @@ foreach my $i (@experiments)
   $average_restriction_red100 /= $repeticoes;
   $average_restriction_red1 /= $repeticoes;
 
-  print "\navg0: " . $average_restriction_max0 . " | avgred1: " . $average_restriction_red1 . " | avgred100: " . $average_restriction_red100;
+  # print "\navg0: " . $restriction_max0 . " | avgred1: " . $average_restriction_red1 . " | avgred100: " . $average_restriction_red100;
 
   ################################################################################################
   ################################################################################################
