@@ -553,7 +553,10 @@ foreach my $i (@experiments)
 	  my $current_solver = lc $solvers[$k];
 	  # print "\nTeste com %s\n", $solvers[$k];
 	  $t0 = [gettimeofday];
-	  system ("./bin/featsel $window_size -a " . $current_solver . " -c $funcao -f input/" . $arquivo[$j-1]  . $argument_t2 . " > result.log");
+    if (k == $number_of_solvers - 1)
+	      system ("./bin/featsel $window_size -a " . $current_solver . " -c $funcao -d 20 -f input/" . $arquivo[$j-1]  . $argument_t2 . " > result.log");
+    else  
+        system ("./bin/featsel $window_size -a " . $current_solver . " -c $funcao -f input/" . $arquivo[$j-1]  . $argument_t2 . " > result.log");
 	  $t1 = [gettimeofday];
 	  $average_time_of_solver[$k] += tv_interval ($t0, $t1);    
 	  open (ARQ, "result.log");

@@ -1,0 +1,4 @@
+
+= = = = PFS additional data, average of 10 runnings = = = =
+
+2^|S|     Time (s)     # Nodes     # Max forest A size     # Max forest B size     # Iterations

@@ -119,7 +119,7 @@ void GeneticOrdering::normalize_fitness ()
 	for (unsigned int i = 0; i < population_size; i++) {
 		OrderingNode * node = solutions[i];
 		unsigned int rsize = node->get_robdd_size ();
-		node->set_normalized_fitness (rsize / total_fitness);
+		node->set_normalized_fitness ((double) rsize / total_fitness);
 	}
 }
 
@@ -163,7 +163,7 @@ void GeneticOrdering::recalculate_fitness ()
 	}
 }
 
-
+// THIS SEEMS WRONG
 unsigned int * GeneticOrdering::reorder ()
 {
 	unsigned int reorder_loops = 0;
@@ -187,6 +187,9 @@ unsigned int * GeneticOrdering::reorder ()
 	unsigned int * best_order = (unsigned int *) malloc (sizeof (int) * solution_size);
 	for (unsigned int i = 0; i < solution_size; i++)
 		best_order[i] = best_seen->get_ordering ()[i];
+
+	cout << "Number of generations: " << reorder_loops << endl;
+	cout.flush ();
 
 	delete best_seen;
 	return best_order;

@@ -231,6 +231,8 @@ void ROBDD::change_ordering (unsigned int * ord)
 	for (unsigned int i = 0; i < n; i++)
 		ordering[i] = ord[i];
 
+	nof_updates = 0;
+
 	for (list <pair <bool, ElementSubset *> >::iterator it = robdd_log.begin (); 
 		it != robdd_log.end (); it++)
 		this->add_interval (it->second, it->first);

@@ -22,6 +22,8 @@ namespace UCSROBDDToolBox7
 			unsigned int * new_ord = genord->reorder ();
 			R->change_ordering (new_ord);
 			myfile << R->get_nof_updates () << " " << R->get_cardinality () << endl;
+			myfile << R->get_nof_updates () << " " << 0 << endl;
+			cout << "Reordered when x = " << R->get_nof_updates () << endl;
 			free (new_ord);
 		}
 		R->add_interval (A, false);
@@ -41,6 +43,8 @@ namespace UCSROBDDToolBox7
 			unsigned int * new_ord = genord->reorder ();
 			R->change_ordering (new_ord);
 			myfile << R->get_nof_updates () << " " << R->get_cardinality () << endl;
+			myfile << R->get_nof_updates () << " " << 0 << endl;
+			cout << "Reordered when x = " << R->get_nof_updates () << endl;
 			free (new_ord);
 		}
 		R->add_interval (A, true);
