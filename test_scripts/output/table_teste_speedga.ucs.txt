@@ -1,0 +1,4 @@
+
+= = = = UCS{2a, 2b} additional data, average of 10 runnings = = = =
+
+Solver    2^|S|     Time (s)     # Nodes     # Max graph size     # Calls of DFS     # Calls of Minimal (Maximal)

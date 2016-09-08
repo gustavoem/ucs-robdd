@@ -553,11 +553,15 @@ foreach my $i (@experiments)
 	  my $current_solver = lc $solvers[$k];
 	  # print "\nTeste com %s\n", $solvers[$k];
 	  $t0 = [gettimeofday];
-    if (k == $number_of_solvers - 1)
-	      system ("./bin/featsel $window_size -a " . $current_solver . " -c $funcao -d 20 -f input/" . $arquivo[$j-1]  . $argument_t2 . " > result.log");
+    if ($ k == 0)
+    {
+	      system ("./bin/featsel $window_size -a " . $current_solver . " -c $funcao -d 50 -f input/" . $arquivo[$j-1]  . $argument_t2 . " > result.log");
+    }
     else  
+    {
         system ("./bin/featsel $window_size -a " . $current_solver . " -c $funcao -f input/" . $arquivo[$j-1]  . $argument_t2 . " > result.log");
-	  $t1 = [gettimeofday];
+	  }
+    $t1 = [gettimeofday];
 	  $average_time_of_solver[$k] += tv_interval ($t0, $t1);    
 	  open (ARQ, "result.log");
 	  while (<ARQ>)
@@ -629,7 +633,7 @@ foreach my $i (@experiments)
       
       # print "\n Com zero: " . $_;
       # d = 1
-      system ("./bin/featsel $window_size -a " . $current_solver . " -c $funcao -d 1 -f input/" . $arquivo[$j-1]  . $argument_t2 . " > result.log");
+      #system ("./bin/featsel $window_size -a " . $current_solver . " -c $funcao -d 1 -f input/" . $arquivo[$j-1]  . $argument_t2 . " > result.log");
       open (ARQ2, "result.log");
       while (<ARQ2>)
       {
@@ -642,7 +646,7 @@ foreach my $i (@experiments)
       close (ARQ2);
 
       # d = 100
-      system ("./bin/featsel $window_size -a " . $current_solver . " -c $funcao -d 100 -f input/" . $arquivo[$j-1]  . $argument_t2 . " > result.log");
+      #system ("./bin/featsel $window_size -a " . $current_solver . " -c $funcao -d 100 -f input/" . $arquivo[$j-1]  . $argument_t2 . " > result.log");
       open (ARQ2, "result.log");
       while (<ARQ2>)
       {

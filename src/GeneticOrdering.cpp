@@ -188,8 +188,8 @@ unsigned int * GeneticOrdering::reorder ()
 	for (unsigned int i = 0; i < solution_size; i++)
 		best_order[i] = best_seen->get_ordering ()[i];
 
-	cout << "Number of generations: " << reorder_loops << endl;
-	cout.flush ();
+	//cout << "Number of generations: " << reorder_loops << endl;
+	//cout.flush ();
 
 	delete best_seen;
 	return best_order;
