@@ -1,7 +1,7 @@
 #ifndef UCSROBDD3TEST_H_
 #define UCSROBDD3TEST_H_
 
-#include "../src/algorithms/UCSROBDD7.h"
+#include "../src/algorithms/UCSROBDD6.h"
 #include "../src/functions/MeanAbsSum.h"
 #include "../src/functions/HammingDistance.h"
 #include "../src/functions/Explicit.h"
