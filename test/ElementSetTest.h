@@ -47,6 +47,8 @@ namespace ElementSetTest
 	bool values_from_a_random_set_should_be_within_the_given_range ();
 
 	bool it_should_store_element_index ();
+
+    bool it_should_copy_itself ();
 }
 
 #endif /* ELEMENTSETTEST_H_ */

@@ -48,49 +48,54 @@ public:
 
 	// Default constructor, gets the max number of values and the element's name.
 	//
-	Element(unsigned int, string);
+	Element (unsigned int, string);
+
+
+    // Copy constructor
+    //
+    Element (Element *);
 
 
 	// Default destructor.
 	//
-	virtual ~Element();
+	virtual ~Element ();
 
 
 	// Adds a value into the element.
 	// Returns true if it was successfully added and false otherwise.
 	//
-	bool add_element_value(int);
+	bool add_element_value (int);
 
 
 	// Returns the name of the element.
 	//
-	string get_element_name();
+	string get_element_name ();
 
 
 	// Returns the value of the element at position "index". If there
 	// is no such element, returns -1 and prints a warning in the STDOUT.
 	//
-	int get_element_value(unsigned int);
+	int get_element_value (unsigned int);
 
 
 	// Returns the maximum number of values of this element.
 	//
-	unsigned int get_max_number_of_values();
+	unsigned int get_max_number_of_values ();
 
 
 	// Returns the number of elements added already.
 	//
-	unsigned int get_number_of_values();
+	unsigned int get_number_of_values ();
 
 
 	// Prints the name of the element and its values in the STDOUT.
 	//
-	void print_element();
+	void print_element ();
 
 
 	// Sets a new name to the element.
 	//
-	void set_element_name(string);
+	void set_element_name (string);
 
 
 };

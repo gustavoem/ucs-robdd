@@ -133,6 +133,10 @@ int main(void) {
     cout << "ElementSetTest::it_should_store_element_index";
     cout.flush ();
     printResult (ElementSetTest::it_should_store_element_index ());
+    cout << "ElementSetTest::it_should_copy_itself";
+    cout.flush ();
+    printResult (ElementSetTest::it_should_copy_itself ());
+
     cout << endl;
 
     // Testing Class "ElementSubset"
@@ -166,246 +170,245 @@ int main(void) {
     cout << endl;
 
     // Testing Class "Collection"
-    cout << "CollectionTest::a_lower_covered_subset_should_be_found";
-    cout.flush ();
-    printResult (CollectionTest::a_lower_covered_subset_should_be_found ());
-    cout << "CollectionTest::a_non_lower_covered_subset_should_not_be_found";
-    cout.flush ();
-    printResult (CollectionTest::a_non_lower_covered_subset_should_not_be_found ());
-    cout << "CollectionTest::it_should_remove_lower_covered_subsets_in_a_collection";
-    cout.flush ();
-    printResult (CollectionTest::it_should_remove_lower_covered_subsets_in_a_collection ());
-    cout << "CollectionTest::the_evaluated_subset_should_not_be_deleted";
-    cout.flush ();
-    printResult (CollectionTest::the_evaluated_subset_should_not_be_deleted ());
-    cout << "CollectionTest::an_upper_covered_subset_should_be_found";
-    cout.flush ();
-    printResult (CollectionTest::an_upper_covered_subset_should_be_found ());
-    cout << "CollectionTest::a_non_upper_covered_subset_should_not_be_found";
-    cout.flush ();
-    printResult (CollectionTest::a_non_upper_covered_subset_should_not_be_found ());
-    cout << "CollectionTest::it_should_remove_upper_covered_subsets_in_a_collection";
-    cout.flush ();
-    printResult (CollectionTest::it_should_remove_upper_covered_subsets_in_a_collection ());
-    cout << "CollectionTest::it_should_copy_a_collection";
-    cout.flush ();
-    printResult (CollectionTest::it_should_copy_a_collection ());
-    cout << endl;
+    // cout << "CollectionTest::a_lower_covered_subset_should_be_found";
+    // cout.flush ();
+    // printResult (CollectionTest::a_lower_covered_subset_should_be_found ());
+    // cout << "CollectionTest::a_non_lower_covered_subset_should_not_be_found";
+    // cout.flush ();
+    // printResult (CollectionTest::a_non_lower_covered_subset_should_not_be_found ());
+    // cout << "CollectionTest::it_should_remove_lower_covered_subsets_in_a_collection";
+    // cout.flush ();
+    // printResult (CollectionTest::it_should_remove_lower_covered_subsets_in_a_collection ());
+    // cout << "CollectionTest::the_evaluated_subset_should_not_be_deleted";
+    // cout.flush ();
+    // printResult (CollectionTest::the_evaluated_subset_should_not_be_deleted ());
+    // cout << "CollectionTest::an_upper_covered_subset_should_be_found";
+    // cout.flush ();
+    // printResult (CollectionTest::an_upper_covered_subset_should_be_found ());
+    // cout << "CollectionTest::a_non_upper_covered_subset_should_not_be_found";
+    // cout.flush ();
+    // printResult (CollectionTest::a_non_upper_covered_subset_should_not_be_found ());
+    // cout << "CollectionTest::it_should_remove_upper_covered_subsets_in_a_collection";
+    // cout.flush ();
+    // printResult (CollectionTest::it_should_remove_upper_covered_subsets_in_a_collection ());
+    // cout << "CollectionTest::it_should_copy_a_collection";
+    // cout.flush ();
+    // printResult (CollectionTest::it_should_copy_a_collection ());
+    // cout << endl;
 
-    // Testing Class "CostFunction"
-    //
+    // // Testing Class "CostFunction"
+    // //
+    // //
+    // // Explicit cost function
+    // //
+    // cout << "CostFunctionTest::it_should_works_with_an_explicitly_declared_cost_function";
+    // cout.flush ();
+    // printResult (CostFunctionTest::it_should_works_with_an_explicitly_declared_cost_function ());
+    // //
+    // // Mean conditional entropy for W-operator feature selection
+    // //
+    // cout << "CostFunctionTest::it_should_store_the_frequencies_of_the_samples";
+    // cout.flush ();
+    // printResult (CostFunctionTest::it_should_store_the_frequencies_of_the_samples ());
+    // cout << "CostFunctionTest::it_should_store_the_label_frequencies_of_the_samples";
+    // cout.flush ();
+    // printResult (CostFunctionTest::it_should_store_the_label_frequencies_of_the_samples ());
+    // cout << "CostFunctionTest::it_should_calculate_the_conditional_entropy";
+    // cout.flush ();
+    // printResult (CostFunctionTest::it_should_calculate_the_conditional_entropy ());
+    // //
+    // // Testing the storage of the elapsed time of all calls of the cost function
+    // //
+    // cout << "CostFunctionTest::it_should_add_and_retrieve_the_elapsed_time";
+    // cout.flush ();
+    // printResult (CostFunctionTest::it_should_add_and_retrieve_the_elapsed_time ());
+    // cout << endl;
 
-    //
-    // Explicit cost function
-    //
-    cout << "CostFunctionTest::it_should_works_with_an_explicitly_declared_cost_function";
-    cout.flush ();
-    printResult (CostFunctionTest::it_should_works_with_an_explicitly_declared_cost_function ());
-    //
-    // Mean conditional entropy for W-operator feature selection
-    //
-    cout << "CostFunctionTest::it_should_store_the_frequencies_of_the_samples";
-    cout.flush ();
-    printResult (CostFunctionTest::it_should_store_the_frequencies_of_the_samples ());
-    cout << "CostFunctionTest::it_should_store_the_label_frequencies_of_the_samples";
-    cout.flush ();
-    printResult (CostFunctionTest::it_should_store_the_label_frequencies_of_the_samples ());
-    cout << "CostFunctionTest::it_should_calculate_the_conditional_entropy";
-    cout.flush ();
-    printResult (CostFunctionTest::it_should_calculate_the_conditional_entropy ());
-    //
-    // Testing the storage of the elapsed time of all calls of the cost function
-    //
-    cout << "CostFunctionTest::it_should_add_and_retrieve_the_elapsed_time";
-    cout.flush ();
-    printResult (CostFunctionTest::it_should_add_and_retrieve_the_elapsed_time ());
-    cout << endl;
+    // // Testing Class "Solver"
+    // cout << "SolverTest::it_should_give_the_abs_sum_cost_of_a_subset";
+    // cout.flush ();
+    // printResult (SolverTest::it_should_give_the_abs_sum_cost_of_a_subset ());
+    // cout << "SolverTest::it_should_give_the_hamming_distance_cost_of_a_subset";
+    // cout.flush ();
+    // printResult (SolverTest::it_should_give_the_hamming_distance_cost_of_a_subset ());
+    // cout << "SolverTest::an_empty_set_should_have_cost_zero";
+    // cout.flush ();
+    // printResult (SolverTest::an_empty_set_should_have_cost_zero ());
+    // cout << endl;
 
-    // Testing Class "Solver"
-    cout << "SolverTest::it_should_give_the_abs_sum_cost_of_a_subset";
-    cout.flush ();
-    printResult (SolverTest::it_should_give_the_abs_sum_cost_of_a_subset ());
-    cout << "SolverTest::it_should_give_the_hamming_distance_cost_of_a_subset";
-    cout.flush ();
-    printResult (SolverTest::it_should_give_the_hamming_distance_cost_of_a_subset ());
-    cout << "SolverTest::an_empty_set_should_have_cost_zero";
-    cout.flush ();
-    printResult (SolverTest::an_empty_set_should_have_cost_zero ());
-    cout << endl;
+    // // Testing Class "UCurveToolBox"
+    // cout << "UCurveToolBoxTest::it_should_not_update_lower_restriction_set_with_a_covered_subset";
+    // cout.flush ();
+    // printResult (UCurveToolBoxTest::it_should_not_update_lower_restriction_set_with_a_covered_subset ());
+    // cout << "UCurveToolBoxTest::it_should_update_lower_restriction_set_with_an_outer_subset";
+    // cout.flush ();
+    // printResult (UCurveToolBoxTest::it_should_update_lower_restriction_set_with_an_outer_subset ());
+    // cout << "UCurveToolBoxTest::it_should_not_update_upper_restriction_set_with_a_covered_subset";
+    // cout.flush ();
+    // printResult (UCurveToolBoxTest::it_should_not_update_upper_restriction_set_with_a_covered_subset ());
+    // cout << "UCurveToolBoxTest::it_should_update_upper_restriction_set_with_an_outer_subset";
+    // cout.flush ();
+    // printResult (UCurveToolBoxTest::it_should_update_upper_restriction_set_with_an_outer_subset ());
+    // cout << "UCurveToolBoxTest::it_should_get_a_maximal_subset";
+    // cout.flush ();
+    // printResult (UCurveToolBoxTest::it_should_get_a_maximal_subset ());
+    // cout << "UCurveToolBoxTest::it_should_get_a_minimal_subset";
+    // cout.flush ();
+    // printResult (UCurveToolBoxTest::it_should_get_a_minimal_subset ());
+    // cout << endl;
 
-    // Testing Class "UCurveToolBox"
-    cout << "UCurveToolBoxTest::it_should_not_update_lower_restriction_set_with_a_covered_subset";
-    cout.flush ();
-    printResult (UCurveToolBoxTest::it_should_not_update_lower_restriction_set_with_a_covered_subset ());
-    cout << "UCurveToolBoxTest::it_should_update_lower_restriction_set_with_an_outer_subset";
-    cout.flush ();
-    printResult (UCurveToolBoxTest::it_should_update_lower_restriction_set_with_an_outer_subset ());
-    cout << "UCurveToolBoxTest::it_should_not_update_upper_restriction_set_with_a_covered_subset";
-    cout.flush ();
-    printResult (UCurveToolBoxTest::it_should_not_update_upper_restriction_set_with_a_covered_subset ());
-    cout << "UCurveToolBoxTest::it_should_update_upper_restriction_set_with_an_outer_subset";
-    cout.flush ();
-    printResult (UCurveToolBoxTest::it_should_update_upper_restriction_set_with_an_outer_subset ());
-    cout << "UCurveToolBoxTest::it_should_get_a_maximal_subset";
-    cout.flush ();
-    printResult (UCurveToolBoxTest::it_should_get_a_maximal_subset ());
-    cout << "UCurveToolBoxTest::it_should_get_a_minimal_subset";
-    cout.flush ();
-    printResult (UCurveToolBoxTest::it_should_get_a_minimal_subset ());
-    cout << endl;
+    // // Testing Class "UCurveSearch"
+    // cout << "UCurveSearchTest::a_lattice_with_constant_cost_should_be_totally_exausted";
+    // cout.flush ();
+    // printResult (UCurveSearchTest::a_lattice_with_constant_cost_should_be_totally_exausted ());
+    // cout << "UCurveSearchTest::it_should_find_a_global_minimum";
+    // cout.flush ();
+    // printResult (UCurveSearchTest::it_should_find_a_global_minimum ());
+    // cout << "UCurveSearchTest::it_should_converge_for_large_hamming_sets";
+    // cout.flush ();
+    // printResult (UCurveSearchTest::it_should_converge_for_large_hamming_sets ());
+    // cout << "UCurveSearchTest::it_should_converge_for_large_abs_sum_sets";
+    // cout.flush ();
+    // printResult (UCurveSearchTest::it_should_converge_for_large_abs_sum_sets());
+    // cout << "UCurveSearchTest::it_should_store_all_the_visited_subsets";
+    // cout.flush ();
+    // printResult (UCurveSearchTest::it_should_store_all_the_visited_subsets ());
+    // cout << "UCurveSearchTest::it_should_give_the_number_of_the_visited_subsets";
+    // cout.flush ();
+    // printResult (UCurveSearchTest::it_should_give_the_number_of_the_visited_subsets ());
+    // cout << "UCurveSearchTest::it_should_always_give_the_correct_answer";
+    // cout.flush ();
+    // printResult (UCurveSearchTest::it_should_always_give_the_correct_answer ());
+    // cout << endl;
 
-    // Testing Class "UCurveSearch"
-    cout << "UCurveSearchTest::a_lattice_with_constant_cost_should_be_totally_exausted";
-    cout.flush ();
-    printResult (UCurveSearchTest::a_lattice_with_constant_cost_should_be_totally_exausted ());
-    cout << "UCurveSearchTest::it_should_find_a_global_minimum";
-    cout.flush ();
-    printResult (UCurveSearchTest::it_should_find_a_global_minimum ());
-    cout << "UCurveSearchTest::it_should_converge_for_large_hamming_sets";
-    cout.flush ();
-    printResult (UCurveSearchTest::it_should_converge_for_large_hamming_sets ());
-    cout << "UCurveSearchTest::it_should_converge_for_large_abs_sum_sets";
-    cout.flush ();
-    printResult (UCurveSearchTest::it_should_converge_for_large_abs_sum_sets());
-    cout << "UCurveSearchTest::it_should_store_all_the_visited_subsets";
-    cout.flush ();
-    printResult (UCurveSearchTest::it_should_store_all_the_visited_subsets ());
-    cout << "UCurveSearchTest::it_should_give_the_number_of_the_visited_subsets";
-    cout.flush ();
-    printResult (UCurveSearchTest::it_should_give_the_number_of_the_visited_subsets ());
-    cout << "UCurveSearchTest::it_should_always_give_the_correct_answer";
-    cout.flush ();
-    printResult (UCurveSearchTest::it_should_always_give_the_correct_answer ());
-    cout << endl;
+    // // Testing Class "BranchAndBound"
+    // cout << "BranchAndBoundTest::a_lattice_with_constant_cost_should_be_totally_exausted";
+    // cout.flush ();
+    // printResult (BranchAndBoundTest::a_lattice_with_constant_cost_should_be_totally_exausted ());
+    // cout << "BranchAndBoundTest::it_should_find_a_global_minimum";
+    // cout.flush ();
+    // printResult (BranchAndBoundTest::it_should_find_a_global_minimum ());
+    // cout << "BranchAndBoundTest::it_should_converge_for_large_hamming_sets";
+    // cout.flush ();
+    // printResult (BranchAndBoundTest::it_should_converge_for_large_hamming_sets ());
+    // cout << "BranchAndBoundTest::it_should_converge_for_large_abs_sum_sets";
+    // cout.flush ();
+    // printResult (BranchAndBoundTest::it_should_converge_for_large_abs_sum_sets());
+    // cout << "BranchAndBoundTest::it_should_store_all_the_visited_subsets";
+    // cout.flush ();
+    // printResult (BranchAndBoundTest::it_should_store_all_the_visited_subsets ());
+    // cout << "BranchAndBoundTest::it_should_give_the_number_of_the_visited_subsets";
+    // cout.flush ();
+    // printResult (BranchAndBoundTest::it_should_give_the_number_of_the_visited_subsets ());
+    // cout << "BranchAndBoundTest::it_should_always_give_the_correct_answer";
+    // cout.flush ();
+    // printResult (BranchAndBoundTest::it_should_always_give_the_correct_answer ());
+    // cout << endl;
 
-    // Testing Class "BranchAndBound"
-    cout << "BranchAndBoundTest::a_lattice_with_constant_cost_should_be_totally_exausted";
-    cout.flush ();
-    printResult (BranchAndBoundTest::a_lattice_with_constant_cost_should_be_totally_exausted ());
-    cout << "BranchAndBoundTest::it_should_find_a_global_minimum";
-    cout.flush ();
-    printResult (BranchAndBoundTest::it_should_find_a_global_minimum ());
-    cout << "BranchAndBoundTest::it_should_converge_for_large_hamming_sets";
-    cout.flush ();
-    printResult (BranchAndBoundTest::it_should_converge_for_large_hamming_sets ());
-    cout << "BranchAndBoundTest::it_should_converge_for_large_abs_sum_sets";
-    cout.flush ();
-    printResult (BranchAndBoundTest::it_should_converge_for_large_abs_sum_sets());
-    cout << "BranchAndBoundTest::it_should_store_all_the_visited_subsets";
-    cout.flush ();
-    printResult (BranchAndBoundTest::it_should_store_all_the_visited_subsets ());
-    cout << "BranchAndBoundTest::it_should_give_the_number_of_the_visited_subsets";
-    cout.flush ();
-    printResult (BranchAndBoundTest::it_should_give_the_number_of_the_visited_subsets ());
-    cout << "BranchAndBoundTest::it_should_always_give_the_correct_answer";
-    cout.flush ();
-    printResult (BranchAndBoundTest::it_should_always_give_the_correct_answer ());
-    cout << endl;
+    // // Testing Class "PosetForestSearch"
+    // //
+    // // Tests of the subroutines
+    // cout << "PosetForestSearchTest::it_should_branch_in_a_lower_tree";
+    // cout.flush ();
+    // printResult (PosetForestSearchTest::it_should_branch_in_a_lower_tree ());
+    // cout << "PosetForestSearchTest::it_should_branch_in_an_upper_tree";
+    // cout.flush ();
+    // printResult (PosetForestSearchTest::it_should_branch_in_an_upper_tree ());
+    // cout << "PosetForestSearchTest::it_should_search_the_lower_children";
+    // cout.flush ();
+    // printResult (PosetForestSearchTest::it_should_search_the_lower_children ());
+    // cout << "PosetForestSearchTest::it_should_search_the_upper_children";
+    // cout.flush ();
+    // printResult (PosetForestSearchTest::it_should_search_the_upper_children ());
+    // cout << "PosetForestSearchTest::it_should_search_a_lower_root";
+    // cout.flush ();
+    // printResult (PosetForestSearchTest::it_should_search_a_lower_root ());
+    // cout << "PosetForestSearchTest::it_should_search_an_upper_root";
+    // cout.flush ();
+    // printResult (PosetForestSearchTest::it_should_search_an_upper_root ());
+    // cout << "PosetForestSearchTest::it_should_prune_a_lower_tree";
+    // cout.flush ();
+    // printResult (PosetForestSearchTest::it_should_prune_a_lower_tree ());
+    // cout << "PosetForestSearchTest::it_should_prune_an_upper_tree";
+    // cout.flush ();
+    // printResult (PosetForestSearchTest::it_should_prune_an_upper_tree ());
+    // // Tests of the main algorithm
+    // cout << "PosetForestSearchTest::a_poset_with_constant_cost_should_be_totally_exausted";
+    // cout.flush ();
+    // printResult (PosetForestSearchTest::a_poset_with_constant_cost_should_be_totally_exausted ());
+    // cout << "PosetForestSearchTest::it_should_find_a_global_minimum";
+    // cout.flush ();
+    // printResult (PosetForestSearchTest::it_should_find_a_global_minimum ());
+    // cout << "PosetForestSearchTest::it_should_converge_for_large_hamming_sets";
+    // cout.flush ();
+    // printResult (PosetForestSearchTest::it_should_converge_for_large_hamming_sets ());
+    // cout << "PosetForestSearchTest::it_should_converge_for_large_abs_sum_sets";
+    // cout.flush ();
+    // printResult (PosetForestSearchTest::it_should_converge_for_large_abs_sum_sets());
+    // cout << "PosetForestSearchTest::it_should_store_all_the_visited_subsets";
+    // cout.flush ();
+    // printResult (PosetForestSearchTest::it_should_store_all_the_visited_subsets ());
+    // cout << "PosetForestSearchTest::it_should_give_the_number_of_the_visited_subsets";
+    // cout.flush ();
+    // printResult (PosetForestSearchTest::it_should_give_the_number_of_the_visited_subsets ());
+    // cout << "PosetForestSearchTest::it_should_always_give_the_correct_answer";
+    // cout.flush ();
+    // printResult (PosetForestSearchTest::it_should_always_give_the_correct_answer ());
+    // cout << endl;
 
-    // Testing Class "PosetForestSearch"
-    //
-    // Tests of the subroutines
-    cout << "PosetForestSearchTest::it_should_branch_in_a_lower_tree";
-    cout.flush ();
-    printResult (PosetForestSearchTest::it_should_branch_in_a_lower_tree ());
-    cout << "PosetForestSearchTest::it_should_branch_in_an_upper_tree";
-    cout.flush ();
-    printResult (PosetForestSearchTest::it_should_branch_in_an_upper_tree ());
-    cout << "PosetForestSearchTest::it_should_search_the_lower_children";
-    cout.flush ();
-    printResult (PosetForestSearchTest::it_should_search_the_lower_children ());
-    cout << "PosetForestSearchTest::it_should_search_the_upper_children";
-    cout.flush ();
-    printResult (PosetForestSearchTest::it_should_search_the_upper_children ());
-    cout << "PosetForestSearchTest::it_should_search_a_lower_root";
-    cout.flush ();
-    printResult (PosetForestSearchTest::it_should_search_a_lower_root ());
-    cout << "PosetForestSearchTest::it_should_search_an_upper_root";
-    cout.flush ();
-    printResult (PosetForestSearchTest::it_should_search_an_upper_root ());
-    cout << "PosetForestSearchTest::it_should_prune_a_lower_tree";
-    cout.flush ();
-    printResult (PosetForestSearchTest::it_should_prune_a_lower_tree ());
-    cout << "PosetForestSearchTest::it_should_prune_an_upper_tree";
-    cout.flush ();
-    printResult (PosetForestSearchTest::it_should_prune_an_upper_tree ());
-    // Tests of the main algorithm
-    cout << "PosetForestSearchTest::a_poset_with_constant_cost_should_be_totally_exausted";
-    cout.flush ();
-    printResult (PosetForestSearchTest::a_poset_with_constant_cost_should_be_totally_exausted ());
-    cout << "PosetForestSearchTest::it_should_find_a_global_minimum";
-    cout.flush ();
-    printResult (PosetForestSearchTest::it_should_find_a_global_minimum ());
-    cout << "PosetForestSearchTest::it_should_converge_for_large_hamming_sets";
-    cout.flush ();
-    printResult (PosetForestSearchTest::it_should_converge_for_large_hamming_sets ());
-    cout << "PosetForestSearchTest::it_should_converge_for_large_abs_sum_sets";
-    cout.flush ();
-    printResult (PosetForestSearchTest::it_should_converge_for_large_abs_sum_sets());
-    cout << "PosetForestSearchTest::it_should_store_all_the_visited_subsets";
-    cout.flush ();
-    printResult (PosetForestSearchTest::it_should_store_all_the_visited_subsets ());
-    cout << "PosetForestSearchTest::it_should_give_the_number_of_the_visited_subsets";
-    cout.flush ();
-    printResult (PosetForestSearchTest::it_should_give_the_number_of_the_visited_subsets ());
-    cout << "PosetForestSearchTest::it_should_always_give_the_correct_answer";
-    cout.flush ();
-    printResult (PosetForestSearchTest::it_should_always_give_the_correct_answer ());
-    cout << endl;
+    // // Testing Class "ExhaustiveSearch"
+    // cout << "ExhaustiveSearchTest::a_lattice_with_constant_cost_should_be_totally_exausted";
+    // cout.flush ();
+    // printResult (ExhaustiveSearchTest::a_lattice_with_constant_cost_should_be_totally_exausted ());
+    // cout << "ExhaustiveSearchTest::it_should_find_a_global_minimum";
+    // cout.flush ();
+    // printResult (ExhaustiveSearchTest::it_should_find_a_global_minimum ());
+    // cout << "ExhaustiveSearchTest::it_should_store_all_the_visited_subsets";
+    // cout.flush ();
+    // printResult (ExhaustiveSearchTest::it_should_store_all_the_visited_subsets ());
+    // cout << "ExhaustiveSearchTest::it_should_give_the_number_of_the_visited_subsets";
+    // cout.flush ();
+    // printResult (ExhaustiveSearchTest::it_should_give_the_number_of_the_visited_subsets ());
+    // cout << endl;
 
-    // Testing Class "ExhaustiveSearch"
-    cout << "ExhaustiveSearchTest::a_lattice_with_constant_cost_should_be_totally_exausted";
-    cout.flush ();
-    printResult (ExhaustiveSearchTest::a_lattice_with_constant_cost_should_be_totally_exausted ());
-    cout << "ExhaustiveSearchTest::it_should_find_a_global_minimum";
-    cout.flush ();
-    printResult (ExhaustiveSearchTest::it_should_find_a_global_minimum ());
-    cout << "ExhaustiveSearchTest::it_should_store_all_the_visited_subsets";
-    cout.flush ();
-    printResult (ExhaustiveSearchTest::it_should_store_all_the_visited_subsets ());
-    cout << "ExhaustiveSearchTest::it_should_give_the_number_of_the_visited_subsets";
-    cout.flush ();
-    printResult (ExhaustiveSearchTest::it_should_give_the_number_of_the_visited_subsets ());
-    cout << endl;
+    // // Testing Class "SFS"
+    // cout << "SFSTest::it_should_find_a_local_minimum";
+    // cout.flush ();
+    // printResult (SFSTest::it_should_find_a_local_minimum ());
+    // cout << "SFSTest::it_should_store_all_the_visited_subsets";
+    // cout.flush ();
+    // printResult (SFSTest::it_should_store_all_the_visited_subsets ());
+    // cout << "SFSTest::it_should_give_the_number_of_the_visited_subsets";
+    // cout.flush ();
+    // printResult (SFSTest::it_should_give_the_number_of_the_visited_subsets ());
+    // cout << "SFSTest::it_should_converge_for_large_hamming_sets";
+    // cout.flush ();
+    // printResult (SFSTest::it_should_converge_for_large_hamming_sets ());
+    // cout << endl;
 
-    // Testing Class "SFS"
-    cout << "SFSTest::it_should_find_a_local_minimum";
-    cout.flush ();
-    printResult (SFSTest::it_should_find_a_local_minimum ());
-    cout << "SFSTest::it_should_store_all_the_visited_subsets";
-    cout.flush ();
-    printResult (SFSTest::it_should_store_all_the_visited_subsets ());
-    cout << "SFSTest::it_should_give_the_number_of_the_visited_subsets";
-    cout.flush ();
-    printResult (SFSTest::it_should_give_the_number_of_the_visited_subsets ());
-    cout << "SFSTest::it_should_converge_for_large_hamming_sets";
-    cout.flush ();
-    printResult (SFSTest::it_should_converge_for_large_hamming_sets ());
-    cout << endl;
-
-    // Testing Class "SFFS"
-    cout << "SFFSTest::it_should_add_the_best_element";
-    cout.flush ();
-    printResult (SFFSTest::it_should_add_the_best_element ());
-    cout << "SFFSTest::it_should_remove_the_worst_element";
-    cout.flush ();
-    printResult (SFFSTest::it_should_remove_the_worst_element ());
-    cout << "SFFSTest::it_should_find_a_local_minimum";
-    cout.flush ();
-    printResult (SFFSTest::it_should_find_a_local_minimum ());
-    cout << "SFFSTest::it_should_store_all_the_visited_subsets";
-    cout.flush ();
-    printResult (SFFSTest::it_should_store_all_the_visited_subsets ());
-    cout << "SFFSTest::it_should_give_the_number_of_the_visited_subsets";
-    cout.flush ();
-    printResult (SFFSTest::it_should_give_the_number_of_the_visited_subsets ());
-    cout << "SFFSTest::it_should_converge_for_large_hamming_sets";
-    cout.flush ();
-    printResult (SFFSTest::it_should_converge_for_large_hamming_sets ());
-    cout << "SFFSTest::it_should_converge_for_large_abs_sum_sets";
-    cout.flush ();
-    printResult (SFFSTest::it_should_converge_for_large_abs_sum_sets ());
-    cout << endl;
+    // // Testing Class "SFFS"
+    // cout << "SFFSTest::it_should_add_the_best_element";
+    // cout.flush ();
+    // printResult (SFFSTest::it_should_add_the_best_element ());
+    // cout << "SFFSTest::it_should_remove_the_worst_element";
+    // cout.flush ();
+    // printResult (SFFSTest::it_should_remove_the_worst_element ());
+    // cout << "SFFSTest::it_should_find_a_local_minimum";
+    // cout.flush ();
+    // printResult (SFFSTest::it_should_find_a_local_minimum ());
+    // cout << "SFFSTest::it_should_store_all_the_visited_subsets";
+    // cout.flush ();
+    // printResult (SFFSTest::it_should_store_all_the_visited_subsets ());
+    // cout << "SFFSTest::it_should_give_the_number_of_the_visited_subsets";
+    // cout.flush ();
+    // printResult (SFFSTest::it_should_give_the_number_of_the_visited_subsets ());
+    // cout << "SFFSTest::it_should_converge_for_large_hamming_sets";
+    // cout.flush ();
+    // printResult (SFFSTest::it_should_converge_for_large_hamming_sets ());
+    // cout << "SFFSTest::it_should_converge_for_large_abs_sum_sets";
+    // cout.flush ();
+    // printResult (SFFSTest::it_should_converge_for_large_abs_sum_sets ());
+    // cout << endl;
 
     // Testing Class "Vertex"
     cout << "VertexTest::a_new_vertex_should_have_no_child";

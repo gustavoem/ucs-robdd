@@ -23,6 +23,7 @@
 
 #include "ElementSet.h"
 #include "ElementSubset.h"
+#include <map>
 
 // This class is used to fix elements of an ElementSet and also define
 // a subposet of the poset defined by power set of ElementSet
@@ -46,6 +47,12 @@ private:
     // List of fixed elements that are not selected
     //
     bool * non_selected_elements;
+
+
+    // Used to map elements from the subproblem set to the original 
+    // elemnt set
+    //
+    map<unsigned int, unsigned int> element_map;
 
 
 public:

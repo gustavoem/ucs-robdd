@@ -64,6 +64,11 @@ public:
 	ElementSet (string, unsigned int, unsigned int);
 
 
+    // Copy constructor
+    //
+    ElementSet (ElementSet *);
+
+
 	// Default destructor.
 	//
 	virtual ~ElementSet ();

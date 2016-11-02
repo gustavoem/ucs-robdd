@@ -146,6 +146,7 @@ namespace ElementSetTest
 		return true;
 	}
 
+
 	bool it_should_store_element_index ()
 	{
 		ElementSet set1 ("S1", 100, 1000);
@@ -155,5 +156,18 @@ namespace ElementSetTest
 				return false;
 		return true;
 	}
+
+
+    bool it_should_copy_itself ()
+    {
+        unsigned int set_size = 100;
+        ElementSet * set1 = new ElementSet ("S1", set_size, 1000);
+        ElementSet set2 (set1);
+        delete set1;
+        for (unsigned int i = 0; i < set_size; i++)
+            if (set2.get_element (i) == NULL)
+                return false;
+        return true;
+    }
 
 } // end namespace
