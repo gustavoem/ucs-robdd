@@ -1,5 +1,5 @@
-#ifndef UCSROBDD3TEST_H_
-#define UCSROBDD3TEST_H_
+#ifndef UCSROBDD6TEST_H_
+#define UCSROBDD6TEST_H_
 
 #include "../src/algorithms/UCSROBDD6.h"
 #include "../src/functions/MeanAbsSum.h"
@@ -7,7 +7,7 @@
 #include "../src/functions/Explicit.h"
 #include "../src/functions/AbsSum.h"
 
-namespace UCSROBDD3Test
+namespace UCSROBDD6Test
 {
 	
 	bool it_should_find_a_global_minimum ();
@@ -20,4 +20,4 @@ namespace UCSROBDD3Test
 	
 }
 
-#endif /* UCSROBDD3TEST_H_ */
+#endif /* UCSROBDD6TEST_H_ */

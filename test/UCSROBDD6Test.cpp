@@ -18,9 +18,9 @@
 //    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-#include "UCSROBDD3Test.h"
+#include "UCSROBDD6Test.h"
 
-namespace UCSROBDD3Test
+namespace UCSROBDD6Test
 {
 
 	bool it_should_find_a_global_minimum ()
