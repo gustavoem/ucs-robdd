@@ -512,9 +512,9 @@ void ROBDD::add_interval (ElementSubset * subset, bool orientation)
 	timeval start, end;
 	gettimeofday (& start, NULL);
 
-	ElementSubset * sub = new ElementSubset ("	", elm_set);
+	ElementSubset * sub = new ElementSubset (subset);
 	/*cout << "(RO) ElementSubset do log: " << sub << endl;*/
-	sub->copy (subset);
+	//sub->copy (subset);
 
 	pair <bool, ElementSubset *> par (orientation, sub);
 	log_of_intervals->push_front (par);

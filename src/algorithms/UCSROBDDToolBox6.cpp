@@ -32,10 +32,10 @@ namespace UCSROBDDToolBox6
 			visit_adjacent (R, L, &Y, X, direction, c, &upper_greater, &lower_greater);
 			direction = 1 - direction;
 		}
-
+                
 		UCSROBDDToolBox6::update_upper_restriction (R, Y->vertex);
 		UCSROBDDToolBox6::update_lower_restriction (R, Y->vertex);
-		delete Y;
+		delete_node (Y);
 	} 
 
 	void visit_adjacent (ROBDD * R, Collection * L, Node ** Y, Node * X, 
@@ -50,7 +50,7 @@ namespace UCSROBDDToolBox6
 		
 		if (X->vertex->cost < (*Y)->vertex->cost)
 		{
-			L->add_subset (X->vertex);
+			L->add_subset (new ElementSubset (X->vertex));
 			if (direction) // Y covers X
 			{ 
 				restrict_visited_adjacents (R, lower_greater, direction);
@@ -66,7 +66,7 @@ namespace UCSROBDDToolBox6
 				UCSROBDDToolBox6::update_lower_restriction (R, (*Y)->vertex);
 			}
 
-			delete (*Y);
+			delete_node (*Y);
 			(*Y) = X;
 		}
 		else
@@ -74,11 +74,11 @@ namespace UCSROBDDToolBox6
 			if (X->vertex->cost > (*Y)->vertex->cost)
 			{
 				if (direction) // Y covers X
-					lower_greater->push_back (X->vertex);
+					lower_greater->push_back (new ElementSubset (X->vertex));
 				else
-					upper_greater->push_back (X->vertex);
+					upper_greater->push_back (new ElementSubset (X->vertex));
 			}
-			delete X;
+			delete_node (X);
 		}
 	}
 

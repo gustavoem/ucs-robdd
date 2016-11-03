@@ -85,89 +85,89 @@ int main(void) {
     cout << endl << "Starting Unit Tests... " << endl << endl;
 
     // Testing Class "Element"
-    cout << "ElementTest::an_element_should_have_a_name";
-    cout.flush ();
-    printResult (ElementTest::an_element_should_have_a_name ());
-    cout << "ElementTest::a_new_element_should_not_have_added_values";
-    cout.flush ();
-    printResult (ElementTest::a_new_element_should_not_have_added_values ());
-    cout << "ElementTest::an_element_without_all_values_added_should_allow_adding";
-    cout.flush ();
-    printResult (ElementTest::an_element_without_all_values_added_should_allow_adding ());
-    cout << "ElementTest::an_element_with_all_values_added_should_not_allow_adding";
-    cout.flush ();
-    printResult (ElementTest::an_element_with_all_values_added_should_not_allow_adding ());
-    cout << "ElementTest::an_added_value_should_be_found";
-    cout.flush ();
-    printResult (ElementTest::an_added_value_should_be_found ());
-    cout << endl;
+    /*cout << "ElementTest::an_element_should_have_a_name";*/
+    //cout.flush ();
+    //printResult (ElementTest::an_element_should_have_a_name ());
+    //cout << "ElementTest::a_new_element_should_not_have_added_values";
+    //cout.flush ();
+    //printResult (ElementTest::a_new_element_should_not_have_added_values ());
+    //cout << "ElementTest::an_element_without_all_values_added_should_allow_adding";
+    //cout.flush ();
+    //printResult (ElementTest::an_element_without_all_values_added_should_allow_adding ());
+    //cout << "ElementTest::an_element_with_all_values_added_should_not_allow_adding";
+    //cout.flush ();
+    //printResult (ElementTest::an_element_with_all_values_added_should_not_allow_adding ());
+    //cout << "ElementTest::an_added_value_should_be_found";
+    //cout.flush ();
+    //printResult (ElementTest::an_added_value_should_be_found ());
+    /*cout << endl;*/
 
     // Testing Class "ElementSet"
-  cout << "ElementSetTest::a_set_should_have_a_name";
-    cout.flush ();
-    printResult (ElementSetTest::a_set_should_have_a_name ());
-    cout << "ElementSetTest::an_empty_set_should_not_have_elements";
-    cout.flush ();
-    printResult (ElementSetTest::an_empty_set_should_not_have_elements ());
-    cout << "ElementSetTest::it_should_load_data_of_a_set_from_file";
-    cout.flush ();
-    printResult (ElementSetTest::it_should_load_data_of_a_set_from_file ());
-    cout << "ElementSetTest::it_should_load_data_of_a_set_from_a_DAT_file";
-    cout.flush ();
-    printResult (ElementSetTest::it_should_load_data_of_a_set_from_a_DAT_file ());
-    cout << "ElementSetTest::it_should_create_a_set_with_random_values";
-    cout.flush ();
-    printResult (ElementSetTest::it_should_create_a_set_with_random_values ());
-    cout << "ElementSetTest::it_should_return_the_set_cardinality";
-    cout.flush ();
-    printResult (ElementSetTest::it_should_return_the_set_cardinality ());
-    cout << "ElementSetTest::it_should_return_an_element_that_belongs_to_the_set";
-    cout.flush ();
-    printResult (ElementSetTest::it_should_return_an_element_that_belongs_to_the_set ());
-    cout << "ElementSetTest::it_should_not_return_an_element_that_not_belongs_to_the_set";
-    cout.flush ();
-    printResult (ElementSetTest::it_should_not_return_an_element_that_not_belongs_to_the_set ());
-    cout << "ElementSetTest::values_from_a_random_set_should_be_within_the_given_range";
-    cout.flush ();
-    printResult (ElementSetTest::values_from_a_random_set_should_be_within_the_given_range ());
-    cout << "ElementSetTest::it_should_store_element_index";
-    cout.flush ();
-    printResult (ElementSetTest::it_should_store_element_index ());
-    cout << "ElementSetTest::it_should_copy_itself";
-    cout.flush ();
-    printResult (ElementSetTest::it_should_copy_itself ());
+    /*cout << "ElementSetTest::a_set_should_have_a_name";*/
+    //cout.flush ();
+    //printResult (ElementSetTest::a_set_should_have_a_name ());
+    //cout << "ElementSetTest::an_empty_set_should_not_have_elements";
+    //cout.flush ();
+    //printResult (ElementSetTest::an_empty_set_should_not_have_elements ());
+    //cout << "ElementSetTest::it_should_load_data_of_a_set_from_file";
+    //cout.flush ();
+    //printResult (ElementSetTest::it_should_load_data_of_a_set_from_file ());
+    //cout << "ElementSetTest::it_should_load_data_of_a_set_from_a_DAT_file";
+    //cout.flush ();
+    //printResult (ElementSetTest::it_should_load_data_of_a_set_from_a_DAT_file ());
+    //cout << "ElementSetTest::it_should_create_a_set_with_random_values";
+    //cout.flush ();
+    //printResult (ElementSetTest::it_should_create_a_set_with_random_values ());
+    //cout << "ElementSetTest::it_should_return_the_set_cardinality";
+    //cout.flush ();
+    //printResult (ElementSetTest::it_should_return_the_set_cardinality ());
+    //cout << "ElementSetTest::it_should_return_an_element_that_belongs_to_the_set";
+    //cout.flush ();
+    //printResult (ElementSetTest::it_should_return_an_element_that_belongs_to_the_set ());
+    //cout << "ElementSetTest::it_should_not_return_an_element_that_not_belongs_to_the_set";
+    //cout.flush ();
+    //printResult (ElementSetTest::it_should_not_return_an_element_that_not_belongs_to_the_set ());
+    //cout << "ElementSetTest::values_from_a_random_set_should_be_within_the_given_range";
+    //cout.flush ();
+    //printResult (ElementSetTest::values_from_a_random_set_should_be_within_the_given_range ());
+    //cout << "ElementSetTest::it_should_store_element_index";
+    //cout.flush ();
+    //printResult (ElementSetTest::it_should_store_element_index ());
+    //cout << "ElementSetTest::it_should_copy_itself";
+    //cout.flush ();
+    //printResult (ElementSetTest::it_should_copy_itself ());
 
-    cout << endl;
+    //cout << endl;
 
-    // Testing Class "ElementSubset"
-    cout << "ElementSubsetTest::a_new_subset_should_be_an_empty_set";
-    cout.flush ();
-    printResult (ElementSubsetTest::a_new_subset_should_be_an_empty_set ());
-    cout << "ElementSubsetTest::an_element_not_in_subset_should_be_added";
-    cout.flush ();
-    printResult (ElementSubsetTest::an_element_not_in_subset_should_be_added ());
-    cout << "ElementSubsetTest::an_element_in_subset_should_be_removed";
-    cout.flush ();
-    printResult (ElementSubsetTest::an_element_in_subset_should_be_removed ());
-    cout << "ElementSubsetTest::it_should_give_the_set_that_belongs_the_subset";
-    cout.flush ();
-    printResult (ElementSubsetTest::it_should_give_the_set_that_belongs_the_subset ());
-    cout << "ElementSubsetTest::a_set_should_contains_its_subset";
-    cout.flush ();
-    printResult (ElementSubsetTest::a_set_should_contains_its_subset ());
-    cout << "ElementSubsetTest::a_subset_should_be_contained_by_its_set";
-    cout.flush ();
-    printResult (ElementSubsetTest::a_subset_should_be_contained_by_its_set ());
-    cout << "ElementSubsetTest::a_subset_should_be_successfully_cloned";
-    cout.flush ();
-    printResult (ElementSubsetTest::a_subset_should_be_successfully_cloned ());
-    cout << "ElementSubsetTest::a_random_element_should_be_removed";
-    cout.flush ();
-    printResult (ElementSubsetTest::a_random_element_should_be_removed ());
-    cout << "ElementSubsetTest::it_should_give_the_complement_of_the_set";
-    cout.flush ();
-    printResult (ElementSubsetTest::it_should_give_the_complement_of_the_set ());
-    cout << endl;
+    //// Testing Class "ElementSubset"
+    //cout << "ElementSubsetTest::a_new_subset_should_be_an_empty_set";
+    //cout.flush ();
+    //printResult (ElementSubsetTest::a_new_subset_should_be_an_empty_set ());
+    //cout << "ElementSubsetTest::an_element_not_in_subset_should_be_added";
+    //cout.flush ();
+    //printResult (ElementSubsetTest::an_element_not_in_subset_should_be_added ());
+    //cout << "ElementSubsetTest::an_element_in_subset_should_be_removed";
+    //cout.flush ();
+    //printResult (ElementSubsetTest::an_element_in_subset_should_be_removed ());
+    //cout << "ElementSubsetTest::it_should_give_the_set_that_belongs_the_subset";
+    //cout.flush ();
+    //printResult (ElementSubsetTest::it_should_give_the_set_that_belongs_the_subset ());
+    //cout << "ElementSubsetTest::a_set_should_contains_its_subset";
+    //cout.flush ();
+    //printResult (ElementSubsetTest::a_set_should_contains_its_subset ());
+    //cout << "ElementSubsetTest::a_subset_should_be_contained_by_its_set";
+    //cout.flush ();
+    //printResult (ElementSubsetTest::a_subset_should_be_contained_by_its_set ());
+    //cout << "ElementSubsetTest::a_subset_should_be_successfully_cloned";
+    //cout.flush ();
+    //printResult (ElementSubsetTest::a_subset_should_be_successfully_cloned ());
+    //cout << "ElementSubsetTest::a_random_element_should_be_removed";
+    //cout.flush ();
+    //printResult (ElementSubsetTest::a_random_element_should_be_removed ());
+    //cout << "ElementSubsetTest::it_should_give_the_complement_of_the_set";
+    //cout.flush ();
+    //printResult (ElementSubsetTest::it_should_give_the_complement_of_the_set ());
+    //cout << endl;
 
     // Testing Class "Collection"
     // cout << "CollectionTest::a_lower_covered_subset_should_be_found";
@@ -502,44 +502,44 @@ int main(void) {
     cout << "UCSROBDD6Test::it_should_find_a_global_minimum";
     cout.flush ();
     printResult (UCSROBDD6Test::it_should_find_a_global_minimum ());
-    cout << "UCSROBDD6Test::it_should_converge_for_large_hamming_sets";
-    cout.flush ();
-    printResult (UCSROBDD6Test::it_should_converge_for_large_hamming_sets ());
-    cout << "UCSROBDD6Test::it_should_converge_for_large_abs_sum_sets";
-    cout.flush ();
-    printResult (UCSROBDD6Test::it_should_converge_for_large_abs_sum_sets());
+    /*cout << "UCSROBDD6Test::it_should_converge_for_large_hamming_sets";*/
+    //cout.flush ();
+    //printResult (UCSROBDD6Test::it_should_converge_for_large_hamming_sets ());
+    //cout << "UCSROBDD6Test::it_should_converge_for_large_abs_sum_sets";
+    //cout.flush ();
+    /*printResult (UCSROBDD6Test::it_should_converge_for_large_abs_sum_sets());*/
     cout << "UCSROBDD6Test::it_should_always_give_the_correct_answer";
     cout.flush ();
     printResult (UCSROBDD6Test::it_should_always_give_the_correct_answer ());
     cout << endl;
     
     // Testing Class "GeneticOrdering"
-    cout << "GeneticOrderingTest::it_should_create_an_initial_population";
-    cout.flush ();
-    printResult (GeneticOrderingTest::it_should_create_an_initial_population ());
-    cout << "GeneticOrderingTest::it_should_give_a_better_ordering_robdd";
-    cout.flush ();
-    printResult (GeneticOrderingTest::it_should_give_a_better_ordering_robdd ());
-    cout << endl;
+    /*cout << "GeneticOrderingTest::it_should_create_an_initial_population";*/
+    //cout.flush ();
+    //printResult (GeneticOrderingTest::it_should_create_an_initial_population ());
+    //cout << "GeneticOrderingTest::it_should_give_a_better_ordering_robdd";
+    //cout.flush ();
+    //printResult (GeneticOrderingTest::it_should_give_a_better_ordering_robdd ());
+    //cout << endl;
 
 
-    // Testing Class "OrderingNode"
-    cout << "OrderingNodeTest::it_should_create_a_random_permutation";
-    cout.flush ();
-    printResult (OrderingNodeTest::it_should_create_a_random_permutation ());
-    cout << "OrderingNodeTest::it_should_represent_the_original_robdd";
-    cout.flush ();
-    printResult (OrderingNodeTest::it_should_represent_the_original_robdd ());
-    cout << "OrderingNodeTest::it_should_recombine_to_other_permutations";
-    cout.flush ();
-    printResult (OrderingNodeTest::it_should_recombine_to_other_permutations ());
-    cout << "OrderingNodeTest::it_should_perform_a_mut";
-    cout.flush ();
-    printResult (OrderingNodeTest::it_should_perform_a_mut ());
-    cout << "OrderingNodeTest::it_should_perform_a_neighbour_mut";
-    cout.flush ();
-    printResult (OrderingNodeTest::it_should_perform_a_neighbour_mut ());
-    cout << endl;
+    //// Testing Class "OrderingNode"
+    //cout << "OrderingNodeTest::it_should_create_a_random_permutation";
+    //cout.flush ();
+    //printResult (OrderingNodeTest::it_should_create_a_random_permutation ());
+    //cout << "OrderingNodeTest::it_should_represent_the_original_robdd";
+    //cout.flush ();
+    //printResult (OrderingNodeTest::it_should_represent_the_original_robdd ());
+    //cout << "OrderingNodeTest::it_should_recombine_to_other_permutations";
+    //cout.flush ();
+    //printResult (OrderingNodeTest::it_should_recombine_to_other_permutations ());
+    //cout << "OrderingNodeTest::it_should_perform_a_mut";
+    //cout.flush ();
+    //printResult (OrderingNodeTest::it_should_perform_a_mut ());
+    //cout << "OrderingNodeTest::it_should_perform_a_neighbour_mut";
+    //cout.flush ();
+    //printResult (OrderingNodeTest::it_should_perform_a_neighbour_mut ());
+    //cout << endl;
 
 
     cout << "Total " << number_of_passed_tests + number_of_failed_tests << " test(s), ";

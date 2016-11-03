@@ -79,6 +79,11 @@ public:
     //
     ElementSubset (string, ElementSet *);
 
+    
+    // Copy constructor
+    //
+    ElementSubset (ElementSubset *);
+
 
     // Default destructor.
     //
