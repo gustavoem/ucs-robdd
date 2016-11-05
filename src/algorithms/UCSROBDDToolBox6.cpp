@@ -50,7 +50,7 @@ namespace UCSROBDDToolBox6
 		
 		if (X->vertex->cost < (*Y)->vertex->cost)
 		{
-			L->add_subset (new ElementSubset (X->vertex));
+			L->add_subset (X->vertex);
 			if (direction) // Y covers X
 			{ 
 				restrict_visited_adjacents (R, lower_greater, direction);
