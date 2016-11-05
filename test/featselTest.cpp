@@ -457,15 +457,15 @@ int main(void) {
 
 
     // Testing Class "UCSROBDDToolBox"
-    cout << "UCSROBDDToolBoxTest::it_should_return_null_when_theres_no_unvisited_adjacent";
-    cout.flush ();
-    printResult (UCSROBDDToolBoxTest::it_should_return_null_when_theres_no_unvisited_adjacent ());
-    cout << "UCSROBDDToolBoxTest::it_should_return_an_unvisited_adjacent";
-    cout.flush ();
-    printResult (UCSROBDDToolBoxTest::it_should_return_an_unvisited_adjacent ());
-    cout << endl;
+    /*cout << "UCSROBDDToolBoxTest::it_should_return_null_when_theres_no_unvisited_adjacent";*/
+    //cout.flush ();
+    //printResult (UCSROBDDToolBoxTest::it_should_return_null_when_theres_no_unvisited_adjacent ());
+    //cout << "UCSROBDDToolBoxTest::it_should_return_an_unvisited_adjacent";
+    //cout.flush ();
+    //printResult (UCSROBDDToolBoxTest::it_should_return_an_unvisited_adjacent ());
+    //cout << endl;
 
-    // Testing Class "UCSROBDDToolBox6"
+    //// Testing Class "UCSROBDDToolBox6"
     cout << "UCSROBDDToolBox6Test::it_should_return_null_when_theres_no_unvisited_adjacent";
     cout.flush ();
     printResult (UCSROBDDToolBox6Test::it_should_return_null_when_theres_no_unvisited_adjacent ());
@@ -498,20 +498,20 @@ int main(void) {
     printResult (UCSROBDDTest::it_should_always_give_the_correct_answer ());
     cout << endl;*/
 
-    /*Testing Class "UCSROBDD3"*/
+    /*Testing Class "UCSROBDD6"*/
     cout << "UCSROBDD6Test::it_should_find_a_global_minimum";
     cout.flush ();
     printResult (UCSROBDD6Test::it_should_find_a_global_minimum ());
-    /*cout << "UCSROBDD6Test::it_should_converge_for_large_hamming_sets";*/
+    //cout << "UCSROBDD6Test::it_should_converge_for_large_hamming_sets";
     //cout.flush ();
-    //printResult (UCSROBDD6Test::it_should_converge_for_large_hamming_sets ());
-    //cout << "UCSROBDD6Test::it_should_converge_for_large_abs_sum_sets";
+    ////printResult (UCSROBDD6Test::it_should_converge_for_large_hamming_sets ());
+    ////cout << "UCSROBDD6Test::it_should_converge_for_large_abs_sum_sets";
+    ////cout.flush ();
+    //[>printResult (UCSROBDD6Test::it_should_converge_for_large_abs_sum_sets());<]
+    //cout << "UCSROBDD6Test::it_should_always_give_the_correct_answer";
     //cout.flush ();
-    /*printResult (UCSROBDD6Test::it_should_converge_for_large_abs_sum_sets());*/
-    cout << "UCSROBDD6Test::it_should_always_give_the_correct_answer";
-    cout.flush ();
-    printResult (UCSROBDD6Test::it_should_always_give_the_correct_answer ());
-    cout << endl;
+    //printResult (UCSROBDD6Test::it_should_always_give_the_correct_answer ());
+    /*cout << endl;*/
     
     // Testing Class "GeneticOrdering"
     /*cout << "GeneticOrderingTest::it_should_create_an_initial_population";*/
