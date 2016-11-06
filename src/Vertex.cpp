@@ -16,6 +16,7 @@ Vertex::Vertex (Element * elm, unsigned int index)
 	hi = NULL;
 	this->index = index;
 	this->id = index;
+	std::cout << "element address: " << elm << "index: " << index << std::endl;
 }
 
 

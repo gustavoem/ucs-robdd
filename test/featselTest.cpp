@@ -466,13 +466,13 @@ int main(void) {
     //cout << endl;
 
     //// Testing Class "UCSROBDDToolBox6"
-    cout << "UCSROBDDToolBox6Test::it_should_return_null_when_theres_no_unvisited_adjacent";
-    cout.flush ();
-    printResult (UCSROBDDToolBox6Test::it_should_return_null_when_theres_no_unvisited_adjacent ());
-    cout << "UCSROBDDToolBox6Test::it_should_return_an_unvisited_adjacent";
-    cout.flush ();
-    printResult (UCSROBDDToolBox6Test::it_should_return_an_unvisited_adjacent ());
-    cout << endl;
+    // cout << "UCSROBDDToolBox6Test::it_should_return_null_when_theres_no_unvisited_adjacent";
+    // cout.flush ();
+    // printResult (UCSROBDDToolBox6Test::it_should_return_null_when_theres_no_unvisited_adjacent ());
+    // cout << "UCSROBDDToolBox6Test::it_should_return_an_unvisited_adjacent";
+    // cout.flush ();
+    // printResult (UCSROBDDToolBox6Test::it_should_return_an_unvisited_adjacent ());
+    // cout << endl;
 
     // Testing Class "UCSROBDD2"
     /*cout << "UCSROBDDTest::a_lattice_with_constant_cost_should_be_totally_exausted";

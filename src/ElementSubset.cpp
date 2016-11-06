@@ -63,7 +63,7 @@ ElementSubset::ElementSubset (ElementSubset * elm_subset)
         this->list_of_elements[i] = elm_subset->list_of_elements[i];
     this->cost = elm_subset->cost;
     this->j = elm_subset->j;
-    this->Y = NULL;
+    this->Y = elm_subset->Y;
 }
 
 

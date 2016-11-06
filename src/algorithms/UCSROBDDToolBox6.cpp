@@ -88,10 +88,12 @@ namespace UCSROBDDToolBox6
     {
         while (!l->empty ())
         {
+            ElementSubset * subset = l->back ();
             if (direction)
-                update_lower_restriction (R, l->back ());
+                update_lower_restriction (R, subset);
             else
-                update_upper_restriction (R, l->back ());
+                update_upper_restriction (R, subset);
+            delete subset;
             l->pop_back ();
         }
     }

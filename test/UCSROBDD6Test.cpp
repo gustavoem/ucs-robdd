@@ -25,36 +25,36 @@ namespace UCSROBDD6Test
 
 	bool it_should_find_a_global_minimum ()
 	{
-		ElementSet set1 ("set", "input/CostFunctionTest3ElementsFile.xml");
-		ElementSet set2 ("set", "input/UCSTest9ElementsFileA.xml");
+		// ElementSet set1 ("set", "input/CostFunctionTest3ElementsFile.xml");
+		// ElementSet set2 ("set", "input/UCSTest9ElementsFileA.xml");
 		ElementSet set3 ("set", "input/UCSTest7ElementsFileA.xml");
-		ElementSet set4 ("set", "input/CostFunctionTestExplicitFuncA.xml");
-		MeanAbsSum c1 (&set1);
-		MeanAbsSum c2 (&set2);
+		// ElementSet set4 ("set", "input/CostFunctionTestExplicitFuncA.xml");
+		// MeanAbsSum c1 (&set1);
+		// MeanAbsSum c2 (&set2);
 		HammingDistance c3 (&set3);
-		Explicit c4 (&set4);
-		UCSROBDD6 ucs1;
-		UCSROBDD6 ucs2;
+		// Explicit c4 (&set4);
+		// UCSROBDD6 ucs1;
+		// UCSROBDD6 ucs2;
 		UCSROBDD6 ucs3;
-		UCSROBDD6 ucs4;
-		ucs1.set_parameters (&c1, &set1, false);
-		ucs1.get_minima_list (1);
-		if (ucs1.print_list_of_minima ().find ("<010>") == string::npos)
-			return false;
-		ucs2.set_parameters (&c2, &set2, false);
-		ucs2.get_minima_list (3);
-		if ((ucs2.print_list_of_minima ().find ("<000010000>") == string::npos) ||
-		    (ucs2.print_list_of_minima ().find ("<100100000>") == string::npos) ||
-			(ucs2.print_list_of_minima ().find ("<011000000>") == string::npos) )
-			return false;
+		// UCSROBDD6 ucs4;
+		// ucs1.set_parameters (&c1, &set1, false);
+		// ucs1.get_minima_list (1);
+		// if (ucs1.print_list_of_minima ().find ("<010>") == string::npos)
+		// 	return false;
+		// ucs2.set_parameters (&c2, &set2, false);
+		// ucs2.get_minima_list (3);
+		// if ((ucs2.print_list_of_minima ().find ("<000010000>") == string::npos) ||
+		//     (ucs2.print_list_of_minima ().find ("<100100000>") == string::npos) ||
+		// 	(ucs2.print_list_of_minima ().find ("<011000000>") == string::npos) )
+		// 	return false;
 		ucs3.set_parameters (&c3, &set3, false);
 		ucs3.get_minima_list (1);
 		if (ucs3.print_list_of_minima ().find ("<0011100>") == string::npos)
 			return false;
-		ucs4.set_parameters (&c4, &set4, false);
-		ucs4.get_minima_list (1);
-		if (ucs4.print_list_of_minima ().find ("<101>") == string::npos)
-			return false;
+		// ucs4.set_parameters (&c4, &set4, false);
+		// ucs4.get_minima_list (1);
+		// if (ucs4.print_list_of_minima ().find ("<101>") == string::npos)
+		// 	return false;
 		return true;
 	}
 
