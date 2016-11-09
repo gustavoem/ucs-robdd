@@ -27,7 +27,8 @@ namespace UCSROBDD6Test
 	{
 		// ElementSet set1 ("set", "input/CostFunctionTest3ElementsFile.xml");
 		// ElementSet set2 ("set", "input/UCSTest9ElementsFileA.xml");
-		ElementSet set3 ("set", "input/UCSTest7ElementsFileA.xml");
+                ElementSet set3 ("set", "input/UCSTest7ElementsFileA.xml");
+                //ElementSet set3 ("set", "input/UCSTest5ElementsFileA.xml");
 		// ElementSet set4 ("set", "input/CostFunctionTestExplicitFuncA.xml");
 		// MeanAbsSum c1 (&set1);
 		// MeanAbsSum c2 (&set2);
@@ -252,5 +253,11 @@ namespace UCSROBDD6Test
 		} */
 		return true;
 	}
+
+
+        bool it_should_be_able_to_reduce_an_obdd () 
+        {
+            
+        }
 
 } // end of namespace

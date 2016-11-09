@@ -2,6 +2,7 @@
 #define ROBDDTEST_H_
 
 #include "../src/ROBDD.h"
+#include "../src/Vertex.h"
 #include "../src/GeneticOrdering.h"
 
 namespace ROBDDTest {
@@ -17,6 +18,7 @@ namespace ROBDDTest {
 	bool its_possible_to_get_a_random_subset_evaluated_zero ();
 	bool the_robdd_maintains_a_log_of_restrictions ();
 	bool it_should_represent_the_same_space_after_reordering ();
+        bool it_should_be_able_to_reduce_an_obdd ();
 
 }
 

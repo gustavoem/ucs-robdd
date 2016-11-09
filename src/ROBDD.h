@@ -128,6 +128,11 @@ public:
 	//
 	ROBDD (ElementSet *);
 
+        
+        // Creates a ROBDD represented by the tree with root root.
+        //
+        ROBDD::ROBDD (ElementSet * set, Vertex * root, int card);
+
 
 	// Builds a ROBDD representing the function "0" using the ordering in unsigned int *
 	//

@@ -25,6 +25,27 @@ ROBDD::ROBDD (ElementSet * set)
     log_of_intervals = new list <pair <bool, ElementSubset *> >();
 }
 
+
+ROBDD::ROBDD (ElementSet * set, Vertex * root, int card)
+{
+    unsigned int n = elm_set->get_set_cardinality ();
+    nof_updates  = 0;
+    nof_consults = 0;
+    time_consulting = 0;
+    time_updating = 0;
+    time_reducing = 0;
+    this->elm_set = set;
+    this->root = root;
+    this->cardinality = card;
+
+    // initial ordering is 0, 1, ..., n-1
+    ordering = (unsigned int *) malloc (sizeof (unsigned int) * n);
+    for (unsigned int i = 0; i < n; i++)
+        ordering[i] = i;
+
+    log_of_intervals = new list <pair <bool, ElementSubset *> >();
+}
+
 ROBDD::ROBDD (ElementSet * set, unsigned int * ord)
 {
     nof_updates  = 0;
@@ -456,8 +477,8 @@ void ROBDD::union_to (Vertex * root2)
     {
         cout << "Eopaaaaa!\n\n\n\n\n";
         print ();
-    //     cout.flush ();
-        // while (true);
+         cout.flush ();
+         while (true);
     }
     // cout << "depois de reduzir: " << endl;
     // print ();

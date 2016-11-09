@@ -1,0 +1,37 @@
+  x01 & id: 1 addres: 0x5a58d00 index: 1
+L x02 & id: 2 addres: 0x5a58df0 index: 2
+L x03 & id: 3 addres: 0x5a58ee0 index: 3
+L x04 & id: 4 addres: 0x5a58fd0 index: 4
+L x05 & id: 5 addres: 0x5a590c0 index: 5
+L 1      & id: 8 addres: 0x5a58c20 index: 8
+R x06 & id: 6 addres: 0x5a59230 index: 6
+L x07 & id: 7 addres: 0x5a59320 index: 7
+L 1      & id: 8 addres: 0x5a58c20 index: 8
+R 0      & id: 8 addres: 0x5a58c90 index: 8
+R 1      & id: 8 addres: 0x5a58c20 index: 8
+R x06 & id: 6 addres: 0x5a59230 index: 6
+L x07 & id: 7 addres: 0x5a59320 index: 7
+L 1      & id: 8 addres: 0x5a58c20 index: 8
+R 0      & id: 8 addres: 0x5a58c90 index: 8
+R 1      & id: 8 addres: 0x5a58c20 index: 8
+R x04 & id: 4 addres: 0x5a59510 index: 4
+L x05 & id: 5 addres: 0x5a59600 index: 5
+L x06 & id: 6 addres: 0x5a596f0 index: 6
+L 1      & id: 8 addres: 0x5a58c20 index: 8
+R 1      & id: 8 addres: 0x5a58c20 index: 8
+R x06 & id: 6 addres: 0x5a59230 index: 6
+L x07 & id: 7 addres: 0x5a59320 index: 7
+L 1      & id: 8 addres: 0x5a58c20 index: 8
+R 0      & id: 8 addres: 0x5a58c90 index: 8
+R 1      & id: 8 addres: 0x5a58c20 index: 8
+R x05 & id: 5 addres: 0x5a59860 index: 5
+L x06 & id: 6 addres: 0x5a59230 index: 6
+L x07 & id: 7 addres: 0x5a59320 index: 7
+L 1      & id: 8 addres: 0x5a58c20 index: 8
+R 0      & id: 8 addres: 0x5a58c90 index: 8
+R 1      & id: 8 addres: 0x5a58c20 index: 8
+R 1      & id: 8 addres: 0x5a58c20 index: 8
+R 1      & id: 8 addres: 0x5a58c20 index: 8
+R 1      & id: 8 addres: 0x5a58c20 index: 8
+Deletando vértice:  0x5a59600
+Eopaaaaa!

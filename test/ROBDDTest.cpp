@@ -277,5 +277,16 @@ namespace ROBDDTest {
 		return true;
 	}
 
+        bool it_should_be_able_to_reduce_an_obdd () 
+        {
+	    ElementSet * elm_set = new ElementSet ("", 7, 100);
+            Vertex v1 = new Vertex (elm_set->get_element (0), 1);
+            Vertex v2 = new Vertex (elm_set->get_element (1), 2);
+            Vertex v3 = new Vertex (elm_set->get_element (2), 3);
+            Vertex v4 = new Vertex (elm_set->get_element (3), 4);
+            Vertex v4 = new Vertex (elm_set->get_element (3), 4);
+        }
+        
+
 } // end of namespace
 
