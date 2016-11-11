@@ -28,7 +28,7 @@ ROBDD::ROBDD (ElementSet * set)
 
 ROBDD::ROBDD (ElementSet * set, Vertex * root, int card)
 {
-    unsigned int n = elm_set->get_set_cardinality ();
+    unsigned int n = set->get_set_cardinality ();
     nof_updates  = 0;
     nof_consults = 0;
     time_consulting = 0;
@@ -334,47 +334,55 @@ void ROBDD::reduce ()
     
     unmark_all_vertex ();
     fill_vlist (root, vlists);
+    // possivel leak: ids corretos??
 
     int next_id = 0;
     for (int i = set_card + 1; i > 0; i--)
     {
-        map<Vertex *, pair<int, int> > Q;
+        list<MyVerticeEntry> Q;
         list<Vertex *> * l = vlists[i];
         for (list<Vertex*>::iterator it = l->begin (); it != l->end (); it++)
         {
             Vertex * u = *it;
             Vertex * u_lo = u->get_child (false);
             Vertex * u_hi = u->get_child (true);
+            VerticeEntry ve;
             if (u->get_index () == set_card + 1) 
             {
-                pair<int,  int> id_i (-1, u->get_value ());
-                Q.insert(make_pair (u, id_i));
+                // pair<int,  int> id_i (-1, u->get_value ());
+                ve.lo_id = -1;
+                ve.hi_id = u->get_value ();
+                ve.v = u;
+                Q.push_back (ve);
+                // Q.insert (make_pair (u, id_i));
             }
             else if (u_hi->get_id () == u_lo->get_id ()) 
             {
+                // Redundant vertex
                 u->set_id (u_lo->get_id ());
-                if (u_hi != u_lo)
-                {
-                    if (subgraph[u_hi->get_id ()] != u_hi) 
-                        trash_can.insert (trash_it, u_hi);
-                    if (subgraph[u_hi->get_id ()] != u_lo)
-                        trash_can.insert (trash_it, u_lo);
-                }
-                else
-                    if (subgraph[u_hi->get_id ()] != u_hi) 
-                        trash_can.insert (trash_it, u_hi);
+                if (subgraph[u_hi->get_id ()] != u_hi) 
+                    trash_can.insert (trash_it, u_hi);
+                if (subgraph[u_hi->get_id ()] != u_lo)
+                    trash_can.insert (trash_it, u_lo);
+                trash_can.insert (trash_it, u);
             }
             else
             {
-                pair<int, int> id_i (u_lo->get_id (), u_hi->get_id ());
-                Q.insert(make_pair(u, id_i));
+                // pair<int, int> id_i (u_lo->get_id (), u_hi->get_id ());
+                // Q.insert(make_pair(u, id_i));
+                ve.lo_id = u_lo->get_id ();
+                ve.hi_id = u_hi->get_id ();
+                ve.v = u;
+                Q.push_back (ve);
             }
         }
         pair<int, int> oldkey (-1, -1);
+        // sort Q by id
         for (map<Vertex *, pair<int, int> >::iterator it = Q.begin(); it != Q.end(); it++)
         {
             pair<int, int> id_i = it->second;
             Vertex * u = it->first;
+            cout << "Key = " << (id_i.first) << ", " << (id_i.second) << endl;
             if (id_i.first == oldkey.first && id_i.second == oldkey.second)
             {
                 u->set_id (next_id);
@@ -387,6 +395,7 @@ void ROBDD::reduce ()
                 Vertex * u_hi = u->get_child (true);
                 next_id++;
                 u->set_id (next_id);
+                // possivel leak: e se subgraph[next_id] = u
                 subgraph[next_id] = u;
                 if (u_lo != NULL)
                 {
@@ -407,6 +416,14 @@ void ROBDD::reduce ()
         }
     }
     
+    Vertex * new_root = subgraph[root->get_id ()];
+    if (root != new_root)
+    {
+        cout << "Deletando vértice:  " << root << endl;
+        delecoes++;
+        delete  root;
+    }
+
     for (trash_it = trash_can.begin (); trash_it != trash_can.end (); )
     {
         Vertex * x = *trash_it;
@@ -416,13 +433,6 @@ void ROBDD::reduce ()
         delete x;
     }
     
-    Vertex * new_root = subgraph[root->get_id ()];
-    if (root != new_root)
-    {
-        cout << "Deletando vértice:  " << root << endl;
-        delecoes++;
-        delete  root;
-    }
     
     root = new_root;
     cardinality = root->get_id ();
@@ -478,7 +488,7 @@ void ROBDD::union_to (Vertex * root2)
         cout << "Eopaaaaa!\n\n\n\n\n";
         print ();
          cout.flush ();
-         while (true);
+         // while (true);
     }
     // cout << "depois de reduzir: " << endl;
     // print ();

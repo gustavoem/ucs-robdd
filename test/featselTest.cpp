@@ -453,6 +453,9 @@ int main(void) {
     cout << "ROBDDTest::it_should_represent_the_same_space_after_reordering";
     cout.flush ();
     printResult (ROBDDTest::it_should_represent_the_same_space_after_reordering ());
+    cout << "ROBDDTest::it_should_be_able_to_reduce_an_obdd";
+    cout.flush ();
+    printResult (ROBDDTest::it_should_be_able_to_reduce_an_obdd ());
     cout << endl;
 
 

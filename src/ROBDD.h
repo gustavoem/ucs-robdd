@@ -12,248 +12,258 @@ class ROBDD
     
 protected:
 
-	// Stores the number of updates (add_interval) of the robdd 
-	//
-	unsigned int nof_updates;
-	
+    // Stores the number of updates (add_interval) of the robdd 
+    //
+    unsigned int nof_updates;
+    
 
-	// Stores the number of consults of the robdd
-	//
-	unsigned int nof_consults;
-
-
-	// Stores the number of reorderings the robdd suffered
-	//
-	unsigned int nof_reorderings;
+    // Stores the number of consults of the robdd
+    //
+    unsigned int nof_consults;
 
 
-	// Time spent updating the ROBDD
-	//
-	unsigned int time_updating;
-
-	// Time spent consulting the ROBDD
-	//
-	unsigned int time_consulting;
+    // Stores the number of reorderings the robdd suffered
+    //
+    unsigned int nof_reorderings;
 
 
-	// Time spent reordering the ROBDD
-	//
-	unsigned int time_reordering;
+    // Time spent updating the ROBDD
+    //
+    unsigned int time_updating;
+
+    // Time spent consulting the ROBDD
+    //
+    unsigned int time_consulting;
 
 
-	// Time spent reducing the ROBDD
-	//
-	unsigned int time_reducing;
+    // Time spent reordering the ROBDD
+    //
+    unsigned int time_reordering;
 
 
-	// The maximum size an ROBDD had
-	//
-	unsigned int max_size;
+    // Time spent reducing the ROBDD
+    //
+    unsigned int time_reducing;
 
 
-	// The current variable ordering
-	//
-	unsigned int * ordering;
-
-	// The set of elements this ROBDD will represent
-	//
-	ElementSet * elm_set;
+    // The maximum size an ROBDD had
+    //
+    unsigned int max_size;
 
 
-	// ROBDD cardinality
-	//
-	unsigned int cardinality;
+    // The current variable ordering
+    //
+    unsigned int * ordering;
+
+    // The set of elements this ROBDD will represent
+    //
+    ElementSet * elm_set;
 
 
-	// The root of the ROBDD
-	//
-	Vertex * root;	
-
-	// A log of all intervals added to the ROBDD
-	//
-	list <pair <bool, ElementSubset *> > * log_of_intervals;
-
-	// Prints the sub-tree that has the parameter Vertex as root
-	//
-	void print(Vertex *);
+    // ROBDD cardinality
+    //
+    unsigned int cardinality;
 
 
-	// Auxiliar function to ROBDD (ElementSet *, ElementSubset*)
-	//
-	void build (Vertex *, unsigned int, unsigned int, ElementSubset *, Vertex *, Vertex *);
+    // The root of the ROBDD
+    //
+    Vertex * root;  
+
+    // A log of all intervals added to the ROBDD
+    //
+    list <pair <bool, ElementSubset *> > * log_of_intervals;
+
+    // Prints the sub-tree that has the parameter Vertex as root
+    //
+    void print(Vertex *);
 
 
-	// Auxiliar function to ROBDD::reduce ()
-	//
-	void fill_vlist (Vertex *, list<Vertex *> **);
+    // Auxiliar function to ROBDD (ElementSet *, ElementSubset*)
+    //
+    void build (Vertex *, unsigned int, unsigned int, ElementSubset *, Vertex *, Vertex *);
 
 
-	// Unmarks all the vertices from the robdd
-	//
-	void unmark_all_vertex ();
+    // Auxiliar function to ROBDD::reduce ()
+    //
+    void fill_vlist (Vertex *, list<Vertex *> **);
 
 
-	// Unmarks all the vertices from the subtree with root Vertex *
-	//
-	void unmark_all_vertex (Vertex *);
+    // Unmarks all the vertices from the robdd
+    //
+    void unmark_all_vertex ();
 
 
-	// Deletes the subtree with root Vertex *
-	//
-	void delete_subtree (Vertex **, unsigned int *);
+    // Unmarks all the vertices from the subtree with root Vertex *
+    //
+    void unmark_all_vertex (Vertex *);
 
 
-	// Returns a list with all vertex of the ROBDD with root Vertex *
-	//
-	Vertex ** get_all_vertex (Vertex *, unsigned int);
+    // Deletes the subtree with root Vertex *
+    //
+    void delete_subtree (Vertex **, unsigned int *);
 
 
-	// Auxiliar function to get_all_vertex that traverse the robdd assgning
-	// pointers of the vertex to the vector vertice
-	//
-	void fill_vertice (Vertex **, int *, Vertex *);
+    // Returns a list with all vertex of the ROBDD with root Vertex *
+    //
+    Vertex ** get_all_vertex (Vertex *, unsigned int);
 
-	// Auxiliar function to add_lower_interval (). This method builds a tree of
-	// a ROBDD that has ones for subsets covered by the subset passed by 
-	// argument.
-	//
-	Vertex * build_interval (unsigned int, unsigned int *, ElementSubset *, Vertex *, Vertex *, bool);
+
+    // Auxiliar function to get_all_vertex that traverse the robdd assgning
+    // pointers of the vertex to the vector vertice
+    //
+    void fill_vertice (Vertex **, int *, Vertex *);
+
+    // Auxiliar function to add_lower_interval (). This method builds a tree of
+    // a ROBDD that has ones for subsets covered by the subset passed by 
+    // argument.
+    //
+    Vertex * build_interval (unsigned int, unsigned int *, ElementSubset *, Vertex *, Vertex *, bool);
+
+
+    // Defines the structure used to save vertice on a reducing procedure
+    //
+    typedef struct MyVerticeEntry
+    {
+        int lo_id;
+        int hi_id;
+        Vertex * v;
+    } VerticeEntry;
 
 
 public:
 
 
 
-	// Builds a ROBDD representing the function "0"
-	//
-	ROBDD (ElementSet *);
+    // Builds a ROBDD representing the function "0"
+    //
+    ROBDD (ElementSet *);
 
         
-        // Creates a ROBDD represented by the tree with root root.
-        //
-        ROBDD::ROBDD (ElementSet * set, Vertex * root, int card);
+    // Creates a ROBDD represented by the tree with root root.
+    //
+    ROBDD (ElementSet * set, Vertex * root, int card);
 
 
-	// Builds a ROBDD representing the function "0" using the ordering in unsigned int *
-	//
-	ROBDD (ElementSet *, unsigned int *);
+    // Builds a ROBDD representing the function "0" using the ordering in unsigned int *
+    //
+    ROBDD (ElementSet *, unsigned int *);
 
 
-	// this is for testing reduce ()
-	//
-	ROBDD (ElementSet *, int);
+    // this is for testing reduce ()
+    //
+    ROBDD (ElementSet *, int);
 
 
-	// Builds an ROBDD where the only path valued "1", is the path representing the subset
-	//
-	ROBDD (ElementSet *, ElementSubset *);
+    // Builds an ROBDD where the only path valued "1", is the path representing the subset
+    //
+    ROBDD (ElementSet *, ElementSubset *);
 
 
-	// Default destructor.
-	//
-	virtual ~ROBDD ();	
+    // Default destructor.
+    //
+    virtual ~ROBDD ();  
 
 
-	// Represents the robdd in the ordering passed by parameter
-	//
-	void change_ordering (unsigned int *);
+    // Represents the robdd in the ordering passed by parameter
+    //
+    void change_ordering (unsigned int *);
 
 
-	// Returns the root vertex
-	//
-	Vertex * get_root ();
+    // Returns the root vertex
+    //
+    Vertex * get_root ();
 
 
-	// Prints the entire ROBDD
-	//
-	void print ();
-	
+    // Prints the entire ROBDD
+    //
+    void print ();
+    
 
-	// Reduces the OBDD
-	//
-	void reduce ();
-
-
-	// Makes the union of this ROBDD and the one passed by argument
-	//
-	void union_to (Vertex *);
+    // Reduces the OBDD
+    //
+    void reduce ();
 
 
-	// Makes the union of the subtrees passed by argument
-	//
-	Vertex * union_step (Vertex * v1, Vertex * v2, map<pair<Vertex *, Vertex *>,\
-						 Vertex *> *, unsigned int *, Vertex *, Vertex *);
+    // Makes the union of this ROBDD and the one passed by argument
+    //
+    void union_to (Vertex *);
 
 
-	// Adds to the ROBDD all the subsets covered (if bool false) or that covers (if bool
-	// true) by ElementSubset *
-	//
-	void add_interval (ElementSubset *, bool);
+    // Makes the union of the subtrees passed by argument
+    //
+    Vertex * union_step (Vertex * v1, Vertex * v2, map<pair<Vertex *, Vertex *>,\
+                         Vertex *> *, unsigned int *, Vertex *, Vertex *);
 
 
-	// Returns true if the ElementSubset * path of the robdds leads to a 1
-	//
-	bool contains (ElementSubset *);
+    // Adds to the ROBDD all the subsets covered (if bool false) or that covers (if bool
+    // true) by ElementSubset *
+    //
+    void add_interval (ElementSubset *, bool);
 
 
-	// Returns a random subset that is evaluated by zero.
-	//
-	ElementSubset * get_random_zero_evaluated_element ();
+    // Returns true if the ElementSubset * path of the robdds leads to a 1
+    //
+    bool contains (ElementSubset *);
 
 
-	// Returns the log list
-	//
-	list< pair<bool, ElementSubset *> > get_log ();
+    // Returns a random subset that is evaluated by zero.
+    //
+    ElementSubset * get_random_zero_evaluated_element ();
 
 
-	// Returns the ElementSet used to build the ROBDD
-	//
-	ElementSet * get_element_set ();
+    // Returns the log list
+    //
+    list< pair<bool, ElementSubset *> > get_log ();
 
 
-	// Returns the number of vertice of the ROBDD
-	//
-	unsigned int get_cardinality ();
+    // Returns the ElementSet used to build the ROBDD
+    //
+    ElementSet * get_element_set ();
 
 
-	// Returns nof_consults
-	//
-	unsigned int get_nof_consults ();
+    // Returns the number of vertice of the ROBDD
+    //
+    unsigned int get_cardinality ();
 
 
-	// Returns nof_updates
-	//
-	unsigned int get_nof_updates ();
+    // Returns nof_consults
+    //
+    unsigned int get_nof_consults ();
 
 
-	// Returns nof_reorderings
-	//
-	unsigned int get_nof_reorderings ();
+    // Returns nof_updates
+    //
+    unsigned int get_nof_updates ();
 
 
-	// Returns time elapsed updating the robdd
-	//
-	int get_time_updating ();
-
-	
-	// Returns time elapsed consulting the robdd
-	//
-	int get_time_consulting ();	
+    // Returns nof_reorderings
+    //
+    unsigned int get_nof_reorderings ();
 
 
-	// Returns time elapsed consulting the robdd
-	//
-	int get_time_reducing ();
+    // Returns time elapsed updating the robdd
+    //
+    int get_time_updating ();
+
+    
+    // Returns time elapsed consulting the robdd
+    //
+    int get_time_consulting (); 
 
 
-	// Returns time elapsed consulting the robdd
-	//
-	int get_time_reordering ();
+    // Returns time elapsed consulting the robdd
+    //
+    int get_time_reducing ();
 
 
-	// Returns the maximum size the ROBDD had
-	//
-	unsigned int get_max_size ();
+    // Returns time elapsed consulting the robdd
+    //
+    int get_time_reordering ();
+
+
+    // Returns the maximum size the ROBDD had
+    //
+    unsigned int get_max_size ();
 
 };
 

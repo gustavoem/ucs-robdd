@@ -20,7 +20,7 @@
 
 IDIR = ../
 
-CXXFLAGS =	-O0 -g -Wall -fmessage-length=0
+CXXFLAGS =	-O2 -g -Wall -fmessage-length=0
 
 OBJS =		src/Element.o src/ElementSet.o src/ElementSubset.o \
 			src/Collection.o src/Solver.o src/CostFunction.o \
