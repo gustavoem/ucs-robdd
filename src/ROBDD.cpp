@@ -318,6 +318,18 @@ void ROBDD::fill_vlist (Vertex * v, list<Vertex *> ** vlists)
 }
 
 
+bool ROBDD::VerticeEntry::operator < (const VerticeEntry& y)
+{  
+    cout <<  "hello"  <<endl;
+    if (lo_id < y.lo_id)
+        return true;
+    else if (lo_id == y.lo_id && hi_id <= y.hi_id)
+        return true;
+    else
+        return false;
+}
+
+
 void ROBDD::reduce ()
 { 
     timeval start, end;
@@ -349,12 +361,10 @@ void ROBDD::reduce ()
             VerticeEntry ve;
             if (u->get_index () == set_card + 1) 
             {
-                // pair<int,  int> id_i (-1, u->get_value ());
                 ve.lo_id = -1;
                 ve.hi_id = u->get_value ();
                 ve.v = u;
                 Q.push_back (ve);
-                // Q.insert (make_pair (u, id_i));
             }
             else if (u_hi->get_id () == u_lo->get_id ()) 
             {
@@ -368,8 +378,6 @@ void ROBDD::reduce ()
             }
             else
             {
-                // pair<int, int> id_i (u_lo->get_id (), u_hi->get_id ());
-                // Q.insert(make_pair(u, id_i));
                 ve.lo_id = u_lo->get_id ();
                 ve.hi_id = u_hi->get_id ();
                 ve.v = u;
@@ -378,15 +386,16 @@ void ROBDD::reduce ()
         }
         pair<int, int> oldkey (-1, -1);
         // sort Q by id
-        for (map<Vertex *, pair<int, int> >::iterator it = Q.begin(); it != Q.end(); it++)
+        Q.sort ();
+        for (list<VerticeEntry>::iterator it = Q.begin(); it != Q.end(); it++)
         {
-            pair<int, int> id_i = it->second;
-            Vertex * u = it->first;
-            cout << "Key = " << (id_i.first) << ", " << (id_i.second) << endl;
-            if (id_i.first == oldkey.first && id_i.second == oldkey.second)
+            VerticeEntry ve = *it;
+            Vertex * u = ve.v;
+            cout << "Key = " << (ve.lo_id) << ", " << (ve.hi_id) << endl;
+            if (ve.lo_id == oldkey.first && ve.hi_id == oldkey.second)
             {
                 u->set_id (next_id);
-                if (subgraph[next_id] != u)
+                // if (subgraph[next_id] != u)
                     trash_can.insert (trash_it, u);
             }
             else
@@ -411,7 +420,7 @@ void ROBDD::reduce ()
                         trash_can.insert (trash_it, u_hi);
                     u->set_child (actual_hi_child, true);
                 }
-                oldkey = id_i;
+                oldkey = make_pair (ve.lo_id, ve.hi_id);
             }
         }
     }

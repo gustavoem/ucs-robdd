@@ -127,6 +127,7 @@ protected:
         int lo_id;
         int hi_id;
         Vertex * v;
+        bool operator < (const MyVerticeEntry& y);
     } VerticeEntry;
 
 
