@@ -27,13 +27,13 @@ using namespace std;
 
 ElementSet::ElementSet (string set_name)
 {
-	if (set_name.length () > 0)
-		name = set_name;
-	else
-		name = "S";
-	number_of_elements = 0;
-	list_of_elements = NULL;
-	has_extra_element = false;
+    if (set_name.length () > 0)
+        name = set_name;
+    else
+        name = "S";
+    number_of_elements = 0;
+    list_of_elements = NULL;
+    has_extra_element = false;
 }
 
 
@@ -41,24 +41,24 @@ ElementSet::ElementSet (string set_name)
 //
 ElementSet::ElementSet (string a_set_name, string file_name)
 {
-	XmlParserDriver driver;
-	list_of_elements = NULL;
-	has_extra_element = false;
-	number_of_elements = 0;
+    XmlParserDriver driver;
+    list_of_elements = NULL;
+    has_extra_element = false;
+    number_of_elements = 0;
 
-	if (driver.parse (file_name.data ()))
-	{
-		std::cout << "Error in ElementSet, processing the XML file!" << std::endl;
-	}
-	else
-	{
-		list_of_elements = driver.list_of_elements;
-		number_of_elements = driver.number_of_elements;
-		name = driver.set_name;
-		explicit_cost = driver.explicit_cost;
-	}
+    if (driver.parse (file_name.data ()))
+    {
+        std::cout << "Error in ElementSet, processing the XML file!" << std::endl;
+    }
+    else
+    {
+        list_of_elements = driver.list_of_elements;
+        number_of_elements = driver.number_of_elements;
+        name = driver.set_name;
+        explicit_cost = driver.explicit_cost;
+    }
 
-	set_elm_indexes ();
+    set_elm_indexes ();
 }
 
 
@@ -66,86 +66,86 @@ ElementSet::ElementSet (string a_set_name, string file_name)
 //
 ElementSet::ElementSet (string file_name, unsigned int n)
 {
-	// example of a line of a .dat file with five elements:
-	// 0 1 1 0  11 27\n
-	// where the last two numbers are the number of occurrences of the labels
-	// "0" and "1"  (in this case, "0" occurred 11 times and "1" 27 times).
-	//
-	//
-	unsigned int i, max_number_of_values, current_value;
-	long begin, end;
-	ifstream my_file (file_name.c_str ());
+    // example of a line of a .dat file with five elements:
+    // 0 1 1 0  11 27\n
+    // where the last two numbers are the number of occurrences of the labels
+    // "0" and "1"  (in this case, "0" occurred 11 times and "1" 27 times).
+    //
+    //
+    unsigned int i, max_number_of_values, current_value;
+    long begin, end;
+    ifstream my_file (file_name.c_str ());
 
-	has_extra_element = true;
-	name = "W-operator window";
-	number_of_elements = n;
+    has_extra_element = true;
+    name = "W-operator window";
+    number_of_elements = n;
 
-	begin = my_file.tellg ();
-	my_file.seekg (0, ios::end);
-	end = my_file.tellg ();
-	my_file.seekg (0, ios::beg);
-	// a conservative estimation, since the values of the last two numbers
-	// often have more than 2 digits.
-	max_number_of_values = (end - begin) / (2 * (number_of_elements + 2));
+    begin = my_file.tellg ();
+    my_file.seekg (0, ios::end);
+    end = my_file.tellg ();
+    my_file.seekg (0, ios::beg);
+    // a conservative estimation, since the values of the last two numbers
+    // often have more than 2 digits.
+    max_number_of_values = (end - begin) / (2 * (number_of_elements + 2));
 
-	// the extra positions is to store the classification for a given window state
-	//
-	list_of_elements = new Element * [number_of_elements + 2];
-	if (list_of_elements == 0)
-		cout << "Error in ElementSet: could not allocate memory for ElementSet elements!" << endl;
+    // the extra positions is to store the classification for a given window state
+    //
+    list_of_elements = new Element * [number_of_elements + 2];
+    if (list_of_elements == 0)
+        cout << "Error in ElementSet: could not allocate memory for ElementSet elements!" << endl;
 
-	for (i = 0; i < number_of_elements + 2; i++)
-		list_of_elements [i] = new Element (max_number_of_values, "");
+    for (i = 0; i < number_of_elements + 2; i++)
+        list_of_elements [i] = new Element (max_number_of_values, "");
 
-	i = 0;
-	while (my_file >> current_value)
-	{
-		list_of_elements [i]->add_element_value (current_value);
-		i++;
-		if (i > (number_of_elements + 1))
-			i = 0;
-	}
-	my_file.close ();
+    i = 0;
+    while (my_file >> current_value)
+    {
+        list_of_elements [i]->add_element_value (current_value);
+        i++;
+        if (i > (number_of_elements + 1))
+            i = 0;
+    }
+    my_file.close ();
 
-	set_elm_indexes ();
+    set_elm_indexes ();
 }
 
 
 ElementSet::ElementSet (string set_name, unsigned int n, unsigned int range)
 {
-	unsigned int i;
-	std::ostringstream stm;
-	has_extra_element = false;
-	number_of_elements = n;
+    unsigned int i;
+    std::ostringstream stm;
+    has_extra_element = false;
+    number_of_elements = n;
 
-	if(set_name.length () > 0)
-		name = set_name;
-	else
-		name = "S";
+    if(set_name.length () > 0)
+        name = set_name;
+    else
+        name = "S";
 
-	if (number_of_elements == 0)
-		list_of_elements = NULL;
-	else
-	{
-		list_of_elements = new Element*[number_of_elements];
-		if (list_of_elements == 0)
-			cout << "Error in ElementSet: could not allocate memory for elements!" << endl;
-		srand ( (unsigned) time (NULL) );
-		for (i = 0; i < n; i++)
-		{
-			stm.str ("");
-			stm << "elem-" << i;
-			list_of_elements[i] = new Element (1, stm.str ());
-			if (range == 0)
-				list_of_elements[i]->add_element_value (0);
-			else
-			{
-				list_of_elements[i]->add_element_value ((int) rand () % range );
-			}
-		}
-	}
+    if (number_of_elements == 0)
+        list_of_elements = NULL;
+    else
+    {
+        list_of_elements = new Element*[number_of_elements];
+        if (list_of_elements == 0)
+            cout << "Error in ElementSet: could not allocate memory for elements!" << endl;
+        srand ( (unsigned) time (NULL) );
+        for (i = 0; i < n; i++)
+        {
+            stm.str ("");
+            stm << "elem-" << i;
+            list_of_elements[i] = new Element (1, stm.str ());
+            if (range == 0)
+                list_of_elements[i]->add_element_value (0);
+            else
+            {
+                list_of_elements[i]->add_element_value ((int) rand () % range );
+            }
+        }
+    }
 
-	set_elm_indexes	();
+    set_elm_indexes ();
 }
 
 
@@ -163,112 +163,128 @@ ElementSet::ElementSet (ElementSet *elm_set)
 }
 
 
+ElementSet::ElementSet (ElementSet *elm_set, unsigned int *map,
+        unsigned int size)
+{
+    this->number_of_elements = size;
+    this->list_of_elements = new Element*[size];
+    for (unsigned int i = 0; i < size; i++)
+    {
+        Element * elm = elm_set->list_of_elements[map[i]];
+        this->list_of_elements[i] = new Element (elm);
+    }
+    this->name = elm_set->name;
+    // this->explicit_cost = elm_set->explicit_cost;
+    this->has_extra_element = elm_set->has_extra_element;
+    set_elm_indexes ();
+}
+
 ElementSet::~ElementSet ()
 {
-	unsigned int i;
-	for (i = 0; i < number_of_elements; i++)
-	{
-		delete list_of_elements[i];
-	}
+    unsigned int i;
+    for (i = 0; i < number_of_elements; i++)
+    {
+        delete list_of_elements[i];
+    }
 
-	if (has_extra_element)
-	{
-		delete list_of_elements [number_of_elements];
-		delete list_of_elements [number_of_elements + 1]; // 2 labels in W-operator table
-	}
+    if (has_extra_element)
+    {
+        delete list_of_elements [number_of_elements];
+        delete list_of_elements [number_of_elements + 1]; // 2 labels in W-operator table
+    }
 
-	if (list_of_elements != NULL)
-		delete [] list_of_elements;
-	explicit_cost.clear ();
+    if (list_of_elements != NULL)
+        delete [] list_of_elements;
+    explicit_cost.clear ();
 }
 
 
 void ElementSet::set_elm_indexes ()
 {
-	for (unsigned int i = 0; i < number_of_elements; i++)
-		element_indexes.insert (make_pair (list_of_elements[i], i));
+    for (unsigned int i = 0; i < number_of_elements; i++)
+        element_indexes.insert (make_pair (list_of_elements[i], i));
 }
 
 
 void ElementSet::print_list_of_elements ()
 {
-	unsigned int i;
-	for (i = 0; i < number_of_elements; i++)
-	{
-		list_of_elements[i]->print_element ();
-	}
+    unsigned int i;
+    for (i = 0; i < number_of_elements; i++)
+    {
+        list_of_elements[i]->print_element ();
+    }
 }
 
 
 unsigned int ElementSet::get_set_cardinality ()
 {
-	return number_of_elements;
+    return number_of_elements;
 }
 
 
 Element * ElementSet::get_element (unsigned int index)
 {
-	if ( (has_extra_element && (index <= (number_of_elements + 1)) ) ||
-		 (index < number_of_elements)
-	   )
-		return list_of_elements[index];
-	else
-		// ElementSet error: index out of range!
-		return NULL;
+    if ( (has_extra_element && (index <= (number_of_elements + 1)) ) ||
+         (index < number_of_elements)
+       )
+        return list_of_elements[index];
+    else
+        // ElementSet error: index out of range!
+        return NULL;
 }
 
 
 unsigned int ElementSet::get_element_index (Element * elm)
 {
-	map<Element *, unsigned int>::iterator it = element_indexes.find (elm);
-	if (it == element_indexes.end ())
-		return -1;
-	else
-		return it->second;
+    map<Element *, unsigned int>::iterator it = element_indexes.find (elm);
+    if (it == element_indexes.end ())
+        return -1;
+    else
+        return it->second;
 }
 
 
 string ElementSet::get_set_name ()
 {
-	return name;
+    return name;
 }
 
 
 float ElementSet::get_explicit_cost (string key)
 {
-	return explicit_cost [key];
-	// if there is no element with a given key it returns the empty string ""
+    return explicit_cost [key];
+    // if there is no element with a given key it returns the empty string ""
 }
 
 
 
 void ElementSet::permute_set ()
 {
-	unsigned int i, j, n;
-	Element * * uniform_permutation, * k;
+    unsigned int i, j, n;
+    Element * * uniform_permutation, * k;
 
-	n = number_of_elements + 1; // the extra element is used in MCE estimation
+    n = number_of_elements + 1; // the extra element is used in MCE estimation
 
-	uniform_permutation = new (nothrow) Element * [n];
-	if (uniform_permutation == NULL)
-		cout << "Error in ElementSet::permute_set : no memory available!\n";
+    uniform_permutation = new (nothrow) Element * [n];
+    if (uniform_permutation == NULL)
+        cout << "Error in ElementSet::permute_set : no memory available!\n";
 
-	for (i = 0; i < n; i++)
-		uniform_permutation[i] = list_of_elements[i];
+    for (i = 0; i < n; i++)
+        uniform_permutation[i] = list_of_elements[i];
 
-	// PERMUTE-IN-PLACE algorithm
-	for (i = 0; i < n - 1; i++)
-	{
-		srand ( (unsigned) time(NULL) );
-		j = ((unsigned int) rand () % (n - i)) + i;   // random number between i and n
-		k = uniform_permutation[i];
-		uniform_permutation[i] = uniform_permutation[j];
-		uniform_permutation[j] = k;
-	}
+    // PERMUTE-IN-PLACE algorithm
+    for (i = 0; i < n - 1; i++)
+    {
+        srand ( (unsigned) time(NULL) );
+        j = ((unsigned int) rand () % (n - i)) + i;   // random number between i and n
+        k = uniform_permutation[i];
+        uniform_permutation[i] = uniform_permutation[j];
+        uniform_permutation[j] = k;
+    }
 
-	for (i = 0; i < number_of_elements; i++)
-		list_of_elements[i] = uniform_permutation[i];
+    for (i = 0; i < number_of_elements; i++)
+        list_of_elements[i] = uniform_permutation[i];
 
-	if (uniform_permutation != NULL)
-		delete [] uniform_permutation;
+    if (uniform_permutation != NULL)
+        delete [] uniform_permutation;
 }
