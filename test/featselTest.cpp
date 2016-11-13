@@ -28,9 +28,9 @@
 #include "ElementSetTest.h"
 #include "ElementSubsetTest.h"
 #include "CollectionTest.h"
-
 #include "VertexTest.h"
 #include "ROBDDTest.h"
+#include "FixedElementSetTest.h"
 
 #include "UCSROBDDToolBoxTest.h"
 #include "UCSROBDDToolBox6Test.h"
@@ -502,19 +502,19 @@ int main(void) {
     cout << endl;*/
 
     /*Testing Class "UCSROBDD6"*/
-    cout << "UCSROBDD6Test::it_should_find_a_global_minimum";
-    cout.flush ();
-    printResult (UCSROBDD6Test::it_should_find_a_global_minimum ());
-    cout << "UCSROBDD6Test::it_should_converge_for_large_hamming_sets";
-    cout.flush ();
-    printResult (UCSROBDD6Test::it_should_converge_for_large_hamming_sets ());
-    cout << "UCSROBDD6Test::it_should_converge_for_large_abs_sum_sets";
-    cout.flush ();
-    printResult (UCSROBDD6Test::it_should_converge_for_large_abs_sum_sets());
-    cout << "UCSROBDD6Test::it_should_always_give_the_correct_answer";
-    cout.flush ();
-    printResult (UCSROBDD6Test::it_should_always_give_the_correct_answer ());
-    cout << endl;
+    // cout << "UCSROBDD6Test::it_should_find_a_global_minimum";
+    // cout.flush ();
+    // printResult (UCSROBDD6Test::it_should_find_a_global_minimum ());
+    // cout << "UCSROBDD6Test::it_should_converge_for_large_hamming_sets";
+    // cout.flush ();
+    // printResult (UCSROBDD6Test::it_should_converge_for_large_hamming_sets ());
+    // cout << "UCSROBDD6Test::it_should_converge_for_large_abs_sum_sets";
+    // cout.flush ();
+    // printResult (UCSROBDD6Test::it_should_converge_for_large_abs_sum_sets());
+    // cout << "UCSROBDD6Test::it_should_always_give_the_correct_answer";
+    // cout.flush ();
+    // printResult (UCSROBDD6Test::it_should_always_give_the_correct_answer ());
+    // cout << endl;
     
     // Testing Class "GeneticOrdering"
     /*cout << "GeneticOrderingTest::it_should_create_an_initial_population";*/
@@ -544,6 +544,11 @@ int main(void) {
     //printResult (OrderingNodeTest::it_should_perform_a_neighbour_mut ());
     //cout << endl;
 
+
+    // Testing Class FixedElementSet
+    cout << "FixedElementSetTest::it_should_create_a_subproblem_elm_set";
+    cout.flush ();
+    printResult (FixedElementSetTest::it_should_create_a_subproblem_elm_set ());
 
     cout << "Total " << number_of_passed_tests + number_of_failed_tests << " test(s), ";
     cout << number_of_passed_tests << " test(s) passed, " << number_of_failed_tests;

@@ -73,8 +73,8 @@ public:
 
     // Copy constructor
     // The new element set has only the elements determined by 'map'
-    ElementSet::ElementSet (ElementSet *elm_set, unsigned int *map,
-        unsigned int size);
+    ElementSet (ElementSet *elm_set, unsigned int *map, 
+            unsigned int size);
 
 
     // Default destructor.

@@ -39,6 +39,7 @@ OBJS =		src/Element.o src/ElementSet.o src/ElementSubset.o \
 			src/GeneticOrdering.o src/OrderingNode.o src/GAROBDD.o \
 			src/algorithms/UCSRT.o src/algorithms/UCSRTToolBox.o src/OBDD.o src/PVertex.o \
 			src/algorithms/UCSOBDD.o src/algorithms/UCSOBDDToolBox.o \
+			src/FixedElementSet.o \
 			    
 TOBJS =		test/ElementTest.o test/ElementSetTest.o test/ElementSubsetTest.o \
 			test/CollectionTest.o test/SolverTest.o \
@@ -51,6 +52,7 @@ TOBJS =		test/ElementTest.o test/ElementSetTest.o test/ElementSubsetTest.o \
 			test/UCSROBDD6Test.o test/UCSROBDDToolBoxTest.o \
 			test/UCSROBDDToolBox6Test.o \
 			test/GeneticOrderingTest.o test/OrderingNodeTest.o \
+			test/FixedElementSetTest.o \
 
 LIBS = -lm
 
