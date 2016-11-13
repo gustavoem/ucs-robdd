@@ -1,7 +1,25 @@
+//
+// ElementSet.cpp -- implementation of the class "ElementSet".
+//
+//    This file is part of the featsel program
+//    Copyright (C) 2016  Gustavo E. Matos
+//
+//    This program is free software: you can redistribute it and/or modify
+//    it under the terms of the GNU General Public License as published by
+//    the Free Software Foundation, either version 3 of the License, or
+//    (at your option) any later version.
+//
+//    This program is distributed in the hope that it will be useful,
+//    but WITHOUT ANY WARRANTY; without even the implied warranty of
+//    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//    GNU General Public License for more details.
+//
+//    You should have received a copy of the GNU General Public License
+//    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+//
+
 #include "ROBDD.h"
 #include <set>
-
-static int delecoes;
 
 ROBDD::ROBDD (ElementSet * set)
 {
@@ -320,7 +338,6 @@ void ROBDD::fill_vlist (Vertex * v, list<Vertex *> ** vlists)
 
 bool ROBDD::VerticeEntry::operator < (const VerticeEntry& y)
 {  
-    cout <<  "hello"  <<endl;
     if (lo_id < y.lo_id)
         return true;
     else if (lo_id == y.lo_id && hi_id <= y.hi_id)
@@ -340,13 +357,10 @@ void ROBDD::reduce ()
     list<Vertex *> ** vlists = (list<Vertex *> **) calloc (set_card + 2, sizeof (list<Vertex *> *));
     for (unsigned int i = 1; i <= set_card + 1; i++) 
         vlists[i] = new list<Vertex *>();
-    
     set<Vertex *> trash_can;
     set<Vertex *>::iterator trash_it = trash_can.begin ();
-    
     unmark_all_vertex ();
     fill_vlist (root, vlists);
-    // possivel leak: ids corretos??
 
     int next_id = 0;
     for (int i = set_card + 1; i > 0; i--)
@@ -361,6 +375,7 @@ void ROBDD::reduce ()
             VerticeEntry ve;
             if (u->get_index () == set_card + 1) 
             {
+                // Terminal vertex
                 ve.lo_id = -1;
                 ve.hi_id = u->get_value ();
                 ve.v = u;
@@ -378,6 +393,7 @@ void ROBDD::reduce ()
             }
             else
             {
+                // Regular vertex
                 ve.lo_id = u_lo->get_id ();
                 ve.hi_id = u_hi->get_id ();
                 ve.v = u;
@@ -391,12 +407,10 @@ void ROBDD::reduce ()
         {
             VerticeEntry ve = *it;
             Vertex * u = ve.v;
-            cout << "Key = " << (ve.lo_id) << ", " << (ve.hi_id) << endl;
             if (ve.lo_id == oldkey.first && ve.hi_id == oldkey.second)
             {
                 u->set_id (next_id);
-                // if (subgraph[next_id] != u)
-                    trash_can.insert (trash_it, u);
+                trash_can.insert (trash_it, u);
             }
             else
             {
@@ -404,7 +418,6 @@ void ROBDD::reduce ()
                 Vertex * u_hi = u->get_child (true);
                 next_id++;
                 u->set_id (next_id);
-                // possivel leak: e se subgraph[next_id] = u
                 subgraph[next_id] = u;
                 if (u_lo != NULL)
                 {
@@ -426,26 +439,14 @@ void ROBDD::reduce ()
     }
     
     Vertex * new_root = subgraph[root->get_id ()];
-    if (root != new_root)
-    {
-        cout << "Deletando vértice:  " << root << endl;
-        delecoes++;
-        delete  root;
-    }
-
     for (trash_it = trash_can.begin (); trash_it != trash_can.end (); )
     {
         Vertex * x = *trash_it;
         trash_it++;
-        cout << "Deletando vértice:  " << x << endl;
-        delecoes++;
         delete x;
     }
-    
-    
     root = new_root;
     cardinality = root->get_id ();
-
     for (unsigned int i = 1; i <= set_card + 1; i++)
         delete vlists[i];
     free (vlists);
@@ -458,11 +459,6 @@ void ROBDD::reduce ()
 
 void ROBDD::union_to (Vertex * root2)
 {
-    // cout << "arvore 1: " << endl;
-    // print ();
-    // cout << "\narvore 2: " << endl;
-    // print (root2);
-
     unsigned int set_card = elm_set->get_set_cardinality ();
     map<pair<Vertex *, Vertex*>, Vertex *> pairs;
     unsigned int new_cardinality = 0;
@@ -486,21 +482,8 @@ void ROBDD::union_to (Vertex * root2)
     delete_subtree (&root, &cardinality);
     cardinality = new_cardinality;
     root = new_root;
-    
-    // cout << "antes de reduzir: " << endl;
-    print ();
-    delecoes = 0;
-    int antes = cardinality;
+
     reduce ();
-    if (antes - delecoes != cardinality)
-    {
-        cout << "Eopaaaaa!\n\n\n\n\n";
-        print ();
-         cout.flush ();
-         // while (true);
-    }
-    // cout << "depois de reduzir: " << endl;
-    // print ();
 }
 
 Vertex * ROBDD::union_step (Vertex * v1, Vertex * v2, map<pair<Vertex *, Vertex*>,\
