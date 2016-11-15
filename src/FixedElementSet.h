@@ -46,12 +46,12 @@ private:
 
     // List of fixed elements that are selected
     //
-    bool * selected_elements;
+    ElementSubset * selected_elements;
 
 
     // List of fixed elements that are not selected
     //
-    bool * non_selected_elements;
+    ElementSubset * non_selected_elements;
 
 
     // Used to map elements from the subproblem set to the original 

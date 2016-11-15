@@ -30,6 +30,7 @@ namespace FixedElementSetTest
 {
 
     bool it_should_create_a_subproblem_elm_set ();
+    bool it_should_be_able_to_map_element_subsets ();
 
 }
 

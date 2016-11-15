@@ -549,6 +549,10 @@ int main(void) {
     cout << "FixedElementSetTest::it_should_create_a_subproblem_elm_set";
     cout.flush ();
     printResult (FixedElementSetTest::it_should_create_a_subproblem_elm_set ());
+    cout << "FixedElementSetTest::it_should_be_able_to_map_element_subsets";
+    cout.flush ();
+    printResult (FixedElementSetTest::it_should_be_able_to_map_element_subsets ());
+    cout << endl;
 
     cout << "Total " << number_of_passed_tests + number_of_failed_tests << " test(s), ";
     cout << number_of_passed_tests << " test(s) passed, " << number_of_failed_tests;

@@ -38,4 +38,34 @@ namespace FixedElementSetTest
         return true;
     }
 
+
+    bool it_should_be_able_to_map_element_subsets ()
+    {
+        bool answ;
+        ElementSet original_set ("", 10, 100);
+        ElementSubset selected ("", &original_set);
+        ElementSubset non_selected ("", &original_set);
+        ElementSubset expected_subset ("", &original_set);
+        selected.add_element (0);
+        selected.add_element (3);
+        non_selected.add_element (7);
+        FixedElementSet fixed_elm_set (&selected, &non_selected);
+        ElementSet * new_set = fixed_elm_set.getUnfixedElementSet ();
+        ElementSubset input_subset ("", new_set);
+        input_subset.add_element (3);
+        input_subset.add_element (4);
+        expected_subset.add_element (0);
+        expected_subset.add_element (3);
+        expected_subset.add_element (5);
+        expected_subset.add_element (6);
+        ElementSubset * answ_subset = 
+            fixed_elm_set.getCorrespondentSubset (&input_subset);
+        if (!answ_subset->is_equal (&expected_subset))
+            answ = false;
+        else
+            answ = true;
+        delete answ_subset;
+        return answ;
+    }
+
 } // end namespace

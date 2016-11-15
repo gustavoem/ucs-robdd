@@ -20,7 +20,6 @@
 
 #include "FixedElementSet.h"
 
-
 using namespace std;
 
 FixedElementSet::FixedElementSet (ElementSubset * sel_elms, 
@@ -30,45 +29,44 @@ FixedElementSet::FixedElementSet (ElementSubset * sel_elms,
     this->original_set = 
         sel_elms->get_set_that_contains_this_subset ();
     unsigned int set_size = original_set->get_set_cardinality ();
-    this->selected_elements = new bool[set_size];
-    this->non_selected_elements = new bool[set_size];
-    this->size = 0;
-    for (unsigned int i = 0; i < set_size; i++) 
-    {
-        if (sel_elms->has_element (i))   
-            selected_elements[i] = true;
-        else if (non_sel_elms->has_element (i))
-            non_selected_elements[i] = true;
-        else
-        {
-            selected_elements[i] = false;
-            non_selected_elements[i] = false;
-            size++;
-        }
-    }
+    this->selected_elements = new ElementSubset (sel_elms);
+    this->non_selected_elements = new ElementSubset (non_sel_elms);
+    this->size = set_size 
+        - (selected_elements->get_subset_cardinality ()
+        + non_selected_elements->get_subset_cardinality ());
     this->element_map = new unsigned int[size];
     j = 0;
     for (unsigned int i = 0; i < set_size; i++)
         if (!sel_elms->has_element (i) &&
                 !non_sel_elms->has_element (i))
             element_map[j++] = i;
-    this->unfixed_set = new ElementSet (original_set, element_map, size);
+    this->unfixed_set = new ElementSet (original_set,
+        element_map, size);
 }
 
 
 FixedElementSet::~FixedElementSet ()
 {
     delete unfixed_set;
+    delete selected_elements;
+    delete non_selected_elements;
     delete[] element_map;
-    delete[] selected_elements;
-    delete[] non_selected_elements;
 }
 
 
 ElementSubset * 
     FixedElementSet::getCorrespondentSubset (ElementSubset * subset)
 {
-    return NULL;
+    ElementSubset * orig_subset = new ElementSubset ("", original_set);
+    orig_subset->copy (selected_elements);
+    for (unsigned int i = 0; i < size; i++)
+    {
+        if (subset->has_element (i))
+        {
+            orig_subset->add_element (element_map[i]);
+        }
+    }
+    return orig_subset;
 }
 
 
