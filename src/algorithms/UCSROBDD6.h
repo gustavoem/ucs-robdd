@@ -11,28 +11,28 @@ class UCSROBDD6 : public Solver
 
 private:
 
-	// The collection of restrictions
-	//
-	ROBDD * restrictions;
-	//ROBDD * lower_restriction, * upper_restriction;
+    // The collection of restrictions
+    //
+    ROBDD * restrictions;
+    //ROBDD * lower_restriction, * upper_restriction;
 
 
 
 public:
 
-	// Default constructor.
-	//
-	UCSROBDD6 ();
+    // Default constructor.
+    //
+    UCSROBDD6 ();
 
 
-	// Default destructor.
-	//
-	virtual ~UCSROBDD6 ();
+    // Default destructor.
+    //
+    virtual ~UCSROBDD6 ();
 
 
-	// Runs the UCSROBDD6 algorithm, getting up to 'max_size_of_minima_list' minimum subsets.
-	//
-	void get_minima_list (unsigned int);
+    // Runs the UCSROBDD6 algorithm, getting up to 'max_size_of_minima_list' minimum subsets.
+    //
+    void get_minima_list (unsigned int);
 
 };
 
