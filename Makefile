@@ -29,6 +29,7 @@ OBJS =		src/Element.o src/ElementSet.o src/ElementSubset.o \
 			src/algorithms/BranchAndBound.o src/algorithms/PosetForestSearch.o \
 			src/functions/AbsSum.o src/functions/Explicit.o src/functions/MeanAbsSum.o \
 			src/functions/HammingDistance.o src/functions/MeanConditionalEntropy.o \
+			src/functions/PartitionCost.o \
 			src/Vertex.o src/ROBDD.o src/algorithms/UCSROBDD.o src/algorithms/UCSROBDDToolBox.o \
 			src/algorithms/UCSROBDD2.o src/algorithms/UCSROBDDToolBox2.o \
 			src/algorithms/UCSROBDD3.o src/algorithms/UCSROBDDToolBox3.o \
@@ -52,7 +53,7 @@ TOBJS =		test/ElementTest.o test/ElementSetTest.o test/ElementSubsetTest.o \
 			test/UCSROBDD6Test.o test/UCSROBDDToolBoxTest.o \
 			test/UCSROBDDToolBox6Test.o \
 			test/GeneticOrderingTest.o test/OrderingNodeTest.o \
-			test/PartitionSetTest.o \
+			test/PartitionSetTest.o test/PartitionCostTest.o \
 
 LIBS = -lm
 

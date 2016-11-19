@@ -49,11 +49,11 @@ void PUCSR1::set_partitions ()
 }
 
 
-FixedElementSet * PUCSR1::get_fx_elm_set (ElementSubset * part)
+PartitionSet * PUCSR1::get_fx_elm_set (ElementSubset * part)
 {
-    ElementSubset * sel_elms = new ElementSubset (set);
-    ElementSubset * non_sel_elms = new ElementSubset (set);
-    unsigned int set_size = set->get_set_cardinality ();
+    ElementSubset * sel_elms = new ElementSubset (original_set);
+    ElementSubset * non_sel_elms = new ElementSubset (original_set);
+
     unsigned int nof_fx_elm = set_size - part_set_size;
     for (unsigned int i = 0; i < nof_fx_elm; i++)
     {
@@ -62,7 +62,10 @@ FixedElementSet * PUCSR1::get_fx_elm_set (ElementSubset * part)
         else
             non_sel_elm->add_element (i);
     }
-    // FixedElementSet * fx_elm_set = 
+    PartitionSet * part_set = new PartitionSet (sel_elms, non_sel_elms);
+    delete sel_elms;
+    delete non_sel_elms;
+    return part_set;
 }
 
 
@@ -83,10 +86,9 @@ void PUCSR1::get_minima_list (unsigned int max_size_of_minima_list)
 
     Collection * L = new Collection ();
     // bool search_space_is_empty = false;
-    ElementSubset * partition = 
+    ElementSubset * part = 
         cand_part->get_random_zero_evaluated_element ();
-    FixedElementSet * fx_elm_set = get_fx_elm_set (partition);
-    
+    PartitionSet * part_set = get_fx_elm_set (partition);
     Solver * subsolver = new Solver ();
     // subsolver->set_parameters (cost_function, element_set, bool);
 

@@ -43,6 +43,7 @@
 // Objective functions
 //
 #include "CostFunctionTest.h"
+#include "PartitionCostTest.h"
 
 
 // Solvers
@@ -552,6 +553,12 @@ int main(void) {
     cout << "PartitionSetTest::it_should_be_able_to_map_element_subsets";
     cout.flush ();
     printResult (PartitionSetTest::it_should_be_able_to_map_element_subsets ());
+    cout << endl;
+
+    // Testing Class PartitionCost
+    cout << "PartitionCostTest::it_should_calculate_the_original_cost";
+    cout.flush ();
+    printResult (PartitionCostTest::it_should_calculate_the_original_cost ());
     cout << endl;
 
     cout << "Total " << number_of_passed_tests + number_of_failed_tests << " test(s), ";
