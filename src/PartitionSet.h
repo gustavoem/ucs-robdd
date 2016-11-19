@@ -82,13 +82,13 @@ public:
     // From an element subset defined over the subposet returns the
     // elementsubset correspondent in the original poset
     //
-    ElementSubset * getCorrespondentSubset (ElementSubset *);
+    ElementSubset * get_orig_subset (ElementSubset *);
 
 
     // Returns a pointer to the element set that contains the elements
     // of the original set and are not fixed
     //
-    ElementSet * getUnfixedElementSet ();
+    ElementSet * get_unfixed_elm_set ();
 
 };
 

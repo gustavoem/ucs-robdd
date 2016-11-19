@@ -32,7 +32,7 @@ namespace PartitionSetTest
         selected.add_element (3);
         non_selected.add_element (7);
         PartitionSet fixed_elm_set (&selected, &non_selected);
-        ElementSet * elm_set = fixed_elm_set.getUnfixedElementSet ();
+        ElementSet * elm_set = fixed_elm_set.get_unfixed_elm_set ();
         if (elm_set->get_set_cardinality () != 7)
             return false;
         return true;
@@ -50,7 +50,7 @@ namespace PartitionSetTest
         selected.add_element (3);
         non_selected.add_element (7);
         PartitionSet fixed_elm_set (&selected, &non_selected);
-        ElementSet * new_set = fixed_elm_set.getUnfixedElementSet ();
+        ElementSet * new_set = fixed_elm_set.get_unfixed_elm_set ();
         ElementSubset input_subset ("", new_set);
         input_subset.add_element (3);
         input_subset.add_element (4);
@@ -59,7 +59,7 @@ namespace PartitionSetTest
         expected_subset.add_element (5);
         expected_subset.add_element (6);
         ElementSubset * answ_subset = 
-            fixed_elm_set.getCorrespondentSubset (&input_subset);
+            fixed_elm_set.get_orig_subset (&input_subset);
         if (!answ_subset->is_equal (&expected_subset))
             answ = false;
         else

@@ -54,8 +54,7 @@ PartitionSet::~PartitionSet ()
 }
 
 
-ElementSubset * 
-    PartitionSet::getCorrespondentSubset (ElementSubset * subset)
+ElementSubset * PartitionSet::get_orig_subset (ElementSubset * subset)
 {
     ElementSubset * orig_subset = new ElementSubset ("", original_set);
     orig_subset->copy (selected_elements);
@@ -70,8 +69,7 @@ ElementSubset *
 }
 
 
-ElementSet * PartitionSet::
-    getUnfixedElementSet ()
+ElementSet * PartitionSet::get_unfixed_elm_set ()
 {
     return unfixed_set;
 }
