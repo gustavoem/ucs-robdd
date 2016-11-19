@@ -4,6 +4,8 @@
 #include "../ROBDD.h"
 #include "../global.h"
 #include "../Solver.h"
+#include "../ElementSubset.h"
+#include "../FixedElementSet.h"
 // #include "UCSROBDDToolBox6.h"
 
 class PUCSR1 : public Solver
@@ -18,26 +20,41 @@ private:
 
     // The partitions of the poset which can have the minimal element
     //
-    ROBDD * candidate_partitions;
+    ROBDD * cand_part;
 
 
     // The element set of the variables that are fixed in each 
     // partition
     //
-    ElementSet * fixed_elements;
+    ElementSet * fixed_elms;
 
 
     // The element set of the variables that are not fixed in each 
-    // par partition
+    // par partitions
     //
-    ElementSet * unfixed_elements;
+    ElementSet * unfixed_elms;
 
+
+    // The size of the partition
+    //
+    unsigned int part_set_size;
 
     // Chooses the elements that are going to be fixed in every
     // partition. For instance, if S = {a, b, c} we can have partitions
     // like: {a'b'X}, {a'bX}, {ab'X} and {abX} (a and b are fixed)
     //   or  {aXX}, {a'XX} (only a is fixed)
-    void set_fixed_variables ();
+    void set_elm_sets ();
+
+
+    // Partitionates the lattice
+    //
+    void set_partitions ();
+
+
+    // Creates the FixedElementSet object according to the
+    // partition determined in the parameter
+    //
+    FixedElementSet * get_fx_elm_set (ElementSubset *);
 
 public:
 

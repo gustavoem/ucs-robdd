@@ -30,7 +30,7 @@
 #include "CollectionTest.h"
 #include "VertexTest.h"
 #include "ROBDDTest.h"
-#include "FixedElementSetTest.h"
+#include "PartitionSetTest.h"
 
 #include "UCSROBDDToolBoxTest.h"
 #include "UCSROBDDToolBox6Test.h"
@@ -546,12 +546,12 @@ int main(void) {
 
 
     // Testing Class FixedElementSet
-    cout << "FixedElementSetTest::it_should_create_a_subproblem_elm_set";
+    cout << "PartitionSetTest::it_should_create_a_subproblem_elm_set";
     cout.flush ();
-    printResult (FixedElementSetTest::it_should_create_a_subproblem_elm_set ());
-    cout << "FixedElementSetTest::it_should_be_able_to_map_element_subsets";
+    printResult (PartitionSetTest::it_should_create_a_subproblem_elm_set ());
+    cout << "PartitionSetTest::it_should_be_able_to_map_element_subsets";
     cout.flush ();
-    printResult (FixedElementSetTest::it_should_be_able_to_map_element_subsets ());
+    printResult (PartitionSetTest::it_should_be_able_to_map_element_subsets ());
     cout << endl;
 
     cout << "Total " << number_of_passed_tests + number_of_failed_tests << " test(s), ";
