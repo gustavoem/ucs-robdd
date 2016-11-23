@@ -42,6 +42,7 @@ float PartitionCost::cost (ElementSubset * X)
 
     ElementSubset * original_subset = part_set->get_orig_subset (X);
     float cost = orig_cost_f->cost (original_subset);
+    delete original_subset;
 
     gettimeofday (& end, NULL);
     elapsed_time_of_all_calls_of_the_cost_function += diff_us (end, begin);

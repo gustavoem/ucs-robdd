@@ -34,13 +34,13 @@ OBJS =		src/Element.o src/ElementSet.o src/ElementSubset.o \
 			src/algorithms/UCSROBDD6.o src/algorithms/UCSROBDDToolBox6.o \
 			src/algorithms/UCSROBDD7.o src/algorithms/UCSROBDDToolBox7.o \
 			src/PartitionSet.o \
-			#src/algorithms/UCSROBDD2.o src/algorithms/UCSROBDDToolBox2.o \
-			src/algorithms/UCSROBDD3.o src/algorithms/UCSROBDDToolBox3.o \
-			src/algorithms/UCSROBDD4.o src/algorithms/UCSROBDDToolBox4.o \
-			src/algorithms/UCSROBDD5.o src/algorithms/UCSROBDDToolBox5.o \
 			src/GeneticOrdering.o src/OrderingNode.o src/GAROBDD.o \
 			src/algorithms/UCSRT.o src/algorithms/UCSRTToolBox.o src/OBDD.o src/PVertex.o \
 			src/algorithms/UCSOBDD.o src/algorithms/UCSOBDDToolBox.o \
+			# src/algorithms/UCSROBDD2.o src/algorithms/UCSROBDDToolBox2.o \
+			# src/algorithms/UCSROBDD3.o src/algorithms/UCSROBDDToolBox3.o \
+			# src/algorithms/UCSROBDD4.o src/algorithms/UCSROBDDToolBox4.o \
+			# src/algorithms/UCSROBDD5.o src/algorithms/UCSROBDDToolBox5.o \
 			    
 TOBJS =		test/ElementTest.o test/ElementSetTest.o test/ElementSubsetTest.o \
 			test/CollectionTest.o test/SolverTest.o \
@@ -49,11 +49,12 @@ TOBJS =		test/ElementTest.o test/ElementSetTest.o test/ElementSubsetTest.o \
 			test/CostFunctionTest.o test/CostFunctionMock.o test/SFSTest.o \
 			test/SFFSTest.o test/SFFSMock.o test/PosetForestSearchMock.o \
 			test/BranchAndBoundTest.o test/PosetForestSearchTest.o \
-			test/VertexTest.o test/ROBDDTest.o test/UCSROBDDTest.o \
-			test/UCSROBDD6Test.o test/UCSROBDDToolBoxTest.o \
-			test/UCSROBDDToolBox6Test.o \
+			test/VertexTest.o test/ROBDDTest.o \
+			test/UCSROBDD6Test.o test/UCSROBDDToolBox6Test.o \
 			test/PartitionSetTest.o test/PartitionCostTest.o \
-			#test/GeneticOrderingTest.o test/OrderingNodeTest.o \
+			test/GeneticOrderingTest.o test/OrderingNodeTest.o \
+			# test/UCSROBDDToolBoxTest.o \
+			# test/UCSROBDDTest.o \
 
 LIBS = -lm
 
