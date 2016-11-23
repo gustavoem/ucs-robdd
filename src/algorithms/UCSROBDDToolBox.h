@@ -39,12 +39,12 @@ namespace UCSROBDDToolBox
 
     // Receives a subset A, a collection of restrictions and add A into the latter.
     //
-    void update_lower_restriction(ROBDD *, ElementSubset *);
+    void update_lower_restriction (ROBDD *, ElementSubset *);
 
 
     // Receives a subset A, a collection of restrictions and add A into the latter.
     //
-    void update_upper_restriction(ROBDD *, ElementSubset *);
+    void update_upper_restriction (ROBDD *, ElementSubset *);
 
 
     // Partial pruning minima exhausting subroutines

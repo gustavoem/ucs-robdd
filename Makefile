@@ -37,6 +37,7 @@ OBJS =		src/Element.o src/ElementSet.o src/ElementSubset.o \
 			src/GeneticOrdering.o src/OrderingNode.o src/GAROBDD.o \
 			src/algorithms/UCSRT.o src/algorithms/UCSRTToolBox.o src/OBDD.o src/PVertex.o \
 			src/algorithms/UCSOBDD.o src/algorithms/UCSOBDDToolBox.o \
+			src/algorithms/PUCSR1ToolBox.o \
 			# src/algorithms/UCSROBDD2.o src/algorithms/UCSROBDDToolBox2.o \
 			# src/algorithms/UCSROBDD3.o src/algorithms/UCSROBDDToolBox3.o \
 			# src/algorithms/UCSROBDD4.o src/algorithms/UCSROBDDToolBox4.o \
@@ -50,9 +51,10 @@ TOBJS =		test/ElementTest.o test/ElementSetTest.o test/ElementSubsetTest.o \
 			test/SFFSTest.o test/SFFSMock.o test/PosetForestSearchMock.o \
 			test/BranchAndBoundTest.o test/PosetForestSearchTest.o \
 			test/VertexTest.o test/ROBDDTest.o \
+			test/GeneticOrderingTest.o test/OrderingNodeTest.o \
 			test/UCSROBDD6Test.o test/UCSROBDDToolBox6Test.o \
 			test/PartitionSetTest.o test/PartitionCostTest.o \
-			test/GeneticOrderingTest.o test/OrderingNodeTest.o \
+			test/PUCSR1ToolBoxTest.o \
 			# test/UCSROBDDToolBoxTest.o \
 			# test/UCSROBDDTest.o \
 

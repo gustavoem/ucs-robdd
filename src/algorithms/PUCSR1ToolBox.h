@@ -5,6 +5,7 @@
 #include "../CostFunction.h"
 #include "../Collection.h"
 #include "../ElementSubset.h"
+#include "../PartitionSet.h"
 
 namespace PUCSR1ToolBox
 {
@@ -17,7 +18,7 @@ namespace PUCSR1ToolBox
     // elements is selected (or not) the i-th element of the original
     // element set is selected (or not)
     //
-    PartitionSet * get_partition (ElementSubset *);
+    PartitionSet * get_part_set (ElementSubset *, ElementSet *);
 
 
 } // end of namespace

@@ -31,12 +31,6 @@
 #include "VertexTest.h"
 #include "ROBDDTest.h"
 #include "PartitionSetTest.h"
-
-#include "UCSROBDDToolBoxTest.h"
-#include "UCSROBDDToolBox6Test.h"
-#include "UCSROBDDTest.h"
-#include "UCSROBDD6Test.h"
-
 #include "GeneticOrderingTest.h"
 #include "OrderingNodeTest.h"
 
@@ -45,21 +39,24 @@
 #include "CostFunctionTest.h"
 #include "PartitionCostTest.h"
 
-
 // Solvers
 //
 #include "SolverTest.h"
-//
 // Sub-optimal solvers
 #include "SFSTest.h"
 #include "SFFSTest.h"
-//
 // Optimal solvers
+//
 #include "BranchAndBoundTest.h"
 #include "ExhaustiveSearchTest.h"
 #include "PosetForestSearchTest.h"
 #include "UCurveToolBoxTest.h"
 #include "UCurveSearchTest.h"
+#include "UCSROBDDToolBoxTest.h"
+#include "UCSROBDDToolBox6Test.h"
+#include "UCSROBDDTest.h"
+#include "UCSROBDD6Test.h"
+#include "PUCSR1ToolBoxTest.h"
 
 
 // Number of passed and failed tests
@@ -559,6 +556,12 @@ int main(void) {
     cout << "PartitionCostTest::it_should_calculate_the_original_cost";
     cout.flush ();
     printResult (PartitionCostTest::it_should_calculate_the_original_cost ());
+    cout << endl;
+
+    // Testing Namespace PUCSR1ToolBox
+     cout << "PUCSR1ToolBoxTest::it_should_get_a_partition_set";
+    cout.flush ();
+    printResult (PUCSR1ToolBoxTest::it_should_get_a_partition_set ());
     cout << endl;
 
     cout << "Total " << number_of_passed_tests + number_of_failed_tests << " test(s), ";
