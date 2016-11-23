@@ -54,9 +54,9 @@ float PartitionCost::cost (ElementSubset * X)
 
     // T2: threshold is a maximum number of calls of the cost function
     //
-    if ( (has_max_number_of_calls_set) &&
-         (number_of_calls_of_cost_function >= max_number_of_calls_of_cost_function )
-       )
+    if ((has_max_number_of_calls_set) &&
+        (number_of_calls_of_cost_function >=
+             max_number_of_calls_of_cost_function))
         reached_threshold = true;
 
     return cost;

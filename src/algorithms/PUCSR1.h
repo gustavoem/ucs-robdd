@@ -51,11 +51,6 @@ private:
     void set_partitions ();
 
 
-    // Creates the FixedElementSet object according to the
-    // partition determined in the parameter
-    //
-    FixedElementSet * get_fx_elm_set (ElementSubset *);
-
 public:
 
     // Default constructor.

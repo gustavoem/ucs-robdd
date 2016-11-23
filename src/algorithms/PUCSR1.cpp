@@ -4,6 +4,10 @@ PUCSR1::PUCSR1 ()
 {
     list_of_visited_subsets = new Collection ();
     cost_function = NULL;
+    restrictions = NULL;
+    cand_part = NULL;
+    fixed_elms = NULL;
+    unfixed_elms = NULL;
 }
 
 
@@ -15,6 +19,10 @@ PUCSR1::~PUCSR1 ()
         delete list_of_visited_subsets;
     if (cand_part != NULL)
         delete cand_part;
+    if (fixed_elms != NULL)
+        delete unfixed_elms;
+    if (fixed_elms != NULL)
+        delete fixed_elms;
 }
 
 
@@ -49,26 +57,6 @@ void PUCSR1::set_partitions ()
 }
 
 
-PartitionSet * PUCSR1::get_fx_elm_set (ElementSubset * part)
-{
-    ElementSubset * sel_elms = new ElementSubset (original_set);
-    ElementSubset * non_sel_elms = new ElementSubset (original_set);
-
-    unsigned int nof_fx_elm = set_size - part_set_size;
-    for (unsigned int i = 0; i < nof_fx_elm; i++)
-    {
-        if (part->has_element (i))
-            sel_elms->add_element (i);
-        else
-            non_sel_elm->add_element (i);
-    }
-    PartitionSet * part_set = new PartitionSet (sel_elms, non_sel_elms);
-    delete sel_elms;
-    delete non_sel_elms;
-    return part_set;
-}
-
-
 void PUCSR1::get_minima_list (unsigned int max_size_of_minima_list)
 {
     set_elm_sets ();
@@ -88,8 +76,8 @@ void PUCSR1::get_minima_list (unsigned int max_size_of_minima_list)
     // bool search_space_is_empty = false;
     ElementSubset * part = 
         cand_part->get_random_zero_evaluated_element ();
-    PartitionSet * part_set = get_fx_elm_set (partition);
-    Solver * subsolver = new Solver ();
+    PartitionSet * part_set = get_partition (partition);
+    Solver * subsolver = new Solver (cost_function, part_set);
     // subsolver->set_parameters (cost_function, element_set, bool);
 
 
