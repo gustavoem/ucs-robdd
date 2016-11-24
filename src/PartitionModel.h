@@ -88,6 +88,20 @@ public:
     //
     ElementSet * get_fixed_elm_set ();
 
+
+    // Returns a pointer to the original element set
+    //
+    ElementSet * get_original_set ();
+
+
+    // Returns the map for the fixed elements
+    //
+    unsigned int * get_fixed_elm_map ();
+
+
+    // Returns the map for the unfixed elements
+    //
+    unsigned int * get_unfixed_elm_map ();
 };
 
 #endif /* FIXED_ELEMENTSSUBSET_H_ */

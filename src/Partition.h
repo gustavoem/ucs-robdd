@@ -23,7 +23,7 @@
 
 #include "ElementSet.h"
 #include "ElementSubset.h"
-#include <map>
+#include "PartitionModel.h"
 
 // This class is used to fix elements of an ElementSet and also define
 // a subposet of the poset defined by power set of ElementSet
@@ -33,39 +33,46 @@ class Partition
 
 private:
 
-/*  TEMP
-    // List of fixed elements that are selected
+    // All the fixed elements that are selected. This is defined over
+    // the ElementSet that contains only the fixed elements
     //
     ElementSubset * selected_elements;
+    
 
-
-    // List of fixed elements that are not selected
+    // Stores the minimal element of the partition. This is the same
+    // as the ElementSubset selected_elements but defined over the 
+    // original ElementSet
     //
-    ElementSubset * non_selected_elements;
+    ElementSubset * minimal_subset;
 
-*/   
+
+    // A pointer to the partition model this partition is using
+    //
+    PartitionModel * part_model;
+
+
+    // Find the minimal subset of this partition
+    // 
+    void find_minimal_subset ();
 
 public:
-    
+
     // Default constructor. Receives the elementsubset that represents
     // the lowest element of this fraction of the poset
     //  
     Partition (PartitionModel *, ElementSubset *);
 
 
-    /*
-    TEMP
-    // From an element subset defined over the subposet returns the
-    // elementsubset correspondent in the original poset
-    //
-    ElementSubset * get_orig_subset (ElementSubset *);
-    */
-
     // Default destructor.
     //
     virtual ~Partition ();
 
 
+    // From an elementsubset defined in this partition returns the
+    // elementsubset correspondent in the original poset
+    //
+    ElementSubset * get_orig_subset (ElementSubset *);
+
 };
 
-#endif /* FIXED_ELEMENTSSUBSET_H_ */
+#endif /* PARTITION_MODEL_H_ */

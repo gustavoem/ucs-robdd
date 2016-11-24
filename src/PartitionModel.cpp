@@ -56,17 +56,6 @@ PartitionModel::~PartitionModel ()
 }
 
 
-// ElementSubset * PartitionModel::get_orig_subset (ElementSubset * subset)
-// {
-//     ElementSubset * orig_subset = new ElementSubset ("", original_set);
-//     orig_subset->copy (selected_elements);
-//     for (unsigned int i = 0; i < fixed_set_size; i++)
-//         if (subset->has_element (i))
-//             orig_subset->add_element (element_map[i]);
-//     return orig_subset;
-// }
-
-
 ElementSet * PartitionModel::get_unfixed_elm_set ()
 {
     return unfixed_set;
@@ -76,4 +65,22 @@ ElementSet * PartitionModel::get_unfixed_elm_set ()
 ElementSet * PartitionModel::get_fixed_elm_set ()
 {
     return fixed_set;
+}
+
+
+ElementSet * PartitionModel::get_original_set ()
+{
+    return original_set;
+}
+
+
+unsigned int * PartitionModel::get_fixed_elm_set ()
+{
+    return fixed_elm_map;
+}
+
+
+unsigned int * PartitionModel::get_unfixed_elm_set ()
+{
+    return unfixed_elm_map;
 }
