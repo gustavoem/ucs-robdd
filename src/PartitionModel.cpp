@@ -22,24 +22,26 @@
 
 using namespace std;
 
-PartitionModel::PartitionModel (ElementSubset * sel_elms, 
-    ElementSubset * non_sel_elms)
+PartitionModel::PartitionModel (ElementSet * a_set, bool * is_fixed)
 {
-    this->original_set = sel_elms->get_set_that_contains_this_subset ();
-    unsigned int set_size = original_set->get_set_cardinality ();
-    this->selected_elements     = new ElementSubset (sel_elms);
-    this->non_selected_elements = new ElementSubset (non_sel_elms);
-    unsigned int a = selected_elements->get_subset_cardinality ();
-    unsigned int b = non_selected_elements->get_subset_cardinality ();
-    this->fixed_set_size = set_size - (a + b);
-    this->element_map = new unsigned int[fixed_set_size];
-    unsigned int j = 0;
+    this->original_set = new ElementSet (a_set);
+    this->fixed_set_size = 0;
+    unsigned int set_size = a_set->get_set_cardinality ();
     for (unsigned int i = 0; i < set_size; i++)
-        if (!sel_elms->has_element (i) &&
-            !non_sel_elms->has_element (i))
-            element_map[j++] = i;
-    this->unfixed_set = new ElementSet (original_set, element_map, 
-        fixed_set_size);
+        fixed_set_size++;
+    this->fixed_elm_map = new unsigned int[fixed_set_size];
+    this->unfixed_elm_map = new unsigned int[set_size - fixed_set_size];
+    unsigned int j = 0;
+    unsigned int k = 0;
+    for (unsigned int i = 0; i < set_size; i++)
+        if (is_fixed (i))
+            fixed_elm_map[j++] = i;
+        else
+            unfixed_elm_map[k++] = i;
+    unsigned int a = fixed_set_size;
+    unsigned int b = set_size - a;
+    this->fixed_set   = new ElementSet (a_set, fixed_elm_map, a);
+    this->unfixed_set = new ElementSet (a_set, unfixed_elm_map, b);
 }
 
 
@@ -52,18 +54,24 @@ PartitionModel::~PartitionModel ()
 }
 
 
-ElementSubset * PartitionModel::get_orig_subset (ElementSubset * subset)
-{
-    ElementSubset * orig_subset = new ElementSubset ("", original_set);
-    orig_subset->copy (selected_elements);
-    for (unsigned int i = 0; i < fixed_set_size; i++)
-        if (subset->has_element (i))
-            orig_subset->add_element (element_map[i]);
-    return orig_subset;
-}
+// ElementSubset * PartitionModel::get_orig_subset (ElementSubset * subset)
+// {
+//     ElementSubset * orig_subset = new ElementSubset ("", original_set);
+//     orig_subset->copy (selected_elements);
+//     for (unsigned int i = 0; i < fixed_set_size; i++)
+//         if (subset->has_element (i))
+//             orig_subset->add_element (element_map[i]);
+//     return orig_subset;
+// }
 
 
 ElementSet * PartitionModel::get_unfixed_elm_set ()
 {
     return unfixed_set;
+}
+
+
+ElementSet * PartitionModel::get_fixed_elm_set ()
+{
+    return fixed_set;
 }

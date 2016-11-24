@@ -53,8 +53,9 @@ TOBJS =		test/ElementTest.o test/ElementSetTest.o test/ElementSubsetTest.o \
 			test/VertexTest.o test/ROBDDTest.o \
 			test/GeneticOrderingTest.o test/OrderingNodeTest.o \
 			test/UCSROBDD6Test.o test/UCSROBDDToolBox6Test.o \
-			test/PartitionModelTest.o test/PartitionCostTest.o \
-			test/PUCSR1ToolBoxTest.o \
+			test/PartitionModelTest.o \
+			# test/PUCSR1ToolBoxTest.o \
+			# test/PartitionCostTest.o \
 			# test/UCSROBDDToolBoxTest.o \
 			# test/UCSROBDDTest.o \
 

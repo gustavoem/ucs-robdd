@@ -39,25 +39,24 @@ private:
     ElementSet * original_set;
 
 
+    // Pointer to the set that cointais the elements that are fixed
+    //
+    ElementSet * fixed_set;
+
+
     // Pointer to the set that cointais the elements that are not fixed
     //
     ElementSet * unfixed_set;
 
 
-    // List of fixed elements that are selected
+    // Used to map the elements of the fixed_set to the original set
     //
-    ElementSubset * selected_elements;
+    unsigned int * fixed_elm_map;
 
 
-    // List of fixed elements that are not selected
+    // Used to map the elements of the unfixed_set to the original set
     //
-    ElementSubset * non_selected_elements;
-
-
-    // Used to map elements from the subproblem set to the original 
-    // elemnt set
-    //
-    unsigned int * element_map;
+    unsigned int * unfixed_elm_map;
 
 
     // Stores the size of the element set without the fixed elements
@@ -67,11 +66,10 @@ private:
 
 public:
 
-    // Default constructor. Receives the elementsubset that represents
-    // the lowest element of this fraction of the poset
+    // Default constructor. Receives the original element set and an 
+    // array that says if i-th element of the element set is fixed
     //
-    PartitionModel (ElementSubset * sel_elms, 
-            ElementSubset * non_sel_elms);
+    PartitionModel (ElementSet *, bool *);
 
 
     // Default destructor.
@@ -79,16 +77,16 @@ public:
     virtual ~PartitionModel ();
 
 
-    // From an element subset defined over the subposet returns the
-    // elementsubset correspondent in the original poset
-    //
-    ElementSubset * get_orig_subset (ElementSubset *);
-
-
     // Returns a pointer to the element set that contains the elements
     // of the original set and are not fixed
     //
     ElementSet * get_unfixed_elm_set ();
+
+
+    // Returns a pointer to the element set that contains the elements
+    // of the original set and are fixed
+    //
+    ElementSet * get_fixed_elm_set ();
 
 };
 

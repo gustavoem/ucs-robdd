@@ -37,7 +37,7 @@
 // Objective functions
 //
 #include "CostFunctionTest.h"
-#include "PartitionCostTest.h"
+// #include "PartitionCostTest.h"
 
 // Solvers
 //
@@ -56,7 +56,7 @@
 #include "UCSROBDDToolBox6Test.h"
 #include "UCSROBDDTest.h"
 #include "UCSROBDD6Test.h"
-#include "PUCSR1ToolBoxTest.h"
+// #include "PUCSR1ToolBoxTest.h"
 
 
 // Number of passed and failed tests
@@ -547,22 +547,22 @@ int main(void) {
     cout << "PartitionModelTest::it_should_create_a_subproblem_elm_set";
     cout.flush ();
     printResult (PartitionModelTest::it_should_create_a_subproblem_elm_set ());
-    cout << "PartitionModelTest::it_should_be_able_to_map_element_subsets";
-    cout.flush ();
-    printResult (PartitionModelTest::it_should_be_able_to_map_element_subsets ());
+    // cout << "PartitionModelTest::it_should_be_able_to_map_element_subsets";
+    // cout.flush ();
+    // printResult (PartitionModelTest::it_should_be_able_to_map_element_subsets ());
     cout << endl;
 
     // Testing Class PartitionCost
-    cout << "PartitionCostTest::it_should_calculate_the_original_cost";
-    cout.flush ();
-    printResult (PartitionCostTest::it_should_calculate_the_original_cost ());
-    cout << endl;
+    // cout << "PartitionCostTest::it_should_calculate_the_original_cost";
+    // cout.flush ();
+    // printResult (PartitionCostTest::it_should_calculate_the_original_cost ());
+    // cout << endl;
 
     // Testing Namespace PUCSR1ToolBox
-     cout << "PUCSR1ToolBoxTest::it_should_get_a_partition_set";
-    cout.flush ();
-    printResult (PUCSR1ToolBoxTest::it_should_get_a_partition_set ());
-    cout << endl;
+    //  cout << "PUCSR1ToolBoxTest::it_should_get_a_partition_set";
+    // cout.flush ();
+    // printResult (PUCSR1ToolBoxTest::it_should_get_a_partition_set ());
+    // cout << endl;
 
     cout << "Total " << number_of_passed_tests + number_of_failed_tests << " test(s), ";
     cout << number_of_passed_tests << " test(s) passed, " << number_of_failed_tests;
