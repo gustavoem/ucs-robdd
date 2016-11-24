@@ -28,13 +28,14 @@ PartitionModel::PartitionModel (ElementSet * a_set, bool * is_fixed)
     this->fixed_set_size = 0;
     unsigned int set_size = a_set->get_set_cardinality ();
     for (unsigned int i = 0; i < set_size; i++)
-        fixed_set_size++;
+        if (is_fixed[i])
+            fixed_set_size++;
     this->fixed_elm_map = new unsigned int[fixed_set_size];
     this->unfixed_elm_map = new unsigned int[set_size - fixed_set_size];
     unsigned int j = 0;
     unsigned int k = 0;
     for (unsigned int i = 0; i < set_size; i++)
-        if (is_fixed (i))
+        if (is_fixed[i])
             fixed_elm_map[j++] = i;
         else
             unfixed_elm_map[k++] = i;
@@ -47,10 +48,11 @@ PartitionModel::PartitionModel (ElementSet * a_set, bool * is_fixed)
 
 PartitionModel::~PartitionModel ()
 {
+    delete original_set;
+    delete[] fixed_elm_map;
+    delete[] unfixed_elm_map;
+    delete fixed_set;
     delete unfixed_set;
-    delete selected_elements;
-    delete non_selected_elements;
-    delete[] element_map;
 }
 
 

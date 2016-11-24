@@ -29,8 +29,8 @@
 namespace PartitionModelTest
 {
 
-    bool it_should_create_a_subproblem_elm_set ();
-    bool it_should_be_able_to_map_element_subsets ();
+    bool it_should_create_the_fixed_elm_set ();
+    bool it_should_create_the_unfixed_elm_set ();
 
 }
 

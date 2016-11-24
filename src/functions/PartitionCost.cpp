@@ -41,24 +41,25 @@ float PartitionCost::cost (ElementSubset * X)
     gettimeofday (& begin, NULL);
     usleep (SLEEP_TIME);
 
-    ElementSubset * original_subset = part_set->get_orig_subset (X);
-    float cost = orig_cost_f->cost (original_subset);
-    delete original_subset;
+    // ElementSubset * original_subset = part_set->get_orig_subset (X);
+    // float cost = orig_cost_f->cost (original_subset);
+    // delete original_subset;
 
     gettimeofday (& end, NULL);
     elapsed_time_of_all_calls_of_the_cost_function += diff_us (end, begin);
 
     // T1: threshold is a given cost
     //
-    if ((has_threshold_set) && (cost <= threshold))
-        reached_threshold = true;
+    // if ((has_threshold_set) && (cost <= threshold))
+    //     reached_threshold = true;
 
     // T2: threshold is a maximum number of calls of the cost function
     //
-    if ((has_max_number_of_calls_set) &&
-        (number_of_calls_of_cost_function >=
-             max_number_of_calls_of_cost_function))
-        reached_threshold = true;
+    // if ((has_max_number_of_calls_set) &&
+    //     (number_of_calls_of_cost_function >=
+    //          max_number_of_calls_of_cost_function))
+    //     reached_threshold = true;
 
-    return cost;
+    // return cost;
+    return 0;
 }

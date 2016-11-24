@@ -544,9 +544,12 @@ int main(void) {
 
 
     // Testing Class FixedElementSet
-    cout << "PartitionModelTest::it_should_create_a_subproblem_elm_set";
+    cout << "PartitionModelTest::it_should_create_the_fixed_elm_set";
     cout.flush ();
-    printResult (PartitionModelTest::it_should_create_a_subproblem_elm_set ());
+    printResult (PartitionModelTest::it_should_create_the_fixed_elm_set ());
+    cout << "PartitionModelTest::it_should_create_the_unfixed_elm_set";
+    cout.flush ();
+    printResult (PartitionModelTest::it_should_create_the_unfixed_elm_set ());
     // cout << "PartitionModelTest::it_should_be_able_to_map_element_subsets";
     // cout.flush ();
     // printResult (PartitionModelTest::it_should_be_able_to_map_element_subsets ());
