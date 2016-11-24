@@ -20,36 +20,48 @@
 
 #include "Partition.h"
 
-Partition::Partition (PartitionModel * part_model, ElementSubset * selected)
+Partition::Partition (PartitionModel * part_model,
+    ElementSubset * selected_subset)
 {
-	this->selected = new ElementSubset (selected_elements);
-	this->part_model = part_model;
-	find_minimal_subset ();
+    this->selected_elements = new ElementSubset (selected_subset);
+    this->part_model = part_model;
+    find_minimal_subset ();
 }
 
+
+Partition::~Partition ()
+{
+    delete selected_elements;
+    delete minimal_subset;
+}
 
 void Partition::find_minimal_subset ()
 {
-	minimal_subset = new ElementSubset (part_model->get_orig_set ());
-	ElementSet * fixed_set = part_model->get_fixed_elm_set ();
-	unsigned int fixed_elm_set_size = fixed_set->get_set_cardinality ();
-	unsigned int * fixed_map = part_model->get_fixed_elm_map ();
-	for (unsigned int i = 0; i < fixed_elm_set_size; i++)
-		if (selected_elements->has_element (i))
-		{
-			minimal_subset->add_element (fixed_map[i]);
-		}
+    ElementSet * fixed_set = part_model->get_fixed_elm_set ();
+    ElementSet * orig_set = part_model->get_original_set ();
+    minimal_subset = new ElementSubset ("", orig_set);
+    unsigned int fixed_elm_set_size = fixed_set->get_set_cardinality ();
+    unsigned int * fixed_map = part_model->get_fixed_elm_map ();
+    for (unsigned int i = 0; i < fixed_elm_set_size; i++)
+    {
+        if (selected_elements->has_element (i))
+            minimal_subset->add_element (fixed_map[i]);
+    }
 }
 
 
-ElementSubset * Partition::get_orig_subset (ElementSubset * subset)
+ElementSubset * Partition::get_original_subset (ElementSubset * subset)
 {
-	ElementSet * orig_set = PartitionModel->get_orig_set ();
-    ElementSubset * orig_subset = new ElementSubset ("", original_set);
+    ElementSet * orig_set = part_model->get_original_set ();
+    ElementSubset * orig_subset = new ElementSubset ("", orig_set);
     orig_subset->copy (minimal_subset);
-    unsigned int * fixed_map = part_model->get_fixed_elm_map ();
-    for (unsigned int i = 0; i < fixed_set_size; i++)
+    ElementSet * unfixed_set = part_model->get_unfixed_elm_set ();
+    unsigned int unfixed_set_size = unfixed_set->get_set_cardinality ();
+    unsigned int * unfixed_map = part_model->get_unfixed_elm_map ();
+    for (unsigned int i = 0; i < unfixed_set_size; i++)
+    {
         if (subset->has_element (i))
-            orig_subset->add_element (fixed_map[i]);
+            orig_subset->add_element (unfixed_map[i]);
+    }
     return orig_subset;
 }

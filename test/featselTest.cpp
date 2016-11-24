@@ -31,13 +31,14 @@
 #include "VertexTest.h"
 #include "ROBDDTest.h"
 #include "PartitionModelTest.h"
+#include "PartitionTest.h"
 #include "GeneticOrderingTest.h"
 #include "OrderingNodeTest.h"
 
 // Objective functions
 //
 #include "CostFunctionTest.h"
-// #include "PartitionCostTest.h"
+#include "PartitionCostTest.h"
 
 // Solvers
 //
@@ -543,23 +544,26 @@ int main(void) {
     //cout << endl;
 
 
-    // Testing Class FixedElementSet
+    // Testing Class PartitionModel
     cout << "PartitionModelTest::it_should_create_the_fixed_elm_set";
     cout.flush ();
     printResult (PartitionModelTest::it_should_create_the_fixed_elm_set ());
     cout << "PartitionModelTest::it_should_create_the_unfixed_elm_set";
     cout.flush ();
     printResult (PartitionModelTest::it_should_create_the_unfixed_elm_set ());
-    // cout << "PartitionModelTest::it_should_be_able_to_map_element_subsets";
-    // cout.flush ();
-    // printResult (PartitionModelTest::it_should_be_able_to_map_element_subsets ());
     cout << endl;
 
+    // Testing Class Partition
+    cout << "PartitionTest::it_map_subsets_correctly";
+    cout.flush ();
+    printResult (PartitionTest::it_map_subsets_correctly ());
+    cout << endl;    
+
     // Testing Class PartitionCost
-    // cout << "PartitionCostTest::it_should_calculate_the_original_cost";
-    // cout.flush ();
-    // printResult (PartitionCostTest::it_should_calculate_the_original_cost ());
-    // cout << endl;
+    cout << "PartitionCostTest::it_should_calculate_the_original_cost";
+    cout.flush ();
+    printResult (PartitionCostTest::it_should_calculate_the_original_cost ());
+    cout << endl;
 
     // Testing Namespace PUCSR1ToolBox
     //  cout << "PUCSR1ToolBoxTest::it_should_get_a_partition_set";

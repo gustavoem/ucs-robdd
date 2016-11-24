@@ -21,11 +21,10 @@
 #include "PartitionCost.h"
 
 
-PartitionCost::PartitionCost (CostFunction * c_f, 
-    PartitionModel * p_set)
+PartitionCost::PartitionCost (CostFunction * c_f, Partition * p)
 {
     orig_cost_f = c_f;
-    part_set = p_set;
+    partition = p;
 }
 
 
@@ -41,9 +40,10 @@ float PartitionCost::cost (ElementSubset * X)
     gettimeofday (& begin, NULL);
     usleep (SLEEP_TIME);
 
-    // ElementSubset * original_subset = part_set->get_orig_subset (X);
-    // float cost = orig_cost_f->cost (original_subset);
-    // delete original_subset;
+    ElementSubset * original_subset;
+    original_subset = partition->get_original_subset (X);
+    float cost = orig_cost_f->cost (original_subset);
+    delete original_subset;
 
     gettimeofday (& end, NULL);
     elapsed_time_of_all_calls_of_the_cost_function += diff_us (end, begin);
@@ -60,6 +60,5 @@ float PartitionCost::cost (ElementSubset * X)
     //          max_number_of_calls_of_cost_function))
     //     reached_threshold = true;
 
-    // return cost;
-    return 0;
+    return cost;
 }

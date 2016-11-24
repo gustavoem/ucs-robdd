@@ -26,27 +26,23 @@ PUCSR1::~PUCSR1 ()
 }
 
 
-void PUCSR1::set_elm_sets ()
+void PUCSR1::set_partition_model ()
 {
     unsigned int set_size = set->get_set_cardinality ();
     // The number partition_set_size determines the cardinality of each
     // subposet in which we will solve the u-curve
     part_set_size = 2;
     unsigned int fixed_set_size = set_size - part_set_size;
-    unsigned int *fixed = new unsigned int[fixed_set_size];
-    unsigned int *unfixed = new unsigned int[partition_set_size];
-
+    bool * fixed = new bool[set_size];
     // This is a simple way to partitionate the space. We are choosing
     // the last <partition_set_size> variables of the element set to be
     // free in every subproblem and fixing the other variables
-    // 
-    for (unsigned int i = 0; i < fixed_set_size; i++)
-        fixed[i] = i;
-    for (unsigned int i = 0; i < partition_set_size; i++)
-        unfixed[i] = fixed_set_size + i;
-
-    this->fixed_elms = new ElementSet (set, fixed, fixed_set_size);
-    this->unfixed_elms = new ElementSet (set, unfixed, part_set_size);
+    for (unsigned int i = 0; i < set_size; i++)
+        if (i < fixed_set_size)
+            fixed[i] = true;
+        else
+            fixed[i] = false;
+    this->part_model = new PartitionModel (set, fixed);
 }
 
 

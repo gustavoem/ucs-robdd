@@ -26,20 +26,30 @@ namespace PartitionCostTest
     bool it_should_calculate_the_original_cost ()
     {
         bool answ;
-        ElementSet original_set ("", 10, 100);
-        ElementSubset selected ("", &original_set);
-        ElementSubset non_selected ("", &original_set);
-        selected.add_element (0);
-        selected.add_element (2);
-        non_selected.add_element (1);
-        PartitionModel p_model (&selected, &non_selected);
+        unsigned int set_size = 12;
+        ElementSet original_set ("", set_size, 100);
+        bool * is_fixed = new bool[set_size];
+        for (unsigned int i = 0; i < set_size; i++)
+            if (i < 5)
+                is_fixed[i] = true;
+            else
+                is_fixed[i] = false;
+        PartitionModel part_model (&original_set, is_fixed);
+        delete[] is_fixed;
+        ElementSet * fixed_set = part_model.get_fixed_elm_set ();
+        ElementSubset part_subset ("", fixed_set);
+        part_subset.add_element (0);
+        part_subset.add_element (2);
+        part_subset.add_element (4);
+        Partition part (&part_model, &part_subset);
+
         AbsSum orig_cost_f (&original_set);
-        PartitionCost p_model_f (&orig_cost_f, &p_model);
-        ElementSubset X ("", p_model.get_unfixed_elm_set ());
+        PartitionCost p_model_f (&orig_cost_f, &part);
+        ElementSubset X ("", part_model.get_unfixed_elm_set ());
         X.add_element (0);
         X.add_element (2);
-        X.add_element (6);
-        ElementSubset * orig_X = p_model.get_orig_subset (&X);
+        X.add_element (3);
+        ElementSubset * orig_X = part.get_original_subset (&X);
         answ = orig_cost_f.cost (orig_X) == p_model_f.cost (&X);
         delete orig_X;
         return answ;

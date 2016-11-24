@@ -15,7 +15,7 @@ private:
 
     // The collection of restrictions
     //
-    ROBDD * restrictions;
+    // ROBDD * restrictions;
 
 
     // The partitions of the poset which can have the minimal element
@@ -26,29 +26,12 @@ private:
     // The element set of the variables that are fixed in each 
     // partition
     //
-    ElementSet * fixed_elms;
-
-
-    // The element set of the variables that are not fixed in each 
-    // par partitions
-    //
-    ElementSet * unfixed_elms;
+    PartitionModel * part_model;
 
 
     // The size of the partition
     //
-    unsigned int part_set_size;
-
-    // Chooses the elements that are going to be fixed in every
-    // partition. For instance, if S = {a, b, c} we can have partitions
-    // like: {a'b'X}, {a'bX}, {ab'X} and {abX} (a and b are fixed)
-    //   or  {aXX}, {a'XX} (only a is fixed)
-    void set_elm_sets ();
-
-
-    // Partitionates the lattice
-    //
-    void set_partitions ();
+    unsigned int nof_unfixed_elms;
 
 
 public:

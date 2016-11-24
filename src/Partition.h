@@ -18,8 +18,8 @@
 //    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-#ifndef PARTITION_MODEL_H_
-#define PARTITION_MODEL_H_
+#ifndef PARTITION_H_
+#define PARTITION_H_
 
 #include "ElementSet.h"
 #include "ElementSubset.h"
@@ -71,8 +71,8 @@ public:
     // From an elementsubset defined in this partition returns the
     // elementsubset correspondent in the original poset
     //
-    ElementSubset * get_orig_subset (ElementSubset *);
+    ElementSubset * get_original_subset (ElementSubset *);
 
 };
 
-#endif /* PARTITION_MODEL_H_ */
+#endif /* PARTITION_H_ */

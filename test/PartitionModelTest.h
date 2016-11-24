@@ -18,8 +18,8 @@
 //    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-#ifndef PARTITIONSETTEST_H_
-#define PARTITIONSETTEST_H_
+#ifndef PARTITION_MODEL_TEST_H_
+#define PARTITION_MODEL_TEST_H_
 
 #include "../src/PartitionModel.h"
 #include "../src/ElementSet.h"
@@ -34,4 +34,4 @@ namespace PartitionModelTest
 
 }
 
-#endif /* PARTITIONSETTEST_H_ */
+#endif /* PARTITION_MODEL_TEST_H_ */

@@ -74,13 +74,13 @@ ElementSet * PartitionModel::get_original_set ()
 }
 
 
-unsigned int * PartitionModel::get_fixed_elm_set ()
+unsigned int * PartitionModel::get_fixed_elm_map ()
 {
     return fixed_elm_map;
 }
 
 
-unsigned int * PartitionModel::get_unfixed_elm_set ()
+unsigned int * PartitionModel::get_unfixed_elm_map ()
 {
     return unfixed_elm_map;
 }
