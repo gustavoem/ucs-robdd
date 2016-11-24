@@ -1,5 +1,5 @@
 //
-// ElementSubset.h -- definition of the class "ElementSubset".
+// PartitionModel.h -- definition of the class "PartitionModel".
 //
 //    This file is part of the featsel program
 //    Copyright (C) 2016  Gustavo E. Matos
@@ -18,8 +18,8 @@
 //    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-#ifndef PARTITION_SET_H_
-#define PARTITION_SET_H_
+#ifndef PARTITION_MODEL_H_
+#define PARTITION_MODEL_H_
 
 #include "ElementSet.h"
 #include "ElementSubset.h"
@@ -28,13 +28,13 @@
 // This class is used to fix elements of an ElementSet and also define
 // a subposet of the poset defined by power set of ElementSet
 //
-class PartitionSet
+class PartitionModel
 {
 
 private:
 
     // Pointer to the set that contains the elements that are fixed or 
-    // not
+    // not, i.e the original set
     //
     ElementSet * original_set;
 
@@ -62,7 +62,7 @@ private:
 
     // Stores the size of the element set without the fixed elements
     //
-    unsigned int size;
+    unsigned int fixed_set_size;
 
 
 public:
@@ -70,13 +70,13 @@ public:
     // Default constructor. Receives the elementsubset that represents
     // the lowest element of this fraction of the poset
     //
-    PartitionSet (ElementSubset * sel_elms, 
+    PartitionModel (ElementSubset * sel_elms, 
             ElementSubset * non_sel_elms);
 
 
     // Default destructor.
     //
-    virtual ~PartitionSet ();
+    virtual ~PartitionModel ();
 
 
     // From an element subset defined over the subposet returns the

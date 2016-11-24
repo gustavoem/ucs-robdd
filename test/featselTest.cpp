@@ -30,7 +30,7 @@
 #include "CollectionTest.h"
 #include "VertexTest.h"
 #include "ROBDDTest.h"
-#include "PartitionSetTest.h"
+#include "PartitionModelTest.h"
 #include "GeneticOrderingTest.h"
 #include "OrderingNodeTest.h"
 
@@ -544,12 +544,12 @@ int main(void) {
 
 
     // Testing Class FixedElementSet
-    cout << "PartitionSetTest::it_should_create_a_subproblem_elm_set";
+    cout << "PartitionModelTest::it_should_create_a_subproblem_elm_set";
     cout.flush ();
-    printResult (PartitionSetTest::it_should_create_a_subproblem_elm_set ());
-    cout << "PartitionSetTest::it_should_be_able_to_map_element_subsets";
+    printResult (PartitionModelTest::it_should_create_a_subproblem_elm_set ());
+    cout << "PartitionModelTest::it_should_be_able_to_map_element_subsets";
     cout.flush ();
-    printResult (PartitionSetTest::it_should_be_able_to_map_element_subsets ());
+    printResult (PartitionModelTest::it_should_be_able_to_map_element_subsets ());
     cout << endl;
 
     // Testing Class PartitionCost

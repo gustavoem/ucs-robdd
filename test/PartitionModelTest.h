@@ -1,5 +1,5 @@
 //
-// PartitionSetTest.h -- definition of the namespace "PartitionSetTest".
+// PartitionModelTest.h -- definition of the namespace "PartitionModelTest".
 //
 //    This file is part of the featsel program
 //    Copyright (C) 2016 Gustavo Estrela de Matos
@@ -21,12 +21,12 @@
 #ifndef PARTITIONSETTEST_H_
 #define PARTITIONSETTEST_H_
 
-#include "../src/PartitionSet.h"
+#include "../src/PartitionModel.h"
 #include "../src/ElementSet.h"
 #include "../src/ElementSubset.h"
 #include "../src/global.h"
 
-namespace PartitionSetTest
+namespace PartitionModelTest
 {
 
     bool it_should_create_a_subproblem_elm_set ();

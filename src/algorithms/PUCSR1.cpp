@@ -13,8 +13,8 @@ PUCSR1::PUCSR1 ()
 
 PUCSR1::~PUCSR1 ()
 {
-    if (restrictions != NULL)
-        delete restrictions;
+    // if (restrictions != NULL)
+    //     delete restrictions;
     if (list_of_visited_subsets != NULL)
         delete list_of_visited_subsets;
     if (cand_part != NULL)
@@ -47,24 +47,23 @@ void PUCSR1::set_elm_sets ()
 
     this->fixed_elms = new ElementSet (set, fixed, fixed_set_size);
     this->unfixed_elms = new ElementSet (set, unfixed, part_set_size);
-
 }
 
 
 void PUCSR1::set_partitions ()
 {
-    this->cand_part = new ROBDD (fixed);
+    this->cand_part = new ROBDD (fixed_elms);
 }
 
 
 void PUCSR1::get_minima_list (unsigned int max_size_of_minima_list)
 {
     set_elm_sets ();
-    restrictions = new ROBDD (set);
+    // restrictions = new ROBDD (set);
     set_partitions ();
 
-    timeval begin_exhausting, end_exhausting, begin_program, end_program;
-    gettimeofday (& begin_program, NULL);
+    // timeval begin_exhausting, end_exhausting, begin_program, end_program;
+    // gettimeofday (& begin_program, NULL);
 
     // enquanto tiver partições para serem visitadas
         // escolhe uma partição
@@ -73,51 +72,21 @@ void PUCSR1::get_minima_list (unsigned int max_size_of_minima_list)
             // olha para os vizinhos e caminha nas partições
 
     Collection * L = new Collection ();
+    ElementSubset * part;
+    part = cand_part->get_random_zero_evaluated_element ();
+    while (part != NULL)
+    {
+        PUCSR1ToolBox::random_walk (part, L, cand_part)
+        part = cand_part->get_random_zero_evaluated_element ();
+    }
     // bool search_space_is_empty = false;
     ElementSubset * part = 
         cand_part->get_random_zero_evaluated_element ();
-    PartitionSet * part_set = get_partition (partition);
-    Solver * subsolver = new Solver (cost_function, part_set);
-    // subsolver->set_parameters (cost_function, element_set, bool);
+    PartitionSet * part_set = PUCSR1ToolBox::get_partition (partition);
+    Solver * subsolver = new Solver ();
+    subsolver->
 
-
-    srand ( (unsigned) time (NULL) );
-    do
-    {
-//         X = restrictions->get_random_zero_evaluated_element ();
-//         if (X != NULL)
-//         {
-//             gettimeofday (& begin_exhausting, NULL);
-//             M = UCSROBDDToolBox6::create_node (X);
-//             M->vertex->cost = cost_function->cost (M->vertex);
-//             // 
-//             UCSROBDDToolBox6::DFS
-//                 (M, L, restrictions, cost_function);
-//             number_of_calls_of_minimum_exhausting++;
-//             // 
-//             gettimeofday (& end_exhausting, NULL);
-//             elapsed_time_of_all_calls_of_the_minima_exhausting +=
-//             diff_us (end_exhausting, begin_exhausting);     
-//             delete X;
-//         }
-//         else
-//             search_space_is_empty = true;
-// // 
-//         while (L->size() > 0)
-//         {
-//             X = L->remove_last_subset ();
-//             list_of_minima.push_back (X);
-//             if (store_visited_subsets)
-//                 list_of_visited_subsets->add_subset (X);
-//         }
-
-//         // Reminder: this function DOES NOT compute again the
-//         // cost function, instead it uses the cost value stored
-//         // into the ElementSubsets.
-//         //
-//         clean_list_of_minima (max_size_of_minima_list);
-
-    } while ( (! search_space_is_empty) && (! cost_function->has_reached_threshold () ) );
+    // Enquanto houver partições para se visitar
 
     delete L;
 

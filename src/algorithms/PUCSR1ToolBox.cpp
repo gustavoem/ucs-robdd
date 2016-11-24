@@ -3,7 +3,7 @@
 namespace PUCSR1ToolBox 
 {
 
-    PartitionSet * get_part_set (ElementSubset * part, 
+    PartitionModel * get_part_set (ElementSubset * part, 
         ElementSet * original_set)
     {
         unsigned int nof_fx_elm = part->get_set_cardinality ();
@@ -16,10 +16,10 @@ namespace PUCSR1ToolBox
             else
                 non_sel->add_element (i);
         }
-        PartitionSet * part_set = new PartitionSet (sel, non_sel);
+        PartitionModel * part_model = new PartitionModel (sel, non_sel);
         delete sel;
         delete non_sel;
-        return part_set;
+        return part_model;
     }
 
 }

@@ -1,5 +1,5 @@
 //
-// ElementSet.cpp -- implementation of the class "ElementSet".
+// PartitionModel.cpp -- implementation of the class "PartitionModel".
 //
 //    This file is part of the featsel program
 //    Copyright (C) 2016  Gustavo E. Matos
@@ -18,34 +18,32 @@
 //    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-#include "PartitionSet.h"
+#include "PartitionModel.h"
 
 using namespace std;
 
-PartitionSet::PartitionSet (ElementSubset * sel_elms, 
+PartitionModel::PartitionModel (ElementSubset * sel_elms, 
     ElementSubset * non_sel_elms)
 {
-    unsigned int j;
-    this->original_set = 
-        sel_elms->get_set_that_contains_this_subset ();
+    this->original_set = sel_elms->get_set_that_contains_this_subset ();
     unsigned int set_size = original_set->get_set_cardinality ();
-    this->selected_elements = new ElementSubset (sel_elms);
+    this->selected_elements     = new ElementSubset (sel_elms);
     this->non_selected_elements = new ElementSubset (non_sel_elms);
-    this->size = set_size 
-        - (selected_elements->get_subset_cardinality ()
-        + non_selected_elements->get_subset_cardinality ());
-    this->element_map = new unsigned int[size];
-    j = 0;
+    unsigned int a = selected_elements->get_subset_cardinality ();
+    unsigned int b = non_selected_elements->get_subset_cardinality ();
+    this->fixed_set_size = set_size - (a + b);
+    this->element_map = new unsigned int[fixed_set_size];
+    unsigned int j = 0;
     for (unsigned int i = 0; i < set_size; i++)
         if (!sel_elms->has_element (i) &&
-                !non_sel_elms->has_element (i))
+            !non_sel_elms->has_element (i))
             element_map[j++] = i;
-    this->unfixed_set = new ElementSet (original_set,
-        element_map, size);
+    this->unfixed_set = new ElementSet (original_set, element_map, 
+        fixed_set_size);
 }
 
 
-PartitionSet::~PartitionSet ()
+PartitionModel::~PartitionModel ()
 {
     delete unfixed_set;
     delete selected_elements;
@@ -54,22 +52,18 @@ PartitionSet::~PartitionSet ()
 }
 
 
-ElementSubset * PartitionSet::get_orig_subset (ElementSubset * subset)
+ElementSubset * PartitionModel::get_orig_subset (ElementSubset * subset)
 {
     ElementSubset * orig_subset = new ElementSubset ("", original_set);
     orig_subset->copy (selected_elements);
-    for (unsigned int i = 0; i < size; i++)
-    {
+    for (unsigned int i = 0; i < fixed_set_size; i++)
         if (subset->has_element (i))
-        {
             orig_subset->add_element (element_map[i]);
-        }
-    }
     return orig_subset;
 }
 
 
-ElementSet * PartitionSet::get_unfixed_elm_set ()
+ElementSet * PartitionModel::get_unfixed_elm_set ()
 {
     return unfixed_set;
 }

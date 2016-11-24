@@ -1,5 +1,5 @@
 //
-// PartitionSetTest.cpp -- implementation of the namespace "PartitionSetTest".
+// PartitionModelTest.cpp -- implementation of the namespace "PartitionModelTest".
 //
 //    This file is part of the featsel program
 //    Copyright (C) 2010  Gustavo Estrela de Matos
@@ -18,9 +18,9 @@
 //    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-#include "PartitionSetTest.h"
+#include "PartitionModelTest.h"
 
-namespace PartitionSetTest
+namespace PartitionModelTest
 {
 
     bool it_should_create_a_subproblem_elm_set ()
@@ -31,8 +31,8 @@ namespace PartitionSetTest
         selected.add_element (0);
         selected.add_element (3);
         non_selected.add_element (7);
-        PartitionSet fixed_elm_set (&selected, &non_selected);
-        ElementSet * elm_set = fixed_elm_set.get_unfixed_elm_set ();
+        PartitionModel part_model (&selected, &non_selected);
+        ElementSet * elm_set = part_model.get_unfixed_elm_set ();
         if (elm_set->get_set_cardinality () != 7)
             return false;
         return true;
@@ -49,8 +49,8 @@ namespace PartitionSetTest
         selected.add_element (0);
         selected.add_element (3);
         non_selected.add_element (7);
-        PartitionSet fixed_elm_set (&selected, &non_selected);
-        ElementSet * new_set = fixed_elm_set.get_unfixed_elm_set ();
+        PartitionModel part_model (&selected, &non_selected);
+        ElementSet * new_set = part_model.get_unfixed_elm_set ();
         ElementSubset input_subset ("", new_set);
         input_subset.add_element (3);
         input_subset.add_element (4);
@@ -59,7 +59,7 @@ namespace PartitionSetTest
         expected_subset.add_element (5);
         expected_subset.add_element (6);
         ElementSubset * answ_subset = 
-            fixed_elm_set.get_orig_subset (&input_subset);
+            part_model.get_orig_subset (&input_subset);
         if (!answ_subset->is_equal (&expected_subset))
             answ = false;
         else

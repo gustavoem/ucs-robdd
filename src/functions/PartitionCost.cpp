@@ -21,7 +21,8 @@
 #include "PartitionCost.h"
 
 
-PartitionCost::PartitionCost (CostFunction * c_f, PartitionSet * p_set)
+PartitionCost::PartitionCost (CostFunction * c_f, 
+    PartitionModel * p_set)
 {
     orig_cost_f = c_f;
     part_set = p_set;

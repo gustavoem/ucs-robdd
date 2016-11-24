@@ -32,15 +32,15 @@ namespace PartitionCostTest
         selected.add_element (0);
         selected.add_element (2);
         non_selected.add_element (1);
-        PartitionSet p_set (&selected, &non_selected);
+        PartitionModel p_model (&selected, &non_selected);
         AbsSum orig_cost_f (&original_set);
-        PartitionCost p_set_f (&orig_cost_f, &p_set);
-        ElementSubset X ("", p_set.get_unfixed_elm_set ());
+        PartitionCost p_model_f (&orig_cost_f, &p_model);
+        ElementSubset X ("", p_model.get_unfixed_elm_set ());
         X.add_element (0);
         X.add_element (2);
         X.add_element (6);
-        ElementSubset * orig_X = p_set.get_orig_subset (&X);
-        answ = orig_cost_f.cost (orig_X) == p_set_f.cost (&X);
+        ElementSubset * orig_X = p_model.get_orig_subset (&X);
+        answ = orig_cost_f.cost (orig_X) == p_model_f.cost (&X);
         delete orig_X;
         return answ;
     }

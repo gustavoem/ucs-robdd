@@ -4,7 +4,7 @@
 #include "../src/algorithms/PUCSR1ToolBox.h"
 #include "../src/ElementSubset.h"
 #include "../src/ElementSet.h"
-#include "../src/PartitionSet.h"
+#include "../src/PartitionModel.h"
 
 namespace PUCSR1ToolBoxTest
 {
