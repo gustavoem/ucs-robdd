@@ -46,17 +46,10 @@ void PUCSR1::set_partition_model ()
 }
 
 
-void PUCSR1::set_partitions ()
-{
-    this->cand_part = new ROBDD (fixed_elms);
-}
-
-
 void PUCSR1::get_minima_list (unsigned int max_size_of_minima_list)
 {
-    set_elm_sets ();
-    // restrictions = new ROBDD (set);
-    set_partitions ();
+    set_partition_model ();
+    cand_part = new ROBDD (part_model->get_fixed_elm_set ());
 
     // timeval begin_exhausting, end_exhausting, begin_program, end_program;
     // gettimeofday (& begin_program, NULL);
@@ -68,21 +61,17 @@ void PUCSR1::get_minima_list (unsigned int max_size_of_minima_list)
             // olha para os vizinhos e caminha nas partições
 
     Collection * L = new Collection ();
-    ElementSubset * part;
-    part = cand_part->get_random_zero_evaluated_element ();
-    while (part != NULL)
+    ElementSubset * part_subset;
+    part_subset = cand_part->get_random_zero_evaluated_element ();
+    while (part_subset != NULL)
     {
-        PUCSR1ToolBox::random_walk (part, L, cand_part)
-        part = cand_part->get_random_zero_evaluated_element ();
+        part = new Partition (part_model, part_subset);
+        PUCSR1ToolBox::random_walk (part, cand_part, L);
+        // clean minima list
+        delete part;
+        delete part_subset;
+        part_subset = cand_part->get_random_zero_evaluated_element ();
     }
-    // bool search_space_is_empty = false;
-    ElementSubset * part = 
-        cand_part->get_random_zero_evaluated_element ();
-    PartitionSet * part_set = PUCSR1ToolBox::get_partition (partition);
-    Solver * subsolver = new Solver ();
-    subsolver->
-
-    // Enquanto houver partições para se visitar
 
     delete L;
 
