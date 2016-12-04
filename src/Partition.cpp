@@ -83,3 +83,24 @@ PartitionModel * Partition::get_partition_model ()
 {
     return part_model;
 }
+
+
+unsigned int Partition::get_number_of_fixed_elms ()
+{
+    ElementSet * fixed_set = part_model->get_fixed_elm_set ();
+    unsigned int n = fixed_set->get_set_cardinality ();
+    return n;
+}
+
+
+bool Partition::is_upper_adjacent (Partition * Q)
+{
+    bool answ = true;
+    ElementSubset * intersect = new ElementSubset (selected_elements);
+    intersect->subset_intersection (Q->selected_elements);
+    if (intersect->get_subset_cardinality () != 
+        Q->selected_elements->get_subset_cardinality ())
+        answ = false;
+    delete intersect;
+    return answ;
+}

@@ -21,10 +21,6 @@ namespace PUCSR1ToolBox
     Partition * adjacent_partition (Partition * P, unsigned int i)
     {
         ElementSubset * sel_elms = P->get_selected_elements ();
-        unsigned int n = sel_elms->get_set_cardinality ();
-        if (i >= n || i < 0)
-            return NULL;
-
         if (sel_elms->has_element (i))
             sel_elms->remove_element (i);
         else
@@ -56,10 +52,11 @@ namespace PUCSR1ToolBox
          unsigned int max_size_of_minima_list)
      {
         unsigned int i = 0;
+        unsigned int n = P->get_number_of_fixed_elms ();
         Partition * Q = adjacent_partition (P, i++);
-        while (Q != NULL)
+        while (i < n)
         {
-
+            
         }
 
         // partition_minimum (P, L, c, max_size_of_minima_list);

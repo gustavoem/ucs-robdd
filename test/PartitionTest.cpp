@@ -63,4 +63,38 @@ namespace PartitionTest
         return answ;
     }
 
+    bool it_should_check_upper_adjacent_partitions ()
+    {
+        bool answ = true;
+        ElementSet original_set ("", 10, 100);
+        bool fixed[10];
+        for (unsigned int i = 0; i < 10; i++)
+            fixed[i] = i < 5; // we are fixing the first 5 elements
+        
+        PartitionModel * part_model;
+        part_model = new PartitionModel (&original_set, fixed);
+        ElementSet * fixed_set = part_model->get_unfixed_elm_set ();
+        ElementSubset p_subset ("", fixed_set);
+        ElementSubset q1_subset ("", fixed_set);
+        ElementSubset q2_subset ("", fixed_set);
+        p_subset.add_element (1);
+        p_subset.add_element (3);
+        q1_subset.add_element (1);
+        q1_subset.add_element (3);
+        q1_subset.add_element (4);
+        q2_subset.add_element (2);
+        Partition * P = new Partition (part_model, &p_subset);
+        Partition * Q1 = new Partition (part_model, &q1_subset);
+        Partition * Q2 = new Partition (part_model, &q2_subset);
+        if (!Q1->is_upper_adjacent (P))
+            answ = false;
+        if (Q2->is_upper_adjacent (P))
+            answ = false;
+        delete P;
+        delete Q1;
+        delete Q2;
+        delete part_model;
+        return answ;
+    }
+
 } // end namespace

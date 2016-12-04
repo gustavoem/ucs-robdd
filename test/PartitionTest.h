@@ -32,6 +32,8 @@ namespace PartitionTest
 
     bool it_map_subsets_correctly ();
 
+    bool it_should_check_upper_adjacent_partitions ();
+
 }
 	
 #endif /* PARTITION_TEST_H_ */

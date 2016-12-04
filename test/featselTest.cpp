@@ -560,6 +560,9 @@ int main(void) {
     cout << "PartitionTest::it_map_subsets_correctly";
     cout.flush ();
     printResult (PartitionTest::it_map_subsets_correctly ());
+    cout << "PartitionTest::it_should_check_upper_adjacent_partitions";
+    cout.flush ();
+    printResult (PartitionTest::it_should_check_upper_adjacent_partitions ());
     cout << endl;    
 
     // Testing Class PartitionCost

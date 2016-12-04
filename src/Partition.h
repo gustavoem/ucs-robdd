@@ -89,6 +89,27 @@ public:
     // Returns the Partition Model of this partition
     //
     PartitionModel * get_partition_model ();
+
+
+    // Returns the number of fixed elements in this partition
+    //
+    unsigned int get_number_of_fixed_elms ();
+
+
+    // Verifies if this partition is upper adjacent to another 
+    // partition.
+    //
+    bool is_upper_adjacent (Partition *);
+
+
+    // Returns the minial subset of this partition
+    //
+    ElementSubset * get_minimal_element ();
+
+
+    // Returns the maximal subset of this partition
+    //
+    ElementSubset * get_maximal_element ();
 };
 
 #endif /* PARTITION_H_ */
