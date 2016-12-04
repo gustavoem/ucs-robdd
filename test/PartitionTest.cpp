@@ -73,7 +73,7 @@ namespace PartitionTest
         
         PartitionModel * part_model;
         part_model = new PartitionModel (&original_set, fixed);
-        ElementSet * fixed_set = part_model->get_unfixed_elm_set ();
+        ElementSet * fixed_set = part_model->get_fixed_elm_set ();
         ElementSubset p_subset ("", fixed_set);
         ElementSubset q1_subset ("", fixed_set);
         ElementSubset q2_subset ("", fixed_set);
@@ -97,4 +97,66 @@ namespace PartitionTest
         return answ;
     }
 
+
+    bool it_should_return_the_minimal_element ()
+    {
+        bool answ = true;
+        ElementSet original_set ("", 10, 100);
+        bool fixed[10];
+        for (unsigned int i = 0; i < 10; i++)
+            fixed[i] = i < 5; // we are fixing the first 5 elements
+        
+        PartitionModel * part_model;
+        part_model = new PartitionModel (&original_set, fixed);
+        ElementSet * fixed_set = part_model->get_fixed_elm_set ();
+        ElementSubset p_subset ("", fixed_set);
+        p_subset.add_element (0);
+        p_subset.add_element (2);
+        p_subset.add_element (3);
+        Partition P (part_model, &p_subset);
+        ElementSubset expected_minimal ("", &original_set);
+        expected_minimal.add_element (0);
+        expected_minimal.add_element (2);
+        expected_minimal.add_element (3);
+        ElementSubset * answ_minimal = P.get_minimal_element ();
+        if (!answ_minimal->is_equal (&expected_minimal))
+            answ = false;
+        delete part_model;
+        delete answ_minimal;
+        return answ;
+    }
+
+
+    bool it_should_return_the_maximal_element ()
+    {
+        bool answ = true;
+        ElementSet original_set ("", 10, 100);
+        bool fixed[10];
+        for (unsigned int i = 0; i < 10; i++)
+            fixed[i] = i < 5; // we are fixing the first 5 elements
+        
+        PartitionModel * part_model;
+        part_model = new PartitionModel (&original_set, fixed);
+        ElementSet * fixed_set = part_model->get_fixed_elm_set ();
+        ElementSubset p_subset ("", fixed_set);
+        p_subset.add_element (0);
+        p_subset.add_element (2);
+        p_subset.add_element (3);
+        Partition P (part_model, &p_subset);
+        ElementSubset expected_maximal ("", &original_set);
+        expected_maximal.add_element (0);
+        expected_maximal.add_element (2);
+        expected_maximal.add_element (3);
+        expected_maximal.add_element (5);
+        expected_maximal.add_element (6);
+        expected_maximal.add_element (7);
+        expected_maximal.add_element (8);
+        expected_maximal.add_element (9);
+        ElementSubset * answ_maximal = P.get_maximal_element ();
+        if (!answ_maximal->is_equal (&expected_maximal))
+            answ = false;
+        delete part_model;
+        delete answ_maximal;
+        return answ;
+    }
 } // end namespace

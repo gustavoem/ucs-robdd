@@ -104,3 +104,25 @@ bool Partition::is_upper_adjacent (Partition * Q)
     delete intersect;
     return answ;
 }
+
+
+ElementSubset * Partition::get_minimal_element ()
+{
+    return new ElementSubset (minimal_subset);
+}
+
+
+ElementSubset * Partition::get_maximal_element ()
+{
+    ElementSet * unfixed_set;
+    ElementSubset * maximal;
+    unsigned int n, * unfixed_map;
+
+    unfixed_set = part_model->get_unfixed_elm_set ();
+    n = unfixed_set->get_set_cardinality ();
+    unfixed_map = part_model->get_unfixed_elm_map ();
+    maximal = new ElementSubset (minimal_subset);
+    for (unsigned int i = 0; i < n; i++)
+        maximal->add_element (unfixed_map[i]);
+    return maximal;
+}

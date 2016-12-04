@@ -563,6 +563,12 @@ int main(void) {
     cout << "PartitionTest::it_should_check_upper_adjacent_partitions";
     cout.flush ();
     printResult (PartitionTest::it_should_check_upper_adjacent_partitions ());
+    cout << "PartitionTest::it_should_return_the_minimal_element";
+    cout.flush ();
+    printResult (PartitionTest::it_should_return_the_minimal_element ());
+    cout << "PartitionTest::it_should_return_the_maximal_element";
+    cout.flush ();
+    printResult (PartitionTest::it_should_return_the_maximal_element ());
     cout << endl;    
 
     // Testing Class PartitionCost

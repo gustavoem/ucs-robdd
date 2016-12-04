@@ -31,8 +31,9 @@ namespace PartitionTest
 {
 
     bool it_map_subsets_correctly ();
-
     bool it_should_check_upper_adjacent_partitions ();
+    bool it_should_return_the_minimal_element ();
+    bool it_should_return_the_maximal_element ();
 
 }
 	
