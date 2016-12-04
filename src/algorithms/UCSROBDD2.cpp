@@ -16,7 +16,7 @@ UCSROBDD2::~UCSROBDD2 ()
 }
 
 
-void UCSROBDD2::get_minima_list (unsigned int max_size_of_minima_list)
+void UCSROBDD2::find_minima_list (unsigned int max_size_of_minima_list)
 {
 	restrictions = new ROBDD (set);
 	timeval begin_exhausting, end_exhausting, begin_program, end_program;

@@ -179,7 +179,7 @@ int main(int argc, char * argv[])
 
 		// Runs the solver
 		//
-		solver->get_minima_list (max_number_of_minima);
+		solver->find_minima_list (max_number_of_minima);
 
 		// Prints the results
 		//

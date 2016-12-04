@@ -32,11 +32,11 @@ namespace SFSTest
 		MeanAbsSum c1 (&set1);
 		HammingDistance c3 (&set3);
 		sfs1.set_parameters (&c1, &set1, false);
-		sfs1.get_minima_list (1);
+		sfs1.find_minima_list (1);
 		if (sfs1.print_list_of_minima ().find ("<010>") == string::npos)
 			return false;
 		sfs3.set_parameters (&c3, &set3, false);
-		sfs3.get_minima_list (1);
+		sfs3.find_minima_list (1);
 		if (sfs3.print_list_of_minima ().find ("<0011100>") == string::npos)
 			return false;
 		return true;
@@ -55,17 +55,17 @@ namespace SFSTest
 		MeanAbsSum c2 (&set2);
 		HammingDistance c3 (&set3);
 		sfs1.set_parameters (&c1, &set1, false);
-		sfs1.get_minima_list (1);
+		sfs1.find_minima_list (1);
 		if (sfs1.print_list_of_minima ().find ("<010>") == string::npos)
 			return false;
 		sfs2.set_parameters (&c2, &set2, false);
-		sfs2.get_minima_list( 3);
+		sfs2.find_minima_list( 3);
 		if ((sfs2.print_list_of_minima ().find ("<000010000>") == string::npos) ||
 		    (sfs2.print_list_of_minima ().find ("<100100000>") == string::npos) ||
 			(sfs2.print_list_of_minima ().find ("<011000000>") == string::npos) )
 			return false;
 		sfs3.set_parameters (&c3, &set3, false);
-		sfs3.get_minima_list (1);
+		sfs3.find_minima_list (1);
 		if (sfs3.print_list_of_minima ().find ("<0011100>") == string::npos)
 			return false;
 		return true;
@@ -78,7 +78,7 @@ namespace SFSTest
 		string list;
 		MeanAbsSum c1 (&set1);
 		sfs1.set_parameters (&c1, &set1, true);
-		sfs1.get_minima_list (1);
+		sfs1.find_minima_list (1);
 		list = sfs1.print_list_of_visited_subsets ();
 		//
 		// For 2^3 it should miss either <110>, <101> or <011>!!!
@@ -102,7 +102,7 @@ namespace SFSTest
 		SFS sfs;
 		MeanAbsSum c1 (&set1);
 		sfs.set_parameters (&c1, &set1, true);
-		sfs.get_minima_list (1);
+		sfs.find_minima_list (1);
 		if ((sfs.print_list_of_visited_subsets ().size () / (set1.get_set_cardinality() + 4)) == 7)
 			return true;
 		else
@@ -120,7 +120,7 @@ namespace SFSTest
 		SFS sfs1;
 		HammingDistance c1 (&set1);
 		sfs1.set_parameters (&c1, &set1, false);
-		sfs1.get_minima_list (1);
+		sfs1.find_minima_list (1);
 		for(i = 0; i < n; i++)
 		{       // gets the minimum from the set1
 			if ((set1.get_element (i))->get_element_value (0) == 0)

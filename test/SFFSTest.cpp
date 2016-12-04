@@ -78,11 +78,11 @@ namespace SFFSTest
 		MeanAbsSum c1 (&set1);
 		HammingDistance c3 (&set3);
 		sffs1.set_parameters (&c1, &set1, false);
-		sffs1.get_minima_list (1);
+		sffs1.find_minima_list (1);
 		if (sffs1.print_list_of_minima ().find ("<010>") == string::npos)
 			return false;
 		sffs3.set_parameters (&c3, &set3, false);
-		sffs3.get_minima_list (1);
+		sffs3.find_minima_list (1);
 		if (sffs3.print_list_of_minima ().find ("<0011100>") == string::npos)
 			return false;
 		return true;
@@ -102,17 +102,17 @@ namespace SFFSTest
 		MeanAbsSum c2 (&set2);
 		HammingDistance c3 (&set3);
 		sffs1.set_parameters (&c1, &set1, false);
-		sffs1.get_minima_list (1);
+		sffs1.find_minima_list (1);
 		if (sffs1.print_list_of_minima ().find ("<010>") == string::npos)
 			return false;
 		sffs2.set_parameters (&c2, &set2, false);
-		sffs2.get_minima_list (3);
+		sffs2.find_minima_list (3);
 		if ((sffs2.print_list_of_minima ().find ("<000010000>") == string::npos) ||
 		    (sffs2.print_list_of_minima ().find ("<100100000>") == string::npos) ||
 			(sffs2.print_list_of_minima ().find ("<011000000>") == string::npos) )
 			return false;
 		sffs3.set_parameters (&c3, &set3, false);
-		sffs3.get_minima_list (1);
+		sffs3.find_minima_list (1);
 		if (sffs3.print_list_of_minima ().find ("<0011100>") == string::npos)
 			return false;
 		return true;
@@ -126,7 +126,7 @@ namespace SFFSTest
 		string list;
 		MeanAbsSum c1 (&set1);
 		sffs1.set_parameters (&c1, &set1, true);
-		sffs1.get_minima_list (1);
+		sffs1.find_minima_list (1);
 		list = sffs1.print_list_of_visited_subsets ();
 		//
 		// For 2^3 it should have at least 7 elements (# visited nodes by SFS)!!!
@@ -151,7 +151,7 @@ namespace SFFSTest
 		SFFS sffs1;
 		HammingDistance c1 (&set1);
 		sffs1.set_parameters (&c1, &set1, false);
-		sffs1.get_minima_list (1);
+		sffs1.find_minima_list (1);
 		for (i = 0; i < n; i++)
 		{       // gets the minimum from the set1
 			if ((set1.get_element (i))->get_element_value (0) == 0)
@@ -172,7 +172,7 @@ namespace SFFSTest
 		SFFS sffs;
 		MeanAbsSum c1 (&set1);
 		sffs.set_parameters (&c1, &set1, true);
-		sffs.get_minima_list (1);
+		sffs.find_minima_list (1);
 		if ((sffs.print_list_of_visited_subsets ().size () / (set1.get_set_cardinality() + 4)) >= 7)
 			return true;
 		else
@@ -189,7 +189,7 @@ namespace SFFSTest
 		SFFS s1;
 		MeanAbsSum c1 (&set1);
 		s1.set_parameters (&c1, &set1, false);
-		s1.get_minima_list (1);
+		s1.find_minima_list (1);
 		return true;
 	}
 

@@ -73,6 +73,9 @@ public:
     //
     ElementSubset * get_original_subset (ElementSubset *);
 
+    //
+    //
+
 };
 
 #endif /* PARTITION_H_ */

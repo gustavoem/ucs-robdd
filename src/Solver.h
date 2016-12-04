@@ -179,7 +179,12 @@ public:
 
     // Generates a list of minima with up to n subsets (abstract method).
     //
-    virtual void get_minima_list (unsigned int) = 0;
+    virtual void find_minima_list (unsigned int) = 0;
+
+
+    // Returns a copy of the list_of_minima list
+    //
+    list<ElementSubset *> get_minima_list ();
 
 
     // Returns the size of the obtained list of minima.

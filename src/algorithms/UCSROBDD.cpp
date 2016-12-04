@@ -20,7 +20,7 @@ UCSROBDD::~UCSROBDD ()
 }
 
 
-void UCSROBDD::get_minima_list (unsigned int max_size_of_minima_list)
+void UCSROBDD::find_minima_list (unsigned int max_size_of_minima_list)
 {
 	upper_restriction = new ROBDD (set);
 	lower_restriction = new ROBDD (set);

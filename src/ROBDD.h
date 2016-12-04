@@ -55,6 +55,7 @@ protected:
     //
     unsigned int * ordering;
 
+
     // The set of elements this ROBDD will represent
     //
     ElementSet * elm_set;

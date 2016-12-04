@@ -31,7 +31,7 @@ public:
 
 	// Runs the UCSROBDD algorithm, getting up to 'max_size_of_minima_list' minimum subsets.
 	//
-	void get_minima_list (unsigned int);
+	void find_minima_list (unsigned int);
 
 };
 

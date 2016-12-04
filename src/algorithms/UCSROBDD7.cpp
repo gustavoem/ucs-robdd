@@ -24,7 +24,7 @@ UCSROBDD7::~UCSROBDD7 ()
 }
 
 
-void UCSROBDD7::get_minima_list (unsigned int max_size_of_minima_list)
+void UCSROBDD7::find_minima_list (unsigned int max_size_of_minima_list)
 {
 	timeval begin_exhausting, end_exhausting, begin_program, end_program;
 	gettimeofday (& begin_program, NULL);

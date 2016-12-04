@@ -36,12 +36,12 @@ namespace ExhaustiveSearchTest
 		MeanAbsSum c3 (&a_set3);
 		string list;
 		es1.set_parameters (&c1, &a_set1, false);
-		es1.get_minima_list (8);
+		es1.find_minima_list (8);
 		list = es1.print_list_of_minima ();
 		es2.set_parameters (&c2, &a_set2, false);
-		es2.get_minima_list (1024);
+		es2.find_minima_list (1024);
 		es3.set_parameters (&c3, &a_set3, false);
-		es3.get_minima_list (2);
+		es3.find_minima_list (2);
 		if ((list.find ("<000>") != string::npos) &&
 		    (list.find ("<001>") != string::npos) &&
 		    (list.find ("<010>") != string::npos) &&
@@ -71,17 +71,17 @@ namespace ExhaustiveSearchTest
 		MeanAbsSum c2 (&set2);
 		HammingDistance c3 (&set3);
 		es1.set_parameters (&c1, &set1, false);
-		es1.get_minima_list (1);
+		es1.find_minima_list (1);
 		if (es1.print_list_of_minima ().find("<010>") == string::npos)
 			return false;
 		es2.set_parameters (&c2, &set2, false);
-		es2.get_minima_list (3);
+		es2.find_minima_list (3);
 		if ((es2.print_list_of_minima ().find ("<000010000>") == string::npos) ||
 		    (es2.print_list_of_minima ().find ("<100100000>") == string::npos) ||
 			(es2.print_list_of_minima ().find ("<011000000>") == string::npos) )
 			return false;
 		es3.set_parameters (&c3, &set3, false);
-		es3.get_minima_list (1);
+		es3.find_minima_list (1);
 		if (es3.print_list_of_minima ().find ("<0011100>") == string::npos)
 			return false;
 		return true;
@@ -94,7 +94,7 @@ namespace ExhaustiveSearchTest
 		ExhaustiveSearch es;
 		MeanAbsSum c1 (&set1);
 		es.set_parameters (&c1, &set1, true);
-		es.get_minima_list (1);
+		es.find_minima_list (1);
 		if ((es.print_list_of_visited_subsets ().size () / (set1.get_set_cardinality () + 4)) == 8)
 			return true;
 		else
@@ -109,7 +109,7 @@ namespace ExhaustiveSearchTest
 		string list;
 		MeanAbsSum c1 (&set1);
 		es1.set_parameters (&c1, &set1, true);
-		es1.get_minima_list (1);
+		es1.find_minima_list (1);
 		list = es1.print_list_of_visited_subsets ();
 		if ((list.find ("<000>") != string::npos) &&
 		    (list.find ("<001>") != string::npos) &&

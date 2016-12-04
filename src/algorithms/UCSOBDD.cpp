@@ -16,7 +16,7 @@ UCSOBDD::~UCSOBDD ()
 }
 
 
-void UCSOBDD::get_minima_list (unsigned int max_size_of_minima_list)
+void UCSOBDD::find_minima_list (unsigned int max_size_of_minima_list)
 {
 	restrictions = new OBDD (set);
 	timeval begin_exhausting, end_exhausting, begin_program, end_program;

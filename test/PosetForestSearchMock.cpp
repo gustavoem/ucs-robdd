@@ -20,7 +20,7 @@
 
 #include "PosetForestSearchMock.h"
 
-void PosetForestSearchMock::get_minima_list (unsigned int max_size_of_minima_list)
+void PosetForestSearchMock::find_minima_list (unsigned int max_size_of_minima_list)
 {
 	return;
 }

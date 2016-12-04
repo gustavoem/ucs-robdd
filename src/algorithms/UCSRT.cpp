@@ -22,7 +22,7 @@ UCSRT::~UCSRT ()
 }
 
 
-void UCSRT::get_minima_list (unsigned int max_size_of_minima_list)
+void UCSRT::find_minima_list (unsigned int max_size_of_minima_list)
 {
 	timeval begin_exhausting, end_exhausting, begin_program, end_program;
 	gettimeofday (& begin_program, NULL);

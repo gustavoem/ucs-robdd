@@ -31,7 +31,7 @@ class PosetForestSearchMock : public PosetForestSearch
 
 public:
 
-	void get_minima_list (unsigned int);
+	void find_minima_list (unsigned int);
 
 	PosetForestSearch::Node * lower_forest_branch_mock (map<string, Node *> *, map<string, Node *> *);
 

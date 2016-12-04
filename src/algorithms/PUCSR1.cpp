@@ -46,7 +46,7 @@ void PUCSR1::set_partition_model ()
 }
 
 
-void PUCSR1::get_minima_list (unsigned int max_size_of_minima_list)
+void PUCSR1::find_minima_list (unsigned int max_size_of_minima_list)
 {
     set_partition_model ();
     cand_part = new ROBDD (part_model->get_fixed_elm_set ());

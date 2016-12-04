@@ -20,7 +20,7 @@
 
 #include "SolverMock.h"
 
-void SolverMock::get_minima_list (unsigned int max_size_of_minima_list)
+void SolverMock::find_minima_list (unsigned int max_size_of_minima_list)
 {
 	return;
 }

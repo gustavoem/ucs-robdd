@@ -1396,12 +1396,12 @@ namespace PosetForestSearchTest
 		PosetForestSearch pfs3;
 		string list;
 		pfs1.set_parameters (&c1, &a_set1, false);
-		pfs1.get_minima_list (16);
+		pfs1.find_minima_list (16);
 		list = pfs1.print_list_of_minima ();
 		pfs2.set_parameters (&c2, &a_set2, false);
-		pfs2.get_minima_list (1024);
+		pfs2.find_minima_list (1024);
 		pfs3.set_parameters (&c3, &a_set3, false);
-		pfs3.get_minima_list (2);
+		pfs3.find_minima_list (2);
 
 		if (!((list.find ("<000>") != string::npos) &&
 		      (list.find ("<001>") != string::npos) &&
@@ -1441,21 +1441,21 @@ namespace PosetForestSearchTest
 		PosetForestSearch pfs3;
 		PosetForestSearch pfs4;
 		pfs1.set_parameters (&c1, &set1, false);
-		pfs1.get_minima_list (1);
+		pfs1.find_minima_list (1);
 		if (pfs1.print_list_of_minima ().find ("<010>") == string::npos)
 			return false;
 		pfs2.set_parameters (&c2, &set2, false);
-		pfs2.get_minima_list (10);
+		pfs2.find_minima_list (10);
 		if ((pfs2.print_list_of_minima ().find ("<000010000>") == string::npos) ||
 		    (pfs2.print_list_of_minima ().find ("<100100000>") == string::npos) ||
 			(pfs2.print_list_of_minima ().find ("<011000000>") == string::npos) )
 			return false;
 		pfs3.set_parameters (&c3, &set3, false);
-		pfs3.get_minima_list (1);
+		pfs3.find_minima_list (1);
 		if (pfs3.print_list_of_minima ().find ("<0011100>") == string::npos)
 			return false;
 		pfs4.set_parameters (&c4, &set4, false);
-		pfs4.get_minima_list (1);
+		pfs4.find_minima_list (1);
 		if (pfs4.print_list_of_minima ().find ("<101>") == string::npos)
 			return false;
 		return true;
@@ -1472,7 +1472,7 @@ namespace PosetForestSearchTest
 		HammingDistance c1 (&set1);
 		PosetForestSearch pfs;
 		pfs.set_parameters (&c1, &set1, false);
-		pfs.get_minima_list (1);
+		pfs.find_minima_list (1);
 		for (i = 0; i < n; i++)
 		{       // gets the minimum from the set1
 			if( (set1.get_element (i))->get_element_value (0) == 0)
@@ -1496,7 +1496,7 @@ namespace PosetForestSearchTest
 		PosetForestSearch pfs;
 		MeanAbsSum c1 (&set1);
 		pfs.set_parameters (&c1, &set1, false);
-		pfs.get_minima_list (1);
+		pfs.find_minima_list (1);
 		return true;
 	}
 
@@ -1508,7 +1508,7 @@ namespace PosetForestSearchTest
 		MeanAbsSum c1 (&set1);
 		string list;
 		pfs.set_parameters (&c1, &set1, true);
-		pfs.get_minima_list (1);
+		pfs.find_minima_list (1);
 		list = pfs.print_list_of_visited_subsets ();
 		if ((list.find ("<000>") != string::npos) &&
 		    (list.find ("<001>") != string::npos) &&
@@ -1531,7 +1531,7 @@ namespace PosetForestSearchTest
 		PosetForestSearch pfs;
 		MeanAbsSum c1 (&set1);
 		pfs.set_parameters (&c1, &set1, false);
-		pfs.get_minima_list (1);
+		pfs.find_minima_list (1);
 		if (pfs.print_number_of_visited_subsets () >= 8)
 			return true;
 		else
@@ -1561,7 +1561,7 @@ namespace PosetForestSearchTest
 		{
 			pfs = new PosetForestSearch ();
 			pfs->set_parameters (&c1, &set1, false);
-			pfs->get_minima_list (1);
+			pfs->find_minima_list (1);
 			result.clear ();
 			result = pfs->print_list_of_minima ();
 			delete pfs;
@@ -1572,7 +1572,7 @@ namespace PosetForestSearchTest
 		{
 			pfs = new PosetForestSearch ();
 			pfs->set_parameters (&c2, &set2, false);
-			pfs->get_minima_list (1);
+			pfs->find_minima_list (1);
 			result.clear ();
 			result = pfs->print_list_of_minima ();
 			delete pfs;
@@ -1584,7 +1584,7 @@ namespace PosetForestSearchTest
 		{
 			pfs = new PosetForestSearch ();
 			pfs->set_parameters (&c3, &set3, false);
-			pfs->get_minima_list (1);
+			pfs->find_minima_list (1);
 			result.clear ();
 			result = pfs->print_list_of_minima ();
 			delete pfs;
@@ -1595,7 +1595,7 @@ namespace PosetForestSearchTest
 		{
 			pfs = new PosetForestSearch ();
 			pfs->set_parameters (&c4, &set4, false);
-			pfs->get_minima_list (1);
+			pfs->find_minima_list (1);
 			result.clear ();
 			result = pfs->print_list_of_minima ();
 			delete pfs;
@@ -1606,7 +1606,7 @@ namespace PosetForestSearchTest
 		{
 			pfs = new PosetForestSearch ();
 			pfs->set_parameters (&c5, &set5, false);
-			pfs->get_minima_list (1);
+			pfs->find_minima_list (1);
 			result.clear ();
 			result = pfs->print_list_of_minima ();
 			delete pfs;
@@ -1617,7 +1617,7 @@ namespace PosetForestSearchTest
 		{
 			pfs = new PosetForestSearch ();
 			pfs->set_parameters (&c6, &set6, false);
-			pfs->get_minima_list (1);
+			pfs->find_minima_list (1);
 			result.clear ();
 			result = pfs->print_list_of_minima ();
 			delete pfs;

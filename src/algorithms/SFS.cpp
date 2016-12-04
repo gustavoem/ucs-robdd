@@ -35,7 +35,7 @@ SFS::~SFS ()
 }
 
 
-void SFS::get_minima_list (unsigned int max_size_of_minima_list)
+void SFS::find_minima_list (unsigned int max_size_of_minima_list)
 {
 	timeval begin_program, end_program;
 	gettimeofday (& begin_program, NULL);

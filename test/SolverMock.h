@@ -31,7 +31,7 @@ class SolverMock : public Solver
 
 public:
 
-	void get_minima_list (unsigned int);
+	void find_minima_list (unsigned int);
 
 };
 

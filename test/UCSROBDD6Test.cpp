@@ -39,21 +39,21 @@ namespace UCSROBDD6Test
 		UCSROBDD6 ucs3;
 		UCSROBDD6 ucs4;
 		ucs1.set_parameters (&c1, &set1, false);
-		ucs1.get_minima_list (1);
+		ucs1.find_minima_list (1);
 		if (ucs1.print_list_of_minima ().find ("<010>") == string::npos)
 			return false;
 		ucs2.set_parameters (&c2, &set2, false);
-		ucs2.get_minima_list (3);
+		ucs2.find_minima_list (3);
 		if ((ucs2.print_list_of_minima ().find ("<000010000>") == string::npos) ||
 		    (ucs2.print_list_of_minima ().find ("<100100000>") == string::npos) ||
 			(ucs2.print_list_of_minima ().find ("<011000000>") == string::npos) )
 			return false;
 		ucs3.set_parameters (&c3, &set3, false);
-		ucs3.get_minima_list (1);
+		ucs3.find_minima_list (1);
 		if (ucs3.print_list_of_minima ().find ("<0011100>") == string::npos)
 			return false;
 		ucs4.set_parameters (&c4, &set4, false);
-		ucs4.get_minima_list (1);
+		ucs4.find_minima_list (1);
 		if (ucs4.print_list_of_minima ().find ("<101>") == string::npos)
 			return false;
 		return true;
@@ -70,7 +70,7 @@ namespace UCSROBDD6Test
 		UCSROBDD6 ucs1;
 		HammingDistance c1 (&set1);
 		ucs1.set_parameters (&c1, &set1, false);
-		ucs1.get_minima_list (1);
+		ucs1.find_minima_list (1);
 		for (i = 0; i < n; i++)
 		{       // gets the minimum from the set1
 			if( (set1.get_element (i))->get_element_value (0) == 0)
@@ -94,7 +94,7 @@ namespace UCSROBDD6Test
 		UCSROBDD6 ucs1;
 		MeanAbsSum c1 (&set1);
 		ucs1.set_parameters (&c1, &set1, false);
-		ucs1.get_minima_list (1);
+		ucs1.find_minima_list (1);
 		return true;
 	}
 
@@ -134,7 +134,7 @@ namespace UCSROBDD6Test
 		{
 			ucs = new UCSROBDD6 ();
 			ucs->set_parameters (&c1, &set1, false);
-			ucs->get_minima_list (1);
+			ucs->find_minima_list (1);
 			result.clear ();
 			result = ucs->print_list_of_minima ();
 			delete ucs;
@@ -145,7 +145,7 @@ namespace UCSROBDD6Test
 		{
 			ucs = new UCSROBDD6 ();
 			ucs->set_parameters (&c2, &set2, false);
-			ucs->get_minima_list (1);
+			ucs->find_minima_list (1);
 			result.clear ();
 			result = ucs->print_list_of_minima ();
 			delete ucs;
@@ -156,7 +156,7 @@ namespace UCSROBDD6Test
 		{
 			ucs = new UCSROBDD6 ();
 			ucs->set_parameters (&c3, &set3, false);
-			ucs->get_minima_list (1);
+			ucs->find_minima_list (1);
 			result.clear ();
 			result = ucs->print_list_of_minima ();
 			delete ucs;
@@ -167,7 +167,7 @@ namespace UCSROBDD6Test
 		{
 			ucs = new UCSROBDD6 ();
 			ucs->set_parameters (&c4, &set4, false);
-			ucs->get_minima_list (1);
+			ucs->find_minima_list (1);
 			result.clear ();
 			result = ucs->print_list_of_minima ();
 			delete ucs;
@@ -178,7 +178,7 @@ namespace UCSROBDD6Test
 		{
 			ucs = new UCSROBDD6 ();
 			ucs->set_parameters (&c5, &set5, false);
-			ucs->get_minima_list (1);
+			ucs->find_minima_list (1);
 			result.clear ();
 			result = ucs->print_list_of_minima ();
 			delete ucs;
@@ -189,7 +189,7 @@ namespace UCSROBDD6Test
 		{
 			ucs = new UCSROBDD6 ();
 			ucs->set_parameters (&c6, &set6, false);
-			ucs->get_minima_list (1);
+			ucs->find_minima_list (1);
 			result.clear ();
 			result = ucs->print_list_of_minima ();
 			delete ucs;
@@ -203,7 +203,7 @@ namespace UCSROBDD6Test
 		{
 			ucs = new UCSROBDD6 ();
 			ucs->set_parameters (&c7, &set7, false);
-			ucs->get_minima_list (1);
+			ucs->find_minima_list (1);
 			result.clear ();
 			result = ucs->print_list_of_minima ();
 			delete ucs;
@@ -214,7 +214,7 @@ namespace UCSROBDD6Test
 		{
 			ucs = new UCSROBDD6 ();
 			ucs->set_parameters (&c8, &set8, false);
-			ucs->get_minima_list (1);
+			ucs->find_minima_list (1);
 			result.clear ();
 			result = ucs->print_list_of_minima ();
 			delete ucs;
@@ -225,7 +225,7 @@ namespace UCSROBDD6Test
 		{
 			ucs = new UCSROBDD6 ();
 			ucs->set_parameters (& c9, & set9, false);
-			ucs->get_minima_list (1);
+			ucs->find_minima_list (1);
 			result.clear ();
 			result = ucs->print_search_report ();
 			delete ucs;
@@ -240,7 +240,7 @@ namespace UCSROBDD6Test
 		{
 			ucs = new UCSROBDD6 ();
 			ucs->set_parameters (& cA, & setA, false);
-			ucs->get_minima_list (1);
+			ucs->find_minima_list (1);
 			result.clear ();
 			result = ucs->print_search_report ();
 			delete ucs;

@@ -36,12 +36,12 @@ namespace BranchAndBoundTest
 		BranchAndBound ucs3;
 		string list;
 		ucs1.set_parameters (&c1, &a_set1, false);
-		ucs1.get_minima_list (8);
+		ucs1.find_minima_list (8);
 		list = ucs1.print_list_of_minima ();
 		ucs2.set_parameters (&c2, &a_set2, false);
-		ucs2.get_minima_list (1024);
+		ucs2.find_minima_list (1024);
 		ucs3.set_parameters (&c3, &a_set3, false);
-		ucs3.get_minima_list (2);
+		ucs3.find_minima_list (2);
 
 		if ((list.find ("<000>") != string::npos) &&
 		    (list.find ("<001>") != string::npos) &&
@@ -75,21 +75,21 @@ namespace BranchAndBoundTest
 		BranchAndBound bb3;
 		BranchAndBound bb4;
 		bb1.set_parameters (&c1, &set1, false);
-		bb1.get_minima_list (1);
+		bb1.find_minima_list (1);
 		if (bb1.print_list_of_minima ().find ("<010>") == string::npos)
 			return false;
 		bb2.set_parameters (&c2, &set2, false);
-		bb2.get_minima_list (10);
+		bb2.find_minima_list (10);
 		if ((bb2.print_list_of_minima ().find ("<000010000>") == string::npos) ||
 		    (bb2.print_list_of_minima ().find ("<100100000>") == string::npos) ||
 			(bb2.print_list_of_minima ().find ("<011000000>") == string::npos) )
 			return false;
 		bb3.set_parameters (&c3, &set3, false);
-		bb3.get_minima_list (1);
+		bb3.find_minima_list (1);
 		if (bb3.print_list_of_minima ().find ("<0011100>") == string::npos)
 			return false;
 		bb4.set_parameters (&c4, &set4, false);
-		bb4.get_minima_list (1);
+		bb4.find_minima_list (1);
 		if (bb4.print_list_of_minima ().find ("<101>") == string::npos)
 			return false;
 		return true;
@@ -106,7 +106,7 @@ namespace BranchAndBoundTest
 		BranchAndBound bb1;
 		HammingDistance c1 (&set1);
 		bb1.set_parameters (&c1, &set1, false);
-		bb1.get_minima_list (1);
+		bb1.find_minima_list (1);
 		for (i = 0; i < n; i++)
 		{       // gets the minimum from the set1
 			if ((set1.get_element (i))->get_element_value (0) == 0)
@@ -130,7 +130,7 @@ namespace BranchAndBoundTest
 		BranchAndBound bb1;
 		MeanAbsSum c1 (&set1);
 		bb1.set_parameters (&c1, &set1, false);
-		bb1.get_minima_list (1);
+		bb1.find_minima_list (1);
 		return true;
 	}
 
@@ -142,7 +142,7 @@ namespace BranchAndBoundTest
 		MeanAbsSum c1 (&set1);
 		string list;
 		bb1.set_parameters (&c1, &set1, true);
-		bb1.get_minima_list (1);
+		bb1.find_minima_list (1);
 		list = bb1.print_list_of_visited_subsets ();
 		if ((list.find ("<000>") != string::npos) &&
 		    (list.find ("<001>") != string::npos) &&
@@ -165,7 +165,7 @@ namespace BranchAndBoundTest
 		BranchAndBound bb1;
 		MeanAbsSum c1 (&set1);
 		bb1.set_parameters (&c1, &set1, false);
-		bb1.get_minima_list (1);
+		bb1.find_minima_list (1);
 		if (bb1.print_number_of_visited_subsets () >= 8)
 			return true;
 		else
@@ -196,7 +196,7 @@ namespace BranchAndBoundTest
 		{
 			bb = new BranchAndBound ();
 			bb->set_parameters (&c1, &set1, false);
-			bb->get_minima_list (1);
+			bb->find_minima_list (1);
 			result.clear ();
 			result = bb->print_list_of_minima ();
 			delete bb;
@@ -207,7 +207,7 @@ namespace BranchAndBoundTest
 		{
 			bb = new BranchAndBound ();
 			bb->set_parameters (&c2, &set2, false);
-			bb->get_minima_list (1);
+			bb->find_minima_list (1);
 			result.clear ();
 			result = bb->print_list_of_minima ();
 			delete bb;
@@ -218,7 +218,7 @@ namespace BranchAndBoundTest
 		{
 			bb = new BranchAndBound ();
 			bb->set_parameters (&c3, &set3, false);
-			bb->get_minima_list (1);
+			bb->find_minima_list (1);
 			result.clear ();
 			result = bb->print_list_of_minima ();
 			delete bb;
@@ -229,7 +229,7 @@ namespace BranchAndBoundTest
 		{
 			bb = new BranchAndBound ();
 			bb->set_parameters (&c4, &set4, false);
-			bb->get_minima_list (1);
+			bb->find_minima_list (1);
 			result.clear ();
 			result = bb->print_list_of_minima ();
 			delete bb;
@@ -240,7 +240,7 @@ namespace BranchAndBoundTest
 		{
 			bb = new BranchAndBound ();
 			bb->set_parameters (&c5, &set5, false);
-			bb->get_minima_list (1);
+			bb->find_minima_list (1);
 			result.clear ();
 			result = bb->print_list_of_minima ();
 			delete bb;
@@ -251,7 +251,7 @@ namespace BranchAndBoundTest
 		{
 			bb = new BranchAndBound ();
 			bb->set_parameters (&c6, &set6, false);
-			bb->get_minima_list (1);
+			bb->find_minima_list (1);
 			result.clear ();
 			result = bb->print_list_of_minima ();
 			delete bb;
