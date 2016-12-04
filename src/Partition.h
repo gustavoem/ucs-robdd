@@ -73,8 +73,10 @@ public:
     //
     ElementSubset * get_original_subset (ElementSubset *);
 
+
+    // Returns the original subset from which this partition is in
     //
-    //
+    ElementSet * get_original_set ();
 
 };
 

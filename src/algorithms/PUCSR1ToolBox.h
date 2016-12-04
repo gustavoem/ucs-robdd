@@ -6,15 +6,21 @@
 #include "../Collection.h"
 #include "../ElementSubset.h"
 #include "../PartitionModel.h"
+#include "../functions/PartitionCost.h"
 #include "../Partition.h"
+#include "../Solver.h"
+#include "../algorithms/ExhaustiveSearch.h"
 
 namespace PUCSR1ToolBox
 {  
+    void update_minima_list (Collection *, Partition *, 
+        list<ElementSubset *> *);
 
     // Finds the minimum of a partition and adds the list of minima of
     // this partition to the collection L.
     //
-    void find_minimum (Partition *, Collection *);
+    void partition_minimum (Partition *, Collection *, CostFunction *,
+        unsigned int);
 
 
     // A simple random walk between partitions

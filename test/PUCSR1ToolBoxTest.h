@@ -5,10 +5,13 @@
 #include "../src/ElementSubset.h"
 #include "../src/ElementSet.h"
 #include "../src/PartitionModel.h"
+#include "../src/Partition.h"
+#include "../src/Collection.h"
+#include "../src/functions/AbsSum.h"
 
 namespace PUCSR1ToolBoxTest
 {
-    bool it_should_get_a_partition_set ();
+    bool it_should_find_the_partition_minimum ();
 }
 
 #endif /* PUCSR1TOOLBOXTEST_H_ */

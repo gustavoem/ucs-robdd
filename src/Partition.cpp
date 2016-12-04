@@ -65,3 +65,9 @@ ElementSubset * Partition::get_original_subset (ElementSubset * subset)
     }
     return orig_subset;
 }
+
+
+ElementSet * Partition::get_original_set ()
+{
+    return part_model->get_original_set ();
+}

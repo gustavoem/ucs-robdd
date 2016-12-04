@@ -57,7 +57,7 @@
 #include "UCSROBDDToolBox6Test.h"
 #include "UCSROBDDTest.h"
 #include "UCSROBDD6Test.h"
-// #include "PUCSR1ToolBoxTest.h"
+#include "PUCSR1ToolBoxTest.h"
 
 
 // Number of passed and failed tests
@@ -569,10 +569,10 @@ int main(void) {
     cout << endl;
 
     // Testing Namespace PUCSR1ToolBox
-    //  cout << "PUCSR1ToolBoxTest::it_should_get_a_partition_set";
-    // cout.flush ();
-    // printResult (PUCSR1ToolBoxTest::it_should_get_a_partition_set ());
-    // cout << endl;
+    cout << "PUCSR1ToolBoxTest::it_should_find_the_partition_minimum";
+    cout.flush ();
+    printResult (PUCSR1ToolBoxTest::it_should_find_the_partition_minimum ());
+    cout << endl;
 
     cout << "Total " << number_of_passed_tests + number_of_failed_tests << " test(s), ";
     cout << number_of_passed_tests << " test(s) passed, " << number_of_failed_tests;
