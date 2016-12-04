@@ -71,3 +71,15 @@ ElementSet * Partition::get_original_set ()
 {
     return part_model->get_original_set ();
 }
+
+
+ElementSubset * Partition::get_selected_elements ()
+{
+    return new ElementSubset (selected_elements);
+}
+
+
+PartitionModel * Partition::get_partition_model ()
+{
+    return part_model;
+}

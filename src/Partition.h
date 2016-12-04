@@ -78,6 +78,17 @@ public:
     //
     ElementSet * get_original_set ();
 
+
+    // Returns the element subset that represents this partition based
+    // on the fixed element set. Example: if the partition is XX010 
+    // this function returns 010
+    //
+    ElementSubset * get_selected_elements ();
+
+
+    // Returns the Partition Model of this partition
+    //
+    PartitionModel * get_partition_model ();
 };
 
 #endif /* PARTITION_H_ */

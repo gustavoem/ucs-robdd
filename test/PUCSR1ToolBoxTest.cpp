@@ -52,21 +52,14 @@ namespace PUCSR1ToolBoxTest {
         
         while (L->size () > 0)
         {
-            ElementSubset * Y = L->remove_last_subset ();
-            ElementSubset * X = P->get_original_subset (Y);
-            if (!X->is_contained_by (&p_maximal)) 
-            {
+            ElementSubset * X = L->remove_last_subset ();
+            if (!X->is_contained_by (&p_maximal))
                 answ = false;
-                break;
-            }
             if (!X->contains (&p_minimal))
-            {
                 answ = false;
-                break;
-            }
             delete X;
-            delete Y;
         }
+        delete part_model;
         delete P;
         delete L;
         delete c;
