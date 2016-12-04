@@ -148,7 +148,6 @@ ROBDD::ROBDD (ElementSet * set, ElementSubset * subset)
     for (unsigned int i = 0; i < set_card; i++)
         ordering[i] = i;
 
-
     elm_set = set;
     Vertex * zero = new Vertex (false, set_card + 1);
     Vertex * one = new Vertex (true, set_card + 1);
@@ -601,6 +600,22 @@ void ROBDD::add_interval (ElementSubset * subset, bool orientation)
 
     gettimeofday (& end, NULL);
     time_updating += (((end.tv_sec - start.tv_sec) * 1000000) + (end.tv_usec - start.tv_usec));
+}
+
+
+void ROBDD::add_subset (ElementSubset * subset) 
+{
+    nof_updates++;
+    timeval start, end;
+    gettimeofday (& start, NULL);
+
+    ROBDD * subset_robdd = new ROBDD (elm_set, subset);
+    Vertex * root2 = subset_robdd->get_root ();
+    union_to (root2);
+    delete subset_robdd;
+
+    gettimeofday (& end, NULL);
+    time_updating += (((end.tv_sec - start.tv_sec) * 1000000) + (end.tv_usec - start.tv_usec));   
 }
 
 

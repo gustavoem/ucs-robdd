@@ -345,6 +345,21 @@ namespace ROBDDTest {
             return true;
         }
         
+    bool it_should_be_able_to_add_a_subset () 
+    {
+        ElementSet * elm_set = new ElementSet ("", 3, 3);
+        ElementSubset * subset = new ElementSubset ("", elm_set);
+        subset->add_element (0);
+        subset->add_element (1);
+        subset->add_element (2);
+        ROBDD * robdd = new ROBDD (elm_set);
+        robdd->add_subset (subset);
+        bool answ = robdd->contains (subset);
+        delete robdd;
+        delete subset;
+        delete elm_set;
+        return answ;
+    }
 
 } // end of namespace
 

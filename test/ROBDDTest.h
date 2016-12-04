@@ -19,6 +19,7 @@ namespace ROBDDTest {
     bool the_robdd_maintains_a_log_of_restrictions ();
     bool it_should_represent_the_same_space_after_reordering ();
     bool it_should_be_able_to_reduce_an_obdd ();
+    bool it_should_be_able_to_add_a_subset ();
 
 }
 

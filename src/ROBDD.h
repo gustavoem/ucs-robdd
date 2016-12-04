@@ -202,6 +202,11 @@ public:
     void add_interval (ElementSubset *, bool);
 
 
+    // Adds to the ROBDD a subset
+    //
+    void add_subset (ElementSubset *);
+
+
     // Returns true if the ElementSubset * path of the robdds leads to a 1
     //
     bool contains (ElementSubset *);

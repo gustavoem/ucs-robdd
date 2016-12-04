@@ -455,6 +455,9 @@ int main(void) {
     cout << "ROBDDTest::it_should_be_able_to_reduce_an_obdd";
     cout.flush ();
     printResult (ROBDDTest::it_should_be_able_to_reduce_an_obdd ());
+    cout << "ROBDDTest::it_should_be_able_to_add_a_subset";
+    cout.flush ();
+    printResult (ROBDDTest::it_should_be_able_to_add_a_subset ());
     cout << endl;
 
 
