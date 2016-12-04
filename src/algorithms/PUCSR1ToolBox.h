@@ -23,6 +23,18 @@ namespace PUCSR1ToolBox
         unsigned int);
 
 
+    // Given a Partition P and an index i we return an adjacent 
+    // partition Q. Partitions are defined according to fixed elements
+    // that can be selected or not inside the partition. If the set of
+    // selected elements in one partition differs to the set of 
+    // selected elements in another partition by only one element then
+    // we call these partitions adjacent. Given P partition we return
+    // adjacent partition Q that differs from P on the selected 
+    // elements only on the i-th element.
+    //
+    Partition * adjacent_partition (Partition *, unsigned int);
+
+
     // A simple random walk between partitions
     // This method receives as argument a partition, a robdd R 
     // (representing the set of partitions) and a Collection. It sets a

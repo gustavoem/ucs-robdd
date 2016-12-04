@@ -18,7 +18,7 @@ namespace PUCSR1ToolBox
     }
 
 
-    Partition * neighbour_partition (Partition * P, unsigned int i)
+    Partition * adjacent_partition (Partition * P, unsigned int i)
     {
         ElementSubset * sel_elms = P->get_selected_elements ();
         unsigned int n = sel_elms->get_set_cardinality ();
@@ -56,7 +56,7 @@ namespace PUCSR1ToolBox
          unsigned int max_size_of_minima_list)
      {
         unsigned int i = 0;
-        Partition * Q = neighbour_partition (P, i++);
+        Partition * Q = adjacent_partition (P, i++);
         while (Q != NULL)
         {
 

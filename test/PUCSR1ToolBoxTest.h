@@ -11,7 +11,10 @@
 
 namespace PUCSR1ToolBoxTest
 {
+
     bool it_should_find_the_partition_minimum ();
+    bool it_should_find_an_adjacent_partition ();
+    
 }
 
 #endif /* PUCSR1TOOLBOXTEST_H_ */

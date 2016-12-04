@@ -572,6 +572,9 @@ int main(void) {
     cout << "PUCSR1ToolBoxTest::it_should_find_the_partition_minimum";
     cout.flush ();
     printResult (PUCSR1ToolBoxTest::it_should_find_the_partition_minimum ());
+    cout << "PUCSR1ToolBoxTest::it_should_find_an_adjacent_partition";
+    cout.flush ();
+    printResult (PUCSR1ToolBoxTest::it_should_find_an_adjacent_partition ());
     cout << endl;
 
     cout << "Total " << number_of_passed_tests + number_of_failed_tests << " test(s), ";

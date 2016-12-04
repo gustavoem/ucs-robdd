@@ -31,7 +31,7 @@ namespace PUCSR1ToolBoxTest {
         ElementSet original_set ("", 5, 50);
         bool fixed[5];
         for (unsigned int i = 0; i < 5; i++)
-            fixed[i] = i < 2; // we are fixing the first 6 elements
+            fixed[i] = i < 2; // we are fixing the first 2 elements
         
         PartitionModel * part_model;
         part_model = new PartitionModel (&original_set, fixed);
@@ -63,6 +63,35 @@ namespace PUCSR1ToolBoxTest {
         delete P;
         delete L;
         delete c;
+        return answ;
+    }
+
+    bool it_should_find_an_adjacent_partition ()
+    {
+        bool answ = true;
+        ElementSet original_set ("", 5, 50);
+        bool fixed[5];
+        for (unsigned int i = 0; i < 5; i++)
+            fixed[i] = i < 2; // we are fixing the first 2 elements
+        
+        PartitionModel * part_model;
+        part_model = new PartitionModel (&original_set, fixed);
+        ElementSet * fixed_set = part_model->get_unfixed_elm_set ();
+        ElementSubset p_subset ("", fixed_set);
+        p_subset.add_element (1);
+        Partition * P = new Partition (part_model, &p_subset);
+        ElementSubset * p_fixed = P->get_selected_elements ();
+        Partition * Q = PUCSR1ToolBox::adjacent_partition (P, 0);
+        ElementSubset * q_fixed = Q->get_selected_elements ();
+        q_fixed->subset_intersection (p_fixed);
+        if (q_fixed->get_subset_cardinality () != 1)
+            answ = false;
+
+        delete part_model;
+        delete P;
+        delete Q;
+        delete p_fixed;
+        delete q_fixed;
         return answ;
     }
 }
