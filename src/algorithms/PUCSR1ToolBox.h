@@ -13,8 +13,14 @@
 
 namespace PUCSR1ToolBox
 {  
+
+    // Adds the elements from a list of elementsubset to a collection. 
+    // This function is used to transfer the list of minima of a 
+    // partition to the list of minima of the original problem
+    //
     void update_minima_list (Collection *, Partition *, 
         list<ElementSubset *> *);
+
 
     // Finds the minimum of a partition and adds the list of minima of
     // this partition to the collection L.
@@ -35,6 +41,23 @@ namespace PUCSR1ToolBox
     Partition * adjacent_partition (Partition *, unsigned int);
 
 
+    // Given a partition P and partition Q perform one step of the walk
+    // that we described below in "random_walk".
+    // If P1 is upper adjacent partition to P2 then:
+    // 1) If minimal element of P1 has cost greater than minimal 
+    // element of P2 we can prune every partition that covers the
+    // minimal element of P1 (including P1 itself).
+    // 2) If maximal element of P2 has cost greater than maximal elemnt
+    // of P1 then we can prune every partition that is covered by the
+    // maximal element of P2 (including P2 itself).
+    // 
+    // By the end we return the partition that will be used in the next
+    // step of the walk. If both partitions P1 and P2 got prunned then
+    // we return NULL.
+    Partition * prune_and_walk (Partition *, Partition *, 
+        CostFunction *, ROBDD *);
+
+
     // A simple random walk between partitions
     // This method receives as argument a partition, a robdd R 
     // (representing the set of partitions) and a Collection. It sets a
@@ -44,25 +67,24 @@ namespace PUCSR1ToolBox
     // do {
     //     find the minimum element in the partition P and update L
     //     choose an adjacent partition Q
-    //     if Q is upper adjacent to X
-    //         if cost (maximal (X)) > cost (maximal (Y))
-    //             restrict every partition covered by maximal (X)
+    //     if Q is upper adjacent to P
+    //         if cost (maximal (P)) > cost (maximal (Q))
+    //             restrict every partition covered by maximal (P)
     //             change P to Q
-    //         if cost (minimal (Y)) > cost (minimal (X))
-    //             restrict every partition the covers minimal (Y)
+    //         if cost (minimal (Q)) > cost (minimal (P))
+    //             restrict every partition the covers minimal (Q)
     //         otherwise
-    //             choose any other neighbour of X
+    //             choose any other neighbour of P
     //             # or find the minimum of this partition ?
-    //     if Q is lower adjacent to X
-    //         if cost (minimal (X) > minimal (Y))
-    //             restrict every partition that covers minimal (X)
+    //     if Q is lower adjacent to P
+    //         if cost (minimal (P) > minimal (Q))
+    //             restrict every partition that covers minimal (P)
     //             change P to Q
-    //         if cost (maximal (Y)) > cost (maximal (X))
-    //             restrict every partition covered by maximal (Y)
+    //         if cost (maximal (Q)) > cost (maximal (P))
+    //             restrict every partition covered by maximal (Q)
     //         otherwise
-    //             choose another neighbour of X
-    // } while (X has unvisited neighbours);
-    //
+    //             choose another neighbour of P
+    // } while (P has unvisited neighbours);
     //
     void random_walk (Partition *, ROBDD *, CostFunction *, 
         Collection *);
