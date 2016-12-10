@@ -35,7 +35,7 @@ namespace PUCSR1ToolBoxTest {
         
         PartitionModel * part_model;
         part_model = new PartitionModel (&original_set, fixed);
-        ElementSet * fixed_set = part_model->get_unfixed_elm_set ();
+        ElementSet * fixed_set = part_model->get_fixed_elm_set ();
         ElementSubset p_subset ("", fixed_set);
         p_subset.add_element (1);
         Partition * P = new Partition (part_model, &p_subset);
@@ -92,6 +92,65 @@ namespace PUCSR1ToolBoxTest {
         delete Q;
         delete p_fixed;
         delete q_fixed;
+        return answ;
+    }
+
+    bool it_should_prune_and_walk ()
+    {
+        bool answ = true;
+        ElementSet original_set ("", 5, 50);
+        bool fixed[5];
+        for (unsigned int i = 0; i < 5; i++)
+            fixed[i] = i < 2; // we are fixing the first 2 elements
+        
+        PartitionModel * part_model;
+        part_model = new PartitionModel (&original_set, fixed);
+        ElementSet * fixed_set = part_model->get_unfixed_elm_set ();
+        ElementSubset p_subset ("", fixed_set);
+        p_subset.add_element (1);
+        Partition * P = new Partition (part_model, &p_subset);
+        Partition * Q = PUCSR1ToolBox::adjacent_partition (P, 0); 
+        // P = 01XXX
+        // Q = 11XXX
+        
+        CostFunction * c = new AbsSum (&original_set);
+        ROBDD * R = new ROBDD (fixed_set);
+
+        Partition * next;
+        next = PUCSR1ToolBox::prune_and_walk (P, Q, c, R);
+        ElementSubset * min1 = P->get_minimal_element ();
+        ElementSubset * min2 = Q->get_minimal_element ();
+        ElementSubset * max1 = P->get_maximal_element ();
+        ElementSubset * max2 = Q->get_maximal_element ();
+        if (next == NULL) 
+        {
+            if (!(c->cost (min2) > c->cost (min1)))
+                answ = false;
+            if (!(c->cost (max1) > c->cost (max2)))
+                answ = false;
+        }
+        else if (next == P) 
+        {
+            if (c->cost (max1) > c->cost (max2))
+                answ = false;
+        }
+        else if (next == Q)
+        {
+            if (!(c->cost (max1) > c->cost (max2)))
+                answ = false;
+            if (c->cost (max2) > c->cost (max1))
+                answ = false;
+        }
+
+        delete c;
+        delete min1;
+        delete max1;
+        delete min2;
+        delete max2;
+        delete R;
+        delete P;
+        delete Q;
+        delete part_model;
         return answ;
     }
 }

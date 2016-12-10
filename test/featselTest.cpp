@@ -584,6 +584,9 @@ int main(void) {
     cout << "PUCSR1ToolBoxTest::it_should_find_an_adjacent_partition";
     cout.flush ();
     printResult (PUCSR1ToolBoxTest::it_should_find_an_adjacent_partition ());
+    cout << "PUCSR1ToolBoxTest::it_should_prune_and_walk";
+    cout.flush ();
+    printResult (PUCSR1ToolBoxTest::it_should_prune_and_walk ());
     cout << endl;
 
     cout << "Total " << number_of_passed_tests + number_of_failed_tests << " test(s), ";
