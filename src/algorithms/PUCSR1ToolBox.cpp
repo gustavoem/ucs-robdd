@@ -86,7 +86,7 @@ namespace PUCSR1ToolBox
         delete q_sub;
         return next;
     }
-    
+
     
     void random_walk (Partition * P, ROBDD * pt_robdd, 
          CostFunction * c, Collection * L, 
@@ -116,6 +116,8 @@ namespace PUCSR1ToolBox
                 return;
             }
         }
+        ElementSubset * p_subset = P->get_minimal_element ();
+        pt_robdd->add_subset (p_subset);
+        delete p_subset;
     }
-
 }

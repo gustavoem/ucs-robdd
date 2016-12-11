@@ -5,7 +5,9 @@
 #include "../global.h"
 #include "../Solver.h"
 #include "../ElementSubset.h"
-#include "../FixedElementSet.h"
+#include "../PartitionModel.h"
+#include "../Partition.h"
+#include "PUCSR1ToolBox.h"
 // #include "UCSROBDDToolBox6.h"
 
 class PUCSR1 : public Solver
@@ -33,6 +35,10 @@ private:
     //
     unsigned int nof_unfixed_elms;
 
+
+    // Sets the partition model we are going to use
+    //
+    void set_partition_model ();
 
 public:
 

@@ -87,7 +87,7 @@ namespace PUCSR1ToolBox
     // } while (P has unvisited neighbours);
     //
     void random_walk (Partition *, ROBDD *, CostFunction *, 
-        Collection *);
+        Collection *, unsigned int);
 
 } // end of namespace
 
