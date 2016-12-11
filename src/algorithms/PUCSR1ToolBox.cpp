@@ -25,20 +25,29 @@ namespace PUCSR1ToolBox
     void partition_minimum (Partition * P, Collection * L,
         CostFunction * c, unsigned int max_size_of_minima_list)
     {
-        cout << "Finding the minimum of " << P->get_minimal_element ()->print_subset () << endl;
+        list<ElementSubset *> p_min_lst;
+        // cout << "Finding the minimum of " << P->get_minimal_element ()->print_subset () << endl;
         PartitionModel * p_model = P->get_partition_model ();
         ElementSet * p_elm_set = p_model->get_unfixed_elm_set ();
-        PartitionCost * p_cost = new PartitionCost (c, P);
-        Solver * sub_solver = new ExhaustiveSearch ();
-        sub_solver->set_parameters (p_cost, p_elm_set, false);
-        sub_solver->find_minima_list (max_size_of_minima_list);
-        list<ElementSubset *> p_min_lst;
-        p_min_lst = sub_solver->get_minima_list ();
+        if (p_elm_set->get_set_cardinality () == 0)
+        {
+            ElementSubset * minimal = P->get_minimal_element ();    
+            minimal->cost = c->cost (minimal);
+            p_min_lst.push_back (minimal);
+        }
+        else
+        {
+            PartitionCost * p_cost = new PartitionCost (c, P);
+            Solver * sub_solver = new ExhaustiveSearch ();
+            sub_solver->set_parameters (p_cost, p_elm_set, false);
+            sub_solver->find_minima_list (max_size_of_minima_list);
+            p_min_lst = sub_solver->get_minima_list ();
+            delete p_cost;
+            delete sub_solver;
+        }
         update_minima_list (L, P, &p_min_lst);
-        cout << "Minima List Collection: " << endl;
-        cout << L->print_collection () << endl;
-        delete p_cost;
-        delete sub_solver;
+        // cout << "Minima List Collection: " << endl;
+        // cout << L->print_collection () << endl;
     }
 
 

@@ -35,11 +35,11 @@ my $n;
 # list of solvers; SFFS is required for the heuristic mode 
 #
 
-my @solvers = (#"UCSO", "UCSRT",
-                "UCSR7",
-                 "UCSR6", "UCSR5", 
-                 # "UCSR4", "UCS", 
-                 "UBB", "ES");
+my @solvers = ("UCSR7",
+               "UCSR6", 
+               "PUCSR1",
+               "UBB",
+               "ES");
 
 my $number_of_solvers = @solvers;
 
@@ -413,7 +413,6 @@ foreach my $i (@experiments)
 	 for (my $k = 0; $k < $number_of_solvers; $k++)
 	   {
 	     my $current_solver = lc $solvers[$k];
-	     # print "\nTeste com %s\n", $solvers[$k];
 	     system ("./bin/featsel $window_size -a " . $current_solver . " -c $funcao -f input/" . $arquivo[$j-1]  . $argument_t1 . " > result.log");
 	     open (ARQ, "result.log");
 	     while (<ARQ>)
@@ -551,7 +550,6 @@ foreach my $i (@experiments)
 	{
 	  my ($t0, $t1);
 	  my $current_solver = lc $solvers[$k];
-	  # print "\nTeste com %s\n", $solvers[$k];
 	  $t0 = [gettimeofday];
     if ($ k == 0)
     {
@@ -627,37 +625,37 @@ foreach my $i (@experiments)
       $average_restriction_consult[$k] += $1;
     }
       # Toda vez que rodarmos o ucsr7 temos que rodá-lo de novo testando reordenações na ROBDD
-    elsif ($_ =~ /^Maximum\s+size\s+of\s+the\s+ROBDD\:\s+(\S+)/ and $current_solver eq "ucsr7")
-    {
-      $restriction_max0 = $1;
+    # elsif ($_ =~ /^Maximum\s+size\s+of\s+the\s+ROBDD\:\s+(\S+)/ and $current_solver eq "ucsr7")
+    # {
+    #   $restriction_max0 = $1;
       
-      # print "\n Com zero: " . $_;
-      # d = 1
-      #system ("./bin/featsel $window_size -a " . $current_solver . " -c $funcao -d 1 -f input/" . $arquivo[$j-1]  . $argument_t2 . " > result.log");
-      open (ARQ2, "result.log");
-      while (<ARQ2>)
-      {
-        if ($_ =~ /^Maximum\s+size\s+of\s+the\s+ROBDD\:\s+(\S+)/)
-        {
-          # print "\n Com 1: " . $_;
-          $average_restriction_red1 += ($restriction_max0 - $1) / $restriction_max0;
-        }
-      }
-      close (ARQ2);
+    #   # print "\n Com zero: " . $_;
+    #   # d = 1
+    #   #system ("./bin/featsel $window_size -a " . $current_solver . " -c $funcao -d 1 -f input/" . $arquivo[$j-1]  . $argument_t2 . " > result.log");
+    #   open (ARQ2, "result.log");
+    #   while (<ARQ2>)
+    #   {
+    #     if ($_ =~ /^Maximum\s+size\s+of\s+the\s+ROBDD\:\s+(\S+)/)
+    #     {
+    #       # print "\n Com 1: " . $_;
+    #       $average_restriction_red1 += ($restriction_max0 - $1) / $restriction_max0;
+    #     }
+    #   }
+    #   close (ARQ2);
 
-      # d = 100
-      #system ("./bin/featsel $window_size -a " . $current_solver . " -c $funcao -d 100 -f input/" . $arquivo[$j-1]  . $argument_t2 . " > result.log");
-      open (ARQ2, "result.log");
-      while (<ARQ2>)
-      {
-        if ($_ =~ /^Maximum\s+size\s+of\s+the\s+ROBDD\:\s+(\S+)/)
-        {
-          # print "\n Com 100: " . $_;
-          $average_restriction_red100 += ($restriction_max0 - $1) / $restriction_max0;
-        }
-      }
-      close (ARQ2);
-    }
+    #   # d = 100
+    #   #system ("./bin/featsel $window_size -a " . $current_solver . " -c $funcao -d 100 -f input/" . $arquivo[$j-1]  . $argument_t2 . " > result.log");
+    #   open (ARQ2, "result.log");
+    #   while (<ARQ2>)
+    #   {
+    #     if ($_ =~ /^Maximum\s+size\s+of\s+the\s+ROBDD\:\s+(\S+)/)
+    #     {
+    #       # print "\n Com 100: " . $_;
+    #       $average_restriction_red100 += ($restriction_max0 - $1) / $restriction_max0;
+    #     }
+    #   }
+    #   close (ARQ2);
+    # }
     }
     close(ARQ);
 
