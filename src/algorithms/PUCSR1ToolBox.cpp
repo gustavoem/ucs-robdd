@@ -6,15 +6,15 @@ namespace PUCSR1ToolBox
     void update_minima_list (Collection * L, Partition * P,
         list<ElementSubset *> * l)
     {
-        cout << "List of minima: " << endl;
+        // cout << "List of minima: " << endl;
         while (l->size () > 0) 
         {
             ElementSubset * pX = l->back ();
-            cout << pX->print_subset () << ": " << pX->cost << endl;
+            // cout << pX->print_subset () << ": " << pX->cost << endl;
             l->pop_back ();
             ElementSubset * X = P->get_original_subset (pX);
             X->cost = pX->cost;
-            cout << X->print_subset () << ": " << X->cost << endl;
+            // cout << X->print_subset () << ": " << X->cost << endl;
             L->add_subset (X);
             delete X;
             delete pX;
@@ -114,7 +114,7 @@ namespace PUCSR1ToolBox
         Partition * Q = adjacent_partition (P, i++);
         while (i < n)
         {
-            cout << "Partition: " << P->get_minimal_element ()->print_subset () << endl;
+            // cout << "Partition: " << P->get_minimal_element ()->print_subset () << endl;
             Partition * next;
             next = prune_and_walk (P, Q, c, pt_robdd);
             
@@ -125,7 +125,7 @@ namespace PUCSR1ToolBox
                 i = 0;
                 free (P);
                 P = Q;
-                cout << "Now going to Q: " << Q->get_minimal_element ()->print_subset () << endl;
+                // cout << "Now going to Q: " << Q->get_minimal_element ()->print_subset () << endl;
                 partition_minimum (P, L, c, max_size_of_minima_list);
             }
             else

@@ -59,9 +59,9 @@ void PUCSR1::find_minima_list (unsigned int max_size_of_minima_list)
         Partition * part = new Partition (part_model, part_subset);
         PUCSR1ToolBox::random_walk (part, cand_part, cost_function, 
             L, max_size_of_minima_list);
-        cout << "size of minima: " << max_size_of_minima_list << endl;
+        // cout << "size of minima: " << max_size_of_minima_list << endl;
         clean_list_of_minima (max_size_of_minima_list);
-        cout << "Collection after finding minimum: " << L->print_collection (cost_function) << endl;
+        // cout << "Collection after finding minimum: " << L->print_collection (cost_function) << endl;
         delete part;
         delete part_subset;
         part_subset = cand_part->get_random_zero_evaluated_element ();
