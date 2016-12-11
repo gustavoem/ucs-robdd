@@ -89,6 +89,17 @@ namespace PUCSR1ToolBox
     void random_walk (Partition *, ROBDD *, CostFunction *, 
         Collection *, unsigned int);
 
+
+    // Returns true if the partition is restricted
+    //
+    bool is_restricted (Partition *, ROBDD *);
+
+
+    // Restricts a partition
+    //
+    void restrict_partition (Partition *, ROBDD *);
+
+    
 } // end of namespace
 
 #endif /* PUCSR1TOOLBOX_H_ */

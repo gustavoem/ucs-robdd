@@ -35,8 +35,7 @@ my $n;
 # list of solvers; SFFS is required for the heuristic mode 
 #
 
-my @solvers = ("UCSR7",
-               "UCSR6", 
+my @solvers = ("UCSR6", 
                "PUCSR1",
                "UBB",
                "ES");
@@ -671,7 +670,7 @@ foreach my $i (@experiments)
       {
         $best_solution = $minimum_of_solvers[$k];
       }
-  } 
+    } 
       
     
 
