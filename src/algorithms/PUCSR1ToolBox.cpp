@@ -6,11 +6,15 @@ namespace PUCSR1ToolBox
     void update_minima_list (Collection * L, Partition * P,
         list<ElementSubset *> * l)
     {
+        cout << "List of minima: " << endl;
         while (l->size () > 0) 
         {
             ElementSubset * pX = l->back ();
+            cout << pX->print_subset () << ": " << pX->cost << endl;
             l->pop_back ();
             ElementSubset * X = P->get_original_subset (pX);
+            X->cost = pX->cost;
+            cout << X->print_subset () << ": " << X->cost << endl;
             L->add_subset (X);
             delete X;
             delete pX;
@@ -21,6 +25,7 @@ namespace PUCSR1ToolBox
     void partition_minimum (Partition * P, Collection * L,
         CostFunction * c, unsigned int max_size_of_minima_list)
     {
+        cout << "Finding the minimum of " << P->get_minimal_element ()->print_subset () << endl;
         PartitionModel * p_model = P->get_partition_model ();
         ElementSet * p_elm_set = p_model->get_unfixed_elm_set ();
         PartitionCost * p_cost = new PartitionCost (c, P);
@@ -30,6 +35,8 @@ namespace PUCSR1ToolBox
         list<ElementSubset *> p_min_lst;
         p_min_lst = sub_solver->get_minima_list ();
         update_minima_list (L, P, &p_min_lst);
+        cout << "Minima List Collection: " << endl;
+        cout << L->print_collection () << endl;
         delete p_cost;
         delete sub_solver;
     }
@@ -94,11 +101,12 @@ namespace PUCSR1ToolBox
     {
         unsigned int i = 0;
         unsigned int n = P->get_number_of_fixed_elms ();
+        partition_minimum (P, L, c, max_size_of_minima_list);
         Partition * Q = adjacent_partition (P, i++);
         while (i < n)
         {
+            cout << "Partition: " << P->get_minimal_element ()->print_subset () << endl;
             Partition * next;
-            partition_minimum (P, L, c, max_size_of_minima_list);
             next = prune_and_walk (P, Q, c, pt_robdd);
             
             if (next == P)
@@ -108,6 +116,8 @@ namespace PUCSR1ToolBox
                 i = 0;
                 free (P);
                 P = Q;
+                cout << "Now going to Q: " << Q->get_minimal_element ()->print_subset () << endl;
+                partition_minimum (P, L, c, max_size_of_minima_list);
             }
             else
             {

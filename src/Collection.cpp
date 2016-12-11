@@ -105,8 +105,16 @@ string Collection::print_collection ()
 {
 	map<string, ElementSubset *>::iterator it;
 	string collection_string ("");
-	for (it = my_map.begin (); it != my_map.end (); it++)
+	std::ostringstream value;
+	for (it = my_map.begin (); it != my_map.end (); it++) {
 		collection_string.append (it->second->print_subset ());
+		collection_string.append (": ");
+		value <<  it->second->cost;
+		collection_string.append (value.str ());
+		collection_string.append ("\n");
+		value.str ("");
+	}
+
 	return collection_string;
 }
 
