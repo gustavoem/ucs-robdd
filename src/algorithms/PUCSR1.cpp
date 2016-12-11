@@ -34,6 +34,7 @@ void PUCSR1::set_partition_model ()
         else
             fixed[i] = false;
     this->part_model = new PartitionModel (set, fixed);
+    delete[] fixed;
 }
 
 
@@ -62,7 +63,7 @@ void PUCSR1::find_minima_list (unsigned int max_size_of_minima_list)
         // cout << "size of minima: " << max_size_of_minima_list << endl;
         clean_list_of_minima (max_size_of_minima_list);
         // cout << "Collection after finding minimum: " << L->print_collection (cost_function) << endl;
-        delete part;
+        
         delete part_subset;
         part_subset = cand_part->get_random_zero_evaluated_element ();
         while (L->size() > 0)

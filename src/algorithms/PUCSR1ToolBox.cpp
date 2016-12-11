@@ -89,7 +89,7 @@ namespace PUCSR1ToolBox
         delete e1;
         delete e2;
         ElementSubset * p_sub = P->get_selected_elements ();
-        ElementSubset * q_sub = P->get_selected_elements ();
+        ElementSubset * q_sub = Q->get_selected_elements ();
         next = P;
         if (R->contains (p_sub))
         {
@@ -111,32 +111,34 @@ namespace PUCSR1ToolBox
         unsigned int i = 0;
         unsigned int n = P->get_number_of_fixed_elms ();
         partition_minimum (P, L, c, max_size_of_minima_list);
-        Partition * Q = adjacent_partition (P, i++);
+        Partition * Q;
         while (i < n)
         {
+            Q = adjacent_partition (P, i++);
             // cout << "Partition: " << P->get_minimal_element ()->print_subset () << endl;
             Partition * next;
             next = prune_and_walk (P, Q, c, pt_robdd);
             
             if (next == P)
-                i++;
+                delete Q;
             else if (next == Q)
             {
                 i = 0;
-                free (P);
+                delete P;
                 P = Q;
                 // cout << "Now going to Q: " << Q->get_minimal_element ()->print_subset () << endl;
                 partition_minimum (P, L, c, max_size_of_minima_list);
             }
             else
             {
-                free (P);
-                free (Q);
+                delete P;
+                delete Q;
                 return;
             }
         }
         ElementSubset * p_subset = P->get_minimal_element ();
         pt_robdd->add_subset (p_subset);
+        delete P;
         delete p_subset;
     }
 }

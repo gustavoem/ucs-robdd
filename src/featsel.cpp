@@ -37,7 +37,7 @@
 #include "algorithms/BranchAndBound.h"
 #include "algorithms/PosetForestSearch.h"
 #include "algorithms/UCSROBDD6.h"
-#include "algorithms/UCSROBDD7.h"
+// #include "algorithms/UCSROBDD7.h"
 #include "algorithms/PUCSR1.h"
 //#include "algorithms/UCSRT.h"
 //#include "algorithms/UCSOBDD.h"
@@ -102,8 +102,8 @@ int main(int argc, char * argv[])
             solver = new UCurveSearch ();
         else if (algorithm.compare ("ucsr6") == 0)
             solver = new UCSROBDD6 ();
-        else if (algorithm.compare ("ucsr7") == 0)
-            solver = new UCSROBDD7 (number_of_reorderings);
+        // else if (algorithm.compare ("ucsr7") == 0)
+        //     solver = new UCSROBDD7 (number_of_reorderings);
         else if (algorithm.compare ("pucsr1") == 0)
             solver = new PUCSR1 ();
 
