@@ -25,7 +25,7 @@
 // using namespace PUCSR1ToolBox;
 namespace PUCSR1ToolBoxTest {
 
-    bool it_should_find_the_partition_minimum ()
+    bool it_should_find_the_part_minimum ()
     {
         bool answ = true;
         ElementSet original_set ("", 5, 50);
@@ -40,7 +40,7 @@ namespace PUCSR1ToolBoxTest {
         PartitionNode * P = new PartitionNode (partition, &p_subset);
         Collection * L = new Collection ();
         CostFunction * c = new AbsSum (&original_set);
-        PUCSR1ToolBox::partition_minimum (P, L, c, 5);
+        PUCSR1ToolBox::part_minimum (P, L, c, 5);
         ElementSubset p_maximal ("", &original_set);
         p_maximal.add_element (1);
         p_maximal.add_element (2);

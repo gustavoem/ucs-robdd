@@ -46,9 +46,9 @@ private:
     ElementSubset * minimal_subset;
 
 
-    // A pointer to the partition model this partition is using
+    // A pointer to the partition this part is from
     //
-    Partition * part_model;
+    Partition * partition;
 
 
     // Find the minimal subset of this partition
@@ -68,48 +68,48 @@ public:
     virtual ~PartitionNode ();
 
 
-    // From an elementsubset defined in this partition returns the
+    // From an elementsubset defined in this partition node returns the
     // elementsubset correspondent in the original poset
     //
     ElementSubset * get_original_subset (ElementSubset *);
 
 
-    // Returns the original subset from which this partition is in
+    // Returns the set of elements that are fixed or not in this part
     //
     ElementSet * get_original_set ();
 
 
-    // Returns the element subset that represents this partition based
+    // Returns the element subset that represents this part based
     // on the fixed element set. Example: if the partition is XX010 
     // this function returns 010
     //
     ElementSubset * get_selected_elements ();
 
 
-    // Returns the Partition Model of this partition
+    // Returns the Partition of this part
     //
-    Partition * get_partition_model ();
+    Partition * get_partition ();
 
 
-    // Returns the number of fixed elements in this partition
+    // Returns the number of fixed elements in this part
     //
     unsigned int get_number_of_fixed_elms ();
 
 
-    // Verifies if this partition is upper adjacent to another 
-    // partition.
+    // Verifies if this part is upper adjacent to another part
     //
     bool is_upper_adjacent (PartitionNode *);
 
 
-    // Returns the minial subset of this partition
+    // Returns the minimal subset of this part
     //
     ElementSubset * get_minimal_element ();
 
 
-    // Returns the maximal subset of this partition
+    // Returns the maximal subset of this part
     //
     ElementSubset * get_maximal_element ();
+    
 };
 
 #endif /* PARTITION_NODE_H_ */

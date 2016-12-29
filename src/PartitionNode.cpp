@@ -20,11 +20,10 @@
 
 #include "PartitionNode.h"
 
-PartitionNode::PartitionNode (Partition * part_model,
-    ElementSubset * selected_subset)
+PartitionNode::PartitionNode (Partition * partition, ElementSubset * X)
 {
-    this->selected_elements = new ElementSubset (selected_subset);
-    this->part_model = part_model;
+    this->selected_elements = new ElementSubset (X);
+    this->partition = partition;
     find_minimal_subset ();
 }
 
@@ -37,11 +36,11 @@ PartitionNode::~PartitionNode ()
 
 void PartitionNode::find_minimal_subset ()
 {
-    ElementSet * fixed_set = part_model->get_fixed_elm_set ();
-    ElementSet * orig_set = part_model->get_original_set ();
+    ElementSet * fixed_set = partition->get_fixed_elm_set ();
+    ElementSet * orig_set = partition->get_original_set ();
     minimal_subset = new ElementSubset ("", orig_set);
     unsigned int fixed_elm_set_size = fixed_set->get_set_cardinality ();
-    unsigned int * fixed_map = part_model->get_fixed_elm_map ();
+    unsigned int * fixed_map = partition->get_fixed_elm_map ();
     for (unsigned int i = 0; i < fixed_elm_set_size; i++)
     {
         if (selected_elements->has_element (i))
@@ -52,12 +51,12 @@ void PartitionNode::find_minimal_subset ()
 
 ElementSubset * PartitionNode::get_original_subset (ElementSubset * X)
 {
-    ElementSet * orig_set = part_model->get_original_set ();
+    ElementSet * orig_set = partition->get_original_set ();
     ElementSubset * orig_subset = new ElementSubset ("", orig_set);
     orig_subset->copy (minimal_subset);
-    ElementSet * unfixed_set = part_model->get_unfixed_elm_set ();
+    ElementSet * unfixed_set = partition->get_unfixed_elm_set ();
     unsigned int unfixed_set_size = unfixed_set->get_set_cardinality ();
-    unsigned int * unfixed_map = part_model->get_unfixed_elm_map ();
+    unsigned int * unfixed_map = partition->get_unfixed_elm_map ();
     for (unsigned int i = 0; i < unfixed_set_size; i++)
         if (X->has_element (i))
             orig_subset->add_element (unfixed_map[i]);
@@ -67,7 +66,7 @@ ElementSubset * PartitionNode::get_original_subset (ElementSubset * X)
 
 ElementSet * PartitionNode::get_original_set ()
 {
-    return part_model->get_original_set ();
+    return partition->get_original_set ();
 }
 
 
@@ -77,15 +76,15 @@ ElementSubset * PartitionNode::get_selected_elements ()
 }
 
 
-Partition * PartitionNode::get_partition_model ()
+Partition * PartitionNode::get_partition ()
 {
-    return part_model;
+    return partition;
 }
 
 
 unsigned int PartitionNode::get_number_of_fixed_elms ()
 {
-    ElementSet * fixed_set = part_model->get_fixed_elm_set ();
+    ElementSet * fixed_set = partition->get_fixed_elm_set ();
     unsigned int n = fixed_set->get_set_cardinality ();
     return n;
 }
@@ -116,9 +115,9 @@ ElementSubset * PartitionNode::get_maximal_element ()
     ElementSubset * maximal;
     unsigned int n, * unfixed_map;
 
-    unfixed_set = part_model->get_unfixed_elm_set ();
+    unfixed_set = partition->get_unfixed_elm_set ();
     n = unfixed_set->get_set_cardinality ();
-    unfixed_map = part_model->get_unfixed_elm_map ();
+    unfixed_map = partition->get_unfixed_elm_map ();
     maximal = new ElementSubset (minimal_subset);
     for (unsigned int i = 0; i < n; i++)
         maximal->add_element (unfixed_map[i]);

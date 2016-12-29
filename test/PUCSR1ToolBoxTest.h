@@ -12,7 +12,7 @@
 namespace PUCSR1ToolBoxTest
 {
 
-    bool it_should_find_the_partition_minimum ();
+    bool it_should_find_the_part_minimum ();
     bool it_should_find_an_adjacent_partition ();
     bool it_should_prune_and_walk ();
     

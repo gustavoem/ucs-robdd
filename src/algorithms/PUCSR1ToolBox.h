@@ -25,7 +25,7 @@ namespace PUCSR1ToolBox
     // Finds the minimum of a partition and adds the list of minima of
     // this partition to the collection L.
     //
-    void partition_minimum (PartitionNode *, Collection *, 
+    void part_minimum (PartitionNode *, Collection *, 
         CostFunction *, unsigned int);
 
 

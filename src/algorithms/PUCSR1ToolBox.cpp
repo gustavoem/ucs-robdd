@@ -22,12 +22,12 @@ namespace PUCSR1ToolBox
     }
 
     /* TODO: Change this function name */
-    void partition_minimum (PartitionNode * P, Collection * L,
+    void part_minimum (PartitionNode * P, Collection * L,
         CostFunction * c, unsigned int max_size_of_minima_list)
     {
         list<ElementSubset *> p_min_lst;
         // cout << "Finding the minimum of " << P->get_minimal_element ()->print_subset () << endl;
-        Partition * partition = P->get_partition_model ();
+        Partition * partition = P->get_partition ();
         ElementSet * p_elm_set = partition->get_unfixed_elm_set ();
         if (p_elm_set->get_set_cardinality () == 0)
         {
@@ -59,7 +59,7 @@ namespace PUCSR1ToolBox
             sel_elms->remove_element (i);
         else
             sel_elms->add_element (i);
-        Partition * partition = P->get_partition_model ();
+        Partition * partition = P->get_partition ();
         PartitionNode * Q = new PartitionNode (partition, sel_elms);
         delete sel_elms;
         return Q;
@@ -119,7 +119,7 @@ namespace PUCSR1ToolBox
     {
         unsigned int i = 0;
         unsigned int n = P->get_number_of_fixed_elms ();
-        partition_minimum (P, L, c, max_size_of_minima_list);
+        part_minimum (P, L, c, max_size_of_minima_list);
         restrict_partition (P, pt_robdd);
         PartitionNode * Q;
         while (i < n)
@@ -141,7 +141,7 @@ namespace PUCSR1ToolBox
                 delete P;
                 P = Q;
                 // cout << "Now going to Q: " << Q->get_minimal_element ()->print_subset () << endl;
-                partition_minimum (P, L, c, max_size_of_minima_list);
+                part_minimum (P, L, c, max_size_of_minima_list);
                 restrict_partition (P, pt_robdd);
             }
             else
