@@ -18,8 +18,8 @@
 //    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-#ifndef PARTITION_H_
-#define PARTITION_H_
+#ifndef PARTITION_NODE_H_
+#define PARTITION_NODE_H_
 
 #include "ElementSet.h"
 #include "ElementSubset.h"
@@ -28,7 +28,7 @@
 // This class is used to fix elements of an ElementSet and also define
 // a subposet of the poset defined by power set of ElementSet
 //
-class Partition
+class PartitionNode
 {
 
 private:
@@ -60,12 +60,12 @@ public:
     // Default constructor. Receives the elementsubset that represents
     // the lowest element of this fraction of the poset
     //  
-    Partition (PartitionModel *, ElementSubset *);
+    PartitionNode (PartitionModel *, ElementSubset *);
 
 
     // Default destructor.
     //
-    virtual ~Partition ();
+    virtual ~PartitionNode ();
 
 
     // From an elementsubset defined in this partition returns the
@@ -99,7 +99,7 @@ public:
     // Verifies if this partition is upper adjacent to another 
     // partition.
     //
-    bool is_upper_adjacent (Partition *);
+    bool is_upper_adjacent (PartitionNode *);
 
 
     // Returns the minial subset of this partition
@@ -112,4 +112,4 @@ public:
     ElementSubset * get_maximal_element ();
 };
 
-#endif /* PARTITION_H_ */
+#endif /* PARTITION_NODE_H_ */

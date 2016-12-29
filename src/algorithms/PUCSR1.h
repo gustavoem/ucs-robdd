@@ -6,7 +6,7 @@
 #include "../Solver.h"
 #include "../ElementSubset.h"
 #include "../PartitionModel.h"
-#include "../Partition.h"
+#include "../PartitionNode.h"
 #include "PUCSR1ToolBox.h"
 // #include "UCSROBDDToolBox6.h"
 

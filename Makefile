@@ -20,7 +20,7 @@
 
 IDIR = ../
 
-CXXFLAGS =	-O0 -g -Wall -fmessage-length=0
+CXXFLAGS =	-O2 -g -Wall -fmessage-length=0
 
 OBJS =		src/Element.o src/ElementSet.o src/ElementSubset.o \
 			src/Collection.o src/Solver.o src/CostFunction.o \
@@ -33,7 +33,7 @@ OBJS =		src/Element.o src/ElementSet.o src/ElementSubset.o \
 			src/Vertex.o src/ROBDD.o src/algorithms/UCSROBDD.o src/algorithms/UCSROBDDToolBox.o \
 			src/algorithms/UCSROBDD6.o src/algorithms/UCSROBDDToolBox6.o \
 			src/algorithms/UCSROBDD7.o src/algorithms/UCSROBDDToolBox7.o \
-			src/PartitionModel.o src/Partition.o \
+			src/PartitionModel.o src/PartitionNode.o \
 			src/GeneticOrdering.o src/OrderingNode.o src/GAROBDD.o \
 			src/algorithms/UCSRT.o src/algorithms/UCSRTToolBox.o src/OBDD.o src/PVertex.o \
 			src/algorithms/UCSOBDD.o src/algorithms/UCSOBDDToolBox.o \
@@ -53,7 +53,7 @@ TOBJS =		test/ElementTest.o test/ElementSetTest.o test/ElementSubsetTest.o \
 			test/VertexTest.o test/ROBDDTest.o \
 			test/GeneticOrderingTest.o test/OrderingNodeTest.o \
 			test/UCSROBDD6Test.o test/UCSROBDDToolBox6Test.o \
-			test/PartitionModelTest.o test/PartitionTest.o \
+			test/PartitionModelTest.o test/PartitionNodeTest.o \
 			test/PartitionCostTest.o \
 			test/PUCSR1ToolBoxTest.o \
 			# test/UCSROBDDToolBoxTest.o \

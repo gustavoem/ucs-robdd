@@ -1,0 +1,10 @@
+\select@language {portuguese}
+\contentsline {section}{\numberline {1}Resumo do Projeto Proposto}{2}{section.1}
+\contentsline {section}{\numberline {2}Atividades Realizadas}{3}{section.2}
+\contentsline {subsection}{\numberline {2.1}Estudo do algoritmo {\tt UCS} e de ROBDDs}{3}{subsection.2.1}
+\contentsline {subsection}{\numberline {2.2}Implementa\IeC {\c c}\IeC {\~a}o de ROBDDs no arcabou\IeC {\c c}o {\tt featsel} }{4}{subsection.2.2}
+\contentsline {subsection}{\numberline {2.3}Simplifica\IeC {\c c}\IeC {\~a}o da busca em profundidade ({\em DFS}) feita pelo algoritmo original}{6}{subsection.2.3}
+\contentsline {subsection}{\numberline {2.4}Ajuste entre tempo de execu\IeC {\c c}\IeC {\~a}o e n\IeC {\'u}mero de chamadas da fun\IeC {\c c}\IeC {\~a}o custo}{7}{subsection.2.4}
+\contentsline {subsection}{\numberline {2.5}Resultados dos experimentos}{8}{subsection.2.5}
+\contentsline {section}{\numberline {3}Plano de atividades para o pr\IeC {\'o}ximo per\IeC {\'\i }odo}{11}{section.3}
+\contentsline {section}{Refer\IeC {\^e}ncias}{12}{section*.2}

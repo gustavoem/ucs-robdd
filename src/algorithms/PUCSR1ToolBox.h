@@ -7,7 +7,7 @@
 #include "../ElementSubset.h"
 #include "../PartitionModel.h"
 #include "../functions/PartitionCost.h"
-#include "../Partition.h"
+#include "../PartitionNode.h"
 #include "../Solver.h"
 #include "../algorithms/ExhaustiveSearch.h"
 
@@ -18,15 +18,15 @@ namespace PUCSR1ToolBox
     // This function is used to transfer the list of minima of a 
     // partition to the list of minima of the original problem
     //
-    void update_minima_list (Collection *, Partition *, 
+    void update_minima_list (Collection *, PartitionNode *, 
         list<ElementSubset *> *);
 
 
     // Finds the minimum of a partition and adds the list of minima of
     // this partition to the collection L.
     //
-    void partition_minimum (Partition *, Collection *, CostFunction *,
-        unsigned int);
+    void partition_minimum (PartitionNode *, Collection *, 
+        CostFunction *, unsigned int);
 
 
     // Given a Partition P and an index i we return an adjacent 
@@ -38,7 +38,7 @@ namespace PUCSR1ToolBox
     // adjacent partition Q that differs from P on the selected 
     // elements only on the i-th element.
     //
-    Partition * adjacent_partition (Partition *, unsigned int);
+    PartitionNode * adjacent_partition (PartitionNode *, unsigned int);
 
 
     // Given a partition P and partition Q perform one step of the walk
@@ -54,15 +54,15 @@ namespace PUCSR1ToolBox
     // By the end we return the partition that will be used in the next
     // step of the walk. If both partitions P1 and P2 got prunned then
     // we return NULL.
-    Partition * prune_and_walk (Partition *, Partition *, 
+    PartitionNode * prune_and_walk (PartitionNode *, PartitionNode *,
         CostFunction *, ROBDD *);
 
 
     // A simple random walk between partitions
     // This method receives as argument a partition, a robdd R 
     // (representing the set of partitions) and a Collection. It sets a
-    // partition P as the argument partition and walks on the set of 
-    // partitions in the following way:
+    // partition node P as the argument partition and walks on the set 
+    // of partitions in the following way:
     //
     // do {
     //     find the minimum element in the partition P and update L
@@ -86,18 +86,18 @@ namespace PUCSR1ToolBox
     //             choose another neighbour of P
     // } while (P has unvisited neighbours);
     //
-    void random_walk (Partition *, ROBDD *, CostFunction *, 
+    void random_walk (PartitionNode *, ROBDD *, CostFunction *,
         Collection *, unsigned int);
 
 
     // Returns true if the partition is restricted
     //
-    bool is_restricted (Partition *, ROBDD *);
+    bool is_restricted (PartitionNode *, ROBDD *);
 
 
     // Restricts a partition
     //
-    void restrict_partition (Partition *, ROBDD *);
+    void restrict_partition (PartitionNode *, ROBDD *);
 
     
 } // end of namespace

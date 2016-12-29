@@ -31,7 +31,7 @@
 #include "VertexTest.h"
 #include "ROBDDTest.h"
 #include "PartitionModelTest.h"
-#include "PartitionTest.h"
+#include "PartitionNodeTest.h"
 #include "GeneticOrderingTest.h"
 #include "OrderingNodeTest.h"
 
@@ -557,18 +557,18 @@ int main(void) {
     cout << endl;
 
     // Testing Class Partition
-    cout << "PartitionTest::it_map_subsets_correctly";
+    cout << "PartitionNodeTest::it_map_subsets_correctly";
     cout.flush ();
-    printResult (PartitionTest::it_map_subsets_correctly ());
-    cout << "PartitionTest::it_should_check_upper_adjacent_partitions";
+    printResult (PartitionNodeTest::it_map_subsets_correctly ());
+    cout << "PartitionNodeTest::it_should_check_upper_adjacent_partitions";
     cout.flush ();
-    printResult (PartitionTest::it_should_check_upper_adjacent_partitions ());
-    cout << "PartitionTest::it_should_return_the_minimal_element";
+    printResult (PartitionNodeTest::it_should_check_upper_adjacent_partitions ());
+    cout << "PartitionNodeTest::it_should_return_the_minimal_element";
     cout.flush ();
-    printResult (PartitionTest::it_should_return_the_minimal_element ());
-    cout << "PartitionTest::it_should_return_the_maximal_element";
+    printResult (PartitionNodeTest::it_should_return_the_minimal_element ());
+    cout << "PartitionNodeTest::it_should_return_the_maximal_element";
     cout.flush ();
-    printResult (PartitionTest::it_should_return_the_maximal_element ());
+    printResult (PartitionNodeTest::it_should_return_the_maximal_element ());
     cout << endl;    
 
     // Testing Class PartitionCost

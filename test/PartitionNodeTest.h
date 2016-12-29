@@ -18,16 +18,16 @@
 //    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-#ifndef PARTITION_TEST_H_
-#define PARTITION_TEST_H_
+#ifndef PARTITION_NODE_TEST_H_
+#define PARTITION_NODE_TEST_H_
 
 #include "../src/PartitionModel.h"
-#include "../src/Partition.h"
+#include "../src/PartitionNode.h"
 #include "../src/ElementSubset.h"
 #include "../src/ElementSet.h"
 #include "../src/global.h"
 
-namespace PartitionTest
+namespace PartitionNodeTest
 {
 
     bool it_map_subsets_correctly ();
@@ -37,4 +37,4 @@ namespace PartitionTest
 
 }
 	
-#endif /* PARTITION_TEST_H_ */
+#endif /* PARTITION_NODE_TEST_H_ */

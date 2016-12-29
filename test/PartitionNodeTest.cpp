@@ -18,9 +18,9 @@
 //    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-#include "PartitionTest.h"
+#include "PartitionNodeTest.h"
 
-namespace PartitionTest
+namespace PartitionNodeTest
 {
     bool it_map_subsets_correctly ()
     {
@@ -40,7 +40,7 @@ namespace PartitionTest
         part_subset.add_element (0);
         part_subset.add_element (2);
         part_subset.add_element (4);
-        Partition part (&part_model, &part_subset);
+        PartitionNode part (&part_model, &part_subset);
 
         ElementSubset expected_subset ("", &original_set);
         expected_subset.add_element (0);
@@ -83,9 +83,9 @@ namespace PartitionTest
         q1_subset.add_element (3);
         q1_subset.add_element (4);
         q2_subset.add_element (2);
-        Partition * P = new Partition (part_model, &p_subset);
-        Partition * Q1 = new Partition (part_model, &q1_subset);
-        Partition * Q2 = new Partition (part_model, &q2_subset);
+        PartitionNode * P = new PartitionNode (part_model, &p_subset);
+        PartitionNode * Q1 = new PartitionNode (part_model, &q1_subset);
+        PartitionNode * Q2 = new PartitionNode (part_model, &q2_subset);
         if (!Q1->is_upper_adjacent (P))
             answ = false;
         if (Q2->is_upper_adjacent (P))
@@ -113,7 +113,7 @@ namespace PartitionTest
         p_subset.add_element (0);
         p_subset.add_element (2);
         p_subset.add_element (3);
-        Partition P (part_model, &p_subset);
+        PartitionNode P (part_model, &p_subset);
         ElementSubset expected_minimal ("", &original_set);
         expected_minimal.add_element (0);
         expected_minimal.add_element (2);
@@ -142,7 +142,7 @@ namespace PartitionTest
         p_subset.add_element (0);
         p_subset.add_element (2);
         p_subset.add_element (3);
-        Partition P (part_model, &p_subset);
+        PartitionNode P (part_model, &p_subset);
         ElementSubset expected_maximal ("", &original_set);
         expected_maximal.add_element (0);
         expected_maximal.add_element (2);

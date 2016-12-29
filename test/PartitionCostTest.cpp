@@ -41,7 +41,7 @@ namespace PartitionCostTest
         part_subset.add_element (0);
         part_subset.add_element (2);
         part_subset.add_element (4);
-        Partition part (&part_model, &part_subset);
+        PartitionNode part (&part_model, &part_subset);
 
         AbsSum orig_cost_f (&original_set);
         PartitionCost p_model_f (&orig_cost_f, &part);

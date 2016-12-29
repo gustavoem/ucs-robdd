@@ -18,9 +18,9 @@
 //    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-#include "Partition.h"
+#include "PartitionNode.h"
 
-Partition::Partition (PartitionModel * part_model,
+PartitionNode::PartitionNode (PartitionModel * part_model,
     ElementSubset * selected_subset)
 {
     this->selected_elements = new ElementSubset (selected_subset);
@@ -29,13 +29,13 @@ Partition::Partition (PartitionModel * part_model,
 }
 
 
-Partition::~Partition ()
+PartitionNode::~PartitionNode ()
 {
     delete selected_elements;
     delete minimal_subset;
 }
 
-void Partition::find_minimal_subset ()
+void PartitionNode::find_minimal_subset ()
 {
     ElementSet * fixed_set = part_model->get_fixed_elm_set ();
     ElementSet * orig_set = part_model->get_original_set ();
@@ -50,7 +50,7 @@ void Partition::find_minimal_subset ()
 }
 
 
-ElementSubset * Partition::get_original_subset (ElementSubset * subset)
+ElementSubset * PartitionNode::get_original_subset (ElementSubset * X)
 {
     ElementSet * orig_set = part_model->get_original_set ();
     ElementSubset * orig_subset = new ElementSubset ("", orig_set);
@@ -59,33 +59,31 @@ ElementSubset * Partition::get_original_subset (ElementSubset * subset)
     unsigned int unfixed_set_size = unfixed_set->get_set_cardinality ();
     unsigned int * unfixed_map = part_model->get_unfixed_elm_map ();
     for (unsigned int i = 0; i < unfixed_set_size; i++)
-    {
-        if (subset->has_element (i))
+        if (X->has_element (i))
             orig_subset->add_element (unfixed_map[i]);
-    }
     return orig_subset;
 }
 
 
-ElementSet * Partition::get_original_set ()
+ElementSet * PartitionNode::get_original_set ()
 {
     return part_model->get_original_set ();
 }
 
 
-ElementSubset * Partition::get_selected_elements ()
+ElementSubset * PartitionNode::get_selected_elements ()
 {
     return new ElementSubset (selected_elements);
 }
 
 
-PartitionModel * Partition::get_partition_model ()
+PartitionModel * PartitionNode::get_partition_model ()
 {
     return part_model;
 }
 
 
-unsigned int Partition::get_number_of_fixed_elms ()
+unsigned int PartitionNode::get_number_of_fixed_elms ()
 {
     ElementSet * fixed_set = part_model->get_fixed_elm_set ();
     unsigned int n = fixed_set->get_set_cardinality ();
@@ -93,7 +91,7 @@ unsigned int Partition::get_number_of_fixed_elms ()
 }
 
 
-bool Partition::is_upper_adjacent (Partition * Q)
+bool PartitionNode::is_upper_adjacent (PartitionNode * Q)
 {
     bool answ = true;
     ElementSubset * intersect = new ElementSubset (selected_elements);
@@ -106,13 +104,13 @@ bool Partition::is_upper_adjacent (Partition * Q)
 }
 
 
-ElementSubset * Partition::get_minimal_element ()
+ElementSubset * PartitionNode::get_minimal_element ()
 {
     return new ElementSubset (minimal_subset);
 }
 
 
-ElementSubset * Partition::get_maximal_element ()
+ElementSubset * PartitionNode::get_maximal_element ()
 {
     ElementSet * unfixed_set;
     ElementSubset * maximal;

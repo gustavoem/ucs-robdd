@@ -53,19 +53,19 @@ void PUCSR1::find_minima_list (unsigned int max_size_of_minima_list)
         // partitions while prunning partitions.
 
     Collection * L = new Collection ();
-    ElementSubset * part_subset;
-    part_subset = cand_part->get_random_zero_evaluated_element ();
-    while (part_subset != NULL)
+    ElementSubset * p_subset;
+    p_subset = cand_part->get_random_zero_evaluated_element ();
+    while (p_subset != NULL)
     {
-        Partition * part = new Partition (part_model, part_subset);
-        PUCSR1ToolBox::random_walk (part, cand_part, cost_function, 
+        PartitionNode * P = new PartitionNode (part_model, p_subset);
+        PUCSR1ToolBox::random_walk (P, cand_part, cost_function, 
             L, max_size_of_minima_list);
         // cout << "size of minima: " << max_size_of_minima_list << endl;
         clean_list_of_minima (max_size_of_minima_list);
         // cout << "Collection after finding minimum: " << L->print_collection (cost_function) << endl;
         
-        delete part_subset;
-        part_subset = cand_part->get_random_zero_evaluated_element ();
+        delete p_subset;
+        p_subset = cand_part->get_random_zero_evaluated_element ();
         while (L->size() > 0)
         {
             ElementSubset * X = L->remove_last_subset ();

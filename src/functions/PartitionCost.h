@@ -25,7 +25,7 @@
 #include "../global.h"
 #include "../ElementSubset.h"
 #include "../CostFunction.h"
-#include "../Partition.h"
+#include "../PartitionNode.h"
 
 
 class PartitionCost : public CostFunction
@@ -35,7 +35,7 @@ protected:
 
     // Stores the information about the partition being evaluated
     //
-    Partition * partition;
+    PartitionNode * partition;
 
 
     // Stores the orignal cost function
@@ -46,7 +46,7 @@ public:
 
     // Default constructor.
     //
-    PartitionCost (CostFunction *, Partition *);
+    PartitionCost (CostFunction *, PartitionNode *);
 
 
     // Default destructor.
