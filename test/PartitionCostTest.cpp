@@ -34,23 +34,23 @@ namespace PartitionCostTest
                 is_fixed[i] = true;
             else
                 is_fixed[i] = false;
-        PartitionModel part_model (&original_set, is_fixed);
+        Partition part (&original_set, is_fixed);
         delete[] is_fixed;
-        ElementSet * fixed_set = part_model.get_fixed_elm_set ();
+        ElementSet * fixed_set = part.get_fixed_elm_set ();
         ElementSubset part_subset ("", fixed_set);
         part_subset.add_element (0);
         part_subset.add_element (2);
         part_subset.add_element (4);
-        PartitionNode part (&part_model, &part_subset);
+        PartitionNode P (&part, &part_subset);
 
-        AbsSum orig_cost_f (&original_set);
-        PartitionCost p_model_f (&orig_cost_f, &part);
-        ElementSubset X ("", part_model.get_unfixed_elm_set ());
+        AbsSum orig_f (&original_set);
+        PartitionCost P_f (&orig_f, &P);
+        ElementSubset X ("", part.get_unfixed_elm_set ());
         X.add_element (0);
         X.add_element (2);
         X.add_element (3);
-        ElementSubset * orig_X = part.get_original_subset (&X);
-        answ = orig_cost_f.cost (orig_X) == p_model_f.cost (&X);
+        ElementSubset * orig_X = P.get_original_subset (&X);
+        answ = orig_f.cost (orig_X) == P_f.cost (&X);
         delete orig_X;
         return answ;
     }

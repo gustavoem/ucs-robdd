@@ -5,7 +5,7 @@ PUCSR1::PUCSR1 ()
     list_of_visited_subsets = new Collection ();
     cost_function = NULL;
     cand_part = NULL;
-    part_model = NULL;
+    partition = NULL;
 }
 
 
@@ -15,8 +15,8 @@ PUCSR1::~PUCSR1 ()
         delete list_of_visited_subsets;
     if (cand_part != NULL)
         delete cand_part;
-    if (part_model != NULL)
-        delete part_model;
+    if (partition != NULL)
+        delete partition;
 }
 
 
@@ -33,7 +33,7 @@ void PUCSR1::set_partition_model ()
             fixed[i] = true;
         else
             fixed[i] = false;
-    this->part_model = new PartitionModel (set, fixed);
+    this->partition = new Partition (set, fixed);
     delete[] fixed;
 }
 
@@ -41,7 +41,7 @@ void PUCSR1::set_partition_model ()
 void PUCSR1::find_minima_list (unsigned int max_size_of_minima_list)
 {
     set_partition_model ();
-    cand_part = new ROBDD (part_model->get_fixed_elm_set ());
+    cand_part = new ROBDD (partition->get_fixed_elm_set ());
 
     timeval begin_exhausting, end_exhausting, begin_program, end_program;
     gettimeofday (& begin_program, NULL);
@@ -57,7 +57,7 @@ void PUCSR1::find_minima_list (unsigned int max_size_of_minima_list)
     p_subset = cand_part->get_random_zero_evaluated_element ();
     while (p_subset != NULL)
     {
-        PartitionNode * P = new PartitionNode (part_model, p_subset);
+        PartitionNode * P = new PartitionNode (partition, p_subset);
         PUCSR1ToolBox::random_walk (P, cand_part, cost_function, 
             L, max_size_of_minima_list);
         // cout << "size of minima: " << max_size_of_minima_list << endl;

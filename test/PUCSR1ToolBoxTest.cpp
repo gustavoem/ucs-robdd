@@ -33,12 +33,11 @@ namespace PUCSR1ToolBoxTest {
         for (unsigned int i = 0; i < 5; i++)
             fixed[i] = i < 2; // we are fixing the first 2 elements
         
-        PartitionModel * part_model;
-        part_model = new PartitionModel (&original_set, fixed);
-        ElementSet * fixed_set = part_model->get_fixed_elm_set ();
+        Partition * partition = new Partition (&original_set, fixed);
+        ElementSet * fixed_set = partition->get_fixed_elm_set ();
         ElementSubset p_subset ("", fixed_set);
         p_subset.add_element (1);
-        PartitionNode * P = new PartitionNode (part_model, &p_subset);
+        PartitionNode * P = new PartitionNode (partition, &p_subset);
         Collection * L = new Collection ();
         CostFunction * c = new AbsSum (&original_set);
         PUCSR1ToolBox::partition_minimum (P, L, c, 5);
@@ -59,7 +58,7 @@ namespace PUCSR1ToolBoxTest {
                 answ = false;
             delete X;
         }
-        delete part_model;
+        delete partition;
         delete P;
         delete L;
         delete c;
@@ -74,12 +73,11 @@ namespace PUCSR1ToolBoxTest {
         for (unsigned int i = 0; i < 5; i++)
             fixed[i] = i < 2; // we are fixing the first 2 elements
         
-        PartitionModel * part_model;
-        part_model = new PartitionModel (&original_set, fixed);
-        ElementSet * fixed_set = part_model->get_unfixed_elm_set ();
+        Partition * partition = new Partition (&original_set, fixed);
+        ElementSet * fixed_set = partition->get_unfixed_elm_set ();
         ElementSubset p_subset ("", fixed_set);
         p_subset.add_element (1);
-        PartitionNode * P = new PartitionNode (part_model, &p_subset);
+        PartitionNode * P = new PartitionNode (partition, &p_subset);
         ElementSubset * p_fixed = P->get_selected_elements ();
         PartitionNode * Q = PUCSR1ToolBox::adjacent_partition (P, 0);
         ElementSubset * q_fixed = Q->get_selected_elements ();
@@ -87,7 +85,7 @@ namespace PUCSR1ToolBoxTest {
         if (q_fixed->get_subset_cardinality () != 1)
             answ = false;
 
-        delete part_model;
+        delete partition;
         delete P;
         delete Q;
         delete p_fixed;
@@ -103,12 +101,11 @@ namespace PUCSR1ToolBoxTest {
         for (unsigned int i = 0; i < 5; i++)
             fixed[i] = i < 2; // we are fixing the first 2 elements
         
-        PartitionModel * part_model;
-        part_model = new PartitionModel (&original_set, fixed);
-        ElementSet * fixed_set = part_model->get_unfixed_elm_set ();
+        Partition * partition = new Partition (&original_set, fixed);
+        ElementSet * fixed_set = partition->get_unfixed_elm_set ();
         ElementSubset p_subset ("", fixed_set);
         p_subset.add_element (1);
-        PartitionNode * P = new PartitionNode (part_model, &p_subset);
+        PartitionNode * P = new PartitionNode (partition, &p_subset);
         PartitionNode * Q = PUCSR1ToolBox::adjacent_partition (P, 0); 
         // P = 01XXX
         // Q = 11XXX
@@ -150,7 +147,7 @@ namespace PUCSR1ToolBoxTest {
         delete R;
         delete P;
         delete Q;
-        delete part_model;
+        delete partition;
         return answ;
     }
 }

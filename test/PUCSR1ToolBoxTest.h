@@ -4,7 +4,7 @@
 #include "../src/algorithms/PUCSR1ToolBox.h"
 #include "../src/ElementSubset.h"
 #include "../src/ElementSet.h"
-#include "../src/PartitionModel.h"
+#include "../src/Partition.h"
 #include "../src/PartitionNode.h"
 #include "../src/Collection.h"
 #include "../src/functions/AbsSum.h"

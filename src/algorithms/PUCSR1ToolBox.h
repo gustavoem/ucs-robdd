@@ -5,7 +5,7 @@
 #include "../CostFunction.h"
 #include "../Collection.h"
 #include "../ElementSubset.h"
-#include "../PartitionModel.h"
+#include "../Partition.h"
 #include "../functions/PartitionCost.h"
 #include "../PartitionNode.h"
 #include "../Solver.h"

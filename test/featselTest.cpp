@@ -30,7 +30,7 @@
 #include "CollectionTest.h"
 #include "VertexTest.h"
 #include "ROBDDTest.h"
-#include "PartitionModelTest.h"
+#include "PartitionTest.h"
 #include "PartitionNodeTest.h"
 #include "GeneticOrderingTest.h"
 #include "OrderingNodeTest.h"
@@ -547,13 +547,13 @@ int main(void) {
     //cout << endl;
 
 
-    // Testing Class PartitionModel
-    cout << "PartitionModelTest::it_should_create_the_fixed_elm_set";
+    // Testing Class Partition
+    cout << "PartitionTest::it_should_create_the_fixed_elm_set";
     cout.flush ();
-    printResult (PartitionModelTest::it_should_create_the_fixed_elm_set ());
-    cout << "PartitionModelTest::it_should_create_the_unfixed_elm_set";
+    printResult (PartitionTest::it_should_create_the_fixed_elm_set ());
+    cout << "PartitionTest::it_should_create_the_unfixed_elm_set";
     cout.flush ();
-    printResult (PartitionModelTest::it_should_create_the_unfixed_elm_set ());
+    printResult (PartitionTest::it_should_create_the_unfixed_elm_set ());
     cout << endl;
 
     // Testing Class Partition

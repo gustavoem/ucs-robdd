@@ -5,7 +5,7 @@
 #include "../global.h"
 #include "../Solver.h"
 #include "../ElementSubset.h"
-#include "../PartitionModel.h"
+#include "../Partition.h"
 #include "../PartitionNode.h"
 #include "PUCSR1ToolBox.h"
 // #include "UCSROBDDToolBox6.h"
@@ -28,7 +28,7 @@ private:
     // The element set of the variables that are fixed in each 
     // partition
     //
-    PartitionModel * part_model;
+    Partition * partition;
 
 
     // The size of the partition

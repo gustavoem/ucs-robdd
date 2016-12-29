@@ -21,7 +21,7 @@
 #ifndef PARTITION_NODE_TEST_H_
 #define PARTITION_NODE_TEST_H_
 
-#include "../src/PartitionModel.h"
+#include "../src/Partition.h"
 #include "../src/PartitionNode.h"
 #include "../src/ElementSubset.h"
 #include "../src/ElementSet.h"

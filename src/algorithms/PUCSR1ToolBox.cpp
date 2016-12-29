@@ -21,28 +21,28 @@ namespace PUCSR1ToolBox
         }
     }
 
-
+    /* TODO: Change this function name */
     void partition_minimum (PartitionNode * P, Collection * L,
         CostFunction * c, unsigned int max_size_of_minima_list)
     {
         list<ElementSubset *> p_min_lst;
         // cout << "Finding the minimum of " << P->get_minimal_element ()->print_subset () << endl;
-        PartitionModel * p_model = P->get_partition_model ();
-        ElementSet * p_elm_set = p_model->get_unfixed_elm_set ();
+        Partition * partition = P->get_partition_model ();
+        ElementSet * p_elm_set = partition->get_unfixed_elm_set ();
         if (p_elm_set->get_set_cardinality () == 0)
         {
-            ElementSubset * minimal = P->get_minimal_element ();    
+            ElementSubset * minimal = P->get_minimal_element ();
             minimal->cost = c->cost (minimal);
             p_min_lst.push_back (minimal);
         }
         else
         {
-            PartitionCost * p_cost = new PartitionCost (c, P);
+            PartitionCost * P_cost = new PartitionCost (c, P);
             Solver * sub_solver = new ExhaustiveSearch ();
-            sub_solver->set_parameters (p_cost, p_elm_set, false);
+            sub_solver->set_parameters (P_cost, p_elm_set, false);
             sub_solver->find_minima_list (max_size_of_minima_list);
             p_min_lst = sub_solver->get_minima_list ();
-            delete p_cost;
+            delete P_cost;
             delete sub_solver;
         }
         update_minima_list (L, P, &p_min_lst);
@@ -59,8 +59,8 @@ namespace PUCSR1ToolBox
             sel_elms->remove_element (i);
         else
             sel_elms->add_element (i);
-        PartitionModel * part_model = P->get_partition_model ();
-        PartitionNode * Q = new PartitionNode (part_model, sel_elms);
+        Partition * partition = P->get_partition_model ();
+        PartitionNode * Q = new PartitionNode (partition, sel_elms);
         delete sel_elms;
         return Q;
     }
@@ -83,8 +83,8 @@ namespace PUCSR1ToolBox
         e2 = P2->get_minimal_element ();
         if (c->cost (e1) > c->cost (e2)) 
         {
-            if (e1->is_equal (p_sub))
-                cout << "heyo! " << e1->print_subset () << endl;
+            // if (e1->is_equal (p_sub))
+            //     cout << "heyo! " << e1->print_subset () << endl;
             R->add_interval (e1, true);
         }
         delete e1;
@@ -93,8 +93,8 @@ namespace PUCSR1ToolBox
         e2 = P2->get_maximal_element ();
         if (c->cost (e1) < c->cost (e2))
         {
-            if (e2->is_equal (p_sub))
-                cout << "heyo! " << e2->print_subset () << endl;
+            // if (e2->is_equal (p_sub))
+            //     cout << "heyo! " << e2->print_subset () << endl;
             R->add_interval (e2, false);
         }
         delete e1;

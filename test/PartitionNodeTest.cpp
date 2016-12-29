@@ -33,14 +33,14 @@ namespace PartitionNodeTest
                 is_fixed[i] = true;
             else
                 is_fixed[i] = false;
-        PartitionModel part_model (&original_set, is_fixed);
+        Partition part (&original_set, is_fixed);
         delete[] is_fixed;
-        ElementSet * fixed_set = part_model.get_fixed_elm_set ();
+        ElementSet * fixed_set = part.get_fixed_elm_set ();
         ElementSubset part_subset ("", fixed_set);
         part_subset.add_element (0);
         part_subset.add_element (2);
         part_subset.add_element (4);
-        PartitionNode part (&part_model, &part_subset);
+        PartitionNode P (&part, &part_subset);
 
         ElementSubset expected_subset ("", &original_set);
         expected_subset.add_element (0);
@@ -49,12 +49,12 @@ namespace PartitionNodeTest
         expected_subset.add_element (6);
         expected_subset.add_element (9);
 
-        ElementSet * unfixed_set = part_model.get_unfixed_elm_set ();
+        ElementSet * unfixed_set = part.get_unfixed_elm_set ();
         ElementSubset input_subset ("", unfixed_set);
         input_subset.add_element (6 - 5);
         input_subset.add_element (9 - 5);
         ElementSubset * answ_subset;
-        answ_subset = part.get_original_subset (&input_subset);
+        answ_subset = P.get_original_subset (&input_subset);
         if (!answ_subset->is_equal (&expected_subset))
             answ = false;
         else
@@ -71,9 +71,8 @@ namespace PartitionNodeTest
         for (unsigned int i = 0; i < 10; i++)
             fixed[i] = i < 5; // we are fixing the first 5 elements
         
-        PartitionModel * part_model;
-        part_model = new PartitionModel (&original_set, fixed);
-        ElementSet * fixed_set = part_model->get_fixed_elm_set ();
+        Partition * part = new Partition (&original_set, fixed);
+        ElementSet * fixed_set = part->get_fixed_elm_set ();
         ElementSubset p_subset ("", fixed_set);
         ElementSubset q1_subset ("", fixed_set);
         ElementSubset q2_subset ("", fixed_set);
@@ -83,9 +82,9 @@ namespace PartitionNodeTest
         q1_subset.add_element (3);
         q1_subset.add_element (4);
         q2_subset.add_element (2);
-        PartitionNode * P = new PartitionNode (part_model, &p_subset);
-        PartitionNode * Q1 = new PartitionNode (part_model, &q1_subset);
-        PartitionNode * Q2 = new PartitionNode (part_model, &q2_subset);
+        PartitionNode * P = new PartitionNode (part, &p_subset);
+        PartitionNode * Q1 = new PartitionNode (part, &q1_subset);
+        PartitionNode * Q2 = new PartitionNode (part, &q2_subset);
         if (!Q1->is_upper_adjacent (P))
             answ = false;
         if (Q2->is_upper_adjacent (P))
@@ -93,7 +92,7 @@ namespace PartitionNodeTest
         delete P;
         delete Q1;
         delete Q2;
-        delete part_model;
+        delete part;
         return answ;
     }
 
@@ -106,14 +105,14 @@ namespace PartitionNodeTest
         for (unsigned int i = 0; i < 10; i++)
             fixed[i] = i < 5; // we are fixing the first 5 elements
         
-        PartitionModel * part_model;
-        part_model = new PartitionModel (&original_set, fixed);
-        ElementSet * fixed_set = part_model->get_fixed_elm_set ();
+        Partition * part;
+        part = new Partition (&original_set, fixed);
+        ElementSet * fixed_set = part->get_fixed_elm_set ();
         ElementSubset p_subset ("", fixed_set);
         p_subset.add_element (0);
         p_subset.add_element (2);
         p_subset.add_element (3);
-        PartitionNode P (part_model, &p_subset);
+        PartitionNode P (part, &p_subset);
         ElementSubset expected_minimal ("", &original_set);
         expected_minimal.add_element (0);
         expected_minimal.add_element (2);
@@ -121,7 +120,7 @@ namespace PartitionNodeTest
         ElementSubset * answ_minimal = P.get_minimal_element ();
         if (!answ_minimal->is_equal (&expected_minimal))
             answ = false;
-        delete part_model;
+        delete part;
         delete answ_minimal;
         return answ;
     }
@@ -135,14 +134,14 @@ namespace PartitionNodeTest
         for (unsigned int i = 0; i < 10; i++)
             fixed[i] = i < 5; // we are fixing the first 5 elements
         
-        PartitionModel * part_model;
-        part_model = new PartitionModel (&original_set, fixed);
-        ElementSet * fixed_set = part_model->get_fixed_elm_set ();
+        Partition * part;
+        part = new Partition (&original_set, fixed);
+        ElementSet * fixed_set = part->get_fixed_elm_set ();
         ElementSubset p_subset ("", fixed_set);
         p_subset.add_element (0);
         p_subset.add_element (2);
         p_subset.add_element (3);
-        PartitionNode P (part_model, &p_subset);
+        PartitionNode P (part, &p_subset);
         ElementSubset expected_maximal ("", &original_set);
         expected_maximal.add_element (0);
         expected_maximal.add_element (2);
@@ -155,7 +154,7 @@ namespace PartitionNodeTest
         ElementSubset * answ_maximal = P.get_maximal_element ();
         if (!answ_maximal->is_equal (&expected_maximal))
             answ = false;
-        delete part_model;
+        delete part;
         delete answ_maximal;
         return answ;
     }

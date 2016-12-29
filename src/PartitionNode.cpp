@@ -20,7 +20,7 @@
 
 #include "PartitionNode.h"
 
-PartitionNode::PartitionNode (PartitionModel * part_model,
+PartitionNode::PartitionNode (Partition * part_model,
     ElementSubset * selected_subset)
 {
     this->selected_elements = new ElementSubset (selected_subset);
@@ -77,7 +77,7 @@ ElementSubset * PartitionNode::get_selected_elements ()
 }
 
 
-PartitionModel * PartitionNode::get_partition_model ()
+Partition * PartitionNode::get_partition_model ()
 {
     return part_model;
 }
