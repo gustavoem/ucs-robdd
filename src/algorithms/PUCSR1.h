@@ -40,6 +40,21 @@ private:
     //
     void set_partition_model ();
 
+
+    // A simple random walk between parts. This function receives as
+    // argument a part P. From P the function walks in the following way:
+    //
+    // do {
+    //     Choose an adjacent part Q
+    //     Apply prunning rules
+    //     If P and Q got prunned, return
+    //     If Q got prunned, choose another neighbour of P
+    //     Otherwise, P = Q
+    // } while (P has unvisited neighbours);
+    //
+    void random_walk (PartitionNode *, Collection *);
+
+
 public:
 
     // Default constructor.
@@ -55,6 +70,7 @@ public:
     // Runs the PUCSR1 algorithm, getting up to 'max_size_of_minima_list' minimum subsets.
     //
     void find_minima_list (unsigned int);
+
 
 };
 

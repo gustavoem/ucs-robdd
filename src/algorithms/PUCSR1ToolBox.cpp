@@ -97,45 +97,6 @@ namespace PUCSR1ToolBox
         return next;
     }
 
-    
-    void random_walk (PartitionNode * P, ROBDD * R, CostFunction * c,
-        Collection * L, unsigned int max_size_of_minima_list)
-    {
-        unsigned int i = 0;
-        unsigned int n = P->get_number_of_fixed_elms ();
-        part_minimum (P, L, c, max_size_of_minima_list);
-        restrict_part (P, R);
-        PartitionNode * Q;
-        while (i < n)
-        {
-            Q = adjacent_part (P, i++);
-            if (is_restricted (Q, R)) 
-            {
-                delete Q;
-                continue;
-            }
-            PartitionNode * next;
-            next = prune_and_walk (P, Q, c, R);
-            if (next == P)
-                delete Q;
-            else if (next == Q)
-            {
-                i = 0;
-                delete P;
-                P = Q;
-                part_minimum (P, L, c, max_size_of_minima_list);
-                restrict_part (P, R);
-            }
-            else
-            {
-                delete P;
-                delete Q;
-                return;
-            }
-        }
-        delete P;
-    }
-
     bool is_restricted (PartitionNode * P, ROBDD * R) 
     {
         bool answ = false;

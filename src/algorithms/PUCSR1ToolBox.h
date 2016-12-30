@@ -58,22 +58,6 @@ namespace PUCSR1ToolBox
         CostFunction *, ROBDD *);
 
 
-    // A simple random walk between parts. This function receives as
-    // argument a part P, a robdd R (representing the set of parts)
-    // and a Collection. From P the function walks in the following way:
-    //
-    // do {
-    //     Choose an adjacent part Q
-    //     Apply prunning rules
-    //     If P and Q got prunned, return
-    //     If Q got prunned, choose another neighbour of P
-    //     Otherwise, P = Q
-    // } while (P has unvisited neighbours);
-    //
-    void random_walk (PartitionNode *, ROBDD *, CostFunction *,
-        Collection *, unsigned int);
-
-
     // Returns true if the part is restricted
     //
     bool is_restricted (PartitionNode *, ROBDD *);

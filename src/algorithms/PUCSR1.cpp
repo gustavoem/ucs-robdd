@@ -23,7 +23,7 @@ PUCSR1::~PUCSR1 ()
 void PUCSR1::set_partition_model ()
 {
     unsigned int set_size = set->get_set_cardinality ();
-    unsigned int partition_set_size = set_size / 2 + 1;
+    unsigned int partition_set_size = set_size - 8;
     bool * fixed = new bool[set_size];
     // This is a simple way to partitionate the space. We are choosing
     // the last <partition_set_size> variables of the element set to be
@@ -52,8 +52,7 @@ void PUCSR1::find_minima_list (unsigned int max_size_of_minima_list)
     while (p_subset != NULL)
     {
         PartitionNode * P = new PartitionNode (partition, p_subset);
-        PUCSR1ToolBox::random_walk (P, cand_part, cost_function, 
-            L, max_size_of_minima_list);
+        random_walk (P, L);
         clean_list_of_minima (max_size_of_minima_list);
         delete p_subset;
         p_subset = cand_part->get_random_zero_evaluated_element ();
@@ -75,4 +74,46 @@ void PUCSR1::find_minima_list (unsigned int max_size_of_minima_list)
 
     gettimeofday (& end_program, NULL);
     elapsed_time_of_the_algorithm = diff_us (end_program, begin_program);
+}
+
+
+void PUCSR1::random_walk (PartitionNode * P, Collection * L)
+{
+    unsigned int i = 0;
+    /*temp*/ unsigned int max_size_of_minima_list = 10;
+    unsigned int n = P->get_number_of_fixed_elms ();
+    PUCSR1ToolBox::part_minimum (P, L, cost_function,
+        max_size_of_minima_list);
+    PUCSR1ToolBox::restrict_part (P, cand_part);
+    PartitionNode * Q;
+    while (i < n)
+    {
+        Q = PUCSR1ToolBox::adjacent_part (P, i++);
+        if (PUCSR1ToolBox::is_restricted (Q, cand_part))
+        {
+            delete Q;
+            continue;
+        }
+        PartitionNode * next;
+        next = PUCSR1ToolBox::prune_and_walk (P, Q,
+            cost_function, cand_part);
+        if (next == P)
+            delete Q;
+        else if (next == Q)
+        {
+            i = 0;
+            delete P;
+            P = Q;
+            PUCSR1ToolBox::part_minimum (P, L, cost_function,
+                max_size_of_minima_list);
+            PUCSR1ToolBox::restrict_part (P, cand_part);
+        }
+        else
+        {
+            delete P;
+            delete Q;
+            return;
+        }
+    }
+    delete P;
 }
