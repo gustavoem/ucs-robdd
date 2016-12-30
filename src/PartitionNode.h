@@ -63,6 +63,11 @@ public:
     PartitionNode (Partition *, ElementSubset *);
 
 
+    // Copy constructor
+    //
+    PartitionNode (PartitionNode *);
+    
+
     // Default destructor.
     //
     virtual ~PartitionNode ();

@@ -28,6 +28,13 @@ PartitionNode::PartitionNode (Partition * partition, ElementSubset * X)
 }
 
 
+PartitionNode::PartitionNode (PartitionNode * Q) 
+{
+    this->selected_elements = new ElementSubset (Q->selected_elements);
+    this->minimal_subset = new ElementSubset (Q->minimal_subset);
+    this->partition = Q->partition;
+}
+
 PartitionNode::~PartitionNode ()
 {
     delete selected_elements;
