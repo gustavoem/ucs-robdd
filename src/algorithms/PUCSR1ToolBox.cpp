@@ -6,32 +6,28 @@ namespace PUCSR1ToolBox
     void update_minima_list (Collection * L, PartitionNode * P,
         list<ElementSubset *> * l)
     {
-        // cout << "List of minima: " << endl;
         while (l->size () > 0) 
         {
             ElementSubset * pX = l->back ();
-            // cout << pX->print_subset () << ": " << pX->cost << endl;
             l->pop_back ();
             ElementSubset * X = P->get_original_subset (pX);
             X->cost = pX->cost;
-            // cout << X->print_subset () << ": " << X->cost << endl;
             L->add_subset (X);
             delete X;
             delete pX;
         }
     }
 
-    /* TODO: Change this function name */
+
     void part_minimum (PartitionNode * P, Collection * L,
         CostFunction * c, unsigned int max_size_of_minima_list)
     {
         list<ElementSubset *> p_min_lst;
-        // cout << "Finding the minimum of " << P->get_minimal_element ()->print_subset () << endl;
         Partition * partition = P->get_partition ();
         ElementSet * p_elm_set = partition->get_unfixed_elm_set ();
         if (p_elm_set->get_set_cardinality () == 0)
         {
-            ElementSubset * minimal = P->get_minimal_element ();
+            ElementSubset * minimal = P->get_least_subset ();
             minimal->cost = c->cost (minimal);
             p_min_lst.push_back (minimal);
         }
@@ -46,12 +42,10 @@ namespace PUCSR1ToolBox
             delete sub_solver;
         }
         update_minima_list (L, P, &p_min_lst);
-        // cout << "Minima List Collection: " << endl;
-        // cout << L->print_collection () << endl;
     }
 
 
-    PartitionNode * adjacent_partition (PartitionNode * P, 
+    PartitionNode * adjacent_part (PartitionNode * P, 
         unsigned int i)
     {
         ElementSubset * sel_elms = P->get_selected_elements ();
@@ -66,37 +60,28 @@ namespace PUCSR1ToolBox
     }
 
 
-    //  we can make this uglier but faster
     PartitionNode * prune_and_walk (PartitionNode * P, PartitionNode * Q, 
         CostFunction * c, ROBDD * R) 
     {
         PartitionNode * P1, * P2, * next;
         ElementSubset * e1, * e2;
-        ElementSubset * p_sub = P->get_minimal_element ();
-        ElementSubset * q_sub = Q->get_minimal_element ();
+        ElementSubset * p_sub = P->get_least_subset ();
+        ElementSubset * q_sub = Q->get_least_subset ();
         if (P->is_upper_adjacent (Q))
             P1 = P, P2 = Q;
         else
             P1 = Q; P2 = P;
         
-        e1 = P1->get_minimal_element ();
-        e2 = P2->get_minimal_element ();
+        e1 = P1->get_least_subset ();
+        e2 = P2->get_least_subset ();
         if (c->cost (e1) > c->cost (e2)) 
-        {
-            // if (e1->is_equal (p_sub))
-            //     cout << "heyo! " << e1->print_subset () << endl;
             R->add_interval (e1, true);
-        }
         delete e1;
         delete e2;
-        e1 = P1->get_maximal_element ();
-        e2 = P2->get_maximal_element ();
+        e1 = P1->get_greatest_subset ();
+        e2 = P2->get_greatest_subset ();
         if (c->cost (e1) < c->cost (e2))
-        {
-            // if (e2->is_equal (p_sub))
-            //     cout << "heyo! " << e2->print_subset () << endl;
             R->add_interval (e2, false);
-        }
         delete e1;
         delete e2;
         next = Q;
@@ -113,26 +98,24 @@ namespace PUCSR1ToolBox
     }
 
     
-    void random_walk (PartitionNode * P, ROBDD * pt_robdd, 
-         CostFunction * c, Collection * L, 
-         unsigned int max_size_of_minima_list)
+    void random_walk (PartitionNode * P, ROBDD * R, CostFunction * c,
+        Collection * L, unsigned int max_size_of_minima_list)
     {
         unsigned int i = 0;
         unsigned int n = P->get_number_of_fixed_elms ();
         part_minimum (P, L, c, max_size_of_minima_list);
-        restrict_partition (P, pt_robdd);
+        restrict_part (P, R);
         PartitionNode * Q;
         while (i < n)
         {
-            Q = adjacent_partition (P, i++);
-            if (is_restricted (Q, pt_robdd)) 
+            Q = adjacent_part (P, i++);
+            if (is_restricted (Q, R)) 
             {
                 delete Q;
                 continue;
             }
-            // cout << "Partition: " << P->get_minimal_element ()->print_subset () << endl;
             PartitionNode * next;
-            next = prune_and_walk (P, Q, c, pt_robdd);
+            next = prune_and_walk (P, Q, c, R);
             if (next == P)
                 delete Q;
             else if (next == Q)
@@ -140,9 +123,8 @@ namespace PUCSR1ToolBox
                 i = 0;
                 delete P;
                 P = Q;
-                // cout << "Now going to Q: " << Q->get_minimal_element ()->print_subset () << endl;
                 part_minimum (P, L, c, max_size_of_minima_list);
-                restrict_partition (P, pt_robdd);
+                restrict_part (P, R);
             }
             else
             {
@@ -164,7 +146,7 @@ namespace PUCSR1ToolBox
         return answ;
     }
 
-    void restrict_partition (PartitionNode * P, ROBDD * R)
+    void restrict_part (PartitionNode * P, ROBDD * R)
     {
         ElementSubset * p_subset = P->get_selected_elements ();
         R->add_subset (p_subset);

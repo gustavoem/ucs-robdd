@@ -29,75 +29,59 @@ namespace PUCSR1ToolBox
         CostFunction *, unsigned int);
 
 
-    // Given a Partition P and an index i we return an adjacent 
-    // partition Q. Partitions are defined according to fixed elements
-    // that can be selected or not inside the partition. If the set of
-    // selected elements in one partition differs to the set of 
-    // selected elements in another partition by only one element then
-    // we call these partitions adjacent. Given P partition we return
-    // adjacent partition Q that differs from P on the selected 
-    // elements only on the i-th element.
+    // Given a PartitionNode P and an index i we return an adjacent 
+    // part Q. Parts are defined according to fixed elements that can
+    // be selected or not inside the part. If the set of selected
+    // elements in one part differs to the set of selected elements in
+    // another part by only one element then we call these parts
+    // adjacent. 
+    //    Given part P we return adjacent part Q such that Q is 
+    // adjacent to P and the element that differs from both is the i-th
+    // element.
     //
-    PartitionNode * adjacent_partition (PartitionNode *, unsigned int);
+    PartitionNode * adjacent_part (PartitionNode *, unsigned int);
 
 
-    // Given a partition P and partition Q perform one step of the walk
-    // that we described below in "random_walk".
-    // If P1 is upper adjacent partition to P2 then:
-    // 1) If minimal element of P1 has cost greater than minimal 
-    // element of P2 we can prune every partition that covers the
-    // minimal element of P1 (including P1 itself).
-    // 2) If maximal element of P2 has cost greater than maximal elemnt
-    // of P1 then we can prune every partition that is covered by the
-    // maximal element of P2 (including P2 itself).
-    // 
-    // By the end we return the partition that will be used in the next
-    // step of the walk. If both partitions P1 and P2 got prunned then
-    // we return NULL.
+    // Given a part P and part Q, we prune the poset with the folowing 
+    // rule.
+    //     If P1 is upper adjacent to P2 then:
+    //     1) If c (O (P1)) > c (O (P2)) then we can prune every part
+    //        that covers P1 (including itself).
+    //     2) If c (I (P2)) > c (I (P1)) then we can prune every part
+    //        that is covered by P2 (including itself).
+    //
+    // This function returns:
+    //     Q by default
+    //     P if Q is restricted by the end of the function
+    //     NULL if P and Q are restricted by the end of the function
     PartitionNode * prune_and_walk (PartitionNode *, PartitionNode *,
         CostFunction *, ROBDD *);
 
 
-    // A simple random walk between partitions
-    // This method receives as argument a partition, a robdd R 
-    // (representing the set of partitions) and a Collection. It sets a
-    // partition node P as the argument partition and walks on the set 
-    // of partitions in the following way:
+    // A simple random walk between parts. This function receives as
+    // argument a part P, a robdd R (representing the set of parts)
+    // and a Collection. From P the function walks in the following way:
     //
     // do {
-    //     find the minimum element in the partition P and update L
-    //     choose an adjacent partition Q
-    //     if Q is upper adjacent to P
-    //         if cost (maximal (P)) > cost (maximal (Q))
-    //             restrict every partition covered by maximal (P)
-    //             change P to Q
-    //         if cost (minimal (Q)) > cost (minimal (P))
-    //             restrict every partition the covers minimal (Q)
-    //         otherwise
-    //             choose any other neighbour of P
-    //             # or find the minimum of this partition ?
-    //     if Q is lower adjacent to P
-    //         if cost (minimal (P) > minimal (Q))
-    //             restrict every partition that covers minimal (P)
-    //             change P to Q
-    //         if cost (maximal (Q)) > cost (maximal (P))
-    //             restrict every partition covered by maximal (Q)
-    //         otherwise
-    //             choose another neighbour of P
+    //     Choose an adjacent part Q
+    //     Apply prunning rules
+    //     If P and Q got prunned, return
+    //     If Q got prunned, choose another neighbour of P
+    //     Otherwise, P = Q
     // } while (P has unvisited neighbours);
     //
     void random_walk (PartitionNode *, ROBDD *, CostFunction *,
         Collection *, unsigned int);
 
 
-    // Returns true if the partition is restricted
+    // Returns true if the part is restricted
     //
     bool is_restricted (PartitionNode *, ROBDD *);
 
 
-    // Restricts a partition
+    // Restricts a part
     //
-    void restrict_partition (PartitionNode *, ROBDD *);
+    void restrict_part (PartitionNode *, ROBDD *);
 
     
 } // end of namespace

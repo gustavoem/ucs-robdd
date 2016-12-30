@@ -46,12 +46,6 @@ void PUCSR1::find_minima_list (unsigned int max_size_of_minima_list)
     timeval begin_exhausting, end_exhausting, begin_program, end_program;
     gettimeofday (& begin_program, NULL);
 
-    // while there are still partitions to be visited
-        // choose a partition
-        // finds the minimum of this partition
-        // look at partition neighbours and perform a walk between 
-        // partitions while prunning partitions.
-
     Collection * L = new Collection ();
     ElementSubset * p_subset;
     p_subset = cand_part->get_random_zero_evaluated_element ();
@@ -60,10 +54,7 @@ void PUCSR1::find_minima_list (unsigned int max_size_of_minima_list)
         PartitionNode * P = new PartitionNode (partition, p_subset);
         PUCSR1ToolBox::random_walk (P, cand_part, cost_function, 
             L, max_size_of_minima_list);
-        // cout << "size of minima: " << max_size_of_minima_list << endl;
         clean_list_of_minima (max_size_of_minima_list);
-        // cout << "Collection after finding minimum: " << L->print_collection (cost_function) << endl;
-        
         delete p_subset;
         p_subset = cand_part->get_random_zero_evaluated_element ();
         while (L->size() > 0)

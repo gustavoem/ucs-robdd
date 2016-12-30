@@ -103,13 +103,13 @@ bool PartitionNode::is_upper_adjacent (PartitionNode * Q)
 }
 
 
-ElementSubset * PartitionNode::get_minimal_element ()
+ElementSubset * PartitionNode::get_least_subset ()
 {
     return new ElementSubset (minimal_subset);
 }
 
 
-ElementSubset * PartitionNode::get_maximal_element ()
+ElementSubset * PartitionNode::get_greatest_subset ()
 {
     ElementSet * unfixed_set;
     ElementSubset * maximal;

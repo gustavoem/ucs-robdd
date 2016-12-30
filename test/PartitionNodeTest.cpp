@@ -63,7 +63,7 @@ namespace PartitionNodeTest
         return answ;
     }
 
-    bool it_should_check_upper_adjacent_partitions ()
+    bool it_should_check_upper_adjacent_parts ()
     {
         bool answ = true;
         ElementSet original_set ("", 10, 100);
@@ -97,7 +97,7 @@ namespace PartitionNodeTest
     }
 
 
-    bool it_should_return_the_minimal_element ()
+    bool it_should_return_the_least_subset ()
     {
         bool answ = true;
         ElementSet original_set ("", 10, 100);
@@ -117,7 +117,7 @@ namespace PartitionNodeTest
         expected_minimal.add_element (0);
         expected_minimal.add_element (2);
         expected_minimal.add_element (3);
-        ElementSubset * answ_minimal = P.get_minimal_element ();
+        ElementSubset * answ_minimal = P.get_least_subset ();
         if (!answ_minimal->is_equal (&expected_minimal))
             answ = false;
         delete part;
@@ -126,7 +126,7 @@ namespace PartitionNodeTest
     }
 
 
-    bool it_should_return_the_maximal_element ()
+    bool it_should_return_the_greatest_subset ()
     {
         bool answ = true;
         ElementSet original_set ("", 10, 100);
@@ -142,20 +142,20 @@ namespace PartitionNodeTest
         p_subset.add_element (2);
         p_subset.add_element (3);
         PartitionNode P (part, &p_subset);
-        ElementSubset expected_maximal ("", &original_set);
-        expected_maximal.add_element (0);
-        expected_maximal.add_element (2);
-        expected_maximal.add_element (3);
-        expected_maximal.add_element (5);
-        expected_maximal.add_element (6);
-        expected_maximal.add_element (7);
-        expected_maximal.add_element (8);
-        expected_maximal.add_element (9);
-        ElementSubset * answ_maximal = P.get_maximal_element ();
-        if (!answ_maximal->is_equal (&expected_maximal))
+        ElementSubset expected_greatest ("", &original_set);
+        expected_greatest.add_element (0);
+        expected_greatest.add_element (2);
+        expected_greatest.add_element (3);
+        expected_greatest.add_element (5);
+        expected_greatest.add_element (6);
+        expected_greatest.add_element (7);
+        expected_greatest.add_element (8);
+        expected_greatest.add_element (9);
+        ElementSubset * answ_greatest = P.get_greatest_subset ();
+        if (!answ_greatest->is_equal (&expected_greatest))
             answ = false;
         delete part;
-        delete answ_maximal;
+        delete answ_greatest;
         return answ;
     }
 } // end namespace

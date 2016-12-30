@@ -22,7 +22,7 @@
 
 #include "PUCSR1ToolBoxTest.h"
 
-// using namespace PUCSR1ToolBox;
+
 namespace PUCSR1ToolBoxTest {
 
     bool it_should_find_the_part_minimum ()
@@ -65,7 +65,7 @@ namespace PUCSR1ToolBoxTest {
         return answ;
     }
 
-    bool it_should_find_an_adjacent_partition ()
+    bool it_should_find_an_adjacent_part ()
     {
         bool answ = true;
         ElementSet original_set ("", 5, 50);
@@ -79,7 +79,7 @@ namespace PUCSR1ToolBoxTest {
         p_subset.add_element (1);
         PartitionNode * P = new PartitionNode (partition, &p_subset);
         ElementSubset * p_fixed = P->get_selected_elements ();
-        PartitionNode * Q = PUCSR1ToolBox::adjacent_partition (P, 0);
+        PartitionNode * Q = PUCSR1ToolBox::adjacent_part (P, 0);
         ElementSubset * q_fixed = Q->get_selected_elements ();
         q_fixed->subset_intersection (p_fixed);
         if (q_fixed->get_subset_cardinality () != 1)
@@ -106,7 +106,7 @@ namespace PUCSR1ToolBoxTest {
         ElementSubset p_subset ("", fixed_set);
         p_subset.add_element (1);
         PartitionNode * P = new PartitionNode (partition, &p_subset);
-        PartitionNode * Q = PUCSR1ToolBox::adjacent_partition (P, 0); 
+        PartitionNode * Q = PUCSR1ToolBox::adjacent_part (P, 0); 
         // P = 01XXX
         // Q = 11XXX
         
@@ -115,10 +115,10 @@ namespace PUCSR1ToolBoxTest {
 
         PartitionNode * next;
         next = PUCSR1ToolBox::prune_and_walk (P, Q, c, R);
-        ElementSubset * min1 = P->get_minimal_element ();
-        ElementSubset * min2 = Q->get_minimal_element ();
-        ElementSubset * max1 = P->get_maximal_element ();
-        ElementSubset * max2 = Q->get_maximal_element ();
+        ElementSubset * min1 = P->get_least_subset ();
+        ElementSubset * min2 = Q->get_least_subset ();
+        ElementSubset * max1 = P->get_greatest_subset ();
+        ElementSubset * max2 = Q->get_greatest_subset ();
         if (next == NULL) 
         {
             if (!(c->cost (min2) > c->cost (min1)))

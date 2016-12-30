@@ -560,15 +560,15 @@ int main(void) {
     cout << "PartitionNodeTest::it_map_subsets_correctly";
     cout.flush ();
     printResult (PartitionNodeTest::it_map_subsets_correctly ());
-    cout << "PartitionNodeTest::it_should_check_upper_adjacent_partitions";
+    cout << "PartitionNodeTest::it_should_check_upper_adjacent_parts";
     cout.flush ();
-    printResult (PartitionNodeTest::it_should_check_upper_adjacent_partitions ());
-    cout << "PartitionNodeTest::it_should_return_the_minimal_element";
+    printResult (PartitionNodeTest::it_should_check_upper_adjacent_parts ());
+    cout << "PartitionNodeTest::it_should_return_the_least_subset";
     cout.flush ();
-    printResult (PartitionNodeTest::it_should_return_the_minimal_element ());
-    cout << "PartitionNodeTest::it_should_return_the_maximal_element";
+    printResult (PartitionNodeTest::it_should_return_the_least_subset ());
+    cout << "PartitionNodeTest::it_should_return_the_greatest_subset";
     cout.flush ();
-    printResult (PartitionNodeTest::it_should_return_the_maximal_element ());
+    printResult (PartitionNodeTest::it_should_return_the_greatest_subset ());
     cout << endl;    
 
     // Testing Class PartitionCost
@@ -581,9 +581,9 @@ int main(void) {
     cout << "PUCSR1ToolBoxTest::it_should_find_the_part_minimum";
     cout.flush ();
     printResult (PUCSR1ToolBoxTest::it_should_find_the_part_minimum ());
-    cout << "PUCSR1ToolBoxTest::it_should_find_an_adjacent_partition";
+    cout << "PUCSR1ToolBoxTest::it_should_find_an_adjacent_part";
     cout.flush ();
-    printResult (PUCSR1ToolBoxTest::it_should_find_an_adjacent_partition ());
+    printResult (PUCSR1ToolBoxTest::it_should_find_an_adjacent_part ());
     cout << "PUCSR1ToolBoxTest::it_should_prune_and_walk";
     cout.flush ();
     printResult (PUCSR1ToolBoxTest::it_should_prune_and_walk ());

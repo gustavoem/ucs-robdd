@@ -103,13 +103,13 @@ public:
 
     // Returns the minimal subset of this part
     //
-    ElementSubset * get_minimal_element ();
+    ElementSubset * get_least_subset ();
 
 
     // Returns the maximal subset of this part
     //
-    ElementSubset * get_maximal_element ();
-    
+    ElementSubset * get_greatest_subset ();
+
 };
 
 #endif /* PARTITION_NODE_H_ */
