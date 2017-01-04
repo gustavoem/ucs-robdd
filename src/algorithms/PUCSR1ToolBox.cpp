@@ -3,14 +3,17 @@
 namespace PUCSR1ToolBox 
 {
 
-    void update_minima_list (Collection * L, PartitionNode * P,
+    void create_minima_list (Collection * L, PartitionNode * P,
         list<ElementSubset *> * l)
     {
         while (l->size () > 0) 
         {
             ElementSubset * pX = l->back ();
+            // cout << "pX: " << pX->print_subset () << endl;
             l->pop_back ();
+            // cout.flush ();
             ElementSubset * X = P->get_original_subset (pX);
+            // cout << "X: " << X->print_subset () << endl;
             X->cost = pX->cost;
             L->add_subset (X);
             delete X;
@@ -19,12 +22,17 @@ namespace PUCSR1ToolBox
     }
 
 
-    void part_minimum (PartitionNode * P, Collection * L,
+    Collection * part_minimum (PartitionNode * P,
         CostFunction * c, unsigned int max_size_of_minima_list)
     {
+        Collection * L = new Collection ();
         list<ElementSubset *> p_min_lst;
         Partition * partition = P->get_partition ();
         ElementSet * p_elm_set = partition->get_unfixed_elm_set ();
+        /*debug*/
+        // ElementSubset * sel_elms = P->get_selected_elements ();
+        // cout << "Part: " << sel_elms->print_subset () << endl;
+        /*debug*/
         if (p_elm_set->get_set_cardinality () == 0)
         {
             ElementSubset * minimal = P->get_least_subset ();
@@ -41,7 +49,8 @@ namespace PUCSR1ToolBox
             delete P_cost;
             delete sub_solver;
         }
-        update_minima_list (L, P, &p_min_lst);
+        create_minima_list (L, P, &p_min_lst);
+        return L;
     }
 
 

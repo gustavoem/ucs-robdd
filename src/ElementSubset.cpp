@@ -234,6 +234,7 @@ bool ElementSubset::has_element (unsigned int index)
 	if (index >= set->get_set_cardinality ())
 	{
 		cout << "Error in ElementSubset::has_element: index out of range!" << endl;
+		while (1);
 		return false;
 	}
 	else return list_of_elements[index];

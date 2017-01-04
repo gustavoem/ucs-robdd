@@ -52,7 +52,13 @@ private:
     //     Otherwise, P = Q
     // } while (P has unvisited neighbours);
     //
-    void random_walk (PartitionNode *, Collection *);
+    void random_walk (PartitionNode *, list<PartitionNode *> *);
+
+
+    // Receives a list of parts to be solved. Solves all parts and 
+    // pushes the elements of lowest cost to the minima list
+    //
+    void solve_parts (list<PartitionNode *> *, unsigned int);
 
 
 public:

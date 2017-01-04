@@ -75,10 +75,10 @@ $(TEST):	featselTest.o $(TOBJS) $(OBJS)
 			parsers/XmlParser.cpp parsers/XmlScanner.cpp parsers/XmlParserDriver.cpp
 
 featsel.o:
-	$(CXX)	-c -o src/featsel.o src/featsel.cpp
+	$(CXX) -g -c -o src/featsel.o src/featsel.cpp
 
 featselTest.o:
-	$(CXX)	-c -o test/featselTest.o test/featselTest.cpp
+	$(CXX)	-g -c -o test/featselTest.o test/featselTest.cpp
 
 help:
 	groff -man -Tascii docs/featsel.1 > featsel.txt

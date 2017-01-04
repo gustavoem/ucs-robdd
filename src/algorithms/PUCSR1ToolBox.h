@@ -18,15 +18,15 @@ namespace PUCSR1ToolBox
     // This function is used to transfer the list of minima of a 
     // partition to the list of minima of the original problem
     //
-    void update_minima_list (Collection *, PartitionNode *, 
+    void create_minima_list (Collection *, PartitionNode *, 
         list<ElementSubset *> *);
 
 
     // Finds the minimum of a partition and adds the list of minima of
     // this partition to the collection L.
     //
-    void part_minimum (PartitionNode *, Collection *, 
-        CostFunction *, unsigned int);
+    Collection * part_minimum (PartitionNode *, CostFunction *,
+        unsigned int);
 
 
     // Given a PartitionNode P and an index i we return an adjacent 

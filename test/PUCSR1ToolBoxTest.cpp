@@ -25,45 +25,45 @@
 
 namespace PUCSR1ToolBoxTest {
 
-    bool it_should_find_the_part_minimum ()
-    {
-        bool answ = true;
-        ElementSet original_set ("", 5, 50);
-        bool fixed[5];
-        for (unsigned int i = 0; i < 5; i++)
-            fixed[i] = i < 2; // we are fixing the first 2 elements
+    // bool it_should_find_the_part_minimum ()
+    // {
+    //     bool answ = true;
+    //     ElementSet original_set ("", 5, 50);
+    //     bool fixed[5];
+    //     for (unsigned int i = 0; i < 5; i++)
+    //         fixed[i] = i < 2; // we are fixing the first 2 elements
         
-        Partition * partition = new Partition (&original_set, fixed);
-        ElementSet * fixed_set = partition->get_fixed_elm_set ();
-        ElementSubset p_subset ("", fixed_set);
-        p_subset.add_element (1);
-        PartitionNode * P = new PartitionNode (partition, &p_subset);
-        Collection * L = new Collection ();
-        CostFunction * c = new AbsSum (&original_set);
-        PUCSR1ToolBox::part_minimum (P, L, c, 5);
-        ElementSubset p_maximal ("", &original_set);
-        p_maximal.add_element (1);
-        p_maximal.add_element (2);
-        p_maximal.add_element (3);
-        p_maximal.add_element (4);
-        ElementSubset p_minimal ("", &original_set);
-        p_minimal.add_element (1);
+    //     Partition * partition = new Partition (&original_set, fixed);
+    //     ElementSet * fixed_set = partition->get_fixed_elm_set ();
+    //     ElementSubset p_subset ("", fixed_set);
+    //     p_subset.add_element (1);
+    //     PartitionNode * P = new PartitionNode (partition, &p_subset);
+    //     Collection * L = new Collection ();
+    //     CostFunction * c = new AbsSum (&original_set);
+    //     PUCSR1ToolBox::part_minimum (P, L, c, 5);
+    //     ElementSubset p_maximal ("", &original_set);
+    //     p_maximal.add_element (1);
+    //     p_maximal.add_element (2);
+    //     p_maximal.add_element (3);
+    //     p_maximal.add_element (4);
+    //     ElementSubset p_minimal ("", &original_set);
+    //     p_minimal.add_element (1);
         
-        while (L->size () > 0)
-        {
-            ElementSubset * X = L->remove_last_subset ();
-            if (!X->is_contained_by (&p_maximal))
-                answ = false;
-            if (!X->contains (&p_minimal))
-                answ = false;
-            delete X;
-        }
-        delete partition;
-        delete P;
-        delete L;
-        delete c;
-        return answ;
-    }
+    //     while (L->size () > 0)
+    //     {
+    //         ElementSubset * X = L->remove_last_subset ();
+    //         if (!X->is_contained_by (&p_maximal))
+    //             answ = false;
+    //         if (!X->contains (&p_minimal))
+    //             answ = false;
+    //         delete X;
+    //     }
+    //     delete partition;
+    //     delete P;
+    //     delete L;
+    //     delete c;
+    //     return answ;
+    // }
 
     bool it_should_find_an_adjacent_part ()
     {

@@ -60,6 +60,7 @@ ElementSubset * PartitionNode::get_original_subset (ElementSubset * X)
 {
     ElementSet * orig_set = partition->get_original_set ();
     ElementSubset * orig_subset = new ElementSubset ("", orig_set);
+    // cout << "minimal_subset: " << minimal_subset->print_subset () << endl;
     orig_subset->copy (minimal_subset);
     ElementSet * unfixed_set = partition->get_unfixed_elm_set ();
     unsigned int unfixed_set_size = unfixed_set->get_set_cardinality ();

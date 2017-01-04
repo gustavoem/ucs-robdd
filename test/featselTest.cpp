@@ -578,9 +578,9 @@ int main(void) {
     cout << endl;
 
     // Testing Namespace PUCSR1ToolBox
-    cout << "PUCSR1ToolBoxTest::it_should_find_the_part_minimum";
-    cout.flush ();
-    printResult (PUCSR1ToolBoxTest::it_should_find_the_part_minimum ());
+    // cout << "PUCSR1ToolBoxTest::it_should_find_the_part_minimum";
+    // cout.flush ();
+    // printResult (PUCSR1ToolBoxTest::it_should_find_the_part_minimum ());
     cout << "PUCSR1ToolBoxTest::it_should_find_an_adjacent_part";
     cout.flush ();
     printResult (PUCSR1ToolBoxTest::it_should_find_an_adjacent_part ());

@@ -31,11 +31,9 @@
 
 namespace PUCSR1ToolBoxTest
 {
-
-    bool it_should_find_the_part_minimum ();
+    // bool it_should_find_the_part_minimum ();
     bool it_should_find_an_adjacent_part ();
-    bool it_should_prune_and_walk ();
-    
+    bool it_should_prune_and_walk ();   
 }
 
 #endif /* PUCSR1TOOLBOXTEST_H_ */
