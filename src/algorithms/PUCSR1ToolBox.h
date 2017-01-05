@@ -9,7 +9,11 @@
 #include "../functions/PartitionCost.h"
 #include "../PartitionNode.h"
 #include "../Solver.h"
+#include "../algorithms/PUCSR1.h"
+#include "../algorithms/UCSROBDD6.h"
 #include "../algorithms/ExhaustiveSearch.h"
+
+#define ES_CUTOFF 10
 
 namespace PUCSR1ToolBox
 {  

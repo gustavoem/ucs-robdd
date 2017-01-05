@@ -41,8 +41,12 @@ namespace PUCSR1ToolBox
         }
         else
         {
+            Solver * sub_solver;
+            if (p_elm_set->get_set_cardinality () > ES_CUTOFF)
+                sub_solver = new PUCSR1 ();
+            else
+                sub_solver = new UCSROBDD6 ();
             PartitionCost * P_cost = new PartitionCost (c, P);
-            Solver * sub_solver = new ExhaustiveSearch ();
             sub_solver->set_parameters (P_cost, p_elm_set, false);
             sub_solver->find_minima_list (max_size_of_minima_list);
             p_min_lst = sub_solver->get_minima_list ();

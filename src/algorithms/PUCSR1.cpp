@@ -23,7 +23,7 @@ PUCSR1::~PUCSR1 ()
 void PUCSR1::set_partition_model ()
 {
     unsigned int set_size = set->get_set_cardinality ();
-    unsigned int partition_set_size = set_size / 2 + 1;
+    unsigned int partition_set_size = set_size * (3 / 4.0) + 1;
     bool * fixed = new bool[set_size];
     // This is a simple way to partitionate the space. We are choosing
     // the last <partition_set_size> variables of the element set to be
