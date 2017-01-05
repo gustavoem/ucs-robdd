@@ -85,7 +85,7 @@ public:
 
 
     // Returns the element subset that represents this part based
-    // on the fixed element set. Example: if the partition is XX010 
+    // on the fixed element set. Example: if the part is XX010, then
     // this function returns 010
     //
     ElementSubset * get_selected_elements ();

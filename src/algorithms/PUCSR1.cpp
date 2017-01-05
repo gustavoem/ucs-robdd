@@ -24,6 +24,8 @@ void PUCSR1::set_partition_model ()
 {
     unsigned int set_size = set->get_set_cardinality ();
     unsigned int partition_set_size = set_size * (3 / 4.0) + 1;
+    #pragma omp critical
+    cout << "Partition element set size: " << partition_set_size << endl;
     bool * fixed = new bool[set_size];
     // This is a simple way to partitionate the space. We are choosing
     // the last <partition_set_size> variables of the element set to be
@@ -57,9 +59,24 @@ void PUCSR1::find_minima_list (unsigned int max_size_of_minima_list)
         p_subset = cand_part->get_random_zero_evaluated_element ();
     }
 
-    solve_parts (&parts_to_solve, max_size_of_minima_list);
+    #pragma omp critical 
+    {
+        cout << "Parts to be solved" << endl;
+        list<PartitionNode *>::iterator it = parts_to_solve.begin ();
+        while (it != parts_to_solve.end ())
+        {
+            cout << (*it)-> get_selected_elements ()->print_subset () << endl;
+            it++;
+        }
+    }
 
-    number_of_visited_subsets =  cost_function->get_number_of_calls_of_cost_function ();
+    list<ElementSubset *> * min_list = &list_of_minima;
+    #pragma omp parallel shared (min_list, parts_to_solve)
+    #pragma omp single
+    solve_parts (&parts_to_solve, min_list, max_size_of_minima_list);
+    #pragma omp taskwait
+    number_of_visited_subsets =  
+        cost_function->get_number_of_calls_of_cost_function ();
     number_of_restrictions_consults = 0;
     number_of_restrictions_updates = 0;
     elapsed_time_consulting_restrictions = 0;
@@ -111,24 +128,41 @@ void PUCSR1::random_walk (PartitionNode * P, list<PartitionNode *> * TQ)
 }
 
 void PUCSR1::solve_parts (list<PartitionNode *> * parts, 
+    list<ElementSubset *> * min_list, 
     unsigned int max_size_of_minima_list)
 {
+    PartitionNode * P = NULL;
+    Collection * L = NULL;
     while (parts->size () > 0) 
     {
-        PartitionNode * P = parts->back ();
-        parts->pop_back ();
-        Collection * L;
-        L = PUCSR1ToolBox::part_minimum (P, cost_function,
-            max_size_of_minima_list);
-        while (L->size () > 0) 
+        #pragma omp critical
         {
-            ElementSubset * X = L->remove_last_subset ();
-            list_of_minima.push_back (X);
-            if (store_visited_subsets)
-                list_of_visited_subsets->add_subset (X);
+            // int tid = omp_get_thread_num ();
+            // cout << "tid: " << tid << endl;
+            P = parts->back ();
+            parts->pop_back ();
         }
-        clean_list_of_minima (max_size_of_minima_list);
-        delete L;
-        delete P;
+        #pragma omp task 
+        {
+            L = PUCSR1ToolBox::part_minimum (P, cost_function,
+                max_size_of_minima_list);
+            #pragma omp taskwait
+            while (L->size () > 0) 
+            {
+                ElementSubset * X = L->remove_last_subset ();
+                #pragma omp critical
+                {
+                    // int tid = omp_get_thread_num ();
+                    // cout << "Part " << P->get_selected_elements ()->print_subset () << " from thread " << tid << endl;
+                    min_list->push_back (X);
+                    if (store_visited_subsets)
+                        list_of_visited_subsets->add_subset (X);
+                }
+            }
+            #pragma omp critical
+            clean_list_of_minima (max_size_of_minima_list);
+            delete L;
+            delete P;
+        }
     }
 }

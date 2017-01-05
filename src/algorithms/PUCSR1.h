@@ -8,6 +8,7 @@
 #include "../Partition.h"
 #include "../PartitionNode.h"
 #include "PUCSR1ToolBox.h"
+#include <omp.h>
 // #include "UCSROBDDToolBox6.h"
 
 class PUCSR1 : public Solver
@@ -58,7 +59,8 @@ private:
     // Receives a list of parts to be solved. Solves all parts and 
     // pushes the elements of lowest cost to the minima list
     //
-    void solve_parts (list<PartitionNode *> *, unsigned int);
+    void solve_parts (list<PartitionNode *> *, list<ElementSubset *> *,
+        unsigned int);
 
 
 public:

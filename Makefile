@@ -67,18 +67,18 @@ TARGET =	featsel
 TEST =		featselTest
 
 $(TARGET):	help featsel.o $(OBJS)
-	$(CXX) -o $(TARGET) src/featsel.o $(OBJS) $(LIBS) \
+	$(CXX) $(CXXFLAGS) -o $(TARGET) src/featsel.o $(OBJS) $(LIBS) \
 			parsers/XmlParser.cpp parsers/XmlScanner.cpp parsers/XmlParserDriver.cpp
 	
 $(TEST):	featselTest.o $(TOBJS) $(OBJS)
-	$(CXX) -o $(TEST) test/featselTest.o $(TOBJS) $(OBJS) $(LIBS) \
+	$(CXX) $(CXXFLAGS) -o $(TEST) test/featselTest.o $(TOBJS) $(OBJS) $(LIBS) \
 			parsers/XmlParser.cpp parsers/XmlScanner.cpp parsers/XmlParserDriver.cpp
 
 featsel.o:
-	$(CXX) -g -c -o src/featsel.o src/featsel.cpp
+	$(CXX) $(CXXFLAGS) -g -c -o src/featsel.o src/featsel.cpp
 
 featselTest.o:
-	$(CXX)	-g -c -o test/featselTest.o test/featselTest.cpp
+	$(CXX)	$(CXXFLAGS) -g -c -o test/featselTest.o test/featselTest.cpp
 
 help:
 	groff -man -Tascii docs/featsel.1 > featsel.txt

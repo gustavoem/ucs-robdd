@@ -50,6 +50,7 @@ namespace PUCSR1ToolBox
             sub_solver->set_parameters (P_cost, p_elm_set, false);
             sub_solver->find_minima_list (max_size_of_minima_list);
             p_min_lst = sub_solver->get_minima_list ();
+            #pragma omp taskwait
             delete P_cost;
             delete sub_solver;
         }
