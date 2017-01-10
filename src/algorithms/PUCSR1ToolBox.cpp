@@ -9,11 +9,8 @@ namespace PUCSR1ToolBox
         while (l->size () > 0) 
         {
             ElementSubset * pX = l->back ();
-            // cout << "pX: " << pX->print_subset () << endl;
             l->pop_back ();
-            // cout.flush ();
             ElementSubset * X = P->get_original_subset (pX);
-            // cout << "X: " << X->print_subset () << endl;
             X->cost = pX->cost;
             L->add_subset (X);
             delete X;
@@ -29,10 +26,6 @@ namespace PUCSR1ToolBox
         list<ElementSubset *> p_min_lst;
         Partition * partition = P->get_partition ();
         ElementSet * p_elm_set = partition->get_unfixed_elm_set ();
-        /*debug*/
-        // ElementSubset * sel_elms = P->get_selected_elements ();
-        // cout << "Part: " << sel_elms->print_subset () << endl;
-        /*debug*/
         if (p_elm_set->get_set_cardinality () == 0)
         {
             ElementSubset * minimal = P->get_least_subset ();
@@ -42,15 +35,17 @@ namespace PUCSR1ToolBox
         else
         {
             Solver * sub_solver;
-            if (p_elm_set->get_set_cardinality () > ES_CUTOFF)
+            if (p_elm_set->get_set_cardinality () > UCS_CUTOFF)
                 sub_solver = new PUCSR1 ();
             else
                 sub_solver = new UCSROBDD6 ();
             PartitionCost * P_cost = new PartitionCost (c, P);
             sub_solver->set_parameters (P_cost, p_elm_set, false);
+            // TODO: does it run faster when we run the next line as a
+            // task?
             sub_solver->find_minima_list (max_size_of_minima_list);
-            p_min_lst = sub_solver->get_minima_list ();
             #pragma omp taskwait
+            p_min_lst = sub_solver->get_minima_list ();
             delete P_cost;
             delete sub_solver;
         }
@@ -78,24 +73,25 @@ namespace PUCSR1ToolBox
         CostFunction * c, ROBDD * R) 
     {
         PartitionNode * P1, * P2, * next;
-        ElementSubset * e1, * e2;
+        ElementSubset * e1, * e2, * p1_sub, * p2_sub;
         ElementSubset * p_sub = P->get_least_subset ();
         ElementSubset * q_sub = Q->get_least_subset ();
         if (P->is_upper_adjacent (Q))
             P1 = P, P2 = Q;
         else
             P1 = Q; P2 = P;
-        
+        p1_sub = P1->get_selected_elements ();
+        p2_sub = P2->get_selected_elements ();
         e1 = P1->get_least_subset ();
         e2 = P2->get_least_subset ();
         if (c->cost (e1) > c->cost (e2)) 
-            R->add_interval (e1, true);
+            R->add_interval (p1_sub, true);
         delete e1;
         delete e2;
         e1 = P1->get_greatest_subset ();
         e2 = P2->get_greatest_subset ();
         if (c->cost (e1) < c->cost (e2))
-            R->add_interval (e2, false);
+            R->add_interval (p2_sub, false);
         delete e1;
         delete e2;
         next = Q;
@@ -108,6 +104,8 @@ namespace PUCSR1ToolBox
         }
         delete p_sub;
         delete q_sub;
+        delete p1_sub;
+        delete p2_sub;
         return next;
     }
 

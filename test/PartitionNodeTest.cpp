@@ -29,30 +29,32 @@ namespace PartitionNodeTest
         ElementSet original_set ("", set_size, 100);
         bool * is_fixed = new bool[set_size];
         for (unsigned int i = 0; i < set_size; i++)
-            if (i < 5)
-                is_fixed[i] = true;
-            else
-                is_fixed[i] = false;
-        Partition part (&original_set, is_fixed);
-        delete[] is_fixed;
-        ElementSet * fixed_set = part.get_fixed_elm_set ();
+            is_fixed[i] = false;
+        is_fixed[0] = true;
+        is_fixed[2] = true;
+        is_fixed[3] = true;
+        is_fixed[5] = true;
+        is_fixed[7] = true;
+        Partition partition (&original_set, is_fixed);
+        ElementSet * fixed_set = partition.get_fixed_elm_set ();
         ElementSubset part_subset ("", fixed_set);
         part_subset.add_element (0);
         part_subset.add_element (2);
         part_subset.add_element (4);
-        PartitionNode P (&part, &part_subset);
-
+        PartitionNode P (&partition, &part_subset);
+        // P        = 1X01X0X1XXXXX 
+        // expected = 1001100101000
+        // input    =  0  1 0 01000
         ElementSubset expected_subset ("", &original_set);
         expected_subset.add_element (0);
-        expected_subset.add_element (2);
+        expected_subset.add_element (3);
         expected_subset.add_element (4);
-        expected_subset.add_element (6);
+        expected_subset.add_element (7);
         expected_subset.add_element (9);
-
-        ElementSet * unfixed_set = part.get_unfixed_elm_set ();
+        ElementSet * unfixed_set = partition.get_unfixed_elm_set ();
         ElementSubset input_subset ("", unfixed_set);
-        input_subset.add_element (6 - 5);
-        input_subset.add_element (9 - 5);
+        input_subset.add_element (1);
+        input_subset.add_element (4);
         ElementSubset * answ_subset;
         answ_subset = P.get_original_subset (&input_subset);
         if (!answ_subset->is_equal (&expected_subset))
@@ -60,6 +62,7 @@ namespace PartitionNodeTest
         else
             answ = true;
         delete answ_subset;
+        delete[] is_fixed;
         return answ;
     }
 
@@ -113,12 +116,12 @@ namespace PartitionNodeTest
         p_subset.add_element (2);
         p_subset.add_element (3);
         PartitionNode P (part, &p_subset);
-        ElementSubset expected_minimal ("", &original_set);
-        expected_minimal.add_element (0);
-        expected_minimal.add_element (2);
-        expected_minimal.add_element (3);
+        ElementSubset expected_least ("", &original_set);
+        expected_least.add_element (0);
+        expected_least.add_element (2);
+        expected_least.add_element (3);
         ElementSubset * answ_minimal = P.get_least_subset ();
-        if (!answ_minimal->is_equal (&expected_minimal))
+        if (!answ_minimal->is_equal (&expected_least))
             answ = false;
         delete part;
         delete answ_minimal;

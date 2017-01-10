@@ -41,8 +41,17 @@ Partition::Partition (ElementSet * a_set, bool * is_fixed)
             unfixed_elm_map[k++] = i;
     unsigned int a = fixed_set_size;
     unsigned int b = set_size - a;
+    // cout << "fixed_set_size: " << fixed_set_size << endl;
     this->fixed_set   = new ElementSet (a_set, fixed_elm_map, a);
     this->unfixed_set = new ElementSet (a_set, unfixed_elm_map, b);
+    // cout << "Fixed map: ";
+    // for (unsigned int i = 0; i < a; i++)
+    //     cout << fixed_elm_map[i] << " ";
+    // cout << endl;
+    // cout << "Unfixed map: ";
+    // for (unsigned int i = 0; i < b; i++)
+    //     cout << unfixed_elm_map[i] << " ";
+    // cout << endl;
 }
 
 

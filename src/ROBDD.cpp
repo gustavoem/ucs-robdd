@@ -580,7 +580,7 @@ void ROBDD::add_interval (ElementSubset * subset, bool orientation)
     Vertex * one = new Vertex (true, set_card + 1);
     one->mark = false;
     unsigned int card2 = 0;
-    // cout << "(RO) Vou construir o intervalo" << subset->print_subset () <<" com ordem: ";
+    // cout << "(RO) Vou construir o intervalo" << subset->print_subset () <<" com orientação: " << orientation << endl;
     // for (unsigned int i = 0; i < elm_set->get_set_cardinality (); i++)
     //          cout << ordering[i] << " ";
     // cout << endl;

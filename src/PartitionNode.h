@@ -53,7 +53,7 @@ private:
 
     // Find the minimal subset of this partition
     // 
-    void find_minimal_subset ();
+    void find_least_subset ();
 
 public:
 

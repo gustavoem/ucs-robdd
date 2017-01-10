@@ -35,7 +35,8 @@ my $n;
 # list of solvers; SFFS is required for the heuristic mode 
 #
 
-my @solvers = ("UCS", 
+my @solvers = (
+               #"UCS", 
                "PUCSR1",
                "ES");
 
@@ -669,7 +670,7 @@ foreach my $i (@experiments)
         $number_of_times_that_has_a_best_solution[$k]++;
       }
     elsif ( ($is_heuristic_mode == 0) &&
-                  (($solvers[$k] eq "UCS") || ($solvers[$k] eq "UCS2a") ||  ($solvers[$k] eq "UCS2b") ||  ($solvers[$k] eq "PFS") ) )
+                  (($solvers[$k] eq "UCS") || ($solvers[$k] eq "UCS2a") ||  ($solvers[$k] eq "UCS2b") ||  ($solvers[$k] eq "PFS") || ($solvers[$k] eq "PUCSR1") ) )
       {
         printf "\n%s did not find a minimum: %3.2f  :-P~\n\n", $solvers[$k], $minimum_of_solvers[$k];
         system ("cp input/" . $arquivo[$j-1] . " teste_com_erro_no_" . $solvers[$k] . "_" . $i . "_elements.xml");

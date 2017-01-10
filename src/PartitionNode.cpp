@@ -24,7 +24,7 @@ PartitionNode::PartitionNode (Partition * partition, ElementSubset * X)
 {
     this->selected_elements = new ElementSubset (X);
     this->partition = partition;
-    find_minimal_subset ();
+    find_least_subset ();
 }
 
 
@@ -41,7 +41,7 @@ PartitionNode::~PartitionNode ()
     delete minimal_subset;
 }
 
-void PartitionNode::find_minimal_subset ()
+void PartitionNode::find_least_subset ()
 {
     ElementSet * fixed_set = partition->get_fixed_elm_set ();
     ElementSet * orig_set = partition->get_original_set ();
@@ -49,10 +49,10 @@ void PartitionNode::find_minimal_subset ()
     unsigned int fixed_elm_set_size = fixed_set->get_set_cardinality ();
     unsigned int * fixed_map = partition->get_fixed_elm_map ();
     for (unsigned int i = 0; i < fixed_elm_set_size; i++)
-    {
         if (selected_elements->has_element (i))
             minimal_subset->add_element (fixed_map[i]);
-    }
+    // cout << "P: " << selected_elements->print_subset () << " | ";
+    // cout << "Least subset: " << minimal_subset->print_subset () << endl;
 }
 
 
@@ -60,7 +60,8 @@ ElementSubset * PartitionNode::get_original_subset (ElementSubset * X)
 {
     ElementSet * orig_set = partition->get_original_set ();
     ElementSubset * orig_subset = new ElementSubset ("", orig_set);
-    // cout << "minimal_subset: " << minimal_subset->print_subset () << endl;
+    // cout << "\nPartitionNode: " << selected_elements->print_subset ();
+    // cout << "| X: " << X->print_subset ();
     orig_subset->copy (minimal_subset);
     ElementSet * unfixed_set = partition->get_unfixed_elm_set ();
     unsigned int unfixed_set_size = unfixed_set->get_set_cardinality ();
@@ -68,6 +69,7 @@ ElementSubset * PartitionNode::get_original_subset (ElementSubset * X)
     for (unsigned int i = 0; i < unfixed_set_size; i++)
         if (X->has_element (i))
             orig_subset->add_element (unfixed_map[i]);
+    // cout << "| original X: " << orig_subset->print_subset () << endl;
     return orig_subset;
 }
 
@@ -129,5 +131,7 @@ ElementSubset * PartitionNode::get_greatest_subset ()
     maximal = new ElementSubset (minimal_subset);
     for (unsigned int i = 0; i < n; i++)
         maximal->add_element (unfixed_map[i]);
+    // cout << "P: " << selected_elements->print_subset () << " | ";
+    // cout << "greatest subset: " << maximal->print_subset () << endl;
     return maximal;
 }

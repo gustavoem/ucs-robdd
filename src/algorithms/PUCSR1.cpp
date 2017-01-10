@@ -23,21 +23,31 @@ PUCSR1::~PUCSR1 ()
 void PUCSR1::set_partition_model ()
 {
     unsigned int set_size = set->get_set_cardinality ();
-    unsigned int partition_set_size = set_size * (3 / 4.0) + 1;
-    #pragma omp critical
-    cout << "Partition element set size: " << partition_set_size << endl;
+    unsigned int partition_set_size = set_size * (1 / 2.0) + 1;
     bool * fixed = new bool[set_size];
+    for (unsigned int i = 0; i < set_size; i++)
+        fixed[i] = false;
     // This is a simple way to partitionate the space. We are choosing
     // the last <partition_set_size> variables of the element set to be
     // free in every subproblem and fixing the other variables
-    for (unsigned int i = 0; i < set_size; i++)
-        if (i < partition_set_size)
-            fixed[i] = true;
-        else
-            fixed[i] = false;
+    // for (unsigned int i = 0; i < set_size; i++)
+    //     if (i < partition_set_size)
+    //         fixed[i] = true;
+    //     else
+    //         fixed[i] = false;
+
+    // Random partitioning
+    ElementSubset X ("", set);
+    X.set_complete_subset ();
+    for (unsigned int i = 0; i < partition_set_size; i++)
+    {
+        unsigned int e = X.remove_random_element ();
+        // cout << "Fixing: " << e << endl;
+        fixed[e] = true;
+    }
     this->partition = new Partition (set, fixed);
     delete[] fixed;
-}
+}   
 
 
 void PUCSR1::find_minima_list (unsigned int max_size_of_minima_list)
@@ -57,17 +67,6 @@ void PUCSR1::find_minima_list (unsigned int max_size_of_minima_list)
         random_walk (P, &parts_to_solve);
         delete p_subset;
         p_subset = cand_part->get_random_zero_evaluated_element ();
-    }
-
-    #pragma omp critical 
-    {
-        cout << "Parts to be solved" << endl;
-        list<PartitionNode *>::iterator it = parts_to_solve.begin ();
-        while (it != parts_to_solve.end ())
-        {
-            cout << (*it)-> get_selected_elements ()->print_subset () << endl;
-            it++;
-        }
     }
 
     list<ElementSubset *> * min_list = &list_of_minima;
@@ -91,6 +90,8 @@ void PUCSR1::find_minima_list (unsigned int max_size_of_minima_list)
 
 void PUCSR1::random_walk (PartitionNode * P, list<PartitionNode *> * TQ)
 {
+    // cout << "\n-------\nEntrou em random walk com P = " << 
+        // P->get_selected_elements ()->print_subset () << endl;
     unsigned int i = 0;
     unsigned int n = P->get_number_of_fixed_elms ();
     TQ->push_back (new PartitionNode (P));
@@ -99,14 +100,20 @@ void PUCSR1::random_walk (PartitionNode * P, list<PartitionNode *> * TQ)
     while (i < n)
     {
         Q = PUCSR1ToolBox::adjacent_part (P, i++);
+        // cout << "- Q = " << Q->get_selected_elements ()->print_subset () << endl;
         if (PUCSR1ToolBox::is_restricted (Q, cand_part))
-        {
+        {   
+            // cout << "- Q é restrito já" << endl;
             delete Q;
             continue;
         }
         PartitionNode * next;
         next = PUCSR1ToolBox::prune_and_walk (P, Q,
             cost_function, cand_part);
+        // if (next != NULL)
+        //     cout << "- next = " << next->get_selected_elements ()->print_subset () << endl;
+        // else
+        //     cout << "- next = NULL" << endl;
         if (next == P)
             delete Q;
         else if (next == Q)
@@ -125,6 +132,7 @@ void PUCSR1::random_walk (PartitionNode * P, list<PartitionNode *> * TQ)
         }
     }
     delete P;
+    // cout << "Saindo de random walk\n-";
 }
 
 void PUCSR1::solve_parts (list<PartitionNode *> * parts, 
@@ -137,8 +145,6 @@ void PUCSR1::solve_parts (list<PartitionNode *> * parts,
     {
         #pragma omp critical
         {
-            // int tid = omp_get_thread_num ();
-            // cout << "tid: " << tid << endl;
             P = parts->back ();
             parts->pop_back ();
         }
@@ -152,8 +158,6 @@ void PUCSR1::solve_parts (list<PartitionNode *> * parts,
                 ElementSubset * X = L->remove_last_subset ();
                 #pragma omp critical
                 {
-                    // int tid = omp_get_thread_num ();
-                    // cout << "Part " << P->get_selected_elements ()->print_subset () << " from thread " << tid << endl;
                     min_list->push_back (X);
                     if (store_visited_subsets)
                         list_of_visited_subsets->add_subset (X);

@@ -13,7 +13,7 @@
 #include "../algorithms/UCSROBDD6.h"
 #include "../algorithms/ExhaustiveSearch.h"
 
-#define ES_CUTOFF 10
+#define UCS_CUTOFF 10
 
 namespace PUCSR1ToolBox
 {  
